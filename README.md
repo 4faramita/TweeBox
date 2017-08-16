@@ -20,7 +20,7 @@
 - [x] Relative time
 - [ ] Content filter
 - [ ] User profile page: 
-  - [x] Basic infomation
+  - [ ] Basic infomation
   - [ ] Text parsing
   - [x] Click action (query)
 - [ ] Save to database

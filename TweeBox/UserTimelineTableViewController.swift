@@ -9,8 +9,8 @@
 import UIKit
 import TwitterKit
 import Kingfisher
-import MXParallaxHeader
-import VisualEffectView
+//import MXParallaxHeader
+//import VisualEffectView
 
 class UserTimelineTableViewController: TimelineTableViewController {
     
@@ -26,12 +26,12 @@ class UserTimelineTableViewController: TimelineTableViewController {
         }
     }
     
+    /*
     private var profileImage: UIImage?
     private var profileImageURL: URL?
     
     private var profileBannerImage: UIImage?
     private var profileBannerImageURL: URL?
-    
     
     private let headerView = UIImageView()
     private var visualEffectView: VisualEffectView?
@@ -116,11 +116,11 @@ class UserTimelineTableViewController: TimelineTableViewController {
             tableView.parallaxHeader.height = headerHeight
             headerHeightCalculated = true
         }
-    }
+    } */
     
 //    override func hideBarsOnScrolling() { }
 //    override func stopHiddingbard() { }
-        
+
     override func refreshTimeline() {
         
         let userTimelineParams = UserTimelineParams(of: userID!)
@@ -145,11 +145,11 @@ class UserTimelineTableViewController: TimelineTableViewController {
 //                self?.tableView.reloadData()
             }
             
-//            Timer.scheduledTimer(
-//                withTimeInterval: TimeInterval(0.1),
-//                repeats: false) { (timer) in
-//                    self?.refreshControl?.endRefreshing()
-//            }
+            Timer.scheduledTimer(
+                withTimeInterval: TimeInterval(0.1),
+                repeats: false) { (timer) in
+                    self?.refreshControl?.endRefreshing()
+            }
         }
 //        isRefreshing = false
     }
@@ -174,7 +174,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         emptyWarningCollapsed = true
     }
     
-    
+/*
     // Header
     private func addHeader() {
         
@@ -187,7 +187,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         let tapOnBanner = UITapGestureRecognizer(target: self, action: #selector(tapToViewBannerImage(_:)))
         tapOnBanner.numberOfTapsRequired = 1
         tapOnBanner.numberOfTouchesRequired = 1
-//        headerView.addGestureRecognizer(tapOnBanner)
+        headerView.addGestureRecognizer(tapOnBanner)
         
         visualEffectView = VisualEffectView(frame: view.bounds)
         visualEffectView?.blurRadius = 10
@@ -218,7 +218,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         let tapOnHead = UITapGestureRecognizer(target: self, action: #selector(tapToViewProfileImage(_:)))
         tapOnHead.numberOfTapsRequired = 1
         tapOnHead.numberOfTouchesRequired = 1
-//        profileImageView.addGestureRecognizer(tapOnHead)
+        profileImageView.addGestureRecognizer(tapOnHead)
         
         
         headerView.addSubview(nameLabel)
@@ -287,9 +287,9 @@ class UserTimelineTableViewController: TimelineTableViewController {
             }
             userURLButton?.setTitle(userURL.absoluteString, for: .normal)
             userURLButton?.setTitleColor(.lightGray, for: .normal)
-            //            userURLButton.titleLabel?.textAlignment = .center
+//            userURLButton.titleLabel?.textAlignment = .center
             userURLButton?.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
-            //            userURLButton(forAction: #selector(tapFollowerButton(_:)), withSender: self)
+//            userURLButton(forAction: #selector(tapFollowerButton(_:)), withSender: self)
             
         }
 
@@ -343,10 +343,11 @@ class UserTimelineTableViewController: TimelineTableViewController {
         
         
         headerView.contentMode = .scaleAspectFill
-        
+        tableView.parallaxHeader.height = 200
         tableView.parallaxHeader.view = headerView
         tableView.parallaxHeader.mode = .fill
         tableView.parallaxHeader.minimumHeight = Constants.profileToolbarHeight
+
     }
     
     @IBAction private func viewFollowerList(_ sender: Any?) {
@@ -387,4 +388,5 @@ class UserTimelineTableViewController: TimelineTableViewController {
         }
 
     }
+ */
 }

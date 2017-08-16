@@ -26,6 +26,10 @@ class TweetTableViewCell: UITableViewCell {
 
     var tweet: Tweet? {
         didSet {
+            if let retweeted = tweet?.retweeted, retweeted, let originTweet = tweet?.retweetedStatus {
+                tweet = originTweet
+//                self.backgroundColor = .g
+            }
             updateUI()
         }
     }
@@ -34,6 +38,15 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetCreatedTime: UILabel!
     @IBOutlet weak var tweetUserName: UILabel!
     @IBOutlet weak var tweetUserID: UILabel!
+    
+    @IBOutlet weak var retweetCount: UILabel!
+    @IBOutlet weak var likeCount: UILabel!
+    
+    @IBOutlet weak var replyImage: UIImageView!
+    @IBOutlet weak var retweetImage: UIImageView!
+    @IBOutlet weak var likeImage: UIImageView!
+    
+    
     
     @IBAction func profileImageTapped(byReactingTo: UIGestureRecognizer) {
         guard let section = section, let row = row else { return }
@@ -81,6 +94,22 @@ class TweetTableViewCell: UITableViewCell {
         tweetUserName.text = tweet?.user.name
         if let id = tweet?.user.screenName {
             tweetUserID.text = "@" + id
+        }
+        
+        replyImage.image = UIImage(named: "reply")
+        
+        retweetCount.text = "\(tweet?.retweetCount ?? 0)"
+        if let retweeted = tweet?.retweeted, retweeted {
+            retweetImage.image = UIImage(named: "retweet_true")
+        } else {
+            retweetImage.image = UIImage(named: "retweet_false")
+        }
+        
+        likeCount.text = "\(tweet?.favoriteCount ?? 0)"
+        if let liked = tweet?.favorited, liked {
+            likeImage.image = UIImage(named: "like_true")
+        } else {
+            likeImage.image = UIImage(named: "like_false")
         }
     }
 }
