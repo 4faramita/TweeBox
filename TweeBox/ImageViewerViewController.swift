@@ -16,8 +16,6 @@ class ImageViewerViewController: PannableViewController {
         
     public var imageURL: URL!
     
-//    public var tweetMedia: TweetMedia!
-    
     public var imageView = UIImageView()
     
     public var image: UIImage? {
@@ -56,9 +54,43 @@ class ImageViewerViewController: PannableViewController {
     
     var photoIndex: Int!
     
-//    @IBAction func tapToDismiss(_ sender: UITapGestureRecognizer) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
+    
+    @IBAction func tapToDismiss(_ sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doubleTapToZoom(_ sender: UITapGestureRecognizer) {
+        
+        if scrollView.zoomScale > 1.0 {
+            scrollView.setZoomScale(1.0, animated: true)
+        } else {
+            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+        }
+    }
+
+    
+    private func addTapGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapToDismiss(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tapGesture)
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapToZoom(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        doubleTapGesture.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(doubleTapGesture)
+        
+        tapGesture.require(toFail: doubleTapGesture)
+    }
+    
+    
+    // MARK - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addTapGestures()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,15 +101,6 @@ class ImageViewerViewController: PannableViewController {
         }
     }
     
-    
-    @IBAction func doubleTapToZoom(_ sender: UITapGestureRecognizer) {
-        
-        if scrollView.zoomScale > 1.0 {
-            scrollView.setZoomScale(1.0, animated: true)
-        } else {
-            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
-        }
-    }
     
     @IBAction func longPressToCallShareSheet(_ sender: UITapGestureRecognizer) {
         

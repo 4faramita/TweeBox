@@ -312,6 +312,7 @@ extension TimelineTableViewController: TweetWithPicTableViewCellProtocol, TweetT
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "imageTapped" {
+            print(sender)
             if let imageViewer = segue.destination.content as? ImageViewerViewController {
                     imageViewer.image = clickMedia
                     imageViewer.imageURL = imageURLToShare
@@ -328,9 +329,7 @@ extension TimelineTableViewController: TweetWithPicTableViewCellProtocol, TweetT
     }
     
     func profileImageTapped(section: Int, row: Int) {
-        
-        print("profile tapped")
-        
+                
         self.clickedTweet = timeline[section][row]
         
         performSegue(withIdentifier: "profileImageTapped", sender: nil)

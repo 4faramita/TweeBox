@@ -174,20 +174,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
         emptyWarningCollapsed = true
     }
     
-    @objc private func tapToViewBannerImage(_ sender: UIGestureRecognizer) {
-        print(">>> banner tapped")
-        clickMedia = profileBannerImage
-        imageURLToShare = profileBannerImageURL
-        performSegue(withIdentifier: "imageTapped", sender: self)
-    }
-    
-    @objc private func tapToViewProfileImage(_ sender: UIGestureRecognizer) {
-        print(">>> head tapped")
-        clickMedia = profileImage
-        imageURLToShare = profileImageURL
-        performSegue(withIdentifier: "imageTapped", sender: self)
-    }
-
     
     // Header
     private func addHeader() {
@@ -201,7 +187,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         let tapOnBanner = UITapGestureRecognizer(target: self, action: #selector(tapToViewBannerImage(_:)))
         tapOnBanner.numberOfTapsRequired = 1
         tapOnBanner.numberOfTouchesRequired = 1
-        headerView.addGestureRecognizer(tapOnBanner)
+//        headerView.addGestureRecognizer(tapOnBanner)
         
         visualEffectView = VisualEffectView(frame: view.bounds)
         visualEffectView?.blurRadius = 10
@@ -232,7 +218,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         let tapOnHead = UITapGestureRecognizer(target: self, action: #selector(tapToViewProfileImage(_:)))
         tapOnHead.numberOfTapsRequired = 1
         tapOnHead.numberOfTouchesRequired = 1
-        headerView.addGestureRecognizer(tapOnHead)
+//        profileImageView.addGestureRecognizer(tapOnHead)
         
         
         headerView.addSubview(nameLabel)
@@ -370,6 +356,21 @@ class UserTimelineTableViewController: TimelineTableViewController {
     @IBAction private func viewFollowingList(_ sender: Any?) {
         performSegue(withIdentifier: "User List", sender: folllowingButton)
     }
+    
+    @IBAction private func tapToViewBannerImage(_ sender: UIGestureRecognizer) {
+        print(">>> banner tapped")
+        clickMedia = profileBannerImage
+        imageURLToShare = profileBannerImageURL
+        performSegue(withIdentifier: "imageTapped", sender: self)
+    }
+    
+    @IBAction private func tapToViewProfileImage(_ sender: UIGestureRecognizer) {
+        clickMedia = profileImage
+        imageURLToShare = profileImageURL
+        performSegue(withIdentifier: "imageTapped", sender: self)
+    }
+    
+
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
