@@ -22,7 +22,7 @@
 - [ ] User profile page: 
   - [x] Basic infomation
   - [ ] Text parsing
-  - [ ] Click action (query)
+  - [x] Click action (query)
 - [ ] Save to database
 - [ ] Load upward and downward
 
