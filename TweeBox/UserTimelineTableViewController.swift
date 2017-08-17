@@ -27,27 +27,11 @@ class UserTimelineTableViewController: TimelineTableViewController {
     }
     
     
-    private var profileImage: UIImage? {
-        didSet {
-            print(">>> profileImage set >> \(profileImage)")
-        }
-    }
-    private var profileImageURL: URL? {
-        didSet {
-            print(">>> profileImageURL set >> \(profileImageURL)")
-        }
-    }
+    private var profileImage: UIImage?
+    private var profileImageURL: URL?
     
-    private var profileBannerImage: UIImage? {
-        didSet {
-            print(">>> profileBannerImage set >> \(profileBannerImage)")
-        }
-    }
-    private var profileBannerImageURL: URL? {
-        didSet {
-            print(">>> profileBannerImageURL set >> \(profileBannerImageURL)")
-        }
-    }
+    private var profileBannerImage: UIImage?
+    private var profileBannerImageURL: URL?
     
     private let headerView = UIImageView()
     private var visualEffectView: VisualEffectView?
@@ -80,6 +64,12 @@ class UserTimelineTableViewController: TimelineTableViewController {
 
 //            pullToRefresh(height)
             makeProfileObjectsDisapearByPulling(height)
+            
+            if height <= Constants.profileToolbarHeight {
+                navigationItem.title = user?.name
+            } else {
+                navigationItem.title = ""
+            }
         }
         
         if !headerHeightCalculated {
@@ -178,7 +168,10 @@ class UserTimelineTableViewController: TimelineTableViewController {
             self.navigationController?.show(destinationViewController, sender: self)
         }
         
-        self.clickedTweet = timeline[section][row]
+        clickedTweet = timeline[section][row]
+        if let originTweet = clickedTweet?.retweetedStatus, let retweetText = clickedTweet?.text, retweetText.hasPrefix("RT @") {
+            clickedTweet = originTweet
+        }
         
         self.prepare(for: segue, sender: self)
         segue.perform()

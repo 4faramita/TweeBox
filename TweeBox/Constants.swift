@@ -8,8 +8,12 @@
 
 import Foundation
 import UIKit
+import TwitterKit
 
 struct Constants {
+    
+    static let selfID = Twitter.sharedInstance().sessionStore.session()?.userID ?? "-1"
+
     static let tweetLimitPerRefresh = "10"
     static let userLimitPerRefresh = "50"
     
@@ -33,6 +37,7 @@ struct Constants {
     static let profilePanelDragOffset: CGFloat = 100
     static let profileToolbarHeight: CGFloat = 50
     static let contentUnifiedOffset: CGFloat = 20
+    
 }
 
 enum ProfileRadius: CGFloat {

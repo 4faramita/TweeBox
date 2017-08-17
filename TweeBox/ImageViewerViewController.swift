@@ -14,11 +14,7 @@ import Kingfisher
 
 class ImageViewerViewController: PannableViewController {
         
-    public var imageURL: URL! {
-        didSet {
-            print(">>> imageURL set >> \(imageURL)")
-        }
-    }
+    public var imageURL: URL!
     
     public var imageView = UIImageView()
     
@@ -27,7 +23,6 @@ class ImageViewerViewController: PannableViewController {
             return imageView.image
         }
         set {
-            print(">>> image set >> \(newValue)")
             imageView.image = newValue
             imageView.sizeToFit()
             scrollView?.contentSize = imageView.frame.size

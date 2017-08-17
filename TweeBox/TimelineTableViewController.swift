@@ -53,16 +53,11 @@ class TimelineTableViewController: UITableViewController
     var clickedImageIndex: Int?
     var clickMedia: UIImage? {
         didSet {
-            print(">>> clickMedia set >> \(clickMedia)")
             performSegue(withIdentifier: "imageTapped", sender: self)
         }
     }
     var imageURLToShare: URL?
-    {
-        didSet {
-            print(">>> imageURLToShare set >> \(imageURLToShare)")
-        }
-    }
+
     var media: [TweetMedia]!
     
     
@@ -170,7 +165,6 @@ class TimelineTableViewController: UITableViewController
             if let sinceID = sinceID {
                 self?.sinceID = sinceID
             }
-//            if let tweets = tweets {
 //                self?.tableView.reloadData()
             
             if tweets.count > 0 {
@@ -189,7 +183,6 @@ class TimelineTableViewController: UITableViewController
                 }
                 
             }
-//            }
             
             Timer.scheduledTimer(
                 withTimeInterval: TimeInterval(0.1),
@@ -339,7 +332,10 @@ extension TimelineTableViewController: TweetWithPicTableViewCellProtocol, TweetT
     
     func profileImageTapped(section: Int, row: Int) {
                 
-        self.clickedTweet = timeline[section][row]
+        clickedTweet = timeline[section][row]
+        if let originTweet = clickedTweet?.retweetedStatus, let retweetText = clickedTweet?.text, retweetText.hasPrefix("RT @") {
+            clickedTweet = originTweet
+        }
         
         performSegue(withIdentifier: "profileImageTapped", sender: nil)
     }

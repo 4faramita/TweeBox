@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 //import SDWebImage
+import VisualEffectView
 
 
 protocol TweetWithPicTableViewCellProtocol: class {
@@ -93,6 +94,48 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
             picHeight = actualHeight
             picWidth = picHeight / aspect
         }
+        
+        
+        if pic.type != "photo" {
+            
+//            let playBackground = UIView()
+//            tweetPicContent.addSubview(playBackground)
+//            playBackground.isOpaque = true
+//            playBackground.snp.makeConstraints({ (make) in
+//                make.center.equalTo(tweetPicContent)
+//                make.height.equalTo(48)
+//                make.width.equalTo(48)
+//            })
+//            playBackground.isUserInteractionEnabled = false
+            
+            let visualEffectView = VisualEffectView(frame: tweetPicContent.bounds)
+            visualEffectView.blurRadius = 2
+            visualEffectView.colorTint = .white
+            visualEffectView.colorTintAlpha = 0.2
+            tweetPicContent.addSubview(visualEffectView)
+            
+            let play = UIImageView(image: UIImage(named: "play_video"))
+            tweetPicContent.addSubview(play)
+            play.snp.makeConstraints { (make) in
+                make.center.equalTo(tweetPicContent)
+                make.height.equalTo(32)
+                make.width.equalTo(32)
+            }
+            
+            
+            if pic.type == "animated_gif" {
+                let gif = UIImageView(image: UIImage(named: "play_gif"))
+                tweetPicContent.addSubview(gif)
+                gif.snp.makeConstraints { (make) in
+                    make.trailing.equalTo(tweetPicContent).offset(-10)
+                    make.bottom.equalTo(tweetPicContent)
+                    make.height.equalTo(32)
+                    make.width.equalTo(32)
+                }
+            }
+        }
+        
+        
         
         // Kingfisher
         let placeholder = UIImage(named: "picPlaceholder")!.kf.image(withRoundRadius: Constants.picCornerRadius, fit: CGSize(width: picWidth, height: picHeight))
