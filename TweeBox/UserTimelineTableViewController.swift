@@ -9,8 +9,8 @@
 import UIKit
 import TwitterKit
 import Kingfisher
-//import MXParallaxHeader
-//import VisualEffectView
+import MXParallaxHeader
+import VisualEffectView
 
 class UserTimelineTableViewController: TimelineTableViewController {
     
@@ -26,12 +26,28 @@ class UserTimelineTableViewController: TimelineTableViewController {
         }
     }
     
-    /*
-    private var profileImage: UIImage?
-    private var profileImageURL: URL?
     
-    private var profileBannerImage: UIImage?
-    private var profileBannerImageURL: URL?
+    private var profileImage: UIImage? {
+        didSet {
+            print(">>> profileImage set >> \(profileImage)")
+        }
+    }
+    private var profileImageURL: URL? {
+        didSet {
+            print(">>> profileImageURL set >> \(profileImageURL)")
+        }
+    }
+    
+    private var profileBannerImage: UIImage? {
+        didSet {
+            print(">>> profileBannerImage set >> \(profileBannerImage)")
+        }
+    }
+    private var profileBannerImageURL: URL? {
+        didSet {
+            print(">>> profileBannerImageURL set >> \(profileBannerImageURL)")
+        }
+    }
     
     private let headerView = UIImageView()
     private var visualEffectView: VisualEffectView?
@@ -116,7 +132,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
             tableView.parallaxHeader.height = headerHeight
             headerHeightCalculated = true
         }
-    } */
+    }
     
 //    override func hideBarsOnScrolling() { }
 //    override func stopHiddingbard() { }
@@ -155,9 +171,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
     }
     
     override func profileImageTapped(section: Int, row: Int) {
-        
-        print("profile tapped")
-        
+                
         let destinationViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserProfileViewController")
         
         let segue = UIStoryboardSegue(identifier: "profileImageTapped", source: self, destination: destinationViewController) {
@@ -174,7 +188,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         emptyWarningCollapsed = true
     }
     
-/*
+
     // Header
     private func addHeader() {
         
@@ -212,7 +226,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.layer.cornerRadius = Constants.profileImageRadius
         profileImageView.clipsToBounds = true
-        
+        profileImageView.isUserInteractionEnabled = true
         profileImageView.isOpaque = false
         
         let tapOnHead = UITapGestureRecognizer(target: self, action: #selector(tapToViewProfileImage(_:)))
@@ -287,9 +301,9 @@ class UserTimelineTableViewController: TimelineTableViewController {
             }
             userURLButton?.setTitle(userURL.absoluteString, for: .normal)
             userURLButton?.setTitleColor(.lightGray, for: .normal)
-//            userURLButton.titleLabel?.textAlignment = .center
+            //            userURLButton.titleLabel?.textAlignment = .center
             userURLButton?.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
-//            userURLButton(forAction: #selector(tapFollowerButton(_:)), withSender: self)
+            //            userURLButton(forAction: #selector(tapFollowerButton(_:)), withSender: self)
             
         }
 
@@ -341,7 +355,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         separator.backgroundColor = .gray
         separator.isUserInteractionEnabled = false
         
-        
+ 
         headerView.contentMode = .scaleAspectFill
         tableView.parallaxHeader.height = 200
         tableView.parallaxHeader.view = headerView
@@ -359,19 +373,21 @@ class UserTimelineTableViewController: TimelineTableViewController {
     }
     
     @IBAction private func tapToViewBannerImage(_ sender: UIGestureRecognizer) {
-        print(">>> banner tapped")
-        clickMedia = profileBannerImage
+//        print(">>> profileBannerImage before transfer >> \(profileBannerImage)")
+//        print(">>> profileBannerImageURL before transfer >> \(profileBannerImageURL)")
         imageURLToShare = profileBannerImageURL
-        performSegue(withIdentifier: "imageTapped", sender: self)
+        clickMedia = profileBannerImage
+//        performSegue(withIdentifier: "imageTapped", sender: self)
     }
     
     @IBAction private func tapToViewProfileImage(_ sender: UIGestureRecognizer) {
-        clickMedia = profileImage
+//        print(">>> profileImage before transfer >> \(profileImage)")
+//        print(">>> profileImageURL before transfer >> \(profileImageURL)")
+        print(">>> profileImage tapped")
         imageURLToShare = profileImageURL
-        performSegue(withIdentifier: "imageTapped", sender: self)
+        clickMedia = profileImage
+//        performSegue(withIdentifier: "imageTapped", sender: self)
     }
-    
-
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -387,6 +403,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
             }
         }
 
+        super.prepare(for: segue, sender: sender)
     }
- */
 }

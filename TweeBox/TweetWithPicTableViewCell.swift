@@ -42,7 +42,6 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
             mediaIndex = totalMediaNum == 4 ? 2 : 0
         case (false, false):  // down right
             mediaIndex = ((totalMediaNum == 4) ? 3 : ((totalMediaNum == 3) ? 2 : ((totalMediaNum == 2) ? 1 : 0)))
-            print("here")
         }
                 
         guard let section = section, let row = row, let mediaIndex = mediaIndex else { return }

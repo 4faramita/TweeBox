@@ -13,6 +13,5 @@ target 'TweeBox' do
 	pod 'Whisper'
 	pod 'BMPlayer'
 	pod "MXParallaxHeader"
-	# pod 'ParallaxHeader'
 	pod "VisualEffectView"
 end

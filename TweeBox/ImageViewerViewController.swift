@@ -14,7 +14,11 @@ import Kingfisher
 
 class ImageViewerViewController: PannableViewController {
         
-    public var imageURL: URL!
+    public var imageURL: URL! {
+        didSet {
+            print(">>> imageURL set >> \(imageURL)")
+        }
+    }
     
     public var imageView = UIImageView()
     
@@ -23,6 +27,7 @@ class ImageViewerViewController: PannableViewController {
             return imageView.image
         }
         set {
+            print(">>> image set >> \(newValue)")
             imageView.image = newValue
             imageView.sizeToFit()
             scrollView?.contentSize = imageView.frame.size
@@ -38,7 +43,7 @@ class ImageViewerViewController: PannableViewController {
              */
             
             let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressToCallShareSheet(_:)))
-            scrollView.addGestureRecognizer(longPress)
+            scrollView?.addGestureRecognizer(longPress)
         }
     }
     
@@ -171,21 +176,23 @@ class ImageViewerViewController: PannableViewController {
 //    }
     
     fileprivate func centerIt() {
-        let imageFactor = imageView.frame.size.width / imageView.frame.size.height
-        
-        let screenWidth = UIScreen.main.bounds.size.width
-        let screenHeight = UIScreen.main.bounds.size.height
-        let screenFactor = screenWidth / screenHeight
-        
-        if imageFactor >= screenFactor {  // image is wider
-            imageView.frame.size.width = screenWidth
-            imageView.frame.size.height = screenWidth / imageFactor
-        } else {
-            imageView.frame.size.height = screenHeight
-            imageView.frame.size.width = screenHeight * imageFactor
+        if image != nil, imageView.frame.size.height > 0, imageView.frame.size.width > 0 {
+            let imageFactor = imageView.frame.size.width / imageView.frame.size.height
+            
+            let screenWidth = UIScreen.main.bounds.size.width
+            let screenHeight = UIScreen.main.bounds.size.height
+            let screenFactor = screenWidth / screenHeight
+            
+            if imageFactor >= screenFactor {  // image is wider
+                imageView.frame.size.width = screenWidth
+                imageView.frame.size.height = screenWidth / imageFactor
+            } else {  // image is higher
+                imageView.frame.size.height = screenHeight
+                imageView.frame.size.width = screenHeight * imageFactor
+            }
+            imageView.center = view.center
+            scrollView.setZoomScale(1.0, animated: true)
         }
-        imageView.center = view.center
-        scrollView.setZoomScale(1.0, animated: true)
     }
     
 }
@@ -237,9 +244,7 @@ extension ImageViewerViewController {
                     }, completionHandler: { success, error in
                         
                         if success {
-                            
-                            print("saved successfully")
-                            
+                                                        
                             Whisper.hide()
                             
                             var successMessage = Murmur(title: "Saved To Camera Roll Successfully.")

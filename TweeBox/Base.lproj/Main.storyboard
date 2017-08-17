@@ -52,7 +52,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="134"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mt4-Jr-diH" id="tQF-gU-gCG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="133.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jqC-gn-it9">
@@ -480,7 +480,7 @@
                                 <rect key="frame" x="0.0" y="682" width="375" height="261"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CkI-On-DUv" id="ECI-pl-kcV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="260.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yth-4a-7yP">
@@ -646,7 +646,7 @@
                                 <rect key="frame" x="0.0" y="943" width="375" height="308"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JhS-Z2-9tx" id="lKZ-BX-w1z">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="307.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VKT-TQ-F7r">
@@ -824,7 +824,7 @@
                                 <rect key="frame" x="0.0" y="1251" width="375" height="309"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fCY-yv-ikL" id="nsO-QO-HFs">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="308.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="309"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ab6-Js-lkL">
@@ -1227,7 +1227,7 @@
         <!--User Timeline-->
         <scene sceneID="rkw-Nk-sFW">
             <objects>
-                <tableViewController id="siG-Yx-ulA" userLabel="User Timeline" customClass="UserTimelineTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UserProfileViewController" id="siG-Yx-ulA" userLabel="User Timeline" customClass="UserTimelineTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" id="PzF-nP-ten">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2012,21 +2012,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Lyc-8h-vaO"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="MxW-pV-Wjs">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle">
-                            <fragment content="Refreshing…">
-                                <attributes>
-                                    <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <connections>
-                            <action selector="refresh:" destination="siG-Yx-ulA" eventType="valueChanged" id="lgb-Cq-TTQ"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <segue destination="YmO-B7-dd1" kind="presentation" identifier="imageTapped" id="P8A-PP-qGh"/>
                         <segue destination="tY3-Cn-E0S" kind="presentation" identifier="videoTapped" id="Mzq-P7-JMi"/>
@@ -2035,7 +2020,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gf4-vT-v3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2610" y="760"/>
+            <point key="canvasLocation" x="2608.8000000000002" y="759.67016491754134"/>
         </scene>
         <!--Home Timeline-->
         <scene sceneID="qPs-EO-Esl">
@@ -2478,7 +2463,7 @@
                                 <rect key="frame" x="0.0" y="682" width="375" height="261"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9m5-ts-qKr" id="USG-e0-JZQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EOh-pF-WgF">
@@ -2825,21 +2810,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="NjE-bg-xoU"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="FFW-wf-eQU">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle">
-                            <fragment content="Refreshing…">
-                                <attributes>
-                                    <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <connections>
-                            <action selector="refresh:" destination="j9R-GV-7ol" eventType="valueChanged" id="Yfd-y5-LAt"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <segue destination="tY3-Cn-E0S" kind="presentation" identifier="videoTapped" id="tdV-pQ-YAf"/>
                         <segue destination="EXU-Nt-KBj" kind="show" identifier="User List" id="GwV-mx-Cse"/>
@@ -2859,7 +2829,7 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AAx-pq-S6O"/>
+        <segue reference="uxh-8f-EHW"/>
         <segue reference="P8A-PP-qGh"/>
         <segue reference="Mzq-P7-JMi"/>
         <segue reference="xU8-Oj-mBQ"/>

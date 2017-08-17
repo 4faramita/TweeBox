@@ -51,8 +51,18 @@ class TimelineTableViewController: UITableViewController
     
     var clickedTweet: Tweet?
     var clickedImageIndex: Int?
-    var clickMedia: UIImage?
+    var clickMedia: UIImage? {
+        didSet {
+            print(">>> clickMedia set >> \(clickMedia)")
+            performSegue(withIdentifier: "imageTapped", sender: self)
+        }
+    }
     var imageURLToShare: URL?
+    {
+        didSet {
+            print(">>> imageURLToShare set >> \(imageURLToShare)")
+        }
+    }
     var media: [TweetMedia]!
     
     
@@ -312,7 +322,6 @@ extension TimelineTableViewController: TweetWithPicTableViewCellProtocol, TweetT
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "imageTapped" {
-            print(sender)
             if let imageViewer = segue.destination.content as? ImageViewerViewController {
                     imageViewer.image = clickMedia
                     imageViewer.imageURL = imageURLToShare
@@ -356,7 +365,7 @@ extension TimelineTableViewController: TweetWithPicTableViewCellProtocol, TweetT
                 }) { [weak self] (image, error, cacheType, url) in
                     if let image = image {
                         self?.clickMedia = image
-                        self?.performSegue(withIdentifier: "imageTapped", sender: nil)
+//                        self?.performSegue(withIdentifier: "imageTapped", sender: nil)
                     }
                 }
                 
