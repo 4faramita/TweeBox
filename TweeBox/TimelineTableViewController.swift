@@ -218,7 +218,18 @@ class TimelineTableViewController: UITableViewController
         let cell: UITableViewCell
         let tweet = timeline[indexPath.section][indexPath.row]
         
-        if let media = tweet.entities?.media {
+        if let _ = tweet.quotedStatus {
+            cell = tableView.dequeueReusableCell(withIdentifier: "Retweet with Comment", for: indexPath)
+            if let retweetCell = cell as? RetweetTableViewCell {
+                retweetCell.tweet = tweet
+                
+                // tap to segue
+                retweetCell.profilrDelegate = self
+                retweetCell.section = indexPath.section
+                retweetCell.row = indexPath.row
+            }
+            
+        } else if let media = tweet.entities?.media {
             switch media.count {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Text", for: indexPath)

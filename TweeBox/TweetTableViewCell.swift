@@ -31,12 +31,8 @@ class TweetTableViewCell: UITableViewCell {
             if let originTweet = tweet?.retweetedStatus, let retweetText = tweet?.text, retweetText.hasPrefix("RT @") {
                 retweet = tweet
                 tweet = originTweet
-//                updateUI()
-//                addStatusIcons()
-            } 
-//                else {
+            }
             updateUI()
-//            }
         }
     }
     
@@ -60,55 +56,6 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     
-    private func addStatusIcons() {
-        
-//        let retweeterNameLabel = UILabel()
-//        addSubview(retweeterNameLabel)
-//        retweeterNameLabel.textColor = .lightGray
-//        retweeterNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 13)
-        
-        if let retweet = retweet {
-            if retweet.id == Constants.selfID {
-                
-//                retweeterNameLabel.text = "You"
-//                retweeterNameLabel.snp.makeConstraints({ (make) in
-//                    make.top.equalTo(replyImage.snp.bottom).offset(5)
-//                    make.leading.equalTo(replyImage)
-//                })
-            } else {
-                
-//
-//                retweeterNameLabel.text = retweet.user.name
-//                retweeterNameLabel.snp.makeConstraints({ (make) in
-//                    make.top.equalTo(retweeterProfileImage)
-//                    make.leading.equalTo(retweeterProfileImage.snp.trailing).offset(5)
-//                })
-                
-                retweetCount.text = retweet.user.name
-                
-                let retweeterProfileImage = UIImageView()
-                addSubview(retweeterProfileImage)
-                retweeterProfileImage.kf.setImage(with: retweet.user.profileImageURL)
-                retweeterProfileImage.snp.makeConstraints({ (make) in
-                    make.height.equalTo(16)
-                    make.width.equalTo(16)
-                    make.top.equalTo(retweetCount)
-                    make.leading.equalTo(retweetCount.snp.trailing).offset(5)
-                })
-                cutViewToRound(with: retweeterProfileImage, radius: 8)
-
-            }
-            
-//            let retweetIcon = UIImageView(image: UIImage(named: "retweet_true"))
-//            addSubview(retweetIcon)
-//            retweetIcon.snp.makeConstraints { (make) in
-//                make.top.equalTo(retweeterNameLabel)
-//                make.leading.equalTo(retweeterNameLabel.snp.trailing).offset(5)
-//            }
-        }
-    }
-    
-    
     private func cutViewToRound(with someView: UIView, radius: CGFloat?) {
         someView.layer.cornerRadius = radius ?? (someView.frame.size.width / 2)
         someView.clipsToBounds = true
@@ -119,7 +66,6 @@ class TweetTableViewCell: UITableViewCell {
         
         if let userProfileImageURL = tweet?.user.profileImageURL, let picView = self.tweetUserProfilePic {
             
-            // Kingfisher
             picView.kf.setImage(
                 with: userProfileImageURL,
 //                placeholder: placeholder,
@@ -179,6 +125,8 @@ class TweetTableViewCell: UITableViewCell {
             retweetImage.image = UIImage(named: "retweet_false")
             
             if let retweet = retweet {
+
+                retweetCount.text = retweet.user.name
                 
                 let retweeterProfileImage = UIImageView()
                 addSubview(retweeterProfileImage)
@@ -187,12 +135,11 @@ class TweetTableViewCell: UITableViewCell {
                     make.height.equalTo(16)
                     make.width.equalTo(16)
                     make.top.equalTo(retweetCount)
-                    make.leading.equalTo(retweetImage.snp.trailing).offset(5).priority(750)
+                    make.leading.equalTo(retweetImage.snp.trailing).offset(3)
                     make.trailing.equalTo(retweetCount.snp.leading).offset(-2)
                 })
                 cutViewToRound(with: retweeterProfileImage, radius: 8)
                 
-                retweetCount.text = retweet.user.name
             } else {
                 retweetCount.text = shortedRtCount
             }
