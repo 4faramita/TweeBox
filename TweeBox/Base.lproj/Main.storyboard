@@ -906,7 +906,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKr-BM-syg" customClass="OriginTweetView" customModule="TweeBox" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="136.5" width="359" height="150"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="djd-pQ-P5A"/>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="150" id="djd-pQ-P5A"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -2115,7 +2115,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sB0-Vb-E7l" customClass="OriginTweetView" customModule="TweeBox" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="136.5" width="359" height="150"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="cDe-d7-yse"/>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="150" id="cDe-d7-yse"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -2654,7 +2654,7 @@
                                 <rect key="frame" x="0.0" y="682" width="375" height="261"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9m5-ts-qKr" id="USG-e0-JZQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EOh-pF-WgF">
@@ -2820,7 +2820,7 @@
                                 <rect key="frame" x="0.0" y="943" width="375" height="308"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3ZE-6Q-aDx" id="FJf-0f-MDI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="307"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5HL-gm-Keu">
@@ -3080,7 +3080,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qz8-8f-vkP" customClass="OriginTweetView" customModule="TweeBox" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="136.5" width="359" height="150"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="xNT-ch-Uyq"/>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="150" id="xNT-ch-Uyq"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

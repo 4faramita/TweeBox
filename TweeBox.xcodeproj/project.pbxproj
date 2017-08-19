@@ -41,6 +41,7 @@
 		B46242921F4419CF0074158A /* TwitterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46242911F4419CF0074158A /* TwitterDate.swift */; };
 		B469BAC11F480C0B00ADA3F6 /* OriginTweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469BAC01F480C0B00ADA3F6 /* OriginTweetView.swift */; };
 		B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469BAC31F481A8500ADA3F6 /* UIViewExtension.swift */; };
+		B469BAC61F488AFB00ADA3F6 /* TwitterAttributedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469BAC51F488AFB00ADA3F6 /* TwitterAttributedContent.swift */; };
 		B47E586B1F3C959900CA0C0A /* UserTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E586A1F3C959900CA0C0A /* UserTimelineTableViewController.swift */; };
 		B47E586F1F3D8A2F00CA0C0A /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E586E1F3D8A2F00CA0C0A /* ImageViewerViewController.swift */; };
 		B47E58711F3DACAC00CA0C0A /* PannableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E58701F3DACAC00CA0C0A /* PannableViewController.swift */; };
@@ -117,6 +118,7 @@
 		B46242911F4419CF0074158A /* TwitterDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterDate.swift; sourceTree = "<group>"; };
 		B469BAC01F480C0B00ADA3F6 /* OriginTweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginTweetView.swift; sourceTree = "<group>"; };
 		B469BAC31F481A8500ADA3F6 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		B469BAC51F488AFB00ADA3F6 /* TwitterAttributedContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAttributedContent.swift; sourceTree = "<group>"; };
 		B47E586A1F3C959900CA0C0A /* UserTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineTableViewController.swift; sourceTree = "<group>"; };
 		B47E586E1F3D8A2F00CA0C0A /* ImageViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
 		B47E58701F3DACAC00CA0C0A /* PannableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				B4E917171F433CEC00FD3A5F /* User List */,
 				B443A0F71F2B44FD0021BB65 /* RESTfulClient.swift */,
 				B443A0F91F2B46370021BB65 /* Constants.swift */,
+				B469BAC51F488AFB00ADA3F6 /* TwitterAttributedContent.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				B4B7C4C41F3ED26E00F424A0 /* NavigationViewControllerExtension.swift in Sources */,
 				B4E917161F433CE600FD3A5F /* UserList.swift in Sources */,
 				B443A0FA1F2B46370021BB65 /* Constants.swift in Sources */,
+				B469BAC61F488AFB00ADA3F6 /* TwitterAttributedContent.swift in Sources */,
 				B4092FF91F38BECF00CAB109 /* TweetPhotoSize.swift in Sources */,
 				B4CE12181F3AD60A002D341E /* TimelineParams.swift in Sources */,
 				B4092FF71F38BD6D00CAB109 /* TweetEntity.swift in Sources */,

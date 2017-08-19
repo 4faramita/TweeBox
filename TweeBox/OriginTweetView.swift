@@ -31,6 +31,12 @@ class OriginTweetView: UIView {
             subview.removeFromSuperview()
         }
         
+        if hasMedia {
+            self.snp.makeConstraints({ (make) in
+                make.height.equalTo(150)
+            })
+        }
+        
         
         var thumbImageView: UIImageView?
         

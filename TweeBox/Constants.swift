@@ -38,6 +38,8 @@ struct Constants {
     static let profileToolbarHeight: CGFloat = 50
     static let contentUnifiedOffset: CGFloat = 20
     
+    static let themeColor = UIColor(red: 0, green: 0, blue: 1, alpha: 1)
+    static let lightenThemeColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5)
 }
 
 enum ProfileRadius: CGFloat {

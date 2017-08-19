@@ -36,6 +36,7 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
     
+    
     @IBOutlet weak var tweetUserProfilePic: UIImageView!
     @IBOutlet weak var tweetCreatedTime: UILabel!
     @IBOutlet weak var tweetUserName: UILabel!

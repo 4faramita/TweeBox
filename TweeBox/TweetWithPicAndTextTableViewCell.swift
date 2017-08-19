@@ -13,16 +13,16 @@ class TweetWithPicAndTextTableViewCell: TweetWithPicTableViewCell {
     
     @IBOutlet weak var tweetTextContent: UILabel!
     
-    public var pureMedia = false
-    
     override func updateUI() {
         
         super.updateUI()
         
-        if pureMedia {
+        if let tweet = tweet {
+            tweetTextContent?.attributedText = TwitterAttributedContent(tweet).attributedString
+        }
+        
+        if tweetTextContent?.attributedText?.length == 0 {
             tweetTextContent?.removeFromSuperview()
-        } else {
-            tweetTextContent?.text = tweet?.text
         }
     }
     
