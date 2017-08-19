@@ -14,10 +14,14 @@ import SnapKit
 
 class RetweetTableViewCell: TweetWithTextTableViewCell {
     
+    
+    @IBOutlet weak var originTweetView: OriginTweetView!
+        
     override func updateUI() {
         
-        let tweet = self.retweet
-        
         super.updateUI()
+        
+        originTweetView.originTweet = tweet?.quotedStatus
+        
     }
 }

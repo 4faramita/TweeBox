@@ -215,10 +215,10 @@ class TimelineTableViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: UITableViewCell
+        var cell: UITableViewCell
         let tweet = timeline[indexPath.section][indexPath.row]
         
-        if let _ = tweet.quotedStatus {
+        if (tweet.quotedStatus != nil) || (tweet.retweetedStatus?.quotedStatus != nil) {
             cell = tableView.dequeueReusableCell(withIdentifier: "Retweet with Comment", for: indexPath)
             if let retweetCell = cell as? RetweetTableViewCell {
                 retweetCell.tweet = tweet

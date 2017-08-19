@@ -39,6 +39,8 @@
 		B443A0FC1F2B70D40021BB65 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A0FB1F2B70D40021BB65 /* Error.swift */; };
 		B45F1D561F40645B00AF201C /* VideoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F1D551F40645B00AF201C /* VideoViewerViewController.swift */; };
 		B46242921F4419CF0074158A /* TwitterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46242911F4419CF0074158A /* TwitterDate.swift */; };
+		B469BAC11F480C0B00ADA3F6 /* OriginTweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469BAC01F480C0B00ADA3F6 /* OriginTweetView.swift */; };
+		B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469BAC31F481A8500ADA3F6 /* UIViewExtension.swift */; };
 		B47E586B1F3C959900CA0C0A /* UserTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E586A1F3C959900CA0C0A /* UserTimelineTableViewController.swift */; };
 		B47E586F1F3D8A2F00CA0C0A /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E586E1F3D8A2F00CA0C0A /* ImageViewerViewController.swift */; };
 		B47E58711F3DACAC00CA0C0A /* PannableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47E58701F3DACAC00CA0C0A /* PannableViewController.swift */; };
@@ -113,6 +115,8 @@
 		B443A0FB1F2B70D40021BB65 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B45F1D551F40645B00AF201C /* VideoViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewerViewController.swift; sourceTree = "<group>"; };
 		B46242911F4419CF0074158A /* TwitterDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterDate.swift; sourceTree = "<group>"; };
+		B469BAC01F480C0B00ADA3F6 /* OriginTweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginTweetView.swift; sourceTree = "<group>"; };
+		B469BAC31F481A8500ADA3F6 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		B47E586A1F3C959900CA0C0A /* UserTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineTableViewController.swift; sourceTree = "<group>"; };
 		B47E586E1F3D8A2F00CA0C0A /* ImageViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
 		B47E58701F3DACAC00CA0C0A /* PannableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableViewController.swift; sourceTree = "<group>"; };
@@ -229,7 +233,7 @@
 				B443A0EE1F2B36A50021BB65 /* Model */,
 				B46A53861F32147F00F0D66E /* ViewController */,
 				B429859F1F29E8E700AFFB97 /* AppDelegate.swift */,
-				B40930021F39600C00CAB109 /* Cell */,
+				B469BAC21F480C1300ADA3F6 /* View */,
 				B42985A91F29E8E700AFFB97 /* Assets.xcassets */,
 				B42985AB1F29E8E700AFFB97 /* LaunchScreen.storyboard */,
 				B42985AE1F29E8E700AFFB97 /* Info.plist */,
@@ -271,6 +275,15 @@
 				B443A0F91F2B46370021BB65 /* Constants.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		B469BAC21F480C1300ADA3F6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B40930021F39600C00CAB109 /* Cell */,
+				B469BAC01F480C0B00ADA3F6 /* OriginTweetView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		B46A53861F32147F00F0D66E /* ViewController */ = {
@@ -342,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				B40930071F3970FF00CAB109 /* URLExtension.swift */,
+				B469BAC31F481A8500ADA3F6 /* UIViewExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -503,6 +517,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MXParallaxHeader/MXParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${PODS_ROOT}/Reveal-SDK/RevealServer-9/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/VisualEffectView/VisualEffectView.framework",
@@ -516,6 +531,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MXParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisualEffectView.framework",
@@ -578,6 +594,7 @@
 				B40930001F395FFD00CAB109 /* TweetWithTextTableViewCell.swift in Sources */,
 				B443A0F41F2B39C30021BB65 /* TweetMedia.swift in Sources */,
 				B47E58711F3DACAC00CA0C0A /* PannableViewController.swift in Sources */,
+				B469BAC11F480C0B00ADA3F6 /* OriginTweetView.swift in Sources */,
 				B40930081F39710000CAB109 /* URLExtension.swift in Sources */,
 				B409300A1F39763E00CAB109 /* MediaSize.swift in Sources */,
 				B4B406361F4163E600683124 /* HomeTimelineTableViewController.swift in Sources */,
@@ -585,6 +602,7 @@
 				B43BB8BD1F35A4A40011A301 /* Place.swift in Sources */,
 				B485BA631F46CD260077CC31 /* RetweetTableViewCell.swift in Sources */,
 				B443A0F21F2B38050021BB65 /* TwitterUser.swift in Sources */,
+				B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */,
 				B45F1D561F40645B00AF201C /* VideoViewerViewController.swift in Sources */,
 				B40930011F395FFD00CAB109 /* TweetWithPicAndTextTableViewCell.swift in Sources */,
 				B42985A21F29E8E700AFFB97 /* LoginViewController.swift in Sources */,

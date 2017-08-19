@@ -155,8 +155,9 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
             )
             picView.layer.borderWidth = 1
             picView.layer.borderColor = UIColor.white.cgColor
-            picView.layer.cornerRadius = Constants.picCornerRadius
-            picView.clipsToBounds = true
+//            picView.layer.cornerRadius = Constants.picCornerRadius
+//            picView.clipsToBounds = true
+            picView.cutToRound(radius: Constants.picCornerRadius)
             
             
             // tap to segue

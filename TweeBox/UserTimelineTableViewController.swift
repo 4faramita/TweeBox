@@ -217,8 +217,9 @@ class UserTimelineTableViewController: TimelineTableViewController {
         
         profileImageView.layer.borderWidth = 3.0
         profileImageView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.layer.cornerRadius = Constants.profileImageRadius
-        profileImageView.clipsToBounds = true
+//        profileImageView.layer.cornerRadius = Constants.profileImageRadius
+//        profileImageView.clipsToBounds = true
+        profileImageView.cutToRound(radius: Constants.profileImageRadius)
         profileImageView.isUserInteractionEnabled = true
         profileImageView.isOpaque = false
         

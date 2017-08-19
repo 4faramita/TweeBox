@@ -56,13 +56,17 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     
-    private func cutViewToRound(with someView: UIView, radius: CGFloat?) {
-        someView.layer.cornerRadius = radius ?? (someView.frame.size.width / 2)
-        someView.clipsToBounds = true
-    }
+//    private func cutViewToRound(with someView: UIView, radius: CGFloat?) {
+//        someView.layer.cornerRadius = radius ?? (someView.frame.size.width / 2)
+//        someView.clipsToBounds = true
+//    }
     
     
     func updateUI() {
+        
+//        if let mainTweetID = tweet?.inReplyToStatusID {
+//            self.backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.05)
+//        }
         
         if let userProfileImageURL = tweet?.user.profileImageURL, let picView = self.tweetUserProfilePic {
             
@@ -77,7 +81,7 @@ class TweetTableViewCell: UITableViewCell {
 //            picView.layer.borderWidth = 3.0
 //            picView.layer.borderColor = UIColor.lightGray.cgColor
             
-            cutViewToRound(with: picView, radius: nil)
+            picView.cutToRound(radius: nil)
             
             // tap to segue
             let tapOnProfileImage = UITapGestureRecognizer(
@@ -101,9 +105,11 @@ class TweetTableViewCell: UITableViewCell {
         if let id = tweet?.user.screenName {
             tweetUserID.text = "@" + id
         }
-        
-        replyImage.image = UIImage(named: "reply")
-        
+        if let mainTweetID = tweet?.inReplyToStatusID {
+            replyImage.image = UIImage(named: "reply_true")
+        } else {
+            replyImage.image = UIImage(named: "reply_false")
+        }
         
         var shortedRtCount = ""
         if let retweetCount = tweet?.retweetCount {
@@ -138,7 +144,7 @@ class TweetTableViewCell: UITableViewCell {
                     make.leading.equalTo(retweetImage.snp.trailing).offset(3)
                     make.trailing.equalTo(retweetCount.snp.leading).offset(-2)
                 })
-                cutViewToRound(with: retweeterProfileImage, radius: 8)
+                retweeterProfileImage.cutToRound(radius: 8)
                 
             } else {
                 retweetCount.text = shortedRtCount

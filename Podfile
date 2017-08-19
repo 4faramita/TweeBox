@@ -4,6 +4,9 @@ use_frameworks!
 swift_version = "3.0"
 
 target 'TweeBox' do
+
+	pod 'Reveal-SDK', :configurations => ['Debug']
+
 	pod 'TwitterKit'
 	pod 'SwiftyJSON'
 	pod 'Kingfisher', '~> 3.0'
