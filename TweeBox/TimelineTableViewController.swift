@@ -364,12 +364,50 @@ extension TimelineTableViewController: TweetWithPicTableViewCellProtocol, TweetT
         } else {
             if let clickedMediaURL = clickedTweet?.entities?.realMedia?[clickedImageIndex ?? 0].mediaURL {
                 
+                let progressView = UIProgressView(progressViewStyle: .bar)
+                progressView.alpha = 0
+                progressView.backgroundColor = .gray
+                progressView.progressTintColor = .orange
+                
+                if let navigationView = navigationController?.view {
+                    navigationView.addSubview(progressView)
+                    if progressView.alpha == 0 {
+                        UIView.animate(
+                            withDuration: 0.5,
+                            delay: 0,
+                            options: [.curveLinear],
+                            animations: { progressView.alpha = 0.5 },
+                            completion: nil
+                        )
+                    }
+                    progressView.snp.makeConstraints({ (make) in
+                        make.size.equalTo(UIApplication.shared.statusBarFrame.size)
+                    })
+                }
+                
                 KingfisherManager.shared.retrieveImage(with: clickedMediaURL, options: nil, progressBlock: {
                     receivedSize, totalSize in
-//                    let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
-//                    print("Loading: \(percentage)%")
-                    // TODO: progress indicator
+                    let percentage = (Float(receivedSize) / Float(totalSize))  // * 100.0
+                    
+                    progressView.setProgress(percentage, animated: true)
+                    
+//                    let tapToStopLoading = UITapGestureRecognizer(target: self, action: #selector("stopLoading(_:)"))
+//                    tapToStopLoading.numberOfTapsRequired = 1
+//                    tapToStopLoading.numberOfTouchesRequired = 1
+//                    progressView.addGestureRecognizer(progressView)
+//                    
+//                    func stopLoading(_ sender: UIGestureRecognizer) { }
                 }) { [weak self] (image, error, cacheType, url) in
+                    if progressView.alpha > 0 {
+                        UIView.animate(
+                            withDuration: 0.5,
+                            delay: 0,
+                            options: [.curveLinear],
+                            animations: { progressView.alpha = 0 },
+                            completion: { if $0 { progressView.removeFromSuperview() } }
+                        )
+                    }
+                    
                     if let image = image {
                         self?.clickMedia = image
 //                        self?.performSegue(withIdentifier: "imageTapped", sender: nil)

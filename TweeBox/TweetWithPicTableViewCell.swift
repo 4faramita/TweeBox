@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import VisualEffectView
+//import NVActivityIndicatorView
 
 
 protocol TweetWithPicTableViewCellProtocol: class {
@@ -19,6 +20,8 @@ protocol TweetWithPicTableViewCellProtocol: class {
 class TweetWithPicTableViewCell: TweetTableViewCell {
     
     private var totalMediaNum: Int!
+    
+    private var images = [UIImageView?]()
     
     @IBAction func imageTapped(byReactingTo: UIGestureRecognizer) {
         
@@ -43,9 +46,22 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
         case (false, false):  // down right
             mediaIndex = ((totalMediaNum == 4) ? 3 : ((totalMediaNum == 3) ? 2 : ((totalMediaNum == 2) ? 1 : 0)))
         }
+        
+//        images = [tweetPicContent, secondPic, thirdPic, fourthPic]
+//        var loadingIndicator: NVActivityIndicatorView? = nil
+//        if let imageFrame = images[mediaIndex ?? 0]?.frame {
+//            loadingIndicator = NVActivityIndicatorView(frame: imageFrame, type: .ballPulse, color: .white, padding: nil)
+//            images[mediaIndex ?? 0]?.addSubview(loadingIndicator!)
+//            loadingIndicator?.startAnimating()
+//        }
+        
                 
         guard let section = section, let row = row, let mediaIndex = mediaIndex else { return }
         delegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.entities?.media)!)
+        
+//        if let loadingIndicator = loadingIndicator, loadingIndicator.animating {
+//            loadingIndicator.stopAnimating()
+//        }
     }
     
     
@@ -63,7 +79,7 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
         
         let media = tweet!.entities!.media!
         
-        let images = [tweetPicContent, secondPic, thirdPic, fourthPic]  // pointer or copy?
+        images = [tweetPicContent, secondPic, thirdPic, fourthPic]
         
         var aspect: CGFloat {
             if (total == 2) || (total == 3 && position == 0) {

@@ -9,7 +9,7 @@
 ### Timeline:
 - [x] Basic timeline information display
 - [ ] Timeline text parsing
-- [ ] Click and wait indicator
+- [x] Click and wait indicator
 - [ ] Image viewer:
   - [x] Gestures, alerts
   - [x] Single Image viewer
