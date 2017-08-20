@@ -14,14 +14,21 @@ import VisualEffectView
 
 class UserTimelineTableViewController: TimelineTableViewController {
     
-    public var user: TwitterUser? {
+    public var user: TwitterUser?
+    {
         didSet {
-            userID = user?.id
+            if userID == nil {
+                userID = user?.id
+            }
+            addHeader()
         }
     }
 
-    var userID: String? {
+    public var userID: String? {
         didSet {
+            if user == nil {
+                setUser()
+            }
             refreshTimeline()
         }
     }
@@ -54,7 +61,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addHeader()
+//        addHeader()
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,6 +93,14 @@ class UserTimelineTableViewController: TimelineTableViewController {
 //            refreshTimeline()
 //        }
 //    }
+    
+    private func setUser() {
+        SingleUser(userParams: UserParams(userID: userID, screenName: nil), resourceURL: ResourceURL.user_show).fetchData { [weak self] (singleUser) in
+            if singleUser != nil {
+                self?.user = singleUser!
+            }
+        }
+    }
     
     private func makeProfileObjectsDisapearByPulling(_ height: CGFloat) {
         

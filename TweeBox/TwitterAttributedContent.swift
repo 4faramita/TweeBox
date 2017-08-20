@@ -42,19 +42,23 @@ class TwitterAttributedContent {
         return getAttributedContent()
     }
     
-    private func changeColorAttribute(to entity: TweetEntity, with color: UIColor?) -> NSRange {
+    private func changeColorAttribute(to entity: TweetEntity, with color: UIColor?) -> NSRange? {
         
-        let start = plainString.index(plainString.startIndex, offsetBy: entity.indices[0])
-        let end = plainString.index(plainString.startIndex, offsetBy: entity.indices[1])
-        let stringToBeRender = plainString.substring(with: start..<end)
-        
-        let range = NSPlainString.range(of: stringToBeRender)
-        
-        if let color = color {
-            attributed.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+        let start = plainString.index(plainString.startIndex, offsetBy: entity.indices[0], limitedBy: plainString.endIndex)
+        let end = plainString.index(plainString.startIndex, offsetBy: entity.indices[1], limitedBy: plainString.endIndex)
+        if let start = start, let end = end {
+            let stringToBeRender = plainString.substring(with: start..<end)
+            
+            let range = NSPlainString.range(of: stringToBeRender)
+            
+            if let color = color {
+                attributed.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+            }
+            
+            return range
+        } else {
+            return nil
         }
-
-        return range
     }
     
     private func getAttributedContent() -> NSAttributedString {
@@ -97,8 +101,9 @@ class TwitterAttributedContent {
             let firstMedia = media[0]
             
             let range = changeColorAttribute(to: firstMedia, with: nil)
-            
-            attributed.mutableString.replaceCharacters(in: range, with: "")
+            if let range = range {
+                attributed.mutableString.replaceCharacters(in: range, with: "")
+            }
         }
         
         return attributed

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import TwitterKit
 import SwiftyJSON
 
 class Timeline {
@@ -31,7 +30,7 @@ class Timeline {
     
     public func fetchData(_ handler: @escaping (String?, String?, [Tweet]) -> Void) {
         
-        if Twitter.sharedInstance().sessionStore.session()?.userID != nil {
+        if Constants.selfID != "-1" {
             
             if fetchNewer, sinceID != nil {
                 timelineParams.sinceID = String(Int(sinceID!)! + 1)

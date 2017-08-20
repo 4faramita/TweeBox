@@ -12,7 +12,9 @@ import TwitterKit
 
 struct Constants {
     
-    static let selfID = Twitter.sharedInstance().sessionStore.session()?.userID ?? "-1"
+    static var selfID: String {
+        return Twitter.sharedInstance().sessionStore.session()?.userID ?? "-1"
+    }
 
     static let tweetLimitPerRefresh = "50"
     static let userLimitPerRefresh = "50"

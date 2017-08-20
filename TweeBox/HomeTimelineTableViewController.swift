@@ -15,9 +15,6 @@ class HomeTimelineTableViewController: UserTimelineTableViewController {
         super.viewDidLoad()
         
         userID = Twitter.sharedInstance().sessionStore.session()?.userID ?? ""
-//        user = 
         // let's user database here
-        // at the same time
-        // query again
     }
 }
