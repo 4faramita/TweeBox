@@ -24,13 +24,13 @@ class TimelineTableViewController: UITableViewController
                 
                 if timeline.count > 0, let navigationController = navigationController {
                     Whisper.hide(whisperFrom: navigationController)
+                    tableView.separatorStyle = .singleLine
                     emptyWarningCollapsed = true
                 }
                 return
             }
             
             print(">>> Batch >> \(timeline.count)")
-//            tableView.separatorStyle = .singleLine
         }
     }
     
@@ -133,7 +133,7 @@ class TimelineTableViewController: UITableViewController
     
     func showEmptyWarningMessage() {
         let message = Message(title: "Pull down to refresh.", backgroundColor: .orange)
-//        tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         if let navigationController = navigationController {
             Whisper.show(whisper: message, to: navigationController, action: .present)
         }

@@ -15,6 +15,9 @@ class VideoViewerViewController: PannableViewController {
     
     public var tweetMedia: TweetMedia! {
         didSet {
+//            BMPlayerConf.enableBrightnessGestures = false
+//            BMPlayerConf.enableVolumeGestures = false
+            
             let player = BMPlayer()
             player.center = view.center
             view.addSubview(player)
@@ -33,14 +36,15 @@ class VideoViewerViewController: PannableViewController {
                 let _ = self.presentingViewController?.dismiss(animated: true)
             }
             
+            
             let asset = BMPlayerResource(url: (tweetMedia.videoInfo?.variants?[0].url)!, name: tweetMedia.extAltText ?? "")
             player.setVideo(resource: asset)
         }
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
     
 //    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
 //        return .slide

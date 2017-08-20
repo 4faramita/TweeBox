@@ -43,6 +43,7 @@ class OriginTweetView: UIView {
         let upperBorder = UIButton()
         addSubview(upperBorder)
         upperBorder.backgroundColor = .lightGray
+        upperBorder.alpha = 0.5
         upperBorder.isUserInteractionEnabled = false
         upperBorder.snp.makeConstraints { (make) in
             make.top.equalTo(self)
@@ -54,6 +55,7 @@ class OriginTweetView: UIView {
         let lowerBorder = UIButton()
         addSubview(lowerBorder)
         lowerBorder.backgroundColor = .lightGray
+        lowerBorder.alpha = 0.5
         lowerBorder.isUserInteractionEnabled = false
         lowerBorder.snp.makeConstraints { (make) in
             make.bottom.equalTo(self)
