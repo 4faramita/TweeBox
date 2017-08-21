@@ -32,8 +32,6 @@ class TwitterUserTableViewCell: UITableViewCell {
     private func updateUI() {
         
         profileImage.kf.setImage(with: user?.profileImageURL)
-//        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
-//        profileImage.clipsToBounds = true
         profileImage.cutToRound(radius: nil)
 
         nameLabel.text = user?.name

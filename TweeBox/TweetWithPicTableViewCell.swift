@@ -9,12 +9,6 @@
 import UIKit
 import Kingfisher
 import VisualEffectView
-//import NVActivityIndicatorView
-
-
-protocol TweetWithPicTableViewCellProtocol: class {
-    func imageTapped(section: Int, row: Int, mediaIndex: Int, media: [TweetMedia])
-}
 
 
 class TweetWithPicTableViewCell: TweetTableViewCell {
@@ -47,21 +41,9 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
             mediaIndex = ((totalMediaNum == 4) ? 3 : ((totalMediaNum == 3) ? 2 : ((totalMediaNum == 2) ? 1 : 0)))
         }
         
-//        images = [tweetPicContent, secondPic, thirdPic, fourthPic]
-//        var loadingIndicator: NVActivityIndicatorView? = nil
-//        if let imageFrame = images[mediaIndex ?? 0]?.frame {
-//            loadingIndicator = NVActivityIndicatorView(frame: imageFrame, type: .ballPulse, color: .white, padding: nil)
-//            images[mediaIndex ?? 0]?.addSubview(loadingIndicator!)
-//            loadingIndicator?.startAnimating()
-//        }
         
-                
         guard let section = section, let row = row, let mediaIndex = mediaIndex else { return }
         delegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.entities?.media)!)
-        
-//        if let loadingIndicator = loadingIndicator, loadingIndicator.animating {
-//            loadingIndicator.stopAnimating()
-//        }
     }
     
     
@@ -113,16 +95,6 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
         
         if pic.type != "photo" {
             
-//            let playBackground = UIView()
-//            tweetPicContent.addSubview(playBackground)
-//            playBackground.isOpaque = true
-//            playBackground.snp.makeConstraints({ (make) in
-//                make.center.equalTo(tweetPicContent)
-//                make.height.equalTo(48)
-//                make.width.equalTo(48)
-//            })
-//            playBackground.isUserInteractionEnabled = false
-            
             let visualEffectView = VisualEffectView(frame: tweetPicContent.bounds)
             visualEffectView.blurRadius = 2
             visualEffectView.colorTint = .white
@@ -156,7 +128,6 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
         let placeholder = UIImage(named: "picPlaceholder")!.kf.image(withRoundRadius: Constants.picCornerRadius, fit: CGSize(width: picWidth, height: picHeight))
         
         let processor = CroppingImageProcessor(size: CGSize(width: picWidth, height: picHeight), anchor: cutPoint)
-            // >> RoundCornerImageProcessor(cornerRadius: Constants.picCornerRadius)
         
         if let picView = images[position] {
 //            picView.kf.indicatorType = .activity
@@ -170,8 +141,6 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
             )
             picView.layer.borderWidth = 1
             picView.layer.borderColor = UIColor.white.cgColor
-//            picView.layer.cornerRadius = Constants.picCornerRadius
-//            picView.clipsToBounds = true
             picView.cutToRound(radius: Constants.picCornerRadius)
             
             

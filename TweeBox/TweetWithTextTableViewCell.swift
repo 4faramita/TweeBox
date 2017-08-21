@@ -16,7 +16,6 @@ class TweetWithTextTableViewCell: TweetTableViewCell {
         
         super.updateUI()
         
-//        tweetTextContent?.text = tweet?.text
         if let tweet = tweet {
             tweetTextContent?.attributedText = TwitterAttributedContent(tweet).attributedString
         }

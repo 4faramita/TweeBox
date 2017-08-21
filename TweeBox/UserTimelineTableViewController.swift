@@ -14,8 +14,7 @@ import VisualEffectView
 
 class UserTimelineTableViewController: TimelineTableViewController {
     
-    public var user: TwitterUser?
-    {
+    public var user: TwitterUser? {
         didSet {
             if userID == nil {
                 userID = user?.id
@@ -269,14 +268,11 @@ class UserTimelineTableViewController: TimelineTableViewController {
         
         
         headerView.addSubview(bioLabel)
-//        bioLabel.text = user?.description
         if let user = user {
             bioLabel.attributedText = TwitterAttributedContent(user).attributedString
         }
         bioLabel.lineBreakMode = .byWordWrapping
         bioLabel.numberOfLines = 0
-//        bioLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 12)
-//        bioLabel.textColor = .white
         
         bioLabel.snp.makeConstraints { (make) in
             make.left.equalTo(headerView).offset(Constants.contentUnifiedOffset + (Constants.profileImageRadius * 2) + 10)

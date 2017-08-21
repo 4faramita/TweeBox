@@ -7,6 +7,7 @@ target 'TweeBox' do
 
 	pod 'Reveal-SDK', :configurations => ['Debug']
 
+	pod 'SnapKit', '~> 3.2.0'
 	pod 'TwitterKit'
 	pod 'SwiftyJSON'
 	pod 'Kingfisher', '~> 3.0'
