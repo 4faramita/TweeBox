@@ -66,3 +66,42 @@ class TweetMedia: TweetEntity {
         super.init(with: json)
     }
 }
+
+extension TweetMedia {
+    
+    func getCutSize(with ratio: CGFloat, at quality: MediaSize) -> CGSize {
+        
+        let picWidth: CGFloat
+        let picHeight: CGFloat
+        
+        let actualSize: TweetPhotoSize.sizeObject
+        
+        
+        switch quality {
+        case .thumb:
+            actualSize = self.sizes.thumb
+        case .small:
+            actualSize = self.sizes.small
+        case .medium:
+            actualSize = self.sizes.medium
+        case .large:
+            actualSize = self.sizes.large
+        default:
+            actualSize = self.sizes.large
+        }
+        let actualHeight = CGFloat(actualSize.h)
+        let actualWidth = CGFloat(actualSize.w)
+        
+        if  actualHeight / actualWidth >= ratio {
+            // too long
+            picWidth = actualWidth
+            picHeight = picWidth * ratio
+        } else {
+            // too wide
+            picHeight = actualHeight
+            picWidth = picHeight / ratio
+        }
+        
+        return CGSize(width: picWidth, height: picHeight)
+    }
+}

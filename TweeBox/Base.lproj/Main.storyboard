@@ -1171,8 +1171,8 @@
                                     <constraint firstItem="cD9-82-UnR" firstAttribute="leading" secondItem="UOL-B1-jzr" secondAttribute="leading" id="bPj-UO-2bj"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wQK-ZA-cqf">
-                                <rect key="frame" x="0.0" y="160.5" width="375" height="276"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bfO-St-341">
+                                <rect key="frame" x="0.0" y="156" width="375" height="266.5"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJL-MZ-3cU">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
@@ -1183,34 +1183,35 @@
                                             <segue destination="KKA-mv-wpw" kind="embed" identifier="Media Container" id="Fvf-ce-Zue"/>
                                         </connections>
                                     </containerView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1zq-4p-uOI">
-                                        <rect key="frame" x="0.0" y="216" width="375" height="60"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zmO-PQ-uzn">
+                                        <rect key="frame" x="0.0" y="216" width="375" height="50.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rfx-DG-7S1">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ybX-GO-obe">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUb-IO-Zf1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="30"/>
-                                                        <state key="normal" title="created time"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3n-E4-WFn">
-                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="30"/>
-                                                        <state key="normal" title="client"/>
-                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="created time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSs-o0-P8F">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="like count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLt-U9-GmJ">
+                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="F3n-E4-WFn" firstAttribute="width" secondItem="uUb-IO-Zf1" secondAttribute="width" id="fbQ-yC-8vL"/>
+                                                    <constraint firstItem="GLt-U9-GmJ" firstAttribute="width" secondItem="ZSs-o0-P8F" secondAttribute="width" id="apr-Dk-DzN"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZ4-jx-R4w">
-                                                <rect key="frame" x="0.0" y="30" width="375" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nBv-xA-QRC">
+                                                <rect key="frame" x="0.0" y="20.5" width="375" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fE-Nc-U9S">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3n-E4-WFn">
                                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="30"/>
-                                                        <state key="normal" title="like count"/>
-                                                        <connections>
-                                                            <segue destination="EXU-Nt-KBj" kind="show" identifier="Like List" id="NKn-5u-2bv"/>
-                                                        </connections>
+                                                        <state key="normal" title="client"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpi-zc-oLD">
                                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="30"/>
@@ -1221,21 +1222,23 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="cpi-zc-oLD" firstAttribute="width" secondItem="2fE-Nc-U9S" secondAttribute="width" id="eFN-7t-GWm"/>
+                                                    <constraint firstItem="cpi-zc-oLD" firstAttribute="width" secondItem="F3n-E4-WFn" secondAttribute="width" id="Fg5-Lg-Hmy"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="hZ4-jx-R4w" firstAttribute="leading" secondItem="1zq-4p-uOI" secondAttribute="leading" id="5uh-11-10R"/>
-                                            <constraint firstAttribute="trailing" secondItem="hZ4-jx-R4w" secondAttribute="trailing" id="EKf-zX-XVu"/>
-                                            <constraint firstAttribute="trailing" secondItem="rfx-DG-7S1" secondAttribute="trailing" id="Ju8-Ce-csf"/>
-                                            <constraint firstItem="rfx-DG-7S1" firstAttribute="leading" secondItem="1zq-4p-uOI" secondAttribute="leading" id="bne-TO-U5b"/>
+                                            <constraint firstAttribute="trailing" secondItem="ybX-GO-obe" secondAttribute="trailing" id="6zk-D6-3gA"/>
+                                            <constraint firstItem="nBv-xA-QRC" firstAttribute="leading" secondItem="zmO-PQ-uzn" secondAttribute="leading" id="ALa-K9-6p4"/>
+                                            <constraint firstAttribute="trailing" secondItem="nBv-xA-QRC" secondAttribute="trailing" id="HDu-px-hQq"/>
+                                            <constraint firstItem="ybX-GO-obe" firstAttribute="leading" secondItem="zmO-PQ-uzn" secondAttribute="leading" id="Oyt-Eu-B5e"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="1zq-4p-uOI" firstAttribute="leading" secondItem="wQK-ZA-cqf" secondAttribute="leading" id="gN3-FH-H8C"/>
-                                    <constraint firstAttribute="trailing" secondItem="1zq-4p-uOI" secondAttribute="trailing" id="qrq-Az-D4U"/>
+                                    <constraint firstItem="CJL-MZ-3cU" firstAttribute="leading" secondItem="bfO-St-341" secondAttribute="leading" id="Exc-5R-8zb"/>
+                                    <constraint firstAttribute="trailing" secondItem="zmO-PQ-uzn" secondAttribute="trailing" id="Fyx-aJ-arR"/>
+                                    <constraint firstAttribute="trailing" secondItem="CJL-MZ-3cU" secondAttribute="trailing" id="bm9-o1-zir"/>
+                                    <constraint firstItem="zmO-PQ-uzn" firstAttribute="leading" secondItem="bfO-St-341" secondAttribute="leading" id="mJd-Ii-Lj8"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -1243,26 +1246,29 @@
                         <constraints>
                             <constraint firstItem="UOL-B1-jzr" firstAttribute="top" secondItem="deG-rx-m1V" secondAttribute="bottom" constant="8" symbolic="YES" id="9bO-x5-Cg0"/>
                             <constraint firstItem="UOL-B1-jzr" firstAttribute="leading" secondItem="eGn-uS-OvJ" secondAttribute="leading" constant="20" symbolic="YES" id="Fvd-5W-oyY"/>
+                            <constraint firstAttribute="trailing" secondItem="bfO-St-341" secondAttribute="trailing" id="J0d-Xg-sJk"/>
+                            <constraint firstItem="bfO-St-341" firstAttribute="top" secondItem="UOL-B1-jzr" secondAttribute="bottom" constant="5" id="KzW-mL-n4Z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UOL-B1-jzr" secondAttribute="trailing" id="OPm-2B-VUB"/>
-                            <constraint firstAttribute="trailing" secondItem="wQK-ZA-cqf" secondAttribute="trailing" id="e7i-o2-LXu"/>
-                            <constraint firstItem="wQK-ZA-cqf" firstAttribute="leading" secondItem="eGn-uS-OvJ" secondAttribute="leading" id="xX0-fY-mEG"/>
-                            <constraint firstItem="wQK-ZA-cqf" firstAttribute="top" secondItem="UOL-B1-jzr" secondAttribute="bottom" constant="10" id="zli-Zp-l8B"/>
+                            <constraint firstItem="bfO-St-341" firstAttribute="leading" secondItem="eGn-uS-OvJ" secondAttribute="leading" id="PIs-bs-B8f"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="clientButton" destination="F3n-E4-WFn" id="HV7-OT-A27"/>
-                        <outlet property="createdTimeButton" destination="uUb-IO-Zf1" id="lgQ-3j-Fjm"/>
-                        <outlet property="likeCountButton" destination="2fE-Nc-U9S" id="NVL-HZ-WGt"/>
+                        <outlet property="containerView" destination="CJL-MZ-3cU" id="cXE-Am-HkO"/>
+                        <outlet property="createdTimeLabel" destination="ZSs-o0-P8F" id="RdF-RU-SZR"/>
+                        <outlet property="likeCountLabel" destination="GLt-U9-GmJ" id="cdt-s3-NW4"/>
                         <outlet property="nameLabel" destination="5pt-Al-AGf" id="Oec-KC-XzS"/>
                         <outlet property="profileImageView" destination="Q3S-kg-WGj" id="wbO-IQ-afC"/>
                         <outlet property="retweetCountButton" destination="cpi-zc-oLD" id="QCA-2y-fqY"/>
                         <outlet property="screenNameLabel" destination="f6O-tt-oh2" id="sCh-Zy-i31"/>
                         <outlet property="textContentLabel" destination="cD9-82-UnR" id="khA-Rd-Jsf"/>
+                        <segue destination="tY3-Cn-E0S" kind="presentation" identifier="Video Tapped" id="HD0-Uo-0OW"/>
+                        <segue destination="YmO-B7-dd1" kind="presentation" identifier="Image Tapped" id="jcy-68-kVo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDg-6c-afW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4314" y="1718"/>
+            <point key="canvasLocation" x="4030" y="1451"/>
         </scene>
         <!--Video Viewer View Controller-->
         <scene sceneID="M0u-wU-l4Y">
@@ -3480,10 +3486,10 @@
             </objects>
             <point key="canvasLocation" x="2773.5999999999999" y="448.42578710644682"/>
         </scene>
-        <!--View Controller-->
+        <!--Image Container View Controller-->
         <scene sceneID="ow1-AG-hie">
             <objects>
-                <viewController id="KKA-mv-wpw" sceneMemberID="viewController">
+                <viewController id="KKA-mv-wpw" customClass="ImageContainerViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mkn-C4-9jK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3492,7 +3498,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOh-RZ-CED" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4121" y="2345"/>
+            <point key="canvasLocation" x="4313" y="2364"/>
         </scene>
     </scenes>
     <resources>
@@ -3502,10 +3508,10 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Mzq-P7-JMi"/>
-        <segue reference="uxh-8f-EHW"/>
-        <segue reference="P8A-PP-qGh"/>
+        <segue reference="HD0-Uo-0OW"/>
         <segue reference="M56-Eo-jan"/>
-        <segue reference="NKn-5u-2bv"/>
+        <segue reference="uxh-8f-EHW"/>
+        <segue reference="def-NE-Ghm"/>
+        <segue reference="jcy-68-kVo"/>
     </inferredMetricsTieBreakers>
 </document>

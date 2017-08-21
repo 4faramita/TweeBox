@@ -32,6 +32,12 @@ class SingleTweetViewController: UIViewController {
             }
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.isUserInteractionEnabled = true
+    }
 
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -39,9 +45,11 @@ class SingleTweetViewController: UIViewController {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var textContentLabel: UILabel!
     
-    @IBOutlet weak var createdTimeButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var createdTimeLabel: UILabel!
     @IBOutlet weak var clientButton: UIButton!
-    @IBOutlet weak var likeCountButton: UIButton!
+    @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var retweetCountButton: UIButton!
     
     
@@ -55,11 +63,14 @@ class SingleTweetViewController: UIViewController {
         if tweetID != nil {
             refreshReply()
         }
-
+        
+    
     }
     
     
     private func setTweetContent() {
+        
+        containerView.isUserInteractionEnabled = true
         
         profileImageView.kf.setImage(with: tweet.user.profileImageURL)
         profileImageView.cutToRound(radius: nil)
@@ -67,12 +78,10 @@ class SingleTweetViewController: UIViewController {
         nameLabel.text = tweet.user.name
         screenNameLabel.text = "@\(tweet.user.screenName)"
         textContentLabel.attributedText = TwitterAttributedContent(tweet).attributedString
-//        textContentLabel.numberOfLines = 0
-//        textContentLabel.lineBreakMode = .byWordWrapping
         
-        createdTimeButton.titleLabel?.text = tweet.createdTime?.description
+        createdTimeLabel.text = tweet.createdTime?.description
         clientButton.titleLabel?.text = tweet.source
-        likeCountButton.titleLabel?.text = "\((tweet.favoriteCount) ?? 0).shortExpression) like"
+        likeCountLabel.text = "\((tweet.favoriteCount ?? 0).shortExpression) like"
         retweetCountButton.titleLabel?.text = "\(tweet.retweetCount.shortExpression) retweet"
     }
     
@@ -81,6 +90,14 @@ class SingleTweetViewController: UIViewController {
         SingleTweet(tweetParams: TweetParams(of: tweetID!), resourceURL: ResourceURL.statuses_show_id).fetchData { [weak self] (tweet) in
             if tweet != nil {
                 self?.tweet = tweet
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Media Container" {
+            if let imageContainerViewController = segue.destination as? ImageContainerViewController {
+                imageContainerViewController.tweet = tweet
             }
         }
     }

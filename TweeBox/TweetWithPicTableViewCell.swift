@@ -63,35 +63,16 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
         
         images = [tweetPicContent, secondPic, thirdPic, fourthPic]
         
-        var aspect: CGFloat {
+        var ratio: CGFloat {
             if (total == 2) || (total == 3 && position == 0) {
-                return Constants.thinAspect
+                return Constants.thinAspectRatio
             } else {
-                return Constants.normalAspect
+                return Constants.normalAspectRatio
             }
         }
         
         let pic = media[position]
         let tweetPicURL = pic.mediaURL
-        
-        let picWidth: CGFloat
-        let picHeight: CGFloat
-        let cutPoint = CGPoint(x: 0.5, y: 0.5)
-        // means cut from middle out
-        
-        let actualHeight = CGFloat(pic.sizes.small.h)
-        let actualWidth = CGFloat(pic.sizes.small.w)
-        
-        if  actualHeight / actualWidth >= aspect {
-            // too long
-            picWidth = actualWidth
-            picHeight = picWidth * aspect
-        } else {
-            // too wide
-            picHeight = actualHeight
-            picWidth = picHeight / aspect
-        }
-        
         
         if pic.type != "photo" {
             
@@ -109,7 +90,6 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
                 make.width.equalTo(32)
             }
             
-            
             if pic.type == "animated_gif" {
                 let gif = UIImageView(image: UIImage(named: "play_gif"))
                 tweetPicContent.addSubview(gif)
@@ -122,12 +102,14 @@ class TweetWithPicTableViewCell: TweetTableViewCell {
             }
         }
         
-        
+        let cutSize = pic.getCutSize(with: ratio, at: .small)
+        let cutPoint = CGPoint(x: 0.5, y: 0.5)
+        // means cut from middle out
         
         // Kingfisher
-        let placeholder = UIImage(named: "picPlaceholder")!.kf.image(withRoundRadius: Constants.picCornerRadius, fit: CGSize(width: picWidth, height: picHeight))
+        let placeholder = UIImage(named: "picPlaceholder")!.kf.image(withRoundRadius: Constants.picCornerRadius, fit: cutSize)
         
-        let processor = CroppingImageProcessor(size: CGSize(width: picWidth, height: picHeight), anchor: cutPoint)
+        let processor = CroppingImageProcessor(size: cutSize, anchor: cutPoint)
         
         if let picView = images[position] {
 //            picView.kf.indicatorType = .activity

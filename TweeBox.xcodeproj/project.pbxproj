@@ -52,6 +52,7 @@
 		B488E66F1F4A9C7D0033CFAD /* SingleTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B488E66E1F4A9C7D0033CFAD /* SingleTweet.swift */; };
 		B488E6711F4AA9650033CFAD /* SingleTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B488E6701F4AA9650033CFAD /* SingleTweetViewController.swift */; };
 		B488E6731F4AB1680033CFAD /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B488E6721F4AB1680033CFAD /* IntegerExtension.swift */; };
+		B488E6751F4B0E890033CFAD /* ImageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B488E6741F4B0E890033CFAD /* ImageContainerViewController.swift */; };
 		B4B406321F40A0A500683124 /* EmbededPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B406311F40A0A500683124 /* EmbededPageViewController.swift */; };
 		B4B406341F40B2EA00683124 /* PageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B406331F40B2EA00683124 /* PageManagerViewController.swift */; };
 		B4B406361F4163E600683124 /* HomeTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B406351F4163E600683124 /* HomeTimelineTableViewController.swift */; };
@@ -135,6 +136,7 @@
 		B488E66E1F4A9C7D0033CFAD /* SingleTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTweet.swift; sourceTree = "<group>"; };
 		B488E6701F4AA9650033CFAD /* SingleTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTweetViewController.swift; sourceTree = "<group>"; };
 		B488E6721F4AB1680033CFAD /* IntegerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerExtension.swift; sourceTree = "<group>"; };
+		B488E6741F4B0E890033CFAD /* ImageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageContainerViewController.swift; sourceTree = "<group>"; };
 		B4B406311F40A0A500683124 /* EmbededPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbededPageViewController.swift; sourceTree = "<group>"; };
 		B4B406331F40B2EA00683124 /* PageManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageManagerViewController.swift; sourceTree = "<group>"; };
 		B4B406351F4163E600683124 /* HomeTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimelineTableViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				B47E58701F3DACAC00CA0C0A /* PannableViewController.swift */,
 				B4E917181F4343D500FD3A5F /* UserListTableViewController.swift */,
 				B488E6701F4AA9650033CFAD /* SingleTweetViewController.swift */,
+				B488E6741F4B0E890033CFAD /* ImageContainerViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				B43BB8BB1F35A2300011A301 /* Entity.swift in Sources */,
 				B43BB8BD1F35A4A40011A301 /* Place.swift in Sources */,
 				B485BA631F46CD260077CC31 /* RetweetTableViewCell.swift in Sources */,
+				B488E6751F4B0E890033CFAD /* ImageContainerViewController.swift in Sources */,
 				B443A0F21F2B38050021BB65 /* TwitterUser.swift in Sources */,
 				B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */,
 				B45F1D561F40645B00AF201C /* VideoViewerViewController.swift in Sources */,
