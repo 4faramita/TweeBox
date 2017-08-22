@@ -7,16 +7,39 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     
-    func startsWith(string: String) -> Bool {
-        
-        guard let range = rangeOfString(string, options:[.AnchoredSearch, .CaseInsensitiveSearch]) else {
-            return false
+    // HTML to attributed string
+    func attributedStringFromHTML(completionBlock: @escaping (NSAttributedString?) ->()) {
+        guard let data = data(using: String.Encoding.utf8) else {
+            print("Unable to decode data from html string: \(self)")
+            return completionBlock(nil)
         }
         
-        return range.startIndex == startIndex
+        let options: [String : Any] = [
+            NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,
+            NSCharacterEncodingDocumentAttribute: NSNumber(value:String.Encoding.utf8.rawValue),
+            NSUnderlineStyleAttributeName: NSUnderlineStyle.styleNone.rawValue
+        ]
+        
+        DispatchQueue.main.async() {
+            if let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil)
+            {
+                completionBlock(attributedString)
+            } else {
+                print("Unable to create attributed string from html string: \(self)")
+                completionBlock(nil)
+            }
+        }
     }
     
+    func rstrip(_ string: String?) -> String {
+        return self.substring(to: self.range(of: (string ?? " "))!.lowerBound)
+    }
+    
+    func split(_ string: String?) -> [String] {
+        return self.components(separatedBy: (string ?? " "))
+    }
 }

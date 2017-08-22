@@ -100,7 +100,9 @@ class OriginTweetView: UIView {
             }
         }
         originNameLabel.text = originTweet.user.name
-        originNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .headline), size: 15)
+//        originNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .headline), size: 15)
+        originNameLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        originNameLabel.lineBreakMode = .byTruncatingTail
         
         let originScreenNameLabel = UILabel()
         addSubview(originScreenNameLabel)
@@ -115,12 +117,15 @@ class OriginTweetView: UIView {
         }
         originScreenNameLabel.text = "@\(originTweet.user.screenName)"
         originScreenNameLabel.textColor = .darkGray
-        originScreenNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .subheadline), size: 10)
+//        originScreenNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .subheadline), size: 10)
+        originScreenNameLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
+        originScreenNameLabel.lineBreakMode = .byTruncatingTail
         
         let originTextLabel = UILabel()
         addSubview(originTextLabel)
         originTextLabel.text = originTweet.text
-        originTextLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 16)
+//        originTextLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 16)
+        originTextLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         originTextLabel.lineBreakMode = .byTruncatingTail
         originTextLabel.numberOfLines = 0
         originTextLabel.snp.makeConstraints { (make) in

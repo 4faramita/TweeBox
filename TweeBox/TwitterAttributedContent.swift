@@ -67,7 +67,8 @@ class TwitterAttributedContent {
         
         if user != nil {
             let range = NSRange.init(location: 0, length: attributed.length)
-            let descriptionFont = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 12)
+//            let descriptionFont = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 12)
+            let descriptionFont = UIFont.preferredFont(forTextStyle: .caption2)
             attributed.addAttribute(NSFontAttributeName, value: descriptionFont, range: range)
             attributed.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: range)
         }

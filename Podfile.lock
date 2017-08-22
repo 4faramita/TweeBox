@@ -8,6 +8,7 @@ PODS:
     - NVActivityIndicatorView (~> 3.5)
     - SnapKit (~> 3.2)
   - DateToolsSwift (2.0.3)
+  - Kanna (2.1.1)
   - Kingfisher (3.10.4)
   - MXParallaxHeader (0.6.1)
   - NVActivityIndicatorView (3.7.0):
@@ -26,9 +27,11 @@ DEPENDENCIES:
   - AMScrollingNavbar
   - BMPlayer
   - DateToolsSwift
+  - Kanna (~> 2.1.0)
   - Kingfisher (~> 3.0)
   - MXParallaxHeader
   - Reveal-SDK
+  - SnapKit (~> 3.2.0)
   - SwiftyJSON
   - TwitterKit
   - VisualEffectView
@@ -38,6 +41,7 @@ SPEC CHECKSUMS:
   AMScrollingNavbar: 64b3626ebd557cbe4ddf7fdd31c652f02c9b8888
   BMPlayer: 5ba9e3f3d61ccc5a24ebd9cdc24901dcf28c98bc
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
+  Kanna: 9b4b086c218703f2b94f5b21a466217dd2f9332e
   Kingfisher: dc3a4983e86d2dfa89513664983a82340c11a289
   MXParallaxHeader: 858c403532ed933b381556a81ce333d7065ad182
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
@@ -49,6 +53,6 @@ SPEC CHECKSUMS:
   VisualEffectView: c6e2b281616b46262d1371aaee3735a58b7b2c7f
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 5d4922c049041d52a57e54a4b9422a34abdcbec5
+PODFILE CHECKSUM: 079aba3132264068ed779ebd21a0e5e5057bd9b8
 
 COCOAPODS: 1.3.1

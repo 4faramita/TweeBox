@@ -245,7 +245,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
         
         headerView.addSubview(nameLabel)
         nameLabel.text = user?.name
-        nameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .headline), size: 22)
+//        nameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .headline), size: 22)
+        nameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         nameLabel.textColor = .white
         nameLabel.numberOfLines = 1
         nameLabel.lineBreakMode = .byTruncatingTail
@@ -258,7 +259,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
     
         headerView.addSubview(screenNameLabel)
         screenNameLabel.text = "@\(user?.screenName ?? "twitterUser")"
-        screenNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption1), size: 15)
+//        screenNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption1), size: 15)
+        screenNameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         screenNameLabel.textColor = .lightGray
         screenNameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(headerView).offset(Constants.contentUnifiedOffset + (Constants.profileImageRadius * 2) + 9)
@@ -286,7 +288,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
             locationLabel = UILabel()
             headerView.addSubview(locationLabel!)
             locationLabel?.text = location
-            locationLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
+//            locationLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
+            locationLabel?.font = UIFont.preferredFont(forTextStyle: .caption2)
             locationLabel?.textColor = .lightGray
             locationLabel?.snp.makeConstraints { (make) in
                 make.left.equalTo(headerView).offset(Constants.contentUnifiedOffset + (Constants.profileImageRadius * 2) + 9)
@@ -309,7 +312,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
             userURLButton?.setTitle(userURL.absoluteString, for: .normal)
             userURLButton?.setTitleColor(.lightGray, for: .normal)
             //            userURLButton.titleLabel?.textAlignment = .center
-            userURLButton?.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
+//            userURLButton?.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
+            userURLButton?.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption2)
             //            userURLButton(forAction: #selector(tapFollowerButton(_:)), withSender: self)
             
         }
@@ -335,7 +339,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
         folllowerButton.setTitle("\(user?.followersCount ?? 0) follower", for: .normal)
         folllowerButton.setTitleColor(.darkGray, for: .normal)
         folllowerButton.titleLabel?.textAlignment = .center
-        folllowerButton.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 14)
+//        folllowerButton.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 14)
+        folllowerButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         folllowerButton.addTarget(self, action: #selector(viewFollowerList(_:)), for: .touchUpInside)
         
         
@@ -349,7 +354,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         folllowingButton.setTitle("\(user?.followingCount ?? 0) following", for: .normal)
         folllowingButton.setTitleColor(.darkGray, for: .normal)
         folllowingButton.titleLabel?.textAlignment = .center
-        folllowingButton.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 14)
+        folllowingButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         folllowingButton.addTarget(self, action: #selector(viewFollowingList(_:)), for: .touchUpInside)
         
         let separator = UIButton()

@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Kanna
+import SafariServices
 
 class SingleTweetViewController: UIViewController {
     
     private var retweet: Tweet?
+    
+    private var clientLink: String?
     
     public var tweet: Tweet! {
         didSet {
@@ -63,8 +67,6 @@ class SingleTweetViewController: UIViewController {
         if tweetID != nil {
             refreshReply()
         }
-        
-    
     }
     
     
@@ -79,10 +81,49 @@ class SingleTweetViewController: UIViewController {
         screenNameLabel.text = "@\(tweet.user.screenName)"
         textContentLabel.attributedText = TwitterAttributedContent(tweet).attributedString
         
-        createdTimeLabel.text = tweet.createdTime?.description
-        clientButton.titleLabel?.text = tweet.source
+        let clientHTMLString = tweet.source
+        if let doc = HTML(html: clientHTMLString, encoding: .utf8) {
+            for link in doc.css("a, link") {
+                let attributedString = NSMutableAttributedString(string: (link.text ?? ""))
+                
+                let range = NSRange.init(location: 0, length: attributedString.length)
+                
+                attributedString.addAttribute(NSLinkAttributeName, value: (link["href"] ?? ""), range: range)
+                clientLink = link["href"]
+                
+                let font = UIFont.preferredFont(forTextStyle: .caption2)
+                attributedString.addAttribute(NSFontAttributeName, value: font, range: range)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGray, range: range)
+                clientButton.setAttributedTitle(attributedString, for: .normal)
+                
+                clientButton.addTarget(self, action: #selector(clickOnClient(_:)), for: .touchUpInside)
+            }
+        }
+//        clientHTMLString.attributedStringFromHTML { [weak self] (attributedString) in
+//            self?.clientButton.setAttributedTitle(attributedString, for: .normal)
+//        }
+        
+        
+        if let date = tweet.createdTime {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.timeZone = TimeZone.current
+            let dateString = dateFormatter.string(from: date)
+            
+            createdTimeLabel.text = dateString
+        }
+        
         likeCountLabel.text = "\((tweet.favoriteCount ?? 0).shortExpression) like"
-        retweetCountButton.titleLabel?.text = "\(tweet.retweetCount.shortExpression) retweet"
+        
+        retweetCountButton.setTitle("\(tweet.retweetCount.shortExpression) retweet", for: .normal)
+    }
+    
+    
+    @IBAction private func clickOnClient(_ sender: Any?) {
+        if let url = URL(string: clientLink ?? "") {
+            let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+            present(safariViewController, animated: true)
+        }
     }
     
     
@@ -107,3 +148,5 @@ class SingleTweetViewController: UIViewController {
         
     }
 }
+
+
