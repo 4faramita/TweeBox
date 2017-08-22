@@ -13,6 +13,6 @@ class HomeTimelineParams: TimelineParams {
     override init(sinceID: String? = nil, maxID: String? = nil, excludeReplies: Bool? = false, includeRetweets: Bool? = true) {
         
         super.init(excludeReplies: nil, includeRetweets: nil)
-        resourceURL = ResourceURL.home_timeline
+        resourceURL = ResourceURL.statuses_home_timeline
     }
 }

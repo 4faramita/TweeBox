@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import TwitterKit
 import SwiftyJSON
 
 class UserList {
@@ -18,9 +17,9 @@ class UserList {
     
     public var fetchOlder = true
     public var resourceURL: (String, String)
-    public var userListParams: UserListParams
+    public var userListParams: Any
     
-    init(resourceURL: (String, String), userListParams: UserListParams, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?) {
+    init(resourceURL: (String, String), userListParams: Any, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?) {
         
         self.resourceURL = resourceURL
         
@@ -42,33 +41,46 @@ class UserList {
     
     public func fetchData(_ handler: @escaping (String, String, [TwitterUser]) -> Void) {
         
-        if Twitter.sharedInstance().sessionStore.session()?.userID != nil {
+        if Constants.selfID != "-1" {
             
-            if fetchOlder, previousCursor != "-1" {
-                userListParams.cursor = previousCursor
-            }
-            
-            if !fetchOlder, nextCursor != "-1" {
-                userListParams.cursor = nextCursor
-            }
-            
-            let client = RESTfulClient(resource: resourceURL, params: userListParams.getParams())
-            
-            client.getData() { data in
-                let json = JSON(data: data)
-//                print(json)
+            if userListParams is UserListParams || userListParams is MultiUserParams {
                 
-                self.nextCursor = json["next_cursor_str"].stringValue
-                self.previousCursor = json["previous_cursor_str"].stringValue
-                
-                for (_, userJSON) in json["users"] {
-                    if userJSON.null == nil {
-                        let user = TwitterUser(with: userJSON)
-                        self.userList.append(user)  // mem cycle?
+                if var userListParams = userListParams as? UserListParams {
+                    if fetchOlder, previousCursor != "-1" {
+                        userListParams.cursor = previousCursor
                     }
+                    
+                    if !fetchOlder, nextCursor != "-1" {
+                        userListParams.cursor = nextCursor
+                    }
+
                 }
                 
-                handler(self.nextCursor, self.previousCursor, self.userList)
+                let client: RESTfulClient
+                
+                if let listParams = userListParams as? UserListParams {
+                    client = RESTfulClient(resource: resourceURL, params: listParams.getParams())
+                } else {
+                    let listParams = userListParams as! MultiUserParams
+                    client = RESTfulClient(resource: resourceURL, params: listParams.getParams())
+                }
+                
+                client.getData() { data in
+                    let json = JSON(data: data)
+                    
+                    self.nextCursor = json["next_cursor_str"].stringValue
+                    self.previousCursor = json["previous_cursor_str"].stringValue
+                    
+                    for (_, userJSON) in json["users"] {
+                        if userJSON.null == nil {
+                            let user = TwitterUser(with: userJSON)
+                            self.userList.append(user)  // mem cycle?
+                        }
+                    }
+                    
+                    handler(self.nextCursor, self.previousCursor, self.userList)
+                }
+
             }
         }
     }

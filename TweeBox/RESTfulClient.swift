@@ -13,11 +13,11 @@ class RESTfulClient {
     
     private var resource: (url: String, method: String)
     
-    private var params: [String: String]?
+    private var params: [String: Any]?
     
 //    private var dataJSON: Data?
     
-    init(resource: (url: String, method: String), params: [String: String]?) {
+    init(resource: (url: String, method: String), params: [String: Any]?) {
         self.resource = resource
         self.params = params
     }
@@ -39,6 +39,8 @@ class RESTfulClient {
                 
                 if data != nil {
                     handler(data!)
+                } else {
+                    print(">>> NO DATA")
                 }
             }
         }

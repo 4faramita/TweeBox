@@ -14,9 +14,11 @@ class UserListTableViewController: UITableViewController {
     
     public var nextCursor = "-1"
     public var previousCursor = "-1"
+    // cursor == "0" indicates the corresponding direction is at the end
+    
     public var fetchOlder = true
     
-    public var userListParams: UserListParams?
+    public var userListParams: Any?
     public var resourceURL: (String, String)?
     
     private var selectedUser: TwitterUser?

@@ -72,7 +72,11 @@ class SingleTweetViewController: UIViewController {
     
     private func setTweetContent() {
         
-        containerView.isUserInteractionEnabled = true
+        if (tweet.entities?.realMedia == nil) || (tweet.entities?.realMedia!.count == 0) {
+            containerView.removeFromSuperview()
+        } else {
+//            childViewControllers[0].view.isUserInteractionEnabled = true
+        }
         
         profileImageView.kf.setImage(with: tweet.user.profileImageURL)
         profileImageView.cutToRound(radius: nil)
@@ -99,9 +103,6 @@ class SingleTweetViewController: UIViewController {
                 clientButton.addTarget(self, action: #selector(clickOnClient(_:)), for: .touchUpInside)
             }
         }
-//        clientHTMLString.attributedStringFromHTML { [weak self] (attributedString) in
-//            self?.clientButton.setAttributedTitle(attributedString, for: .normal)
-//        }
         
         
         if let date = tweet.createdTime {
@@ -136,11 +137,44 @@ class SingleTweetViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Media Container" {
-            if let imageContainerViewController = segue.destination as? ImageContainerViewController {
-                imageContainerViewController.tweet = tweet
+        
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Retweet List":
+                if let userListViewController = segue.destination as? UserListTableViewController {
+                    
+                    let retweetIDListRetriever = RetweeterID(
+                        resourceURL: ResourceURL.statuses_retweeters_ids,
+                        retweetersIDParams: RetweetersIDParams(id: tweetID),
+                        fetchOlder: nil,
+                        nextCursor: nil,
+                        previousCursor: nil
+                    )
+                    retweetIDListRetriever.fetchData({ (nextCursor, previousCursor, idList) in
+                        print(">>> idList >> \(idList)")
+                        userListViewController.resourceURL = ResourceURL.user_lookup
+                        userListViewController.userListParams = MultiUserParams(userID: idList, screenName: nil)
+                        userListViewController.previousCursor = previousCursor
+                        userListViewController.nextCursor = nextCursor
+                    })
+                }
+                
+            case "Media Container":
+                if let imageContainerViewController = segue.destination as? ImageContainerViewController {
+                    imageContainerViewController.tweet = tweet
+                }
+
+            default:
+                return
             }
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "Media Container" {
+            return (tweet.entities?.realMedia != nil)
+        }
+        return true
     }
     
     
