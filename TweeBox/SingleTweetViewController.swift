@@ -69,11 +69,11 @@ class SingleTweetViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        view.sizeToFit()
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        
+//        view.sizeToFit()
+//    }
     
     private func setTweetContent() {
         

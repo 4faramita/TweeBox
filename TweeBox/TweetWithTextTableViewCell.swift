@@ -15,7 +15,7 @@ class TweetWithTextTableViewCell: TweetTableViewCell {
     override func updateUI() {
         
         super.updateUI()
-        
+
         if let tweet = tweet {
             tweetTextContent?.attributedText = TwitterAttributedContent(tweet).attributedString
         }

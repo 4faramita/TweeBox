@@ -14,13 +14,39 @@ class ReplyTableViewController: MentionTimelineTableViewController {
     
     public var tweet: Tweet?    
     public var tweetID: String?
+    public var cellTextLabelHeight: CGFloat?
+    private var hasMedia: Bool {
+        if let media = tweet?.entities?.realMedia, media.count > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        tweetInfoContainerView?.frame.size.height = 10
-        tweetInfoContainerView.sizeToFit()
-        print(tweetInfoContainerView.frame)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        for subview in (tweetInfoContainerView.subviews[0].subviews) {
+            if subview.frame.height > 0, subview.subviews.count != 0 {
+                tweetInfoContainerView?.frame.size.height = subview.frame.height + CGFloat(10)
+                // FIX THIS: this height change is ugly
+            }
+        }
+//        tweetInfoContainerView.removeConstraints(tweetInfoContainerView.constraints)
+//        tweetInfoContainerView?.frame.size.height = CGFloat(10 + 48 + 10)
+//
+//        if let textLabelHeight = cellTextLabelHeight, textLabelHeight != 0 {
+//            tweetInfoContainerView?.frame.size.height += (textLabelHeight + CGFloat(10))
+//        }
+//
+//        if hasMedia {
+//            tweetInfoContainerView?.frame.size.height += CGFloat(211 + 8)
+//        }
+//
+//        tweetInfoContainerView?.frame.size.height += CGFloat(28 + 8)
+    //        tweetInfoContainerView.sizeToFit()
+    //        print(tweetInfoContainerView.frame)
     }
     
     override func viewWillAppear(_ animated: Bool) {

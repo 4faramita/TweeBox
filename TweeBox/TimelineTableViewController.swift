@@ -47,8 +47,8 @@ class TimelineTableViewController: UITableViewController
     
     // tap to segue
     weak var delegate:TweetWithPicTableViewCell?
-//    weak var profilrDelegate: TweetTableViewCell?
-    
+
+    var clickedCellTextLabelHeight: CGFloat?
     var clickedTweet: Tweet?
     var clickedImageIndex: Int?
     var clickMedia: UIImage? {
@@ -206,7 +206,12 @@ class TimelineTableViewController: UITableViewController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         clickedTweet = timeline[indexPath.section][indexPath.row]
-        
+        if let cell = tableView.cellForRow(at: indexPath) as? TweetWithTextTableViewCell {
+            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
+        } else if let cell = tableView.cellForRow(at: indexPath) as? TweetWithPicAndTextTableViewCell {
+            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
+        }
+
         performSegue(withIdentifier: "View Tweet", sender: self)
     }
 
@@ -233,7 +238,6 @@ class TimelineTableViewController: UITableViewController
                 retweetCell.tweet = tweet
                 
                 // tap to segue
-//                retweetCell.profilrDelegate = self
                 retweetCell.delegate = self
                 retweetCell.section = indexPath.section
                 retweetCell.row = indexPath.row
@@ -247,7 +251,6 @@ class TimelineTableViewController: UITableViewController
                     tweetCell.tweet = tweet
                     
                     // tap to segue
-//                    tweetCell.profilrDelegate = self
                     tweetCell.delegate = self
                     tweetCell.section = indexPath.section
                     tweetCell.row = indexPath.row
@@ -259,7 +262,6 @@ class TimelineTableViewController: UITableViewController
                     
                     // tap to segue
                     tweetCell.delegate = self
-//                    tweetCell.profilrDelegate = self
                     tweetCell.section = indexPath.section
                     tweetCell.row = indexPath.row
                     tweetCell.mediaIndex = 0
@@ -271,7 +273,6 @@ class TimelineTableViewController: UITableViewController
                     
                     // tap to segue
                     tweetCell.delegate = self
-//                    tweetCell.profilrDelegate = self
                     tweetCell.section = indexPath.section
                     tweetCell.row = indexPath.row
                 }
@@ -282,7 +283,6 @@ class TimelineTableViewController: UITableViewController
                     
                     // tap to segue
                     tweetCell.delegate = self
-//                    tweetCell.profilrDelegate = self
                     tweetCell.section = indexPath.section
                     tweetCell.row = indexPath.row
                 }
@@ -293,7 +293,6 @@ class TimelineTableViewController: UITableViewController
                     
                     // tap to segue
                     tweetCell.delegate = self
-//                    tweetCell.profilrDelegate = self
                     tweetCell.section = indexPath.section
                     tweetCell.row = indexPath.row
                 }
@@ -303,7 +302,6 @@ class TimelineTableViewController: UITableViewController
                     tweetCell.tweet = tweet
                     
                     // tap to segue
-//                    tweetCell.profilrDelegate = self
                     tweetCell.delegate = self
                     tweetCell.section = indexPath.section
                     tweetCell.row = indexPath.row
@@ -315,7 +313,6 @@ class TimelineTableViewController: UITableViewController
                 tweetCell.tweet = tweet
                 
                 // tap to segue
-//                tweetCell.profilrDelegate = self
                 tweetCell.delegate = self
                 tweetCell.section = indexPath.section
                 tweetCell.row = indexPath.row
@@ -335,9 +332,7 @@ class TimelineTableViewController: UITableViewController
 }
 
 // tap to segue
-extension TimelineTableViewController: TweetTableViewCellProtocol
-//TweetWithPicTableViewCellProtocol,
-{
+extension TimelineTableViewController: TweetTableViewCellProtocol {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -360,6 +355,8 @@ extension TimelineTableViewController: TweetTableViewCellProtocol
             case "View Tweet":
                 if let singleTweetViewController = segue.destination.content as? ReplyTableViewController {
                     singleTweetViewController.tweet = clickedTweet
+                    singleTweetViewController.cellTextLabelHeight = clickedCellTextLabelHeight
+//                    singleTweetViewController.hasLabel =
                 }
             default:
                 break

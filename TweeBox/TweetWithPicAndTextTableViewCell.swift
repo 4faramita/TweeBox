@@ -20,8 +20,9 @@ class TweetWithPicAndTextTableViewCell: TweetWithPicTableViewCell {
         if let tweet = tweet {
             tweetTextContent?.attributedText = TwitterAttributedContent(tweet).attributedString
         }
-        
-        if tweetTextContent?.attributedText?.length == 0 {
+
+        print(">>> string >> \(tweetTextContent?.text)")
+        if let attributedString = tweetTextContent?.attributedText, attributedString.string == "" {
             tweetTextContent?.removeFromSuperview()
         }
     }
