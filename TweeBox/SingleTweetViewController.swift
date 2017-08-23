@@ -37,12 +37,6 @@ class SingleTweetViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.isUserInteractionEnabled = true
-    }
-
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -168,9 +162,7 @@ class SingleTweetViewController: UIViewController {
                 }
                 
             case "Media Container":
-                print(">>> container segue")
                 if let imageContainerViewController = segue.destination as? ImageContainerViewController {
-                    print(">>> container segue >> true")
                     imageContainerViewController.tweet = tweet
                 }
 

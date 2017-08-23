@@ -15,7 +15,6 @@ class ImageContainerViewController: UIViewController {
 
     public var tweet: Tweet? {
         didSet {
-            print(">>> container tweet >> \(tweet)")
             setLayout()
         }
     }
@@ -31,9 +30,19 @@ class ImageContainerViewController: UIViewController {
     private let placeholder = UIImage(named: "picPlaceholder")!
     private let cutPoint = CGPoint(x: 0.5, y: 0.5)
     
-    private func setLayout() {
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        view.isUserInteractionEnabled = true
+        for (index, imageView) in imageViews.enumerated() {
+            if imageView.bounds.height > 0 && imageView.bounds.width > 0 {
+                addGesture(index, imageView)
+            }
+        }
+    }
+    
+    
+    private func setLayout() {
         
         if let media = media {
             switch media.count {
@@ -44,7 +53,7 @@ class ImageContainerViewController: UIViewController {
                     make.size.equalTo(view)
                     make.center.equalTo(view)
                 })
-                
+                                
             case 2:
                 let firstImageView = addImageView(at: 0)
                 firstImageView.snp.makeConstraints({ (make) in
@@ -156,30 +165,37 @@ class ImageContainerViewController: UIViewController {
         }
         imageViews.append(imageView)
         
-        // add tap gesture
-        let gestures = [#selector(tapOnFirstImage(_:)), #selector(tapOnSecondImage(_:)), #selector(tapOnThirdImage(_:)), #selector(tapOnFourthImage(_:))]
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: gestures[index])
-        tapGesture.numberOfTapsRequired = 1
-        tapGesture.numberOfTouchesRequired = 1
-        imageView.addGestureRecognizer(tapGesture)
-        
         return imageView
     }
     
-    @IBAction func tapOnFirstImage(_ sender: UIGestureRecognizer) {
+    
+        private func addGesture(_ index: Int, _ imageView: ImageView) {
+            
+            imageView.isUserInteractionEnabled = true
+            
+            // add tap gesture
+            let gestures = [#selector(tapOnFirstImage(_:)), #selector(tapOnSecondImage(_:)), #selector(tapOnThirdImage(_:)), #selector(tapOnFourthImage(_:))]
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: gestures[index])
+            tapGesture.numberOfTapsRequired = 1
+            tapGesture.numberOfTouchesRequired = 1
+            imageView.addGestureRecognizer(tapGesture)
+    }
+    
+    
+    @IBAction private func tapOnFirstImage(_ sender: UIGestureRecognizer) {
         clickedIndex = 0
         performSegue(withIdentifier: "Image Tapped", sender: imageViews[0])
     }
-    @IBAction func tapOnSecondImage(_ sender: UIGestureRecognizer) {
+    @IBAction private func tapOnSecondImage(_ sender: UIGestureRecognizer) {
         clickedIndex = 1
         performSegue(withIdentifier: "Image Tapped", sender: imageViews[1])
     }
-    @IBAction func tapOnThirdImage(_ sender: UIGestureRecognizer) {
+    @IBAction private func tapOnThirdImage(_ sender: UIGestureRecognizer) {
         clickedIndex = 2
         performSegue(withIdentifier: "Image Tapped", sender: imageViews[2])
     }
-    @IBAction func tapOnFourthImage(_ sender: UIGestureRecognizer) {
+    @IBAction private func tapOnFourthImage(_ sender: UIGestureRecognizer) {
         clickedIndex = 3
         performSegue(withIdentifier: "Image Tapped", sender: imageViews[3])
     }

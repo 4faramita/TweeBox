@@ -1265,8 +1265,6 @@
                         <outlet property="retweetCountButton" destination="cpi-zc-oLD" id="QCA-2y-fqY"/>
                         <outlet property="screenNameLabel" destination="f6O-tt-oh2" id="sCh-Zy-i31"/>
                         <outlet property="textContentLabel" destination="cD9-82-UnR" id="khA-Rd-Jsf"/>
-                        <segue destination="tY3-Cn-E0S" kind="presentation" identifier="Video Tapped" id="HD0-Uo-0OW"/>
-                        <segue destination="YmO-B7-dd1" kind="presentation" identifier="Image Tapped" id="jcy-68-kVo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDg-6c-afW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3503,10 +3501,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="YmO-B7-dd1" kind="presentation" identifier="Image Tapped" id="FFe-TK-q2o"/>
+                        <segue destination="tY3-Cn-E0S" kind="presentation" identifier="Video Tapped" id="hSo-zN-k1a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOh-RZ-CED" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4828" y="1741"/>
+            <point key="canvasLocation" x="4860" y="1864"/>
         </scene>
         <!--Mentions-->
         <scene sceneID="miM-UO-KYf">
@@ -5591,8 +5593,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="AAx-pq-S6O"/>
         <segue reference="sCG-QK-uYb"/>
-        <segue reference="HD0-Uo-0OW"/>
-        <segue reference="jcy-68-kVo"/>
         <segue reference="def-NE-Ghm"/>
+        <segue reference="hSo-zN-k1a"/>
+        <segue reference="FFe-TK-q2o"/>
     </inferredMetricsTieBreakers>
 </document>
