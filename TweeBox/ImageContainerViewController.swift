@@ -15,6 +15,7 @@ class ImageContainerViewController: UIViewController {
 
     public var tweet: Tweet? {
         didSet {
+            print(">>> container tweet >> \(tweet)")
             setLayout()
         }
     }

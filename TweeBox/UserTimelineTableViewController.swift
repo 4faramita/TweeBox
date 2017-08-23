@@ -13,7 +13,7 @@ import MXParallaxHeader
 import VisualEffectView
 
 class UserTimelineTableViewController: TimelineTableViewController {
-    
+
     public var user: TwitterUser? {
         didSet {
             if userID == nil {
@@ -31,14 +31,14 @@ class UserTimelineTableViewController: TimelineTableViewController {
             refreshTimeline()
         }
     }
-    
-    
+
+
     private var profileImage: UIImage?
     private var profileImageURL: URL?
-    
+
     private var profileBannerImage: UIImage?
     private var profileBannerImageURL: URL?
-    
+
     private let headerView = UIImageView()
     private var visualEffectView: VisualEffectView?
     private let profileImageView = UIImageView()
@@ -49,50 +49,58 @@ class UserTimelineTableViewController: TimelineTableViewController {
     private var userURLButton: UIButton?
     private let folllowerButton = UIButton()
     private let folllowingButton = UIButton()
-    
+
     private var objects = [UIView?]()
-    
+
     private var headerHeight: CGFloat = 0
     private var headerHeightCalculated = false
-    
-//    private var isRefreshing = false
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        addHeader()
+
+    private var isRefreshing = false
+    private var isStretching = false {
+        didSet {
+            if !isStretching, isRefreshing {
+                isRefreshing = false
+            }
+        }
     }
-    
+
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         if let height = tableView.parallaxHeader.view?.bounds.height {
 
-//            pullToRefresh(height)
+            if height > (headerHeight * 1.1) {
+                isStretching = true
+            } else {
+                isStretching = false
+            }
+
+            pullToRefresh(height)
+
             makeProfileObjectsDisapearByPulling(height)
-            
+
             if height <= Constants.profileToolbarHeight {
                 navigationItem.title = user?.name
             } else {
                 navigationItem.title = ""
             }
         }
-        
+
         if !headerHeightCalculated {
             calculateHeaderHeight()
         }
-        
-//        print(">>> headerHeight >> \(headerHeight)")
+
     }
-    
-//    private func pullToRefresh(_ height: CGFloat) {
-//        if height > CGFloat(400), !isRefreshing {
-//            print("refreshing")
-//            isRefreshing = true
-//            refreshTimeline()
-//        }
-//    }
-    
+
+    private func pullToRefresh(_ height: CGFloat) {
+        if height > (headerHeight + Constants.profilePanelDragOffset), !isRefreshing {
+            print("refreshing")
+            isRefreshing = true
+            refreshTimeline()
+        }
+    }
+
     private func setUser() {
         SingleUser(
             userParams: UserParams(userID: userID, screenName: nil),
@@ -103,23 +111,23 @@ class UserTimelineTableViewController: TimelineTableViewController {
             }
         }
     }
-    
+
     private func makeProfileObjectsDisapearByPulling(_ height: CGFloat) {
-        
+
         objects = [profileImageView, nameLabel, screenNameLabel, bioLabel, locationLabel, userURLButton]
-        
+
         visualEffectView?.blurRadius = min(10 * max(0, (headerHeight + Constants.profilePanelDragOffset - height) / Constants.profilePanelDragOffset), 10)
         visualEffectView?.colorTintAlpha = min(0.5 * max(0, (headerHeight + Constants.profilePanelDragOffset - height) / Constants.profilePanelDragOffset), 0.5)
-        
+
         for object in objects {
             if let object = object {
                 object.alpha = min(max(0, (headerHeight + Constants.profilePanelDragOffset - height) / Constants.profilePanelDragOffset), 1)
             }
         }
     }
-    
+
     private func calculateHeaderHeight() {
-        
+
         if let userURLButton = userURLButton {
             let convertedBounds = headerView.convert(userURLButton.bounds, from: userURLButton)
             headerHeight = convertedBounds.maxY
@@ -131,23 +139,20 @@ class UserTimelineTableViewController: TimelineTableViewController {
             let imageConvertedBounds = headerView.convert(profileImageView.bounds, from: profileImageView)
             headerHeight = max(bioConvertedBounds.maxY, imageConvertedBounds.maxY)
         }
-        
+
         if headerHeight > (Constants.profileToolbarHeight + Constants.contentUnifiedOffset) {
-            
+
             headerHeight = max(headerHeight, CGFloat(2 * Constants.profileImageRadius + Constants.contentUnifiedOffset))
             headerHeight += (Constants.profileToolbarHeight + Constants.contentUnifiedOffset)
             tableView.parallaxHeader.height = headerHeight
             headerHeightCalculated = true
         }
     }
-    
-//    override func hideBarsOnScrolling() { }
-//    override func stopHiddingbard() { }
 
     override func refreshTimeline() {
-        
+
         let userTimelineParams = UserTimelineParams(of: userID!)
-        
+
         let timeline = Timeline(
             maxID: maxID,
             sinceID: sinceID,
@@ -155,7 +160,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
             resourceURL: userTimelineParams.resourceURL,
             timelineParams: userTimelineParams
         )
-        
+
         timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
             if maxID != nil {
                 self?.maxID = maxID!
@@ -165,61 +170,59 @@ class UserTimelineTableViewController: TimelineTableViewController {
             }
             if tweets.count != 0 {
                 self?.insertNewTweets(with: tweets)
-//                self?.tableView.reloadData()
             }
-            
+
             Timer.scheduledTimer(
                 withTimeInterval: TimeInterval(0.1),
                 repeats: false) { (timer) in
                     self?.refreshControl?.endRefreshing()
             }
         }
-//        isRefreshing = false
     }
-    
+
     override func profileImageTapped(section: Int, row: Int) {
-                
+
         let destinationViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserProfileViewController")
-        
+
         let segue = UIStoryboardSegue(identifier: "profileImageTapped", source: self, destination: destinationViewController) {
             self.navigationController?.show(destinationViewController, sender: self)
         }
-        
+
         clickedTweet = timeline[section][row]
         if let originTweet = clickedTweet?.retweetedStatus, let retweetText = clickedTweet?.text, retweetText.hasPrefix("RT @") {
             clickedTweet = originTweet
         }
-        
+
         self.prepare(for: segue, sender: self)
         segue.perform()
     }
-    
+
     override func showEmptyWarningMessage() {
         emptyWarningCollapsed = true
     }
-    
+
 
     // Header
     private func addHeader() {
-        
+
         headerView.isUserInteractionEnabled = true
         headerView.kf.setImage(with: user?.profileBannerURL, placeholder: nil, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
             self?.profileBannerImage = image
             self?.profileBannerImageURL = url
         }
-        
+
         let tapOnBanner = UITapGestureRecognizer(target: self, action: #selector(tapToViewBannerImage(_:)))
         tapOnBanner.numberOfTapsRequired = 1
         tapOnBanner.numberOfTouchesRequired = 1
         headerView.addGestureRecognizer(tapOnBanner)
-        
+
         visualEffectView = VisualEffectView(frame: view.bounds)
         visualEffectView?.blurRadius = 10
         visualEffectView?.colorTint = .black
         visualEffectView?.colorTintAlpha = 0.5
         headerView.addSubview(visualEffectView!)
-        
-        
+
+
         headerView.addSubview(profileImageView)
         profileImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(headerView).offset(-25)
@@ -231,21 +234,19 @@ class UserTimelineTableViewController: TimelineTableViewController {
             self?.profileImage = image
             self?.profileImageURL = url
         }
-        
+
         profileImageView.layer.borderWidth = 3.0
         profileImageView.layer.borderColor = UIColor.white.cgColor
-//        profileImageView.layer.cornerRadius = Constants.profileImageRadius
-//        profileImageView.clipsToBounds = true
         profileImageView.cutToRound(radius: Constants.profileImageRadius)
         profileImageView.isUserInteractionEnabled = true
         profileImageView.isOpaque = false
-        
+
         let tapOnHead = UITapGestureRecognizer(target: self, action: #selector(tapToViewProfileImage(_:)))
         tapOnHead.numberOfTapsRequired = 1
         tapOnHead.numberOfTouchesRequired = 1
         profileImageView.addGestureRecognizer(tapOnHead)
-        
-        
+
+
         headerView.addSubview(nameLabel)
         nameLabel.text = user?.name
 //        nameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .headline), size: 22)
@@ -258,8 +259,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
             make.top.equalTo(headerView).offset(Constants.contentUnifiedOffset)
         }
         nameLabel.isOpaque = false
-        
-    
+
+
         headerView.addSubview(screenNameLabel)
         screenNameLabel.text = "@\(user?.screenName ?? "twitterUser")"
 //        screenNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption1), size: 15)
@@ -270,23 +271,23 @@ class UserTimelineTableViewController: TimelineTableViewController {
             make.top.equalTo(nameLabel.snp.bottom).offset(6)
         }
         screenNameLabel.isOpaque = false
-        
-        
+
+
         headerView.addSubview(bioLabel)
         if let user = user {
             bioLabel.attributedText = TwitterAttributedContent(user).attributedString
         }
         bioLabel.lineBreakMode = .byWordWrapping
         bioLabel.numberOfLines = 0
-        
+
         bioLabel.snp.makeConstraints { (make) in
             make.left.equalTo(headerView).offset(Constants.contentUnifiedOffset + (Constants.profileImageRadius * 2) + 10)
             make.right.equalTo(headerView).offset(-Constants.contentUnifiedOffset)
             make.top.equalTo(screenNameLabel.snp.bottom).offset(8)
         }
         bioLabel.isOpaque = false
-        
-        
+
+
         if let location = user?.location, location != "" {
             locationLabel = UILabel()
             headerView.addSubview(locationLabel!)
@@ -300,7 +301,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
             }
             locationLabel?.isOpaque = false
         }
-        
+
         if let userURL = user?.url {
             userURLButton = UIButton()
             headerView.addSubview(userURLButton!)
@@ -318,10 +319,10 @@ class UserTimelineTableViewController: TimelineTableViewController {
 //            userURLButton?.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
             userURLButton?.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption2)
             //            userURLButton(forAction: #selector(tapFollowerButton(_:)), withSender: self)
-            
+
         }
 
-        
+
         let toolbar = UIToolbar()
         headerView.addSubview(toolbar)
         toolbar.snp.makeConstraints { (make) in
@@ -330,8 +331,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
             make.width.equalTo(headerView)
         }
         toolbar.barStyle = .default
-        
-        
+
+
         toolbar.addSubview(folllowerButton)
         folllowerButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(toolbar)
@@ -345,8 +346,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
 //        folllowerButton.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 14)
         folllowerButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         folllowerButton.addTarget(self, action: #selector(viewFollowerList(_:)), for: .touchUpInside)
-        
-        
+
+
         toolbar.addSubview(folllowingButton)
         folllowingButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(toolbar)
@@ -359,7 +360,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         folllowingButton.titleLabel?.textAlignment = .center
         folllowingButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         folllowingButton.addTarget(self, action: #selector(viewFollowingList(_:)), for: .touchUpInside)
-        
+
         let separator = UIButton()
         toolbar.addSubview(separator)
         separator.snp.makeConstraints { (make) in
@@ -369,8 +370,8 @@ class UserTimelineTableViewController: TimelineTableViewController {
         }
         separator.backgroundColor = .gray
         separator.isUserInteractionEnabled = false
-        
- 
+
+
         headerView.contentMode = .scaleAspectFill
         tableView.parallaxHeader.height = 200
         tableView.parallaxHeader.view = headerView
@@ -378,15 +379,15 @@ class UserTimelineTableViewController: TimelineTableViewController {
         tableView.parallaxHeader.minimumHeight = Constants.profileToolbarHeight
 
     }
-    
+
     @IBAction private func viewFollowerList(_ sender: Any?) {
         performSegue(withIdentifier: "User List", sender: folllowerButton)
     }
-    
+
     @IBAction private func viewFollowingList(_ sender: Any?) {
         performSegue(withIdentifier: "User List", sender: folllowingButton)
     }
-    
+
     @IBAction private func tapToViewBannerImage(_ sender: UIGestureRecognizer) {
 //        print(">>> profileBannerImage before transfer >> \(profileBannerImage)")
 //        print(">>> profileBannerImageURL before transfer >> \(profileBannerImageURL)")
@@ -394,7 +395,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         clickMedia = profileBannerImage
 //        performSegue(withIdentifier: "imageTapped", sender: self)
     }
-    
+
     @IBAction private func tapToViewProfileImage(_ sender: UIGestureRecognizer) {
 //        print(">>> profileImage before transfer >> \(profileImage)")
 //        print(">>> profileImageURL before transfer >> \(profileImageURL)")
@@ -403,10 +404,10 @@ class UserTimelineTableViewController: TimelineTableViewController {
         clickMedia = profileImage
 //        performSegue(withIdentifier: "imageTapped", sender: self)
     }
-    
-    
+
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         if segue.identifier == "User List" {
             if let sender = sender as? UIButton, let userListTableViewController = segue.destination.content as? UserListTableViewController {
                 if (sender.titleLabel?.text?.hasSuffix("follower") ?? false) {

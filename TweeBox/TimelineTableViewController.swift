@@ -9,7 +9,7 @@
 import UIKit
 //import AMScrollingNavbar
 import Kingfisher
-import Whisper
+//import Whisper
 import SnapKit
 
 class TimelineTableViewController: UITableViewController
@@ -23,7 +23,7 @@ class TimelineTableViewController: UITableViewController
             guard timeline.count > 0, emptyWarningCollapsed else {
                 
                 if timeline.count > 0, let navigationController = navigationController {
-                    Whisper.hide(whisperFrom: navigationController)
+//                    Whisper.hide(whisperFrom: navigationController)
                     tableView.separatorStyle = .singleLine
                     emptyWarningCollapsed = true
                 }
@@ -132,10 +132,10 @@ class TimelineTableViewController: UITableViewController
     
     
     func showEmptyWarningMessage() {
-        let message = Message(title: "Pull down to refresh.", backgroundColor: .orange)
+//        let message = Message(title: "Pull down to refresh.", backgroundColor: .orange)
         tableView.separatorStyle = .none
         if let navigationController = navigationController {
-            Whisper.show(whisper: message, to: navigationController, action: .present)
+//            Whisper.show(whisper: message, to: navigationController, action: .present)
         }
     }
     

@@ -69,6 +69,11 @@ class SingleTweetViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        view.sizeToFit()
+    }
     
     private func setTweetContent() {
         
@@ -163,7 +168,9 @@ class SingleTweetViewController: UIViewController {
                 }
                 
             case "Media Container":
+                print(">>> container segue")
                 if let imageContainerViewController = segue.destination as? ImageContainerViewController {
+                    print(">>> container segue >> true")
                     imageContainerViewController.tweet = tweet
                 }
 

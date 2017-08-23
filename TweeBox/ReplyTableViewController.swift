@@ -18,7 +18,8 @@ class ReplyTableViewController: MentionTimelineTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tweetInfoContainerView?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+//        tweetInfoContainerView?.frame.size.height = 10
+        tweetInfoContainerView.sizeToFit()
         print(tweetInfoContainerView.frame)
     }
     

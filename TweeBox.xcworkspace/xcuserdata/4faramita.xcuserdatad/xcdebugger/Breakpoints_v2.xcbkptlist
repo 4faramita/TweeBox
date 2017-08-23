@@ -69,22 +69,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TweeBox/UserTimelineTableViewController.swift"
-            timestampString = "525166199.864511"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "TweeBox/RetweeterID.swift"
             timestampString = "525164628.846121"
             startingColumnNumber = "9223372036854775807"
@@ -102,7 +86,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/RetweeterID.swift"
-                  timestampString = "525177457.120627"
+                  timestampString = "525193925.49575"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
@@ -117,7 +101,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/RetweeterID.swift"
-                  timestampString = "525177457.123466"
+                  timestampString = "525193925.509475"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
@@ -150,7 +134,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525177457.131174"
+                  timestampString = "525193925.528265"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -165,7 +149,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525177457.133886"
+                  timestampString = "525193925.532379"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -182,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TweeBox/SingleTweetViewController.swift"
-            timestampString = "525165047.725381"
+            timestampString = "525191527.607366"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "setTweet()"
             landmarkType = "7">
          </BreakpointContent>
