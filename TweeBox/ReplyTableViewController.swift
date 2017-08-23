@@ -24,13 +24,12 @@ class ReplyTableViewController: MentionTimelineTableViewController {
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
         for subview in (tweetInfoContainerView.subviews[0].subviews) {
             if subview.frame.height > 0, subview.subviews.count != 0 {
                 tweetInfoContainerView?.frame.size.height = subview.frame.height + CGFloat(10)
-                // FIX THIS: this height change is ugly
             }
         }
 //        tweetInfoContainerView.removeConstraints(tweetInfoContainerView.constraints)
