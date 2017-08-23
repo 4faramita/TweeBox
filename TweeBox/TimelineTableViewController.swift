@@ -358,7 +358,7 @@ extension TimelineTableViewController: TweetTableViewCellProtocol
                     profileViewController.user = clickedTweet?.user
                 }
             case "View Tweet":
-                if let singleTweetViewController = segue.destination.content as? SingleTweetViewController {
+                if let singleTweetViewController = segue.destination.content as? ReplyTableViewController {
                     singleTweetViewController.tweet = clickedTweet
                 }
             default:

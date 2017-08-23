@@ -41,11 +41,11 @@ class TimelineParams {
         
         var params = [String: String]()
         
+        params["count"] = Constants.tweetLimitPerRefresh
+        
         if sinceID != nil {
             params["since_id"] = sinceID
         }
-        
-        params["count"] = Constants.tweetLimitPerRefresh
         
         if maxID != nil {
             params["max_id"] = maxID

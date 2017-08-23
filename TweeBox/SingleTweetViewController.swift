@@ -129,7 +129,10 @@ class SingleTweetViewController: UIViewController {
     
     
     private func setTweet() {
-        SingleTweet(tweetParams: TweetParams(of: tweetID!), resourceURL: ResourceURL.statuses_show_id).fetchData { [weak self] (tweet) in
+        SingleTweet(
+            tweetParams: TweetParams(of: tweetID!),
+            resourceURL: ResourceURL.statuses_show_id
+        ).fetchData { [weak self] (tweet) in
             if tweet != nil {
                 self?.tweet = tweet
             }
@@ -145,7 +148,7 @@ class SingleTweetViewController: UIViewController {
                     
                     let retweetIDListRetriever = RetweeterID(
                         resourceURL: ResourceURL.statuses_retweeters_ids,
-                        retweetersIDParams: RetweetersIDParams(id: tweetID),
+                        retweetersIDParams: RetweetersIDParams(id: tweetID, cursor: nil),
                         fetchOlder: nil,
                         nextCursor: nil,
                         previousCursor: nil
@@ -173,6 +176,11 @@ class SingleTweetViewController: UIViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "Media Container" {
             return (tweet.entities?.realMedia != nil)
+        }
+            
+        // FIX THIS
+        if identifier == "Retweet List" {
+            return false
         }
         return true
     }

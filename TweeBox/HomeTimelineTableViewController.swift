@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import TwitterKit
 
 class HomeTimelineTableViewController: UserTimelineTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userID = Twitter.sharedInstance().sessionStore.session()?.userID ?? ""
+        userID = Constants.selfID
         // let's user database here
     }
 }

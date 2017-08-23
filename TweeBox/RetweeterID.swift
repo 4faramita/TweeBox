@@ -56,9 +56,11 @@ class RetweeterID {
             }
             
             let client = RESTfulClient(resource: resourceURL, params: retweetersIDParams.getParams())
-            
+            print(resourceURL)
+            print(retweetersIDParams.getParams())
             client.getData() { data in
                 let json = JSON(data: data)
+                print(">>> rt json >> \(json)")
                 
                 self.nextCursor = json["next_cursor_str"].stringValue
                 self.previousCursor = json["previous_cursor_str"].stringValue

@@ -46,3 +46,4 @@
 ## Bug:
 - [ ] retweet/reply/like indicator set cannot be initialized properly
 - [ ] GIF/video indicator set cannot be initialized properly
+- [ ] Single tweet page: retweeter list

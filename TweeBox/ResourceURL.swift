@@ -28,6 +28,8 @@ struct ResourceURL {
     
     static let statuses_user_timeline = (url: "https://api.twitter.com/1.1/statuses/user_timeline.json", method: "GET")
     
+    static let statuses_mentions_timeline = (url: "https://api.twitter.com/1.1/statuses/mentions_timeline.json", method: "GET")
+    
     
     static let followers_list = (url: "https://api.twitter.com/1.1/followers/list.json", method: "GET")
     

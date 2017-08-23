@@ -15,8 +15,11 @@ class RetweetersIDParams {
     
 //    stringify_ids
     
-    init(id: String) {
+    init(id: String, cursor: String?) {
         self.id = id
+        if let cursor = cursor {
+            self.cursor = cursor
+        }
     }
     
     public func getParams() -> [String: String] {
@@ -24,8 +27,11 @@ class RetweetersIDParams {
         var params = [String: String]()
         
         params["id"] = id
-
-        params["cursor"] = cursor
+        
+        if let cursor = cursor, cursor != "-1" {
+            params["cursor"] = cursor
+        }
+        
                 
         params["stringify_ids"] = "true"
         

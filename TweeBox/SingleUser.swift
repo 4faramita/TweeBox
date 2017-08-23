@@ -27,6 +27,7 @@ class SingleUser {
             
             client.getData() { data in
                 let json = JSON(data: data)
+                print(json)
                 if json.null == nil {
                     let user = TwitterUser(with: json)
                     handler(user)

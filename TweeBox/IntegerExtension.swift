@@ -15,7 +15,7 @@ extension Int {
         let shortenExpression: String
         
         if self > 10000 {
-            shortenExpression = "\(Float(self) / 1000)k"
+            shortenExpression = "\(Int(Float(self) / 1000))k"
         } else {
             shortenExpression = "\(self)"
         }

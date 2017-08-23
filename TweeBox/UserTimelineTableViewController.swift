@@ -94,7 +94,10 @@ class UserTimelineTableViewController: TimelineTableViewController {
 //    }
     
     private func setUser() {
-        SingleUser(userParams: UserParams(userID: userID, screenName: nil), resourceURL: ResourceURL.user_show).fetchData { [weak self] (singleUser) in
+        SingleUser(
+            userParams: UserParams(userID: userID, screenName: nil),
+            resourceURL: ResourceURL.user_show
+        ).fetchData { [weak self] (singleUser) in
             if singleUser != nil {
                 self?.user = singleUser!
             }

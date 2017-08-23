@@ -44,7 +44,6 @@ class Timeline {
             
             client.getData() { data in
                 let json = JSON(data: data)
-//                print(json)
                 
                 for (_, tweetJSON) in json {
                     if tweetJSON.null == nil {
