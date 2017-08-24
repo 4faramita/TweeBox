@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MultiUserParams {
+class MultiUserParams: Params {
     
     public var userID: [String]?
     

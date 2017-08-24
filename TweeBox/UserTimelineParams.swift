@@ -22,7 +22,7 @@ class UserTimelineParams: TimelineParams {
         resourceURL = ResourceURL.statuses_user_timeline
     }
     
-    override public func getParams() -> [String: String] {
+    override public func getParams() -> [String: Any] {
         var params = super.getParams()
         
         if userID != nil {

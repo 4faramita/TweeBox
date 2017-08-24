@@ -1270,7 +1270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDg-6c-afW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4834" y="1084"/>
+            <point key="canvasLocation" x="4460" y="2390"/>
         </scene>
         <!--Video Viewer View Controller-->
         <scene sceneID="M0u-wU-l4Y">
@@ -3509,7 +3509,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOh-RZ-CED" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4860" y="1864"/>
+            <point key="canvasLocation" x="5524" y="2390"/>
         </scene>
         <!--Mentions-->
         <scene sceneID="miM-UO-KYf">
@@ -4555,9 +4555,9 @@
         <!--Tweet-->
         <scene sceneID="GIV-Ve-EAt">
             <objects>
-                <tableViewController id="CxX-ex-f2w" customClass="ReplyTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ReplyTableViewController" id="CxX-ex-f2w" customClass="ReplyTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" id="lhV-ce-jYP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="JA5-yx-Mu7">
@@ -5578,11 +5578,14 @@
                     </refreshControl>
                     <connections>
                         <outlet property="tweetInfoContainerView" destination="JA5-yx-Mu7" id="Lqe-A9-ie1"/>
+                        <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="p1a-fx-Q2D"/>
+                        <segue destination="YmO-B7-dd1" kind="show" id="Xnk-PO-A97"/>
+                        <segue destination="tY3-Cn-E0S" kind="show" identifier="videoTapped" id="LD9-fb-Rb0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8g-7S-pNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4023" y="1084"/>
+            <point key="canvasLocation" x="3540" y="2475"/>
         </scene>
     </scenes>
     <resources>
@@ -5592,10 +5595,10 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Mzq-P7-JMi"/>
+        <segue reference="wHR-Kd-1fr"/>
         <segue reference="gEj-9i-yKO"/>
-        <segue reference="sCG-QK-uYb"/>
         <segue reference="def-NE-Ghm"/>
-        <segue reference="P8A-PP-qGh"/>
+        <segue reference="hSo-zN-k1a"/>
+        <segue reference="FFe-TK-q2o"/>
     </inferredMetricsTieBreakers>
 </document>

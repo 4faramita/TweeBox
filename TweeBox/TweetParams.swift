@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TweetParams {
+class TweetParams: Params {
     
     public var tweetID: String?
     
@@ -24,11 +24,11 @@ class TweetParams {
     init(of tweetID: String) { self.tweetID = tweetID }
     
     
-    public func getParams() -> [String: String]? {
+    public func getParams() -> [String: Any] {
         
         var params = [String: String]()
         
-        guard tweetID != nil else { return nil }
+        guard tweetID != nil else { return params }
         
         params["id"] = tweetID!
         

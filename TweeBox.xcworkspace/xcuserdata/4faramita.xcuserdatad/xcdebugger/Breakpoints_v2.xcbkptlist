@@ -86,12 +86,12 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/RetweeterID.swift"
-                  timestampString = "525252963.55754"
+                  timestampString = "525262951.807693"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "1252">
+                  offsetFromSymbolStart = "1184">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -101,7 +101,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/RetweeterID.swift"
-                  timestampString = "525252963.56168"
+                  timestampString = "525262951.813281"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
@@ -134,7 +134,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525252963.570501"
+                  timestampString = "525262951.824151"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -149,7 +149,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525252963.572916"
+                  timestampString = "525262951.826529"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"

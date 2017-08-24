@@ -104,7 +104,7 @@ class TweetTableViewCell: UITableViewCell {
         if let id = tweet?.user.screenName {
             tweetUserID.text = "@" + id
         }
-        if let mainTweetID = tweet?.inReplyToStatusID {
+        if (tweet?.inReplyToStatusID) != nil {
             replyImage.image = UIImage(named: "reply_true")
         } else {
             replyImage.image = UIImage(named: "reply_false")

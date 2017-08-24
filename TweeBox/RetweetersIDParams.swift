@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RetweetersIDParams {
+class RetweetersIDParams: ParamsWithCursor {
     
     public var id: String
     public var cursor: String? = "-1"
@@ -22,7 +22,7 @@ class RetweetersIDParams {
         }
     }
     
-    public func getParams() -> [String: String] {
+    public func getParams() -> [String: Any] {
         
         var params = [String: String]()
         

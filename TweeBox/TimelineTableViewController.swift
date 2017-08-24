@@ -22,7 +22,9 @@ class TimelineTableViewController: UITableViewController
             
             guard timeline.count > 0, emptyWarningCollapsed else {
                 
-                if timeline.count > 0, let navigationController = navigationController {
+                if timeline.count > 0
+//                    , let navigationController = navigationController
+                {
 //                    Whisper.hide(whisperFrom: navigationController)
                     tableView.separatorStyle = .singleLine
                     emptyWarningCollapsed = true
@@ -48,7 +50,7 @@ class TimelineTableViewController: UITableViewController
     // tap to segue
     weak var delegate:TweetWithPicTableViewCell?
 
-    var clickedCellTextLabelHeight: CGFloat?
+//    var clickedCellTextLabelHeight: CGFloat?
     var clickedTweet: Tweet?
     var clickedImageIndex: Int?
     var clickMedia: UIImage? {
@@ -134,9 +136,9 @@ class TimelineTableViewController: UITableViewController
     func showEmptyWarningMessage() {
 //        let message = Message(title: "Pull down to refresh.", backgroundColor: .orange)
         tableView.separatorStyle = .none
-        if let navigationController = navigationController {
+//        if let navigationController = navigationController {
 //            Whisper.show(whisper: message, to: navigationController, action: .present)
-        }
+//        }
     }
     
     
@@ -206,15 +208,19 @@ class TimelineTableViewController: UITableViewController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         clickedTweet = timeline[indexPath.section][indexPath.row]
-        if let cell = tableView.cellForRow(at: indexPath) as? TweetWithTextTableViewCell {
-            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
-        } else if let cell = tableView.cellForRow(at: indexPath) as? TweetWithPicAndTextTableViewCell {
-            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
-        }
+        
+//        if let cell = tableView.cellForRow(at: indexPath) as? TweetWithTextTableViewCell {
+//            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
+//        } else if let cell = tableView.cellForRow(at: indexPath) as? TweetWithPicAndTextTableViewCell {
+//            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
+//        }
 
-        performSegue(withIdentifier: "View Tweet", sender: self)
+        setAndPerformSegue()
     }
 
+    func setAndPerformSegue() {
+        performSegue(withIdentifier: "View Tweet", sender: self)
+    }
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -355,7 +361,7 @@ extension TimelineTableViewController: TweetTableViewCellProtocol {
             case "View Tweet":
                 if let singleTweetViewController = segue.destination.content as? ReplyTableViewController {
                     singleTweetViewController.tweet = clickedTweet
-                    singleTweetViewController.cellTextLabelHeight = clickedCellTextLabelHeight
+//                    singleTweetViewController.cellTextLabelHeight = clickedCellTextLabelHeight
 //                    singleTweetViewController.hasLabel =
                 }
             default:

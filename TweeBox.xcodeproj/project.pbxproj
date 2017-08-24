@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		B230F5DCBCAADB2F8B3CD0F2 /* Pods_TweeBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3A1C5C0DABB6C344B4147 /* Pods_TweeBox.framework */; };
+		B4047B801F4EC0B5004E2AE3 /* SearchTweetParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B7F1F4EC0B5004E2AE3 /* SearchTweetParams.swift */; };
+		B4047B821F4EC575004E2AE3 /* SearchResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B811F4EC575004E2AE3 /* SearchResultType.swift */; };
+		B4047B841F4ECD0B004E2AE3 /* ReplyTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B831F4ECD0B004E2AE3 /* ReplyTimeline.swift */; };
+		B4047B861F4ECF32004E2AE3 /* Params.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B851F4ECF32004E2AE3 /* Params.swift */; };
+		B4047B881F4ED00F004E2AE3 /* ParamsWithBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B871F4ED00F004E2AE3 /* ParamsWithBounds.swift */; };
+		B4047B8A1F4ED080004E2AE3 /* ParamsWithCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B891F4ED080004E2AE3 /* ParamsWithCursor.swift */; };
 		B4092FF71F38BD6D00CAB109 /* TweetEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4092FF61F38BD6D00CAB109 /* TweetEntity.swift */; };
 		B4092FF91F38BECF00CAB109 /* TweetPhotoSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4092FF81F38BECF00CAB109 /* TweetPhotoSize.swift */; };
 		B4092FFB1F38C22000CAB109 /* TweetVideoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4092FFA1F38C22000CAB109 /* TweetVideoInfo.swift */; };
@@ -93,6 +99,12 @@
 /* Begin PBXFileReference section */
 		27A3D1FDBA0152D8A2C9DA41 /* Pods-TweeBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-TweeBox/Pods-TweeBox.release.xcconfig"; sourceTree = "<group>"; };
 		9FACEDC042CE0399F01969AB /* Pods-TweeBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TweeBox/Pods-TweeBox.debug.xcconfig"; sourceTree = "<group>"; };
+		B4047B7F1F4EC0B5004E2AE3 /* SearchTweetParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTweetParams.swift; sourceTree = "<group>"; };
+		B4047B811F4EC575004E2AE3 /* SearchResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultType.swift; sourceTree = "<group>"; };
+		B4047B831F4ECD0B004E2AE3 /* ReplyTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyTimeline.swift; sourceTree = "<group>"; };
+		B4047B851F4ECF32004E2AE3 /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
+		B4047B871F4ED00F004E2AE3 /* ParamsWithBounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParamsWithBounds.swift; sourceTree = "<group>"; };
+		B4047B891F4ED080004E2AE3 /* ParamsWithCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParamsWithCursor.swift; sourceTree = "<group>"; };
 		B4092FF61F38BD6D00CAB109 /* TweetEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetEntity.swift; sourceTree = "<group>"; };
 		B4092FF81F38BECF00CAB109 /* TweetPhotoSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetPhotoSize.swift; sourceTree = "<group>"; };
 		B4092FFA1F38C22000CAB109 /* TweetVideoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetVideoInfo.swift; sourceTree = "<group>"; };
@@ -335,6 +347,7 @@
 				B443A0F51F2B43EB0021BB65 /* ResourceURL.swift */,
 				B488E6661F49E2C80033CFAD /* Params */,
 				B443A0F71F2B44FD0021BB65 /* RESTfulClient.swift */,
+				B4047B811F4EC575004E2AE3 /* SearchResultType.swift */,
 			);
 			name = "RESTful Client";
 			sourceTree = "<group>";
@@ -351,6 +364,10 @@
 				B488E6671F49E2FF0033CFAD /* UserParams.swift */,
 				B4EDAAE71F4C8DE500C6660B /* MultiUserParams.swift */,
 				B488E66C1F49F1990033CFAD /* TweetParams.swift */,
+				B4047B7F1F4EC0B5004E2AE3 /* SearchTweetParams.swift */,
+				B4047B851F4ECF32004E2AE3 /* Params.swift */,
+				B4047B891F4ED080004E2AE3 /* ParamsWithCursor.swift */,
+				B4047B871F4ED00F004E2AE3 /* ParamsWithBounds.swift */,
 			);
 			name = Params;
 			sourceTree = "<group>";
@@ -359,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				B443A0EC1F2B36520021BB65 /* Timeline.swift */,
+				B4047B831F4ECD0B004E2AE3 /* ReplyTimeline.swift */,
 				B488E66A1F49E9800033CFAD /* SingleUser.swift */,
 				B488E66E1F4A9C7D0033CFAD /* SingleTweet.swift */,
 				B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */,
@@ -652,6 +670,7 @@
 				B47E58711F3DACAC00CA0C0A /* PannableViewController.swift in Sources */,
 				B488E66D1F49F1990033CFAD /* TweetParams.swift in Sources */,
 				B469BAC11F480C0B00ADA3F6 /* OriginTweetView.swift in Sources */,
+				B4047B881F4ED00F004E2AE3 /* ParamsWithBounds.swift in Sources */,
 				B40930081F39710000CAB109 /* URLExtension.swift in Sources */,
 				B409300A1F39763E00CAB109 /* MediaSize.swift in Sources */,
 				B4B406361F4163E600683124 /* HomeTimelineTableViewController.swift in Sources */,
@@ -665,11 +684,15 @@
 				B4EDAAE61F4C89F400C6660B /* RetweeterID.swift in Sources */,
 				B40930011F395FFD00CAB109 /* TweetWithPicAndTextTableViewCell.swift in Sources */,
 				B4B541D61F4D71450008C2EE /* MentionTimelineTableViewController.swift in Sources */,
+				B4047B821F4EC575004E2AE3 /* SearchResultType.swift in Sources */,
+				B4047B841F4ECD0B004E2AE3 /* ReplyTimeline.swift in Sources */,
 				B42985A21F29E8E700AFFB97 /* LoginViewController.swift in Sources */,
 				B4B7C4C41F3ED26E00F424A0 /* NavigationViewControllerExtension.swift in Sources */,
 				B4EDAAE21F4C1EF100C6660B /* StringExtension.swift in Sources */,
+				B4047B861F4ECF32004E2AE3 /* Params.swift in Sources */,
 				B4E917161F433CE600FD3A5F /* UserList.swift in Sources */,
 				B4B541D81F4D84170008C2EE /* ReplyTableViewController.swift in Sources */,
+				B4047B801F4EC0B5004E2AE3 /* SearchTweetParams.swift in Sources */,
 				B443A0FA1F2B46370021BB65 /* Constants.swift in Sources */,
 				B4B541D41F4D6C7B0008C2EE /* MentionTimelineParams.swift in Sources */,
 				B469BAC61F488AFB00ADA3F6 /* TwitterAttributedContent.swift in Sources */,
@@ -683,6 +706,7 @@
 				B43BB8B91F359F9A0011A301 /* Coordinates.swift in Sources */,
 				B4EDAAE41F4C85CE00C6660B /* RetweetersIDParams.swift in Sources */,
 				B4B406321F40A0A500683124 /* EmbededPageViewController.swift in Sources */,
+				B4047B8A1F4ED080004E2AE3 /* ParamsWithCursor.swift in Sources */,
 				B46242921F4419CF0074158A /* TwitterDate.swift in Sources */,
 				B488E66B1F49E9800033CFAD /* SingleUser.swift in Sources */,
 				B40930041F3965B600CAB109 /* TweetTableViewCell.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TimelineParams {
+class TimelineParams: ParamsWithBounds {
     
     public var sinceID: String?
     
@@ -22,7 +22,7 @@ class TimelineParams {
     
     public var includeRetweets = true
     
-    public var resourceURL: (String, String)!
+    public var resourceURL = ResourceURL.search_tweets
     
 
     init(sinceID: String? = nil, maxID: String? = nil, excludeReplies: Bool?, includeRetweets: Bool?) {
@@ -37,7 +37,7 @@ class TimelineParams {
         }
     }
     
-    public func getParams() -> [String: String] {
+    public func getParams() -> [String: Any] {
         
         var params = [String: String]()
         

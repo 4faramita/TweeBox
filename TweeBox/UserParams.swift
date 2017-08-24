@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserParams {
+class UserParams: Params {
     
     public var userID: String?
     
@@ -22,7 +22,7 @@ class UserParams {
     }
     
     
-    public func getParams() -> [String: String] {
+    public func getParams() -> [String: Any] {
         
         var params = [String: String]()
         

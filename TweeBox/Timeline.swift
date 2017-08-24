@@ -15,9 +15,9 @@ class Timeline {
     public var sinceID: String?
     public var fetchNewer: Bool
     public var resourceURL: (String, String)
-    public var timelineParams: TimelineParams
+    public var timelineParams: ParamsWithBounds
     
-    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), timelineParams: TimelineParams) {
+    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), timelineParams: ParamsWithBounds) {
         
         self.maxID = maxID
         self.sinceID = sinceID
@@ -26,6 +26,17 @@ class Timeline {
         
         self.resourceURL = resourceURL
         self.timelineParams = timelineParams
+    }
+    
+    func appendTweet(from json: JSON) {
+        
+        for (_, tweetJSON) in json {
+            if tweetJSON.null == nil {
+                let tweet = Tweet(with: tweetJSON)
+                self.timeline.append(tweet)  // mem cycle?
+            }
+        }
+
     }
     
     public func fetchData(_ handler: @escaping (String?, String?, [Tweet]) -> Void) {
@@ -41,16 +52,13 @@ class Timeline {
             }
             
             let client = RESTfulClient(resource: resourceURL, params: timelineParams.getParams())
-            
+            print(">>> params \(timelineParams.getParams())")
             client.getData() { data in
+                
                 let json = JSON(data: data)
                 
-                for (_, tweetJSON) in json {
-                    if tweetJSON.null == nil {
-                        let tweet = Tweet(with: tweetJSON)
-                        self.timeline.append(tweet)  // mem cycle?
-                    }
-                }
+                self.appendTweet(from: json)
+                
                 self.maxID = self.timeline.last?.id  // if fetch tweets below this batch, the earliest one in this batch would be the max one for the next batch
                 self.sinceID = self.timeline.first?.id  // vice versa
                 
