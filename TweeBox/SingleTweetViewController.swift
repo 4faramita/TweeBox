@@ -9,6 +9,7 @@
 import UIKit
 import Kanna
 import SafariServices
+import VisualEffectView
 
 class SingleTweetViewController: UIViewController {
     
@@ -69,16 +70,63 @@ class SingleTweetViewController: UIViewController {
 //        view.sizeToFit()
 //    }
     
+    private func addPlayLabel(to view: UIView, isGif: Bool) {
+        
+        let visualEffectView = VisualEffectView(frame: view.bounds)
+        visualEffectView.blurRadius = 2
+        visualEffectView.colorTint = .white
+        visualEffectView.colorTintAlpha = 0.2
+        visualEffectView.isUserInteractionEnabled = false
+        visualEffectView.isOpaque = false
+        view.addSubview(visualEffectView)
+        
+        let play = UIImageView(image: UIImage(named: "play_video"))
+        play.isUserInteractionEnabled = false
+        play.isOpaque = false
+        view.addSubview(play)
+        play.snp.makeConstraints { (make) in
+            make.center.equalTo(view)
+            make.height.equalTo(32)
+            make.width.equalTo(32)
+        }
+
+        if isGif {
+            let gif = UIImageView(image: UIImage(named: "play_gif"))
+            gif.isUserInteractionEnabled = false
+            gif.isOpaque = false
+            view.addSubview(gif)
+            gif.snp.makeConstraints { (make) in
+                make.trailing.equalTo(view).offset(-10)
+                make.bottom.equalTo(view)
+                make.height.equalTo(32)
+                make.width.equalTo(32)
+            }
+        }
+    }
+    
+    @IBAction private func tapOnProfileImage(_ sender: UIGestureRecognizer) {
+        performSegue(withIdentifier: "View Profile", sender: sender)
+    }
+    
     private func setTweetContent() {
         
         if (tweet.entities?.realMedia == nil) || (tweet.entities?.realMedia!.count == 0) {
             containerView.removeFromSuperview()
-        } else {
-//            childViewControllers[0].view.isUserInteractionEnabled = true
+        } else if let media = tweet.entities?.realMedia, media.count == 1 {
+            if media[0].type != "photo" {
+                addPlayLabel(to: containerView, isGif: (media[0].type == "animated_gif"))
+            }
         }
         
         profileImageView.kf.setImage(with: tweet.user.profileImageURL)
         profileImageView.cutToRound(radius: nil)
+        profileImageView.isUserInteractionEnabled = true
+        
+        let tapProfile = UITapGestureRecognizer(target: self, action: #selector(tapOnProfileImage(_:)))
+        tapProfile.numberOfTapsRequired = 1
+        tapProfile.numberOfTouchesRequired = 1
+        profileImageView.addGestureRecognizer(tapProfile)
+        
         
         nameLabel.text = tweet.user.name
         screenNameLabel.text = "@\(tweet.user.screenName)"
@@ -165,6 +213,12 @@ class SingleTweetViewController: UIViewController {
                 if let imageContainerViewController = segue.destination as? ImageContainerViewController {
                     imageContainerViewController.tweet = tweet
                 }
+                
+            case "View Profile" :
+                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                    profileViewController.user = tweet?.user
+                }
+
 
             default:
                 return

@@ -185,6 +185,9 @@ class ImageContainerViewController: UIViewController {
     
     @IBAction private func tapOnFirstImage(_ sender: UIGestureRecognizer) {
         clickedIndex = 0
+        if media?.count == 1, media?[0].type != "photo" {
+            performSegue(withIdentifier: "Video Tapped", sender: nil)
+        }
         performSegue(withIdentifier: "Image Tapped", sender: imageViews[0])
     }
     @IBAction private func tapOnSecondImage(_ sender: UIGestureRecognizer) {
@@ -202,10 +205,22 @@ class ImageContainerViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Image Tapped" {
-            if let imageViewer = segue.destination as? ImageViewerViewController {
-                imageViewer.image = images[clickedIndex]
-                imageViewer.imageURL = tweet?.entities?.mediaToShare?[clickedIndex].mediaURL
+        
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Video Tapped":
+                if let videoViewer = segue.destination.content as? VideoViewerViewController {
+                    videoViewer.tweetMedia = media![0]
+                }
+                
+            case "Image Tapped":
+                if let imageViewer = segue.destination as? ImageViewerViewController {
+                    imageViewer.image = images[clickedIndex]
+                    imageViewer.imageURL = tweet?.entities?.mediaToShare?[clickedIndex].mediaURL
+                }
+
+            default:
+                return
             }
         }
     }
