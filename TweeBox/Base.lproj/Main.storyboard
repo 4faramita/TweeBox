@@ -1040,7 +1040,13 @@
                             <outlet property="delegate" destination="i8A-W9-rEQ" id="ncv-RZ-nKu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Timeline" id="bFo-1U-pWo"/>
+                    <navigationItem key="navigationItem" title="Timeline" id="bFo-1U-pWo">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="SLr-ao-JyG">
+                            <connections>
+                                <action selector="search:" destination="i8A-W9-rEQ" id="qgG-MU-quk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="RvG-dG-x51">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1348,6 +1354,69 @@
             </objects>
             <point key="canvasLocation" x="1836" y="449"/>
         </scene>
+        <!--General Search View Controller-->
+        <scene sceneID="l8A-MH-j2F">
+            <objects>
+                <viewController id="eQy-pS-KvG" customClass="GeneralSearchViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wBm-tb-Ibg"/>
+                        <viewControllerLayoutGuide type="bottom" id="Duq-Kr-RSW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Ym-B3-Ca7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="G8k-R6-URY">
+                                <rect key="frame" x="132" y="258" width="110" height="150"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KbA-31-hiS">
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0E9-bs-dnh">
+                                        <rect key="frame" x="0.0" y="30" width="110" height="120"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdm-Qn-qIy">
+                                                <rect key="frame" x="8" y="0.0" width="94" height="30"/>
+                                                <state key="normal" title="Search Tweet"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jT-0V-b7y">
+                                                <rect key="frame" x="0.0" y="30" width="110" height="30"/>
+                                                <state key="normal" title="Search Hashtag"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VB7-5O-adQ">
+                                                <rect key="frame" x="22" y="60" width="66" height="30"/>
+                                                <state key="normal" title="Find User"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRE-gk-Ixl">
+                                                <rect key="frame" x="12.5" y="90" width="85" height="30"/>
+                                                <state key="normal" title="Search User"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="G8k-R6-URY" firstAttribute="centerX" secondItem="0Ym-B3-Ca7" secondAttribute="centerX" id="DbZ-FM-FiP"/>
+                            <constraint firstItem="G8k-R6-URY" firstAttribute="centerY" secondItem="0Ym-B3-Ca7" secondAttribute="centerY" id="ey6-U2-D7e"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="findUserButton" destination="VB7-5O-adQ" id="jxq-MF-cDk"/>
+                        <outlet property="inputTextField" destination="KbA-31-hiS" id="7qQ-vq-EEX"/>
+                        <outlet property="searchHashtagButton" destination="6jT-0V-b7y" id="Fja-1D-cQ6"/>
+                        <outlet property="searchTweetButton" destination="zdm-Qn-qIy" id="72P-1p-xYj"/>
+                        <outlet property="searchUserButton" destination="KRE-gk-Ixl" id="tuW-je-VoY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lLh-5k-Pp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6101" y="-248"/>
+        </scene>
         <!--User List Table View Controller-->
         <scene sceneID="qfw-Be-4Dd">
             <objects>
@@ -1466,7 +1535,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="UserProfileViewController" id="siG-Yx-ulA" userLabel="User Timeline" customClass="UserTimelineTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" id="PzF-nP-ten">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -4537,7 +4606,7 @@
         <scene sceneID="PhK-xZ-MRy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A3v-OJ-qeK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mentions" id="1z7-pi-FRn"/>
+                    <tabBarItem key="tabBarItem" title="Mentions" image="mention" selectedImage="mention" id="1z7-pi-FRn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fao-6K-Dc8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -5579,7 +5648,7 @@
                     <connections>
                         <outlet property="tweetInfoContainerView" destination="JA5-yx-Mu7" id="Lqe-A9-ie1"/>
                         <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="p1a-fx-Q2D"/>
-                        <segue destination="YmO-B7-dd1" kind="show" id="Xnk-PO-A97"/>
+                        <segue destination="YmO-B7-dd1" kind="show" identifier="imageTapped" id="Xnk-PO-A97"/>
                         <segue destination="tY3-Cn-E0S" kind="show" identifier="videoTapped" id="LD9-fb-Rb0"/>
                     </connections>
                 </tableViewController>
@@ -5589,16 +5658,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mention" width="16" height="16"/>
         <image name="profile" width="16" height="16"/>
         <image name="profile_selected" width="16" height="16"/>
         <image name="twitter" width="16" height="16"/>
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="AAx-pq-S6O"/>
+        <segue reference="mef-VN-nlC"/>
         <segue reference="wHR-Kd-1fr"/>
-        <segue reference="gEj-9i-yKO"/>
+        <segue reference="TE5-Ah-PTm"/>
         <segue reference="def-NE-Ghm"/>
-        <segue reference="hSo-zN-k1a"/>
-        <segue reference="FFe-TK-q2o"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,4 +19,5 @@ target 'TweeBox' do
 	pod "MXParallaxHeader"
 	pod "VisualEffectView"
 	pod 'Kanna', '~> 2.1.0'
+	pod 'PopupDialog', '~> 0.5'
 end

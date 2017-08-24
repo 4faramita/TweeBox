@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54ED664AB7B7332463FC7869 /* SearchTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED6460E6F7336FA0335EB2 /* SearchTimelineTableViewController.swift */; };
 		B230F5DCBCAADB2F8B3CD0F2 /* Pods_TweeBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3A1C5C0DABB6C344B4147 /* Pods_TweeBox.framework */; };
 		B4047B801F4EC0B5004E2AE3 /* SearchTweetParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B7F1F4EC0B5004E2AE3 /* SearchTweetParams.swift */; };
 		B4047B821F4EC575004E2AE3 /* SearchResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4047B811F4EC575004E2AE3 /* SearchResultType.swift */; };
@@ -68,6 +69,7 @@
 		B4B7C4C41F3ED26E00F424A0 /* NavigationViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7C4C31F3ED26E00F424A0 /* NavigationViewControllerExtension.swift */; };
 		B4CE12161F3ACCDF002D341E /* HomeTimelineParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CE12151F3ACCDF002D341E /* HomeTimelineParams.swift */; };
 		B4CE12181F3AD60A002D341E /* TimelineParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CE12171F3AD60A002D341E /* TimelineParams.swift */; };
+		B4D89EB81F4F2F0A00698FF1 /* GeneralSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D89EB71F4F2F0A00698FF1 /* GeneralSearchViewController.swift */; };
 		B4E917141F43393700FD3A5F /* UserListParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E917131F43393700FD3A5F /* UserListParams.swift */; };
 		B4E917161F433CE600FD3A5F /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E917151F433CE600FD3A5F /* UserList.swift */; };
 		B4E917191F4343D500FD3A5F /* UserListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E917181F4343D500FD3A5F /* UserListTableViewController.swift */; };
@@ -98,6 +100,7 @@
 
 /* Begin PBXFileReference section */
 		27A3D1FDBA0152D8A2C9DA41 /* Pods-TweeBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-TweeBox/Pods-TweeBox.release.xcconfig"; sourceTree = "<group>"; };
+		54ED6460E6F7336FA0335EB2 /* SearchTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTimelineTableViewController.swift; sourceTree = "<group>"; };
 		9FACEDC042CE0399F01969AB /* Pods-TweeBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TweeBox/Pods-TweeBox.debug.xcconfig"; sourceTree = "<group>"; };
 		B4047B7F1F4EC0B5004E2AE3 /* SearchTweetParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTweetParams.swift; sourceTree = "<group>"; };
 		B4047B811F4EC575004E2AE3 /* SearchResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultType.swift; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 		B4B7C4C31F3ED26E00F424A0 /* NavigationViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewControllerExtension.swift; sourceTree = "<group>"; };
 		B4CE12151F3ACCDF002D341E /* HomeTimelineParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimelineParams.swift; sourceTree = "<group>"; };
 		B4CE12171F3AD60A002D341E /* TimelineParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineParams.swift; sourceTree = "<group>"; };
+		B4D89EB71F4F2F0A00698FF1 /* GeneralSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchViewController.swift; sourceTree = "<group>"; };
 		B4E917131F43393700FD3A5F /* UserListParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListParams.swift; sourceTree = "<group>"; };
 		B4E917151F433CE600FD3A5F /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		B4E917181F4343D500FD3A5F /* UserListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 				B4E917181F4343D500FD3A5F /* UserListTableViewController.swift */,
 				B488E6701F4AA9650033CFAD /* SingleTweetViewController.swift */,
 				B488E6741F4B0E890033CFAD /* ImageContainerViewController.swift */,
+				B4D89EB71F4F2F0A00698FF1 /* GeneralSearchViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 				B47E586A1F3C959900CA0C0A /* UserTimelineTableViewController.swift */,
 				B4B406351F4163E600683124 /* HomeTimelineTableViewController.swift */,
 				B4B541D71F4D84170008C2EE /* ReplyTableViewController.swift */,
+				54ED6460E6F7336FA0335EB2 /* SearchTimelineTableViewController.swift */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -589,6 +595,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MXParallaxHeader/MXParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-9/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -604,6 +611,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MXParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -674,6 +682,7 @@
 				B40930081F39710000CAB109 /* URLExtension.swift in Sources */,
 				B409300A1F39763E00CAB109 /* MediaSize.swift in Sources */,
 				B4B406361F4163E600683124 /* HomeTimelineTableViewController.swift in Sources */,
+				B4D89EB81F4F2F0A00698FF1 /* GeneralSearchViewController.swift in Sources */,
 				B43BB8BB1F35A2300011A301 /* Entity.swift in Sources */,
 				B43BB8BD1F35A4A40011A301 /* Place.swift in Sources */,
 				B485BA631F46CD260077CC31 /* RetweetTableViewCell.swift in Sources */,
@@ -723,6 +732,7 @@
 				B47E586B1F3C959900CA0C0A /* UserTimelineTableViewController.swift in Sources */,
 				B40930061F3966A000CAB109 /* TweetWithPicTableViewCell.swift in Sources */,
 				B443A0F81F2B44FD0021BB65 /* RESTfulClient.swift in Sources */,
+				54ED664AB7B7332463FC7869 /* SearchTimelineTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

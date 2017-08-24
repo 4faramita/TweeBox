@@ -11,6 +11,7 @@ import UIKit
 import Kingfisher
 //import Whisper
 import SnapKit
+import PopupDialog
 
 class TimelineTableViewController: UITableViewController
 //, ScrollingNavigationControllerDelegate 
@@ -194,6 +195,31 @@ class TimelineTableViewController: UITableViewController
         }
         
     }
+    
+    @IBAction func search(_ sender: UIBarButtonItem) {
+        
+        let searchViewController = GeneralSearchViewController()
+        let popup = PopupDialog(viewController: searchViewController)
+        popup.view.frame.size.height = 230
+        
+//        let popup = PopupDialog(title: "Test Dialog", message: "Look!", image: UIImage(named: "twitter_selected"))
+//        let buttonOne = CancelButton(title: "CANCEL") {
+//            print("You canceled the car dialog.")
+//        }
+//        
+//        let buttonTwo = DefaultButton(title: "ADMIRE CAR") {
+//            print("What a beauty!")
+//        }
+//        
+//        let buttonThree = DefaultButton(title: "BUY CAR", height: 60) {
+//            print("Ah, maybe next time :)")
+//        }
+//        
+//        popup.addButtons([buttonOne, buttonTwo, buttonThree])
+
+        present(popup, animated: true, completion: nil)
+    }
+    
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
         refreshTimeline()

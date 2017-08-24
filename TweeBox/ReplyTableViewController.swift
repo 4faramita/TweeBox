@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReplyTableViewController: TimelineTableViewController {
+class ReplyTableViewController: SearchTimelineTableViewController {
 
     @IBOutlet weak var tweetInfoContainerView: UIView!
     
@@ -34,8 +34,12 @@ class ReplyTableViewController: TimelineTableViewController {
             }
         }
     }
+
+    override var resultType: SearchResultType {
+        return .recent
+    }
     
-    
+    // MARK - Header height
     public var cellTextLabelHeight: CGFloat?
     private var hasMedia: Bool {
         if let media = tweet?.entities?.realMedia, media.count > 0 {
@@ -44,8 +48,7 @@ class ReplyTableViewController: TimelineTableViewController {
             return false
         }
     }
-    
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -55,26 +58,14 @@ class ReplyTableViewController: TimelineTableViewController {
             }
         }
     }
-    
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         refreshTimeline()
     }
-    
-    
-    override func setAndPerformSegue() {
-        
-        let destinationViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReplyTableViewController")
-        
-        let segue = UIStoryboardSegue(identifier: "View Tweet", source: self, destination: destinationViewController) {
-            self.navigationController?.show(destinationViewController, sender: self)
-        }
-        
-        self.prepare(for: segue, sender: self)
-        segue.perform()
-    }
-    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -88,10 +79,12 @@ class ReplyTableViewController: TimelineTableViewController {
     }
     
     override func refreshTimeline() {
+
+        let screenName = "%40\(tweet?.user.screenName ?? "")"
         
         let replyTimelineParams = SearchTweetParams(
-            query: "%40\(tweet?.user.screenName ?? "")",
-            resultType: .recent,
+            query: screenName,
+            resultType: self.resultType,
             until: nil,
             sinceID: nil,
             maxID: nil,
@@ -147,10 +140,10 @@ class ReplyTableViewController: TimelineTableViewController {
         SingleTweet(
             tweetParams: TweetParams(of: tweetID!),
             resourceURL: ResourceURL.statuses_show_id
-            ).fetchData { [weak self] (tweet) in
-                if tweet != nil {
-                    self?.tweet = tweet
-                }
+        ).fetchData { [weak self] (tweet) in
+            if tweet != nil {
+                self?.tweet = tweet
+            }
         }
     }
 }

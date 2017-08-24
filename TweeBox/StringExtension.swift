@@ -11,6 +11,27 @@ import UIKit
 
 extension String {
     
+    var isAlpha: Bool {
+        for scalar in self.unicodeScalars {
+            let value = scalar.value
+            guard (value >= 65 && value <= 90) || (value >= 97 && value <= 122) else {
+                return false
+            }
+        }
+        return true
+    }
+    
+    var isDigit: Bool {
+        for scalar in self.unicodeScalars {
+            let value = scalar.value
+            guard (value >= 48 && value <= 57) else {
+                return false
+            }
+        }
+        return true
+    }
+
+    
     // HTML to attributed string
     func attributedStringFromHTML(completionBlock: @escaping (NSAttributedString?) ->()) {
         guard let data = data(using: String.Encoding.utf8) else {
