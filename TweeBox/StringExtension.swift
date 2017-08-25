@@ -63,4 +63,20 @@ extension String {
     func split(_ string: String?) -> [String] {
         return self.components(separatedBy: (string ?? " "))
     }
+    
+    
+    func stringByURLEncoding() -> String? {
+        
+        let characters = NSCharacterSet.urlQueryAllowed as! NSMutableCharacterSet
+        
+        characters.removeCharacters(in: "&")
+        
+        guard let encodedString = (self as NSString).addingPercentEncoding(withAllowedCharacters: characters as CharacterSet) else {
+            return nil
+        }
+        
+        return encodedString
+        
+    }
+
 }

@@ -80,6 +80,7 @@
 		B4EDAAE41F4C85CE00C6660B /* RetweetersIDParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE31F4C85CE00C6660B /* RetweetersIDParams.swift */; };
 		B4EDAAE61F4C89F400C6660B /* RetweeterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */; };
 		B4EDAAE81F4C8DE500C6660B /* MultiUserParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE71F4C8DE500C6660B /* MultiUserParams.swift */; };
+		B4F6414B1F50843E0039FA1C /* SearchTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F6414A1F50843E0039FA1C /* SearchTimeline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		B4EDAAE31F4C85CE00C6660B /* RetweetersIDParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetersIDParams.swift; sourceTree = "<group>"; };
 		B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweeterID.swift; sourceTree = "<group>"; };
 		B4EDAAE71F4C8DE500C6660B /* MultiUserParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiUserParams.swift; sourceTree = "<group>"; };
+		B4F6414A1F50843E0039FA1C /* SearchTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTimeline.swift; sourceTree = "<group>"; };
 		E8E3A1C5C0DABB6C344B4147 /* Pods_TweeBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TweeBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -385,6 +387,7 @@
 			children = (
 				B443A0EC1F2B36520021BB65 /* Timeline.swift */,
 				B4047B831F4ECD0B004E2AE3 /* ReplyTimeline.swift */,
+				B4F6414A1F50843E0039FA1C /* SearchTimeline.swift */,
 				B488E66A1F49E9800033CFAD /* SingleUser.swift */,
 				B488E66E1F4A9C7D0033CFAD /* SingleTweet.swift */,
 				B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */,
@@ -674,6 +677,7 @@
 				B4B406341F40B2EA00683124 /* PageManagerViewController.swift in Sources */,
 				B4EC26231F2F810700011DA0 /* UserTimelineParams.swift in Sources */,
 				B4E917231F43515B00FD3A5F /* TwitterUserTableViewCell.swift in Sources */,
+				B4F6414B1F50843E0039FA1C /* SearchTimeline.swift in Sources */,
 				B443A0F01F2B371A0021BB65 /* Tweet.swift in Sources */,
 				B40930001F395FFD00CAB109 /* TweetWithTextTableViewCell.swift in Sources */,
 				B443A0F41F2B39C30021BB65 /* TweetMedia.swift in Sources */,

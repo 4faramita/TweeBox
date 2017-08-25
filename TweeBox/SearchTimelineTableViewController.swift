@@ -18,6 +18,10 @@ class SearchTimelineTableViewController: TimelineTableViewController {
     var resultType: SearchResultType {
         return .recent
     }
+    
+    @IBAction func done(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
 
 
     override func setAndPerformSegue() {
@@ -45,7 +49,7 @@ class SearchTimelineTableViewController: TimelineTableViewController {
                 resourceURL: ResourceURL.search_tweets
         )
 
-        let searchTimeline = Timeline(
+        let searchTimeline = SearchTimeline(
                 maxID: maxID,
                 sinceID: sinceID,
                 fetchNewer: fetchNewer,
@@ -61,9 +65,11 @@ class SearchTimelineTableViewController: TimelineTableViewController {
             if let sinceID = sinceID {
                 self?.sinceID = sinceID
             }
+            
+            print(">>> tweets >> \(tweets.count)")
 
             if tweets.count > 0 {
-
+                
                 self?.insertNewTweets(with: tweets)
 
                 let cells = self?.tableView.visibleCells
