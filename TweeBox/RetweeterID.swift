@@ -59,15 +59,17 @@ class RetweeterID {
             print(resourceURL)
             print(retweetersIDParams.getParams())
             client.getData() { data in
-                let json = JSON(data: data)
-                print(">>> rt json >> \(json)")
-                
-                self.nextCursor = json["next_cursor_str"].stringValue
-                self.previousCursor = json["previous_cursor_str"].stringValue
-                
-                let idList = json["ids"].arrayValue.map({ $0.stringValue })
-                
-                handler(self.nextCursor, self.previousCursor, idList)
+                if let data = data {
+                    let json = JSON(data: data)
+                    print(">>> rt json >> \(json)")
+                    
+                    self.nextCursor = json["next_cursor_str"].stringValue
+                    self.previousCursor = json["previous_cursor_str"].stringValue
+                    
+                    let idList = json["ids"].arrayValue.map({ $0.stringValue })
+                    
+                    handler(self.nextCursor, self.previousCursor, idList)
+                }
             }
         }
     }

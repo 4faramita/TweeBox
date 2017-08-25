@@ -1401,7 +1401,7 @@
                                                 <rect key="frame" x="0.0" y="120" width="300" height="50"/>
                                                 <state key="normal" title="Find User"/>
                                                 <connections>
-                                                    <segue destination="siG-Yx-ulA" kind="show" identifier="Show User" id="niJ-YQ-gnV"/>
+                                                    <action selector="findUser:" destination="eQy-pS-KvG" eventType="touchUpInside" id="fSt-TU-50A"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRE-gk-Ixl">
@@ -1445,11 +1445,12 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dialogView" destination="0Ym-B3-Ca7" id="wD8-I3-Xvm"/>
+                        <segue destination="siG-Yx-ulA" kind="show" identifier="Show User" id="yim-PV-ZT0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLh-5k-Pp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5615.1999999999998" y="-1689.8050974512746"/>
+            <point key="canvasLocation" x="6554.3999999999996" y="-1689.8050974512746"/>
         </scene>
         <!--User List Table View Controller-->
         <scene sceneID="qfw-Be-4Dd">
@@ -6742,11 +6743,11 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lqx-TU-h8E"/>
+        <segue reference="xU8-Oj-mBQ"/>
+        <segue reference="yim-PV-ZT0"/>
         <segue reference="Cfb-Kz-HwO"/>
-        <segue reference="niJ-YQ-gnV"/>
-        <segue reference="NhC-kn-RBT"/>
-        <segue reference="KTH-sd-gwr"/>
-        <segue reference="poC-IB-rpN"/>
+        <segue reference="P8A-PP-qGh"/>
+        <segue reference="Mzq-P7-JMi"/>
+        <segue reference="sCG-QK-uYb"/>
     </inferredMetricsTieBreakers>
 </document>

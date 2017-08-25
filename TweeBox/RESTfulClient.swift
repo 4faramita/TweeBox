@@ -22,7 +22,7 @@ class RESTfulClient {
         self.params = params
     }
     
-    public func getData(_ handler: @escaping (_ data: Data) -> Void) {
+    public func getData(_ handler: @escaping (_ data: Data?) -> Void) {
         
         
         if let userID = Twitter.sharedInstance().sessionStore.session()?.userID {
@@ -41,6 +41,7 @@ class RESTfulClient {
                     handler(data!)
                 } else {
                     print(">>> NO DATA")
+                    handler(nil)
                 }
             }
         }

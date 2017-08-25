@@ -18,7 +18,25 @@ class GeneralSearchViewController: UIViewController {
         return dialogView.keyword
     }
     
-    fileprivate var shouldProceedSegue = true
+    fileprivate var fetchedUser: TwitterUser?
+    fileprivate var shouldProceedSegue = false
+    
+    
+    @IBAction func findUser(_ sender: UIButton) {
+        
+        fetchUser() { [weak self] (user) in
+            
+            if let user = user {
+                self?.fetchedUser = user
+                self?.performSegue(withIdentifier: "Show User", sender: self)
+            } else {
+                self?.alertForNoSuchUser()
+            }
+        }
+
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,18 +84,10 @@ extension GeneralSearchViewController {
                     }
 
                 case "Show User":
-                    fetchUser() { [weak self] (user) in
-                        print(">>> user >> \(user)")
-                        
-                        if let user = user {
-                            if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
-                                profileViewController.user = user
-                                self?.shouldProceedSegue = true
-                            } else {
-                                self?.alertForNoSuchUser()
-                            }
-                        } else {
-                            self?.alertForNoSuchUser()
+                    print(">>> clicked")
+                    if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                        if let user = fetchedUser {
+                            profileViewController.user = user
                         }
                     }
                 
@@ -89,28 +99,21 @@ extension GeneralSearchViewController {
         }
     }
     
-    private func alertForNoSuchUser() {
+    
+    
+    fileprivate func alertForNoSuchUser() {
         
-        shouldProceedSegue = false
+        print(">>> no user")
+        
         let popup = PopupDialog(title: "Cannot Find User @\(keyword ?? "")", message: "Please check your input.", image: nil)
-        let buttonOne = CancelButton(title: "OK") {
-            //                        popup.dismiss(animated: true, completion: nil)
-        }
-        popup.addButton(buttonOne)
+        let cancelButton = CancelButton(title: "OK") { }
+        popup.addButton(cancelButton)
         present(popup, animated: true, completion: nil)
 
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
-        if identifier == "Show User" {
-            return shouldProceedSegue
-        }
-        
-        return super.shouldPerformSegue(withIdentifier: identifier, sender: sender)
-    }
     
-    private func fetchUser(_ handler: @escaping (TwitterUser?) -> Void) {
+    fileprivate func fetchUser(_ handler: @escaping (TwitterUser?) -> Void) {
         
         SingleUser(
             userParams: UserParams(userID: nil, screenName: keyword),

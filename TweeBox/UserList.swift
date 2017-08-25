@@ -66,19 +66,21 @@ class UserList {
                 }
                 
                 client.getData() { data in
-                    let json = JSON(data: data)
-                    
-                    self.nextCursor = json["next_cursor_str"].stringValue
-                    self.previousCursor = json["previous_cursor_str"].stringValue
-                    
-                    for (_, userJSON) in json["users"] {
-                        if userJSON.null == nil {
-                            let user = TwitterUser(with: userJSON)
-                            self.userList.append(user)  // mem cycle?
+                    if let data = data {
+                        let json = JSON(data: data)
+                        
+                        self.nextCursor = json["next_cursor_str"].stringValue
+                        self.previousCursor = json["previous_cursor_str"].stringValue
+                        
+                        for (_, userJSON) in json["users"] {
+                            if userJSON.null == nil {
+                                let user = TwitterUser(with: userJSON)
+                                self.userList.append(user)  // mem cycle?
+                            }
                         }
+                        
+                        handler(self.nextCursor, self.previousCursor, self.userList)
                     }
-                    
-                    handler(self.nextCursor, self.previousCursor, self.userList)
                 }
 
             }

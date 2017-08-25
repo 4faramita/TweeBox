@@ -26,11 +26,17 @@ class SingleUser {
             let client = RESTfulClient(resource: resourceURL, params: userParams.getParams())
             
             client.getData() { data in
-                let json = JSON(data: data)
-                print(json)
-                if json.null == nil {
-                    let user = TwitterUser(with: json)
-                    handler(user)
+                if let data = data {
+                    let json = JSON(data: data)
+                    print(json)
+                    if json.null == nil {
+                        let user = TwitterUser(with: json)
+                        handler(user)
+                    } else {
+                        handler(nil)
+                    }
+                } else {
+                    handler(nil)
                 }
             }
         }

@@ -70,45 +70,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TweeBox/RetweeterID.swift"
-            timestampString = "525164628.846121"
+            timestampString = "525375941.963523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "fetchData(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TweeBox.RetweeterID.fetchData ((Swift.String, Swift.String, Swift.Array&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "TweeBox"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/RetweeterID.swift"
-                  timestampString = "525373661.92685"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "1184">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TweeBox.RetweeterID.(fetchData ((Swift.String, Swift.String, Swift.Array&lt;Swift.String&gt;) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "TweeBox"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/RetweeterID.swift"
-                  timestampString = "525373661.93563"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -134,7 +102,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525373661.948513"
+                  timestampString = "525378417.848188"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -149,7 +117,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525373661.950806"
+                  timestampString = "525378417.850724"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"

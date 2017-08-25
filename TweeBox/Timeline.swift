@@ -54,15 +54,16 @@ class Timeline {
             let client = RESTfulClient(resource: resourceURL, params: timelineParams.getParams())
             print(">>> params \(timelineParams.getParams())")
             client.getData() { data in
-                
-                let json = JSON(data: data)
-                
-                self.appendTweet(from: json)
-                
-                self.maxID = self.timeline.last?.id  // if fetch tweets below this batch, the earliest one in this batch would be the max one for the next batch
-                self.sinceID = self.timeline.first?.id  // vice versa
-                
-                handler(self.maxID, self.sinceID, self.timeline)
+                if let data = data {
+                    let json = JSON(data: data)
+                    
+                    self.appendTweet(from: json)
+                    
+                    self.maxID = self.timeline.last?.id  // if fetch tweets below this batch, the earliest one in this batch would be the max one for the next batch
+                    self.sinceID = self.timeline.first?.id  // vice versa
+                    
+                    handler(self.maxID, self.sinceID, self.timeline)
+                }
             }
         }
     }

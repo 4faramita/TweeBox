@@ -27,10 +27,12 @@ class SingleTweet {
             let client = RESTfulClient(resource: resourceURL, params: tweetParams.getParams())
             
             client.getData() { data in
-                let json = JSON(data: data)
-                if json.null == nil {
-                    let tweet = Tweet(with: json)
-                    handler(tweet)
+                if let data = data {
+                    let json = JSON(data: data)
+                    if json.null == nil {
+                        let tweet = Tweet(with: json)
+                        handler(tweet)
+                    }
                 }
             }
         }
