@@ -198,9 +198,8 @@ class TimelineTableViewController: UITableViewController
     
     @IBAction func search(_ sender: UIBarButtonItem) {
         
-        let searchViewController = GeneralSearchViewController()
-        let popup = PopupDialog(viewController: searchViewController)
-        popup.view.frame.size.height = 230
+        let searchViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GeneralSearchViewController")
+        let popup = PopupDialog.init(viewController: searchViewController)
         
 //        let popup = PopupDialog(title: "Test Dialog", message: "Look!", image: UIImage(named: "twitter_selected"))
 //        let buttonOne = CancelButton(title: "CANCEL") {

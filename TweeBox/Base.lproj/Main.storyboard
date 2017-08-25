@@ -1043,7 +1043,7 @@
                     <navigationItem key="navigationItem" title="Timeline" id="bFo-1U-pWo">
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="SLr-ao-JyG">
                             <connections>
-                                <action selector="search:" destination="i8A-W9-rEQ" id="qgG-MU-quk"/>
+                                <action selector="search:" destination="i8A-W9-rEQ" id="4je-1J-8jt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1357,65 +1357,86 @@
         <!--General Search View Controller-->
         <scene sceneID="l8A-MH-j2F">
             <objects>
-                <viewController id="eQy-pS-KvG" customClass="GeneralSearchViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GeneralSearchViewController" id="eQy-pS-KvG" customClass="GeneralSearchViewController" customModule="TweeBox" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wBm-tb-Ibg"/>
                         <viewControllerLayoutGuide type="bottom" id="Duq-Kr-RSW"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0Ym-B3-Ca7">
+                    <view key="view" contentMode="scaleToFill" id="0Ym-B3-Ca7" customClass="SearchDialogView" customModule="TweeBox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="G8k-R6-URY">
-                                <rect key="frame" x="132" y="258" width="110" height="150"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="G8k-R6-URY">
+                                <rect key="frame" x="37" y="183" width="300" height="300"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KbA-31-hiS">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Search for…" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KbA-31-hiS">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="4YO-aq-7M5"/>
+                                            <constraint firstAttribute="height" constant="50" id="8Dt-w5-cOj"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0E9-bs-dnh">
-                                        <rect key="frame" x="0.0" y="30" width="110" height="120"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0E9-bs-dnh">
+                                        <rect key="frame" x="0.0" y="70" width="300" height="230"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdm-Qn-qIy">
-                                                <rect key="frame" x="8" y="0.0" width="94" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                                 <state key="normal" title="Search Tweet"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jT-0V-b7y">
-                                                <rect key="frame" x="0.0" y="30" width="110" height="30"/>
+                                                <rect key="frame" x="0.0" y="60" width="300" height="50"/>
                                                 <state key="normal" title="Search Hashtag"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VB7-5O-adQ">
-                                                <rect key="frame" x="22" y="60" width="66" height="30"/>
+                                                <rect key="frame" x="0.0" y="120" width="300" height="50"/>
                                                 <state key="normal" title="Find User"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRE-gk-Ixl">
-                                                <rect key="frame" x="12.5" y="90" width="85" height="30"/>
+                                                <rect key="frame" x="0.0" y="180" width="300" height="50"/>
                                                 <state key="normal" title="Search User"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="KRE-gk-Ixl" firstAttribute="height" secondItem="KbA-31-hiS" secondAttribute="height" id="18K-Cn-TCi"/>
+                                    <constraint firstItem="zdm-Qn-qIy" firstAttribute="height" secondItem="KbA-31-hiS" secondAttribute="height" id="199-wH-cOd"/>
+                                    <constraint firstItem="zdm-Qn-qIy" firstAttribute="width" secondItem="KbA-31-hiS" secondAttribute="width" id="3za-Sb-ROF"/>
+                                    <constraint firstItem="VB7-5O-adQ" firstAttribute="height" secondItem="KbA-31-hiS" secondAttribute="height" id="CZY-SO-J5J"/>
+                                    <constraint firstItem="VB7-5O-adQ" firstAttribute="width" secondItem="KbA-31-hiS" secondAttribute="width" id="MNl-zx-kyc"/>
+                                    <constraint firstItem="KRE-gk-Ixl" firstAttribute="width" secondItem="KbA-31-hiS" secondAttribute="width" id="XFa-fk-uCH"/>
+                                    <constraint firstItem="6jT-0V-b7y" firstAttribute="width" secondItem="KbA-31-hiS" secondAttribute="width" id="fdD-eh-g25"/>
+                                    <constraint firstItem="6jT-0V-b7y" firstAttribute="height" secondItem="KbA-31-hiS" secondAttribute="height" id="xyR-K9-MxB"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="G8k-R6-URY" firstAttribute="centerX" secondItem="0Ym-B3-Ca7" secondAttribute="centerX" id="DbZ-FM-FiP"/>
-                            <constraint firstItem="G8k-R6-URY" firstAttribute="centerY" secondItem="0Ym-B3-Ca7" secondAttribute="centerY" id="ey6-U2-D7e"/>
+                            <constraint firstItem="G8k-R6-URY" firstAttribute="centerX" secondItem="0Ym-B3-Ca7" secondAttribute="centerX" id="2ft-Ov-Uk7"/>
+                            <constraint firstItem="G8k-R6-URY" firstAttribute="centerY" secondItem="0Ym-B3-Ca7" secondAttribute="centerY" id="Jxa-AL-PCm"/>
                         </constraints>
+                        <connections>
+                            <outlet property="findUserButton" destination="VB7-5O-adQ" id="AaJ-Pb-SqV"/>
+                            <outlet property="inputTextField" destination="KbA-31-hiS" id="Bkb-cd-0aW"/>
+                            <outlet property="searchHashtagButton" destination="6jT-0V-b7y" id="s8d-bM-GAh"/>
+                            <outlet property="searchTweetButton" destination="zdm-Qn-qIy" id="hu4-f7-JsV"/>
+                            <outlet property="searchUserButton" destination="KRE-gk-Ixl" id="1uy-GJ-Kby"/>
+                        </connections>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="findUserButton" destination="VB7-5O-adQ" id="jxq-MF-cDk"/>
-                        <outlet property="inputTextField" destination="KbA-31-hiS" id="7qQ-vq-EEX"/>
-                        <outlet property="searchHashtagButton" destination="6jT-0V-b7y" id="Fja-1D-cQ6"/>
-                        <outlet property="searchTweetButton" destination="zdm-Qn-qIy" id="72P-1p-xYj"/>
-                        <outlet property="searchUserButton" destination="KRE-gk-Ixl" id="tuW-je-VoY"/>
+                        <outlet property="dialogView" destination="0Ym-B3-Ca7" id="wD8-I3-Xvm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLh-5k-Pp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6101" y="-248"/>
+            <point key="canvasLocation" x="4086" y="-672"/>
         </scene>
         <!--User List Table View Controller-->
         <scene sceneID="qfw-Be-4Dd">
