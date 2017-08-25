@@ -1445,12 +1445,28 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dialogView" destination="0Ym-B3-Ca7" id="wD8-I3-Xvm"/>
-                        <segue destination="siG-Yx-ulA" kind="show" identifier="Show User" id="yim-PV-ZT0"/>
+                        <segue destination="Ueh-xd-xUB" kind="show" identifier="Show User" id="62g-Lk-k5c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLh-5k-Pp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6554.3999999999996" y="-1689.8050974512746"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="T4b-At-SM5">
+            <objects>
+                <navigationController id="Ueh-xd-xUB" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vaU-Nr-AH9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="siG-Yx-ulA" kind="relationship" relationship="rootViewController" id="86F-ae-DeW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VSO-Fp-rVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5338" y="-1690"/>
         </scene>
         <!--User List Table View Controller-->
         <scene sceneID="qfw-Be-4Dd">
@@ -2567,7 +2583,13 @@
                             <outlet property="delegate" destination="siG-Yx-ulA" id="fHK-SS-xsB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Lyc-8h-vaO"/>
+                    <navigationItem key="navigationItem" id="Lyc-8h-vaO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="CMU-wx-d9O">
+                            <connections>
+                                <action selector="done:" destination="siG-Yx-ulA" id="egM-jp-PgW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="YmO-B7-dd1" kind="presentation" identifier="imageTapped" id="P8A-PP-qGh"/>
                         <segue destination="tY3-Cn-E0S" kind="presentation" identifier="videoTapped" id="Mzq-P7-JMi"/>
@@ -6743,9 +6765,9 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="1w8-WL-0CI"/>
+        <segue reference="86F-ae-DeW"/>
         <segue reference="xU8-Oj-mBQ"/>
-        <segue reference="yim-PV-ZT0"/>
-        <segue reference="Cfb-Kz-HwO"/>
         <segue reference="P8A-PP-qGh"/>
         <segue reference="Mzq-P7-JMi"/>
         <segue reference="sCG-QK-uYb"/>

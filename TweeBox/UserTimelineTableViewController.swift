@@ -63,11 +63,10 @@ class UserTimelineTableViewController: TimelineTableViewController {
             }
         }
     }
-
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         if let height = tableView.parallaxHeader.view?.bounds.height {
 
             if height > (headerHeight * 1.1) {
@@ -199,6 +198,10 @@ class UserTimelineTableViewController: TimelineTableViewController {
 
     override func showEmptyWarningMessage() {
         emptyWarningCollapsed = true
+    }
+    
+    @IBAction func done(_ sender: Any?) {
+        dismiss(animated: true, completion: nil)
     }
 
 

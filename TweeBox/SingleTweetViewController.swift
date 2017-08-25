@@ -215,9 +215,18 @@ class SingleTweetViewController: UIViewController {
                 }
                 
             case "View Profile" :
-                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                
+                if let profileViewController = segue.destination as? UserTimelineTableViewController {
+                    profileViewController.user = tweet?.user
+                    profileViewController.navigationItem.rightBarButtonItem = nil
+                } else if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
                     profileViewController.user = tweet?.user
                 }
+
+                
+//                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+//                    profileViewController.user = tweet?.user
+//                }
 
 
             default:

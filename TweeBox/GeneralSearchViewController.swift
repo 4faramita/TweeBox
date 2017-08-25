@@ -84,7 +84,7 @@ extension GeneralSearchViewController {
                     }
 
                 case "Show User":
-                    print(">>> clicked")
+                    
                     if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
                         if let user = fetchedUser {
                             profileViewController.user = user

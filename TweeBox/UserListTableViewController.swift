@@ -115,9 +115,18 @@ class UserListTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "View User" {
+            
             if let userTimelineTableViewController = segue.destination as? UserTimelineTableViewController {
                 userTimelineTableViewController.user = selectedUser
+                userTimelineTableViewController.navigationItem.rightBarButtonItem = nil
+            } else if let userTimelineTableViewController = segue.destination.content as? UserTimelineTableViewController {
+                userTimelineTableViewController.user = selectedUser
             }
+
+            
+//            if let userTimelineTableViewController = segue.destination as? UserTimelineTableViewController {
+//                userTimelineTableViewController.user = selectedUser
+//            }
         }
     }
 }
