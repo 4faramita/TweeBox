@@ -91,7 +91,9 @@ extension GeneralSearchViewController {
                         }
                     }
                 
-//                case Show "Show Users":
+                case "Show Users":
+                    break
+                    // HERE
                 
                 default:
                     return
@@ -120,6 +122,17 @@ extension GeneralSearchViewController {
             resourceURL: ResourceURL.user_show
         ).fetchData { (singleUser) in
             handler(singleUser)
+        }
+    }
+    
+    
+    fileprivate func fetchUsers(_ handler: @escaping ([TwitterUser]) -> Void) {
+        
+        SearchUsers(
+            usersParams: UsersSearchParams(query: keyword),
+            resourceURL: ResourceURL.users_search
+        ).fetchData { (users) in
+            handler(users)
         }
     }
 

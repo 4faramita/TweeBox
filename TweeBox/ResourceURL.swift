@@ -19,6 +19,8 @@ struct ResourceURL {
     
     static let user_show = (url: "https://api.twitter.com/1.1/users/show.json", method: "GET")
     
+    static let users_search = (url: "https://api.twitter.com/1.1/users/search.json", method: "GET")
+    
     
     static let statuses_show_id = (url: "https://api.twitter.com/1.1/statuses/show.json", method: "GET")
     

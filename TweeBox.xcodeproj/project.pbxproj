@@ -81,6 +81,8 @@
 		B4EDAAE61F4C89F400C6660B /* RetweeterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */; };
 		B4EDAAE81F4C8DE500C6660B /* MultiUserParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE71F4C8DE500C6660B /* MultiUserParams.swift */; };
 		B4F6414B1F50843E0039FA1C /* SearchTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F6414A1F50843E0039FA1C /* SearchTimeline.swift */; };
+		B4F6414D1F50AF830039FA1C /* UsersSearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F6414C1F50AF830039FA1C /* UsersSearchParams.swift */; };
+		B4F641511F50B1580039FA1C /* SearchUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F641501F50B1580039FA1C /* SearchUsers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +184,8 @@
 		B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweeterID.swift; sourceTree = "<group>"; };
 		B4EDAAE71F4C8DE500C6660B /* MultiUserParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiUserParams.swift; sourceTree = "<group>"; };
 		B4F6414A1F50843E0039FA1C /* SearchTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTimeline.swift; sourceTree = "<group>"; };
+		B4F6414C1F50AF830039FA1C /* UsersSearchParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersSearchParams.swift; sourceTree = "<group>"; };
+		B4F641501F50B1580039FA1C /* SearchUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsers.swift; sourceTree = "<group>"; };
 		E8E3A1C5C0DABB6C344B4147 /* Pods_TweeBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TweeBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -378,6 +382,7 @@
 				B4047B851F4ECF32004E2AE3 /* Params.swift */,
 				B4047B891F4ED080004E2AE3 /* ParamsWithCursor.swift */,
 				B4047B871F4ED00F004E2AE3 /* ParamsWithBounds.swift */,
+				B4F6414C1F50AF830039FA1C /* UsersSearchParams.swift */,
 			);
 			name = Params;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				B488E66E1F4A9C7D0033CFAD /* SingleTweet.swift */,
 				B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */,
 				B4E917151F433CE600FD3A5F /* UserList.swift */,
+				B4F641501F50B1580039FA1C /* SearchUsers.swift */,
 			);
 			name = "Data Retriever";
 			sourceTree = "<group>";
@@ -697,6 +703,7 @@
 				B488E6751F4B0E890033CFAD /* ImageContainerViewController.swift in Sources */,
 				B443A0F21F2B38050021BB65 /* TwitterUser.swift in Sources */,
 				B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */,
+				B4F641511F50B1580039FA1C /* SearchUsers.swift in Sources */,
 				B45F1D561F40645B00AF201C /* VideoViewerViewController.swift in Sources */,
 				B4EDAAE61F4C89F400C6660B /* RetweeterID.swift in Sources */,
 				B40930011F395FFD00CAB109 /* TweetWithPicAndTextTableViewCell.swift in Sources */,
@@ -736,6 +743,7 @@
 				B42985A01F29E8E700AFFB97 /* AppDelegate.swift in Sources */,
 				B443A0F61F2B43EB0021BB65 /* ResourceURL.swift in Sources */,
 				B43BBCAA1F3716F2002D0AE0 /* TimelineTableViewController.swift in Sources */,
+				B4F6414D1F50AF830039FA1C /* UsersSearchParams.swift in Sources */,
 				B4E917191F4343D500FD3A5F /* UserListTableViewController.swift in Sources */,
 				B47E586B1F3C959900CA0C0A /* UserTimelineTableViewController.swift in Sources */,
 				B40930061F3966A000CAB109 /* TweetWithPicTableViewCell.swift in Sources */,
