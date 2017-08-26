@@ -10,6 +10,7 @@ import UIKit
 import Kanna
 import SafariServices
 import VisualEffectView
+import YYText
 
 class SingleTweetViewController: UIViewController {
     
@@ -42,7 +43,7 @@ class SingleTweetViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
-    @IBOutlet weak var textContentLabel: UILabel!
+    @IBOutlet weak var textContentLabel: YYLabel!
     
     @IBOutlet weak var containerView: UIView!
     
@@ -127,10 +128,11 @@ class SingleTweetViewController: UIViewController {
         tapProfile.numberOfTouchesRequired = 1
         profileImageView.addGestureRecognizer(tapProfile)
         
-        
         nameLabel.text = tweet.user.name
         screenNameLabel.text = "@\(tweet.user.screenName)"
         textContentLabel.attributedText = TwitterAttributedContent(tweet).attributedString
+
+        print(">>> label >> \(textContentLabel.subviews)")
         
         let clientHTMLString = tweet.source
         if let doc = HTML(html: clientHTMLString, encoding: .utf8) {

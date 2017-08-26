@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import YYText
 
 
 class TweetWithPicAndTextTableViewCell: TweetWithPicTableViewCell {
     
-    @IBOutlet weak var tweetTextContent: UILabel!
+    @IBOutlet weak var tweetTextContent: YYLabel!
     
     override func updateUI() {
         

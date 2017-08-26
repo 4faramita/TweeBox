@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import YYText
+import SafariServices
 
 
 class TwitterAttributedContent {
@@ -51,11 +53,20 @@ class TwitterAttributedContent {
             
             let range = NSPlainString.range(of: stringToBeRender)
             
-            if let color = color {
-                attributed.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
-            }
+//            attributed.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+            attributed.yy_setTextHighlight(
+                range,
+                color: color ?? Constants.themeColor,
+                backgroundColor: .lightGray,
+                userInfo: nil,
+                tapAction: { (containerView, attributedString, range, rect) in
+                    print(">>> attr text >> \(attributedString)")
+                },
+                longPressAction: nil
+            )
             
             return range
+            
         } else {
             return nil
         }
@@ -67,7 +78,6 @@ class TwitterAttributedContent {
         
         if user != nil {
             let range = NSRange.init(location: 0, length: attributed.length)
-//            let descriptionFont = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .body), size: 12)
             let descriptionFont = UIFont.preferredFont(forTextStyle: .caption2)
             attributed.addAttribute(NSFontAttributeName, value: descriptionFont, range: range)
             attributed.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: range)

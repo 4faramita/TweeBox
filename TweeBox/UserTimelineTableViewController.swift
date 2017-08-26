@@ -11,6 +11,7 @@ import TwitterKit
 import Kingfisher
 import MXParallaxHeader
 import VisualEffectView
+import YYText
 
 class UserTimelineTableViewController: TimelineTableViewController {
 
@@ -44,7 +45,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
     private let profileImageView = UIImageView()
     private let nameLabel = UILabel()
     private let screenNameLabel = UILabel()
-    private let bioLabel = UILabel()
+    private let bioLabel = YYLabel()
     private var locationLabel: UILabel?
     private var userURLButton: UIButton?
     private let folllowerButton = UIButton()

@@ -20,4 +20,5 @@ target 'TweeBox' do
 	pod "VisualEffectView"
 	pod 'Kanna', '~> 2.1.0'
 	pod 'PopupDialog', '~> 0.5'
+	pod 'YYText'
 end

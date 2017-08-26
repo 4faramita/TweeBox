@@ -1175,7 +1175,7 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cD9-82-UnR">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cD9-82-UnR">
                                         <rect key="frame" x="0.0" y="56" width="61.5" height="20.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Content">
@@ -6789,11 +6789,11 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1w8-WL-0CI"/>
+        <segue reference="gEj-9i-yKO"/>
         <segue reference="sCG-QK-uYb"/>
-        <segue reference="hvw-ft-BYD"/>
+        <segue reference="Xnk-PO-A97"/>
+        <segue reference="LD9-fb-Rb0"/>
         <segue reference="def-NE-Ghm"/>
-        <segue reference="P8A-PP-qGh"/>
-        <segue reference="Mzq-P7-JMi"/>
+        <segue reference="1w8-WL-0CI"/>
     </inferredMetricsTieBreakers>
 </document>
