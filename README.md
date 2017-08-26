@@ -26,7 +26,8 @@
   - [x] Click action (query)
 - [ ] **Save to database**
 - [ ] **Load upward and downward**
-- [ ] View replies
+- [x] View replies
+- [x] View context
 
 #### Special:
 - [ ] Tweet gesture
@@ -38,6 +39,8 @@
 - [ ] Compose new tweet
 
 ### Settings:
+- [x] General search
+- [ ] Database search
 
 ### Search:
 
