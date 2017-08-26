@@ -54,7 +54,7 @@ class ReplyTableViewController: SearchTimelineTableViewController {
 
         for subview in (tweetInfoContainerView.subviews[0].subviews) {
             if subview.frame.height > 0, subview.subviews.count != 0 {
-                tweetInfoContainerView?.frame.size.height = subview.frame.height + CGFloat(10)
+                tweetInfoContainerView?.frame.size.height = subview.frame.height + CGFloat(30)
             }
         }
     }

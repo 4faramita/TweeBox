@@ -19,7 +19,6 @@ class GeneralSearchViewController: UIViewController {
     }
     
     fileprivate var fetchedUser: TwitterUser?
-    fileprivate var shouldProceedSegue = false
     
     
     @IBAction func findUser(_ sender: UIButton) {

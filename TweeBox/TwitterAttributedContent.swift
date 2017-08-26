@@ -32,6 +32,7 @@ class TwitterAttributedContent {
         return (tweet?.entities) ?? (user?.entities)
     }
     
+    
     init(_ tweet: Tweet) {
         self.tweet = tweet
     }
@@ -49,21 +50,88 @@ class TwitterAttributedContent {
         let start = plainString.index(plainString.startIndex, offsetBy: entity.indices[0], limitedBy: plainString.endIndex)
         let end = plainString.index(plainString.startIndex, offsetBy: entity.indices[1], limitedBy: plainString.endIndex)
         if let start = start, let end = end {
+            
             let stringToBeRender = plainString.substring(with: start..<end)
             
             let range = NSPlainString.range(of: stringToBeRender)
             
 //            attributed.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
-            attributed.yy_setTextHighlight(
-                range,
-                color: color ?? Constants.themeColor,
-                backgroundColor: .red,
-                userInfo: nil,
-                tapAction: { (containerView, attributedString, range, rect) in
-                    print(">>> attr text >> \(attributedString)")
-                },
-                longPressAction: nil
-            )
+            if let url = entity as? TweetURL {
+                
+                attributed.yy_setTextHighlight(
+                    range,
+                    color: color ?? Constants.themeColor,
+                    backgroundColor: nil,
+                    userInfo: nil,
+                    tapAction: { (containerView, attributedString, range, rect) in
+                        if let realURL = url.url {
+                            let safariViewController = SFSafariViewController(url: realURL, entersReaderIfAvailable: true)
+                            containerView.yy_viewController?.present(safariViewController, animated: true)
+                        }
+                    },
+                    longPressAction: nil
+                )
+            } else if entity is Hashtag {
+                
+                attributed.yy_setTextHighlight(
+                    range,
+                    color: color ?? Constants.themeColor,
+                    backgroundColor: nil,
+                    userInfo: nil,
+                    tapAction: { [weak self] (containerView, attributedString, range, rect) in
+                        if let sourceViewController = containerView.yy_viewController as? SingleTweetViewController {
+                            
+                            let keyword = (attributedString.string as NSString).substring(with: range)
+                            sourceViewController.keyword = keyword
+                            sourceViewController.performSegue(withIdentifier: "Show Tweets with Hashtag", sender: self)
+                        }
+                    },
+                    longPressAction: nil
+                )
+
+            } else if entity is Mention {
+                attributed.yy_setTextHighlight(
+                    range,
+                    color: color ?? Constants.themeColor,
+                    backgroundColor: nil,
+                    userInfo: nil,
+                    tapAction: { [weak self] (containerView, attributedString, range, rect) in
+                        
+                        if let sourceViewController = containerView.yy_viewController as? SingleTweetViewController {
+                            
+                            let keyword = (attributedString.string as NSString).substring(with: range)
+                            sourceViewController.keyword = keyword
+                            
+                            SingleUser(
+                                userParams: UserParams(userID: nil, screenName: keyword),
+                                resourceURL: ResourceURL.user_show
+                            ).fetchData { (singleUser) in
+                                print(">>> detching user")
+                                    
+                                if let user = singleUser {
+                                    sourceViewController.fetchedUser = user
+                                    sourceViewController.performSegue(withIdentifier: "Show User", sender: self)
+                                } else {
+                                    sourceViewController.alertForNoSuchUser(viewController: sourceViewController)
+                                }
+                            }
+                        }
+                    },
+                    longPressAction: nil
+                )
+                
+            } else {
+                attributed.yy_setTextHighlight(
+                    range,
+                    color: color ?? Constants.themeColor,
+                    backgroundColor: nil,
+                    userInfo: nil,
+                    tapAction: { (containerView, attributedString, range, rect) in
+                        print(">>> Unknown entity >> \(attributedString)")                    },
+                    longPressAction: nil
+                )
+            }
+
             
             return range
             
@@ -71,6 +139,18 @@ class TwitterAttributedContent {
             return nil
         }
     }
+    
+    
+//    fileprivate func fetchUser(keyword: String, _ handler: @escaping (TwitterUser?) -> Void) {
+//        
+//        SingleUser(
+//            userParams: UserParams(userID: nil, screenName: keyword),
+//            resourceURL: ResourceURL.user_show
+//            ).fetchData { (singleUser) in
+//                handler(singleUser)
+//        }
+//    }
+
     
     private func getAttributedContent() -> NSAttributedString {
         

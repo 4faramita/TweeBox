@@ -11,6 +11,7 @@ import Kanna
 import SafariServices
 import VisualEffectView
 import YYText
+import PopupDialog
 
 class SingleTweetViewController: UIViewController {
     
@@ -51,6 +52,32 @@ class SingleTweetViewController: UIViewController {
     @IBOutlet weak var clientButton: UIButton!
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var retweetCountButton: UIButton!
+    
+    
+    var keyword: String? {
+        didSet {
+            print(">>> keyword in SingleTweetViewController >> \(keyword)")
+            if let newKeyword = keyword, newKeyword.hasPrefix("@") || newKeyword.hasPrefix("#") {
+                let index = newKeyword.index(newKeyword.startIndex, offsetBy: 1)
+                keyword = newKeyword.substring(from: index)
+            }
+        }
+    }
+    
+    var fetchedUser: TwitterUser?
+    
+    func alertForNoSuchUser(viewController: UIViewController) {
+        
+        print(">>> no user")
+        
+        let popup = PopupDialog(title: "Cannot Find User @\(keyword ?? "")", message: "Please check your input.", image: nil)
+        let cancelButton = CancelButton(title: "OK") { }
+        popup.addButton(cancelButton)
+        viewController.present(popup, animated: true, completion: nil)
+        
+    }
+
+
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,6 +158,11 @@ class SingleTweetViewController: UIViewController {
         nameLabel.text = tweet.user.name
         screenNameLabel.text = "@\(tweet.user.screenName)"
         textContentLabel.attributedText = TwitterAttributedContent(tweet).attributedString
+        textContentLabel.lineBreakMode = .byWordWrapping
+        textContentLabel.numberOfLines = 0
+        textContentLabel.textAlignment = .natural
+        textContentLabel.preferredMaxLayoutWidth = containerView.bounds.width
+        textContentLabel.font = UIFont.preferredFont(forTextStyle: .body)
 
         print(">>> label >> \(textContentLabel.subviews)")
         
@@ -216,7 +248,7 @@ class SingleTweetViewController: UIViewController {
                     imageContainerViewController.tweet = tweet
                 }
                 
-            case "View Profile" :
+            case "View Profile":
                 
                 if let profileViewController = segue.destination as? UserTimelineTableViewController {
                     profileViewController.user = tweet?.user
@@ -224,11 +256,23 @@ class SingleTweetViewController: UIViewController {
                 } else if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
                     profileViewController.user = tweet?.user
                 }
-
                 
-//                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
-//                    profileViewController.user = tweet?.user
-//                }
+            case "Show Tweets with Hashtag":
+                if let searchTimelineViewController = segue.destination.content as? SearchTimelineTableViewController,
+                    let keyword = keyword {
+                    searchTimelineViewController.query = "%23\(keyword)"
+                    searchTimelineViewController.navigationItem.title = "#\(keyword)"
+                    
+                    searchTimelineViewController.navigationItem.rightBarButtonItem = nil
+                }
+
+            case "Show User":
+                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                    if let user = fetchedUser {
+                        profileViewController.user = user
+                        profileViewController.navigationItem.rightBarButtonItem = nil
+                    }
+                }
 
 
             default:

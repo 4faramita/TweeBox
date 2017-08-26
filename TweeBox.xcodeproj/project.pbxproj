@@ -45,6 +45,10 @@
 		B443A0FA1F2B46370021BB65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A0F91F2B46370021BB65 /* Constants.swift */; };
 		B443A0FC1F2B70D40021BB65 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A0FB1F2B70D40021BB65 /* Error.swift */; };
 		B45F1D561F40645B00AF201C /* VideoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F1D551F40645B00AF201C /* VideoViewerViewController.swift */; };
+		B4600B021F51E51500D0403E /* HashTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B011F51E51500D0403E /* HashTag.swift */; };
+		B4600B041F51E54F00D0403E /* TweetSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B031F51E54F00D0403E /* TweetSymbol.swift */; };
+		B4600B061F51E56500D0403E /* TweetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B051F51E56500D0403E /* TweetURL.swift */; };
+		B4600B081F51E57B00D0403E /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B071F51E57B00D0403E /* Mention.swift */; };
 		B46242921F4419CF0074158A /* TwitterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46242911F4419CF0074158A /* TwitterDate.swift */; };
 		B469BAC11F480C0B00ADA3F6 /* OriginTweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469BAC01F480C0B00ADA3F6 /* OriginTweetView.swift */; };
 		B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B469BAC31F481A8500ADA3F6 /* UIViewExtension.swift */; };
@@ -149,6 +153,10 @@
 		B443A0F91F2B46370021BB65 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B443A0FB1F2B70D40021BB65 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B45F1D551F40645B00AF201C /* VideoViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewerViewController.swift; sourceTree = "<group>"; };
+		B4600B011F51E51500D0403E /* HashTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTag.swift; sourceTree = "<group>"; };
+		B4600B031F51E54F00D0403E /* TweetSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetSymbol.swift; sourceTree = "<group>"; };
+		B4600B051F51E56500D0403E /* TweetURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetURL.swift; sourceTree = "<group>"; };
+		B4600B071F51E57B00D0403E /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		B46242911F4419CF0074158A /* TwitterDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterDate.swift; sourceTree = "<group>"; };
 		B469BAC01F480C0B00ADA3F6 /* OriginTweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginTweetView.swift; sourceTree = "<group>"; };
 		B469BAC31F481A8500ADA3F6 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -230,6 +238,10 @@
 			isa = PBXGroup;
 			children = (
 				B43BB8BA1F35A2300011A301 /* Entity.swift */,
+				B4600B071F51E57B00D0403E /* Mention.swift */,
+				B4600B051F51E56500D0403E /* TweetURL.swift */,
+				B4600B031F51E54F00D0403E /* TweetSymbol.swift */,
+				B4600B011F51E51500D0403E /* HashTag.swift */,
 				B4092FF61F38BD6D00CAB109 /* TweetEntity.swift */,
 				B4092FF81F38BECF00CAB109 /* TweetPhotoSize.swift */,
 				B443A0F31F2B39C30021BB65 /* TweetMedia.swift */,
@@ -696,6 +708,7 @@
 				B47E58711F3DACAC00CA0C0A /* PannableViewController.swift in Sources */,
 				B488E66D1F49F1990033CFAD /* TweetParams.swift in Sources */,
 				B469BAC11F480C0B00ADA3F6 /* OriginTweetView.swift in Sources */,
+				B4600B041F51E54F00D0403E /* TweetSymbol.swift in Sources */,
 				B4047B881F4ED00F004E2AE3 /* ParamsWithBounds.swift in Sources */,
 				B40930081F39710000CAB109 /* URLExtension.swift in Sources */,
 				B409300A1F39763E00CAB109 /* MediaSize.swift in Sources */,
@@ -724,10 +737,12 @@
 				B4B541D81F4D84170008C2EE /* ReplyTableViewController.swift in Sources */,
 				B4047B801F4EC0B5004E2AE3 /* SearchTweetParams.swift in Sources */,
 				B443A0FA1F2B46370021BB65 /* Constants.swift in Sources */,
+				B4600B021F51E51500D0403E /* HashTag.swift in Sources */,
 				B4B541D41F4D6C7B0008C2EE /* MentionTimelineParams.swift in Sources */,
 				B469BAC61F488AFB00ADA3F6 /* TwitterAttributedContent.swift in Sources */,
 				B4092FF91F38BECF00CAB109 /* TweetPhotoSize.swift in Sources */,
 				B4CE12181F3AD60A002D341E /* TimelineParams.swift in Sources */,
+				B4600B081F51E57B00D0403E /* Mention.swift in Sources */,
 				B4092FF71F38BD6D00CAB109 /* TweetEntity.swift in Sources */,
 				B4092FFB1F38C22000CAB109 /* TweetVideoInfo.swift in Sources */,
 				B443A0ED1F2B36520021BB65 /* Timeline.swift in Sources */,
@@ -741,6 +756,7 @@
 				B488E66B1F49E9800033CFAD /* SingleUser.swift in Sources */,
 				B40930041F3965B600CAB109 /* TweetTableViewCell.swift in Sources */,
 				B488E6711F4AA9650033CFAD /* SingleTweetViewController.swift in Sources */,
+				B4600B061F51E56500D0403E /* TweetURL.swift in Sources */,
 				B488E6681F49E2FF0033CFAD /* UserParams.swift in Sources */,
 				B47E586F1F3D8A2F00CA0C0A /* ImageViewerViewController.swift in Sources */,
 				B4EDAAE81F4C8DE500C6660B /* MultiUserParams.swift in Sources */,

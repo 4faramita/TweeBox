@@ -1144,7 +1144,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kJe-T1-JO4">
-                                <rect key="frame" x="16" y="53.5" width="343" height="325.5"/>
+                                <rect key="frame" x="16" y="8" width="343" height="351"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uyi-Ip-qve">
                                         <rect key="frame" x="0.0" y="0.0" width="105" height="48"/>
@@ -1175,20 +1175,12 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cD9-82-UnR">
-                                        <rect key="frame" x="0.0" y="56" width="61.5" height="20.5"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Content">
-                                                <attributes>
-                                                    <font key="NSFont" size="17" name=".AppleSystemUIFont"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4E2-KM-Dds" customClass="YYLabel">
+                                        <rect key="frame" x="0.0" y="56" width="343" height="46"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJL-MZ-3cU">
-                                        <rect key="frame" x="0.0" y="84.5" width="343" height="193"/>
+                                        <rect key="frame" x="0.0" y="110" width="343" height="193"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="CJL-MZ-3cU" secondAttribute="height" multiplier="16:9" id="68j-xj-fOS"/>
                                         </constraints>
@@ -1197,7 +1189,7 @@
                                         </connections>
                                     </containerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SSb-yE-KPZ">
-                                        <rect key="frame" x="0.0" y="285.5" width="343" height="40"/>
+                                        <rect key="frame" x="0.0" y="311" width="343" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="lastBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="9yQ-yM-i9c">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="20"/>
@@ -1262,19 +1254,22 @@
                                 <constraints>
                                     <constraint firstItem="SSb-yE-KPZ" firstAttribute="leading" secondItem="kJe-T1-JO4" secondAttribute="leading" id="4be-Yj-YxX"/>
                                     <constraint firstItem="CJL-MZ-3cU" firstAttribute="leading" secondItem="kJe-T1-JO4" secondAttribute="leading" id="Awm-Ln-ZQj"/>
-                                    <constraint firstItem="CJL-MZ-3cU" firstAttribute="top" secondItem="cD9-82-UnR" secondAttribute="bottom" constant="8" id="KFe-2c-e70"/>
-                                    <constraint firstItem="cD9-82-UnR" firstAttribute="top" secondItem="Uyi-Ip-qve" secondAttribute="bottom" constant="8" id="Oj4-ap-aae"/>
+                                    <constraint firstItem="CJL-MZ-3cU" firstAttribute="top" secondItem="4E2-KM-Dds" secondAttribute="bottom" constant="8" symbolic="YES" id="KK3-H0-cdM"/>
                                     <constraint firstItem="SSb-yE-KPZ" firstAttribute="top" secondItem="CJL-MZ-3cU" secondAttribute="bottom" constant="8" id="Qtz-T7-33m"/>
+                                    <constraint firstItem="4E2-KM-Dds" firstAttribute="top" secondItem="Uyi-Ip-qve" secondAttribute="bottom" constant="8" symbolic="YES" id="aXB-Ag-Y0N"/>
                                     <constraint firstAttribute="trailing" secondItem="SSb-yE-KPZ" secondAttribute="trailing" id="cks-BT-WFc"/>
+                                    <constraint firstAttribute="trailing" secondItem="4E2-KM-Dds" secondAttribute="trailing" id="o9d-2z-x0B"/>
                                     <constraint firstAttribute="trailing" secondItem="CJL-MZ-3cU" secondAttribute="trailing" id="u3I-2P-K0E"/>
+                                    <constraint firstItem="4E2-KM-Dds" firstAttribute="leading" secondItem="kJe-T1-JO4" secondAttribute="leading" id="usZ-cG-TFA"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="kJe-T1-JO4" secondAttribute="bottom" constant="20" symbolic="YES" id="5Va-ec-AEQ"/>
                             <constraint firstItem="kJe-T1-JO4" firstAttribute="trailing" secondItem="eGn-uS-OvJ" secondAttribute="trailingMargin" id="86Y-4d-eWG"/>
                             <constraint firstItem="kJe-T1-JO4" firstAttribute="leading" secondItem="eGn-uS-OvJ" secondAttribute="leadingMargin" id="AoH-wj-gl4"/>
-                            <constraint firstItem="M6n-Ke-Asj" firstAttribute="top" secondItem="kJe-T1-JO4" secondAttribute="bottom" id="ijH-dD-sc5"/>
+                            <constraint firstItem="kJe-T1-JO4" firstAttribute="top" secondItem="deG-rx-m1V" secondAttribute="bottom" constant="8" symbolic="YES" placeholder="YES" id="vvX-ou-iuv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1286,13 +1281,15 @@
                         <outlet property="profileImageView" destination="Q3S-kg-WGj" id="wbO-IQ-afC"/>
                         <outlet property="retweetCountButton" destination="cpi-zc-oLD" id="QCA-2y-fqY"/>
                         <outlet property="screenNameLabel" destination="f6O-tt-oh2" id="sCh-Zy-i31"/>
-                        <outlet property="textContentLabel" destination="cD9-82-UnR" id="khA-Rd-Jsf"/>
+                        <outlet property="textContentLabel" destination="4E2-KM-Dds" id="xPB-Qj-N25"/>
                         <segue destination="siG-Yx-ulA" kind="show" identifier="View Profile" id="gEj-9i-yKO"/>
+                        <segue destination="hhk-sn-pmH" kind="show" identifier="Show Tweets with Hashtag" id="1wZ-cF-ZwZ"/>
+                        <segue destination="siG-Yx-ulA" kind="show" identifier="Show User" id="kwR-uR-0W4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDg-6c-afW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4676" y="1497"/>
+            <point key="canvasLocation" x="2369" y="2041"/>
         </scene>
         <!--Video Viewer View Controller-->
         <scene sceneID="M0u-wU-l4Y">
@@ -5736,12 +5733,12 @@
             </objects>
             <point key="canvasLocation" x="4676" y="917"/>
         </scene>
-        <!--Home Timeline-->
+        <!--Search Timeline-->
         <scene sceneID="BZz-BK-wSv">
             <objects>
-                <tableViewController id="hhk-sn-pmH" userLabel="Home Timeline" customClass="SearchTimelineTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SearchTimelineViewController" title="Search Timeline" id="hhk-sn-pmH" userLabel="Search Timeline" customClass="SearchTimelineTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" id="EzJ-sM-yto">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -6789,10 +6786,11 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gEj-9i-yKO"/>
+        <segue reference="1wZ-cF-ZwZ"/>
         <segue reference="sCG-QK-uYb"/>
-        <segue reference="Xnk-PO-A97"/>
-        <segue reference="LD9-fb-Rb0"/>
+        <segue reference="kwR-uR-0W4"/>
+        <segue reference="P8A-PP-qGh"/>
+        <segue reference="Mzq-P7-JMi"/>
         <segue reference="def-NE-Ghm"/>
         <segue reference="1w8-WL-0CI"/>
     </inferredMetricsTieBreakers>

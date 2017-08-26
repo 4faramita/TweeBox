@@ -11,6 +11,7 @@ class SearchTimelineTableViewController: TimelineTableViewController {
 
     var query: String? {
         didSet {
+            print(">>> keyword set at SearchTimelineTableViewController >> \(query)")
             refreshTimeline()
         }
     }
