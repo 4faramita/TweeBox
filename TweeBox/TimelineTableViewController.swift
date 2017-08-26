@@ -478,7 +478,6 @@ extension TimelineTableViewController: TweetTableViewCellProtocol {
                     
                     if let image = image {
                         self?.clickMedia = image
-//                        self?.performSegue(withIdentifier: "imageTapped", sender: nil)
                     }
                 }
                 

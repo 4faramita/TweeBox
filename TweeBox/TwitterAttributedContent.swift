@@ -57,7 +57,7 @@ class TwitterAttributedContent {
             attributed.yy_setTextHighlight(
                 range,
                 color: color ?? Constants.themeColor,
-                backgroundColor: .lightGray,
+                backgroundColor: .red,
                 userInfo: nil,
                 tapAction: { (containerView, attributedString, range, rect) in
                     print(">>> attr text >> \(attributedString)")

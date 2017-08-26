@@ -148,21 +148,30 @@ class ImageContainerViewController: UIViewController {
 
         
         let cutSize = media![index].getCutSize(with: ratio, at: Constants.picQuality)
-        let processor = CroppingImageProcessor(size: cutSize, anchor: cutPoint)
+//        let processor = CroppingImageProcessor(size: cutSize, anchor: cutPoint)
         
-        imageView.kf.setImage(
-            with: media![index].mediaURL,
-            placeholder: placeholder,
-            options: [
-                .transition(.fade(Constants.picFadeInDuration)),
-                .processor(processor)
-            ]
-        )
-        { [weak self] (image, error, cacheType, url) in
-            if let image = image {
+        KingfisherManager.shared.retrieveImage(with: media![index].mediaURL!, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
+            
+            if let image = image, let cutPoint = self?.cutPoint {
                 self?.images.append(image)
+                let cuttedImage = image.kf.crop(to: cutSize, anchorOn: cutPoint)
+                imageView.image = cuttedImage
             }
         }
+        
+//        imageView.kf.setImage(
+//            with: media![index].mediaURL,
+//            placeholder: placeholder,
+//            options: [
+//                .transition(.fade(Constants.picFadeInDuration)),
+//                .processor(processor)
+//            ]
+//        )
+//        { [weak self] (image, error, cacheType, url) in
+//            if let image = image {
+//                self?.images.append(image)
+//            }
+//        }
         imageViews.append(imageView)
         
         return imageView
