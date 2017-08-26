@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ParamsWithCursor: Params {
+protocol ParamsWithCursorProtocol: ParamsProtocol {
     
     var cursor: String? { get set }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TweetParams: Params {
+class TweetParams: ParamsProtocol {
     
     public var tweetID: String?
     

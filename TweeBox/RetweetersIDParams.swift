@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RetweetersIDParams: ParamsWithCursor {
+class RetweetersIDParams: ParamsWithCursorProtocol {
     
     public var id: String
     public var cursor: String? = "-1"

@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class UserList {
+class UserList: UserListRetrieverProtocol {
     
     public var userList = [TwitterUser]()
     public var nextCursor = "0"
@@ -17,9 +17,9 @@ class UserList {
     
     public var fetchOlder = true
     public var resourceURL: (String, String)
-    public var userListParams: ParamsWithCursor
+    public var userListParams: ParamsWithCursorProtocol
     
-    init(resourceURL: (String, String), userListParams: ParamsWithCursor, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?) {
+    init(resourceURL: (String, String), userListParams: ParamsWithCursorProtocol, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?) {
         
         self.resourceURL = resourceURL
         
@@ -43,9 +43,6 @@ class UserList {
         
         if Constants.selfID != "-1" {
             
-            //            if userListParams is UserListParams || userListParams is MultiUserParams {
-            //
-            //                if var userListParams = userListParams as? UserListParams {
             if fetchOlder, previousCursor != "-1" {
                 userListParams.cursor = previousCursor
             }
@@ -54,16 +51,10 @@ class UserList {
                 userListParams.cursor = nextCursor
             }
             
-            //                }
             
             let client: RESTfulClient
             
-//            if let listParams = userListParams as? UserListParams {
-            client = RESTfulClient(resource: resourceURL, params: listParams.getParams())
-//            } else {
-//                let listParams = userListParams as! MultiUserParams
-//                client = RESTfulClient(resource: resourceURL, params: listParams.getParams())
-//            }
+            client = RESTfulClient(resource: resourceURL, params: userListParams.getParams())
             
             client.getData() { data in
                 if let data = data {
@@ -84,7 +75,5 @@ class UserList {
             }
             
         }
-    }
-    //    }
-    
+    }    
 }

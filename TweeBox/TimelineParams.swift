@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TimelineParams: ParamsWithBounds {
+class TimelineParams: ParamsWithBoundsProtocol {
     
     public var sinceID: String?
     

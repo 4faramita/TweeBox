@@ -8,13 +8,13 @@
 
 import Foundation
 
-class UsersSearchParams: Params {
+class UsersSearchParams: ParamsProtocol {
     
     public var query: String
     
     public var page: Int {
         // Specifies the page of results to retrieve.
-        return Int(Constants.tweetLimitPerRefresh / 20)
+        return Int(Int(Constants.tweetLimitPerRefresh)! / 20)
     }
     
     public var count = 20
@@ -34,9 +34,9 @@ class UsersSearchParams: Params {
         
         params["q"] = query
         
-        params["page"] = page
+        params["page"] = "\(page)"
         
-        params["count"] = count
+        params["count"] = "\(count)"
         
         params["include_entities"] = includeEntities.description
         

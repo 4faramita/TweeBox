@@ -68,23 +68,23 @@ class GeneralSearchViewController: UIViewController {
 extension GeneralSearchViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
+        if let keyword = keyword, let identifier = segue.identifier {
             switch identifier {
                 case "Show Tweets":
-                    
                     if let searchTimelineViewController = segue.destination.content as? SearchTimelineTableViewController {
                         searchTimelineViewController.query = keyword
+                        searchTimelineViewController.navigationItem.title = "\"\(keyword)\""
                     }
                 
                 case "Show Tweets with Hashtag":
                     if let searchTimelineViewController = segue.destination.content as? SearchTimelineTableViewController {
-                        if let keyword = keyword {
-                            searchTimelineViewController.query = "%23\(keyword)"
-                        }
+//                        if let keyword = keyword {
+                        searchTimelineViewController.query = "%23\(keyword)"
+                        searchTimelineViewController.navigationItem.title = "#\(keyword)"
+//                        }
                     }
 
                 case "Show User":
-                    
                     if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
                         if let user = fetchedUser {
                             profileViewController.user = user
@@ -92,8 +92,16 @@ extension GeneralSearchViewController {
                     }
                 
                 case "Show Users":
-                    break
-                    // HERE
+                    if let userListTableViewController = segue.destination.content as? UserListTableViewController {
+                        
+                        let simpleUserListRetriever = SearchUsers(
+                            usersParams: UsersSearchParams(query: keyword),
+                            resourceURL: ResourceURL.users_search
+                        )
+                        
+                        userListTableViewController.userListRetriever = simpleUserListRetriever
+                        userListTableViewController.navigationItem.title = "\"\(keyword)\""
+                    }
                 
                 default:
                     return
@@ -124,18 +132,6 @@ extension GeneralSearchViewController {
             handler(singleUser)
         }
     }
-    
-    
-    fileprivate func fetchUsers(_ handler: @escaping ([TwitterUser]) -> Void) {
-        
-        SearchUsers(
-            usersParams: UsersSearchParams(query: keyword),
-            resourceURL: ResourceURL.users_search
-        ).fetchData { (users) in
-            handler(users)
-        }
-    }
-
 }
 
 

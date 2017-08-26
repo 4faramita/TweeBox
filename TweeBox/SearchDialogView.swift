@@ -69,7 +69,7 @@ class SearchDialogView: UIView {
                 searchTweetButton.isEnabled = true
             }
 
-            if keyword.isAlpha || keyword.isDigit {
+            if keyword.isLegit {
                 searchHashtagButton.setTitle("Hashtag \"#\(keyword)\"", for: .normal)
                 if !(searchHashtagButton.isEnabled) {
                     searchHashtagButton.isEnabled = true

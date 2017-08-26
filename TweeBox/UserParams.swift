@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserParams: Params {
+class UserParams: ParamsProtocol {
     
     public var userID: String?
     

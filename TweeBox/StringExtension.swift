@@ -30,6 +30,16 @@ extension String {
         }
         return true
     }
+    
+    var isLegit: Bool {
+        for scalar in self.unicodeScalars {
+            let value = scalar.value
+            guard (value >= 48 && value <= 57) || (value >= 65 && value <= 90) || (value >= 97 && value <= 122) else {
+                return false
+            }
+        }
+        return true
+    }
 
     
     // HTML to attributed string

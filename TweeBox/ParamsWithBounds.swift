@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ParamsWithBounds: Params {
+protocol ParamsWithBoundsProtocol: ParamsProtocol {
     
     var sinceID: String? { get set }
     var maxID: String? { get set }

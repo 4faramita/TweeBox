@@ -380,10 +380,13 @@ extension TimelineTableViewController: TweetTableViewCellProtocol {
                     videoViewer.tweetMedia = media[0]
                 }
             case "profileImageTapped":
-                if let profileViewController = segue.destination as? UserTimelineTableViewController {
-                    profileViewController.user = clickedTweet?.user
-                    profileViewController.navigationItem.rightBarButtonItem = nil
-                } else if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                    
+                    if let realViewController = segue.destination as? UserTimelineTableViewController {
+                        realViewController.navigationItem.rightBarButtonItem = nil
+                    }
+
+                    
                     profileViewController.user = clickedTweet?.user
                 }
                 

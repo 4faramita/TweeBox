@@ -18,8 +18,10 @@ class UserListTableViewController: UITableViewController {
     
     public var fetchOlder = true
     
-    public var userListParams: Any?
-    public var resourceURL: (String, String)?
+//    public var userListParams: ParamsWithCursorProtocol?
+//    public var resourceURL: (String, String)?
+    
+    public var userListRetriever: UserListRetrieverProtocol?
     
     private var selectedUser: TwitterUser?
 
@@ -49,15 +51,23 @@ class UserListTableViewController: UITableViewController {
     
     func refreshUserList() {
      
-        let userListFetcher = UserList(
-            resourceURL: resourceURL!,
-            userListParams: userListParams!,
-            fetchOlder: fetchOlder,
-            nextCursor: nextCursor,
-            previousCursor: previousCursor
-        )
+//        let userListFetcher = UserList(
+//            resourceURL: resourceURL!,
+//            userListParams: userListParams!,
+//            fetchOlder: fetchOlder,
+//            nextCursor: nextCursor,
+//            previousCursor: previousCursor
+//        )
         
-        userListFetcher.fetchData { [weak self] (nextCursor, previousCursor, newUserList) in
+//        userListFetcher
+        
+        if let userList = userListRetriever as? UserList {
+            userList.fetchOlder = fetchOlder
+            userList.nextCursor = nextCursor
+            userList.previousCursor = previousCursor
+        }
+        
+        userListRetriever?.fetchData { [weak self] (nextCursor, previousCursor, newUserList) in
             
             self?.nextCursor = nextCursor
             self?.previousCursor = previousCursor
@@ -77,6 +87,11 @@ class UserListTableViewController: UITableViewController {
     @IBAction func refresh(_ sender: UIRefreshControl) {
         refreshUserList()
     }
+    
+    @IBAction func done(_ sender: Any?) {
+        dismiss(animated: true, completion: nil)
+    }
+
     
     
     // MARK: - Table view data source

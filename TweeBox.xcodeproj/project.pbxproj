@@ -68,6 +68,7 @@
 		B4B541D81F4D84170008C2EE /* ReplyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B541D71F4D84170008C2EE /* ReplyTableViewController.swift */; };
 		B4B7C4C41F3ED26E00F424A0 /* NavigationViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7C4C31F3ED26E00F424A0 /* NavigationViewControllerExtension.swift */; };
 		B4BF669F1F5002FA00857285 /* SearchDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BF669E1F5002FA00857285 /* SearchDialogView.swift */; };
+		B4C5E7841F515B0200975242 /* UserListRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C5E7831F515B0200975242 /* UserListRetriever.swift */; };
 		B4CE12161F3ACCDF002D341E /* HomeTimelineParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CE12151F3ACCDF002D341E /* HomeTimelineParams.swift */; };
 		B4CE12181F3AD60A002D341E /* TimelineParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CE12171F3AD60A002D341E /* TimelineParams.swift */; };
 		B4D89EB81F4F2F0A00698FF1 /* GeneralSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D89EB71F4F2F0A00698FF1 /* GeneralSearchViewController.swift */; };
@@ -171,6 +172,7 @@
 		B4B541D71F4D84170008C2EE /* ReplyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyTableViewController.swift; sourceTree = "<group>"; };
 		B4B7C4C31F3ED26E00F424A0 /* NavigationViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewControllerExtension.swift; sourceTree = "<group>"; };
 		B4BF669E1F5002FA00857285 /* SearchDialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDialogView.swift; sourceTree = "<group>"; };
+		B4C5E7831F515B0200975242 /* UserListRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListRetriever.swift; sourceTree = "<group>"; };
 		B4CE12151F3ACCDF002D341E /* HomeTimelineParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimelineParams.swift; sourceTree = "<group>"; };
 		B4CE12171F3AD60A002D341E /* TimelineParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineParams.swift; sourceTree = "<group>"; };
 		B4D89EB71F4F2F0A00698FF1 /* GeneralSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchViewController.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */,
 				B4E917151F433CE600FD3A5F /* UserList.swift */,
 				B4F641501F50B1580039FA1C /* SearchUsers.swift */,
+				B4C5E7831F515B0200975242 /* UserListRetriever.swift */,
 			);
 			name = "Data Retriever";
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				B485BA631F46CD260077CC31 /* RetweetTableViewCell.swift in Sources */,
 				B488E6751F4B0E890033CFAD /* ImageContainerViewController.swift in Sources */,
 				B443A0F21F2B38050021BB65 /* TwitterUser.swift in Sources */,
+				B4C5E7841F515B0200975242 /* UserListRetriever.swift in Sources */,
 				B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */,
 				B4F641511F50B1580039FA1C /* SearchUsers.swift in Sources */,
 				B45F1D561F40645B00AF201C /* VideoViewerViewController.swift in Sources */,

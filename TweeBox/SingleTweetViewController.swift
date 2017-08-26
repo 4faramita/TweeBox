@@ -190,24 +190,24 @@ class SingleTweetViewController: UIViewController {
         
         if let identifier = segue.identifier {
             switch identifier {
-            case "Retweet List":
-                if let userListViewController = segue.destination as? UserListTableViewController {
-                    
-                    let retweetIDListRetriever = RetweeterID(
-                        resourceURL: ResourceURL.statuses_retweeters_ids,
-                        retweetersIDParams: RetweetersIDParams(id: tweetID, cursor: nil),
-                        fetchOlder: nil,
-                        nextCursor: nil,
-                        previousCursor: nil
-                    )
-                    retweetIDListRetriever.fetchData({ (nextCursor, previousCursor, idList) in
-                        print(">>> idList >> \(idList)")
-                        userListViewController.resourceURL = ResourceURL.user_lookup
-                        userListViewController.userListParams = MultiUserParams(userID: idList, screenName: nil)
-                        userListViewController.previousCursor = previousCursor
-                        userListViewController.nextCursor = nextCursor
-                    })
-                }
+//            case "Retweet List":
+//                if let userListViewController = segue.destination as? UserListTableViewController {
+//                    
+//                    let retweetIDListRetriever = RetweeterID(
+//                        resourceURL: ResourceURL.statuses_retweeters_ids,
+//                        retweetersIDParams: RetweetersIDParams(id: tweetID, cursor: nil),
+//                        fetchOlder: nil,
+//                        nextCursor: nil,
+//                        previousCursor: nil
+//                    )
+//                    retweetIDListRetriever.fetchData({ (nextCursor, previousCursor, idList) in
+//                        print(">>> idList >> \(idList)")
+//                        userListViewController.resourceURL = ResourceURL.user_lookup
+//                        userListViewController.userListParams = MultiUserParams(userID: idList, screenName: nil)
+//                        userListViewController.previousCursor = previousCursor
+//                        userListViewController.nextCursor = nextCursor
+//                    })
+//                }
                 
             case "Media Container":
                 if let imageContainerViewController = segue.destination as? ImageContainerViewController {

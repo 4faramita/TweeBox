@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol Params {
+protocol ParamsProtocol {
     func getParams() -> [String: Any]
 }

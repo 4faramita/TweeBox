@@ -252,7 +252,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
 
         headerView.addSubview(nameLabel)
         nameLabel.text = user?.name
-//        nameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .headline), size: 22)
         nameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         nameLabel.textColor = .white
         nameLabel.numberOfLines = 1
@@ -266,7 +265,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
 
         headerView.addSubview(screenNameLabel)
         screenNameLabel.text = "@\(user?.screenName ?? "twitterUser")"
-//        screenNameLabel.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption1), size: 15)
         screenNameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         screenNameLabel.textColor = .lightGray
         screenNameLabel.snp.makeConstraints { (make) in
@@ -295,7 +293,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
             locationLabel = UILabel()
             headerView.addSubview(locationLabel!)
             locationLabel?.text = location
-//            locationLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
             locationLabel?.font = UIFont.preferredFont(forTextStyle: .caption2)
             locationLabel?.textColor = .lightGray
             locationLabel?.snp.makeConstraints { (make) in
@@ -392,33 +389,46 @@ class UserTimelineTableViewController: TimelineTableViewController {
     }
 
     @IBAction private func tapToViewBannerImage(_ sender: UIGestureRecognizer) {
-//        print(">>> profileBannerImage before transfer >> \(profileBannerImage)")
-//        print(">>> profileBannerImageURL before transfer >> \(profileBannerImageURL)")
         imageURLToShare = profileBannerImageURL
         clickMedia = profileBannerImage
-//        performSegue(withIdentifier: "imageTapped", sender: self)
     }
 
     @IBAction private func tapToViewProfileImage(_ sender: UIGestureRecognizer) {
-//        print(">>> profileImage before transfer >> \(profileImage)")
-//        print(">>> profileImageURL before transfer >> \(profileImageURL)")
         print(">>> profileImage tapped")
         imageURLToShare = profileImageURL
         clickMedia = profileImage
-//        performSegue(withIdentifier: "imageTapped", sender: self)
     }
 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "User List" {
+            
             if let sender = sender as? UIButton, let userListTableViewController = segue.destination.content as? UserListTableViewController {
-                if (sender.titleLabel?.text?.hasSuffix("follower") ?? false) {
-                    userListTableViewController.resourceURL = ResourceURL.followers_list
-                } else if (sender.titleLabel?.text?.hasSuffix("following") ?? false) {
-                    userListTableViewController.resourceURL = ResourceURL.followings_list
+                
+                if let realViewController = segue.destination as? UserListTableViewController {
+                    realViewController.navigationItem.rightBarButtonItem = nil
                 }
-                userListTableViewController.userListParams = UserListParams(userID: userID!)
+                
+                var userListRetriever: UserList? = nil
+                
+                if (sender.titleLabel?.text?.hasSuffix("follower") ?? false) {
+                    
+                    userListRetriever = UserList(
+                        resourceURL: ResourceURL.followers_list,
+                        userListParams: UserListParams(userID: userID!),
+                        fetchOlder: nil, nextCursor: nil, previousCursor: nil
+                    )
+                } else if (sender.titleLabel?.text?.hasSuffix("following") ?? false) {
+                    
+                    userListRetriever = UserList(
+                        resourceURL: ResourceURL.followings_list,
+                        userListParams: UserListParams(userID: userID!),
+                        fetchOlder: nil, nextCursor: nil, previousCursor: nil
+                    )
+
+                }
+                userListTableViewController.userListRetriever = userListRetriever
             }
         }
 

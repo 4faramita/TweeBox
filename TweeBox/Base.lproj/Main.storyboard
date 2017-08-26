@@ -1115,6 +1115,22 @@
             </objects>
             <point key="canvasLocation" x="7692" y="-527.58620689655174"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="neF-OM-PHr">
+            <objects>
+                <navigationController id="OpB-O4-JE8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VBb-9F-N8t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="EXU-Nt-KBj" kind="relationship" relationship="rootViewController" id="jIq-Rd-mSm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iw7-nW-2ge" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7790" y="-1391"/>
+        </scene>
         <!--Single Tweet View Controller-->
         <scene sceneID="5zc-YK-iB3">
             <objects>
@@ -1408,7 +1424,7 @@
                                                 <rect key="frame" x="0.0" y="180" width="300" height="50"/>
                                                 <state key="normal" title="Search User"/>
                                                 <connections>
-                                                    <segue destination="EXU-Nt-KBj" kind="show" identifier="Show Users" id="Lqx-TU-h8E"/>
+                                                    <segue destination="OpB-O4-JE8" kind="show" identifier="Show Users" id="L4A-u4-3xC"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1473,7 +1489,7 @@
             <objects>
                 <tableViewController id="EXU-Nt-KBj" customClass="UserListTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="28" sectionFooterHeight="28" id="GyH-9O-0sb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1566,6 +1582,13 @@
                             <outlet property="delegate" destination="EXU-Nt-KBj" id="bdd-Ic-hBQ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="gtN-gY-E61">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="x7H-B4-uSW">
+                            <connections>
+                                <action selector="done:" destination="EXU-Nt-KBj" id="0Z5-hq-Zhg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Phd-mn-2Vp">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1579,14 +1602,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EdA-iq-esl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6753" y="448"/>
+            <point key="canvasLocation" x="7546" y="647"/>
         </scene>
         <!--User Timeline-->
         <scene sceneID="rkw-Nk-sFW">
             <objects>
                 <tableViewController storyboardIdentifier="UserProfileViewController" id="siG-Yx-ulA" userLabel="User Timeline" customClass="UserTimelineTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" id="PzF-nP-ten">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -4683,7 +4706,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="ReplyTableViewController" id="CxX-ex-f2w" customClass="ReplyTableViewController" customModule="TweeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" id="lhV-ce-jYP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="JA5-yx-Mu7">
@@ -6722,6 +6745,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ZzI-Ip-5Cn">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="hhk-sn-pmH" eventType="valueChanged" id="9ne-Qd-L99"/>
@@ -6741,7 +6765,6 @@
         <!--Navigation Controller-->
         <scene sceneID="sqn-rz-oVX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L7x-X9-oVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bba-kI-gmo" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zIS-dV-vce">
@@ -6753,6 +6776,7 @@
                         <segue destination="hhk-sn-pmH" kind="relationship" relationship="rootViewController" id="aht-E5-Gcz"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L7x-X9-oVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3662" y="-900"/>
         </scene>
@@ -6766,10 +6790,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1w8-WL-0CI"/>
-        <segue reference="86F-ae-DeW"/>
-        <segue reference="xU8-Oj-mBQ"/>
+        <segue reference="sCG-QK-uYb"/>
+        <segue reference="hvw-ft-BYD"/>
+        <segue reference="def-NE-Ghm"/>
         <segue reference="P8A-PP-qGh"/>
         <segue reference="Mzq-P7-JMi"/>
-        <segue reference="sCG-QK-uYb"/>
     </inferredMetricsTieBreakers>
 </document>

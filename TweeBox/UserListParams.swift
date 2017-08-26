@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct UserListParams: ParamsWithCursor {
+struct UserListParams: ParamsWithCursorProtocol {
     
     public var userID: String
     public var cursor: String? = "-1"

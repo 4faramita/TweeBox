@@ -13,7 +13,7 @@ class ReplyTimeline: Timeline {
     
     public var mainTweetID: String
     
-    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), timelineParams: ParamsWithBounds, mainTweetID: String) {
+    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), timelineParams: ParamsWithBoundsProtocol, mainTweetID: String) {
         
         self.mainTweetID = mainTweetID
         

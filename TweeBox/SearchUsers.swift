@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class SearchUsers {
+class SearchUsers: UserListRetrieverProtocol {
     
     private var userList = [TwitterUser]()
     
@@ -21,7 +21,7 @@ class SearchUsers {
         self.usersParams = usersParams
     }
     
-    public func fetchData(_ handler: @escaping ([TwitterUser]) -> Void) {
+    public func fetchData(_ handler: @escaping (String, String, [TwitterUser]) -> Void) {
         if Constants.selfID != "-1" {
             let client = RESTfulClient(resource: resourceURL, params: usersParams.getParams())
             
@@ -37,7 +37,7 @@ class SearchUsers {
                         }
                     }
                     
-                    handler(self.userList)
+                    handler("0", "0", self.userList)
                 }
             }
         }

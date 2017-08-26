@@ -15,9 +15,9 @@ class Timeline {
     public var sinceID: String?
     public var fetchNewer: Bool
     public var resourceURL: (String, String)
-    public var timelineParams: ParamsWithBounds
+    public var timelineParams: ParamsWithBoundsProtocol
     
-    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), timelineParams: ParamsWithBounds) {
+    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), timelineParams: ParamsWithBoundsProtocol) {
         
         self.maxID = maxID
         self.sinceID = sinceID

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchTweetParams: ParamsWithBounds {
+class SearchTweetParams: ParamsWithBoundsProtocol {
     
     public var query: String  // qd
     // A UTF-8, URL-encoded search query of 500 characters maximum, including operators. 
