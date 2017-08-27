@@ -12,14 +12,17 @@ import SwiftyJSON
 class UserList: UserListRetrieverProtocol {
     
     public var userList = [TwitterUser]()
-    public var nextCursor = "0"
-    public var previousCursor = "0"
+    public var nextCursor = "-1"
+    public var previousCursor = "-1"
+    
+    public var headID: String?
+    public var tailID: String?
     
     public var fetchOlder = true
     public var resourceURL: (String, String)
     public var userListParams: ParamsWithCursorProtocol
     
-    init(resourceURL: (String, String), userListParams: ParamsWithCursorProtocol, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?) {
+    init(resourceURL: (String, String), userListParams: ParamsWithCursorProtocol, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?, headID: String?, tailID: String?) {
         
         self.resourceURL = resourceURL
         
@@ -36,6 +39,9 @@ class UserList: UserListRetrieverProtocol {
         if let previousCursor = previousCursor {
             self.previousCursor = previousCursor
         }
+        
+        self.headID = headID
+        self.tailID = tailID
     }
     
     
@@ -43,18 +49,18 @@ class UserList: UserListRetrieverProtocol {
         
         if Constants.selfID != "-1" {
             
-            if fetchOlder, previousCursor != "-1" {
-                userListParams.cursor = previousCursor
-            }
-            
-            if !fetchOlder, nextCursor != "-1" {
+            if fetchOlder, nextCursor != "0" {
                 userListParams.cursor = nextCursor
             }
             
+            if !fetchOlder, previousCursor != "0" {
+                userListParams.cursor = previousCursor
+            }
             
-            let client: RESTfulClient
             
-            client = RESTfulClient(resource: resourceURL, params: userListParams.getParams())
+            let client = RESTfulClient(resource: resourceURL, params: userListParams.getParams())            
+            
+            print(">>> params >> \(userListParams.getParams())")
             
             client.getData() { data in
                 if let data = data {
@@ -70,6 +76,26 @@ class UserList: UserListRetrieverProtocol {
                         }
                     }
                     
+                    if self.fetchOlder, let tailID = self.tailID {
+                        for index in stride(from: self.userList.endIndex - 1, through: 0, by: -1) {
+                            if self.userList[index].id == tailID {
+//                                self.userList = self.userList[(index + 1)..<(self.userList.endIndex)]
+                                self.userList = Array(self.userList.suffix(self.userList.endIndex - index - 1))
+                            }
+                        }
+                    }
+                    
+                    if !(self.fetchOlder), let headID = self.headID {
+                        for index in 0..<self.userList.endIndex {
+                            if self.userList[index].id == headID {
+//                                self.userList = self.userList[0..<index]
+                                self.userList = Array(self.userList.prefix(index))
+                            }
+                        }
+                    }
+                    
+                    handler(self.nextCursor, self.previousCursor, self.userList)
+                } else {
                     handler(self.nextCursor, self.previousCursor, self.userList)
                 }
             }

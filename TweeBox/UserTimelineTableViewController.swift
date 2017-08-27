@@ -433,14 +433,18 @@ class UserTimelineTableViewController: TimelineTableViewController {
                     userListRetriever = UserList(
                         resourceURL: ResourceURL.followers_list,
                         userListParams: UserListParams(userID: userID!),
-                        fetchOlder: nil, nextCursor: nil, previousCursor: nil
+                        fetchOlder: nil, nextCursor: nil, previousCursor: nil,
+                        headID: nil,
+                        tailID: nil
                     )
                 } else if (sender.titleLabel?.text?.hasSuffix("following") ?? false) {
                     
                     userListRetriever = UserList(
                         resourceURL: ResourceURL.followings_list,
                         userListParams: UserListParams(userID: userID!),
-                        fetchOlder: nil, nextCursor: nil, previousCursor: nil
+                        fetchOlder: nil, nextCursor: nil, previousCursor: nil,
+                        headID: nil,
+                        tailID: nil
                     )
 
                 }

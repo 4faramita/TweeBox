@@ -7,19 +7,37 @@
 //
 
 import UIKit
+import ESPullToRefresh
 
 class UserListTableViewController: UITableViewController {
     
     var userList = [Array<TwitterUser>]()
     
-    public var nextCursor = "-1"
-    public var previousCursor = "-1"
+    private var headID: String? {
+        return userList.first?.first?.id
+    }
+    
+    private var tailID: String? {
+        return userList.last?.last?.id
+    }
+    
+    public var nextCursor = "-1" {
+        didSet {
+            print(">>> nextCursor set \(nextCursor)")
+        }
+    }
+    public var previousCursor = "-1" {
+        didSet {
+            print(">>> previousCursor set \(previousCursor)")
+        }
+    }
     // cursor == "0" indicates the corresponding direction is at the end
     
-    public var fetchOlder = true
-    
-//    public var userListParams: ParamsWithCursorProtocol?
-//    public var resourceURL: (String, String)?
+    public var fetchOlder = true {
+        didSet {
+            print(">>> fetch older? >> \(fetchOlder)")
+        }
+    }
     
     public var userListRetriever: UserListRetrieverProtocol?
     
@@ -31,68 +49,108 @@ class UserListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshUserList()
+        refreshUserList(handler: nil)
         tableView.rowHeight = 72
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.refreshControl?.endRefreshing()
+        addRefresher()
+        pullToLoaderMore()
     }
-
+    
     
     private func insertNewUsers(with newUsers: [TwitterUser]) {
-        self.userList.insert(newUsers, at: 0)
-        self.tableView.insertSections([0], with: .automatic)
+        if !fetchOlder {
+            self.userList.insert(newUsers, at: 0)
+            self.tableView.insertSections([0], with: .automatic)
+        } else {
+            self.userList.append(newUsers)
+            self.tableView.insertSections([self.userList.endIndex - 1], with: .automatic)
+
+        }
+    }
+    
+    
+    func addRefresher() {
+        self.tableView.es_addPullToRefresh {
+            [unowned self] in
+            
+            self.fetchOlder = false
+            self.refreshUserList {
+//                self.tableView.es_stopPullToRefresh(ignoreDate: true)
+                self.tableView.es_stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
+            }
+            
+            /// 设置ignoreFooter来处理不需要显示footer的情况
+//            self.tableView.es_stopPullToRefresh(completion: true, ignoreFooter: false)
+        }
+    }
+    
+    func pullToLoaderMore() {
+        self.tableView.es_addInfiniteScrolling {
+            [weak self] in
+            self?.fetchOlder = true
+            self?.refreshUserList {
+                self?.tableView.es_stopLoadingMore()
+            }
+            /// 如果你的加载更多事件成功，调用es_stopLoadingMore()重置footer状态
+            //            self.tableView.es_stopLoadingMore()
+            /// 通过es_noticeNoMoreData()设置footer暂无数据状态
+            //            self.tableView.es_noticeNoMoreData()
+        }
     }
 
+
     
-    func refreshUserList() {
-     
-//        let userListFetcher = UserList(
-//            resourceURL: resourceURL!,
-//            userListParams: userListParams!,
-//            fetchOlder: fetchOlder,
-//            nextCursor: nextCursor,
-//            previousCursor: previousCursor
-//        )
+    func refreshUserList(handler: ((Void) -> Void)?) {
         
-//        userListFetcher
-        
-        if let userList = userListRetriever as? UserList {
-            userList.fetchOlder = fetchOlder
-            userList.nextCursor = nextCursor
-            userList.previousCursor = previousCursor
-        }
-        
-        userListRetriever?.fetchData { [weak self] (nextCursor, previousCursor, newUserList) in
-            
-            self?.nextCursor = nextCursor
-            self?.previousCursor = previousCursor
-            
-            if newUserList.count > 0 {
-                self?.insertNewUsers(with: newUserList)
+        if (fetchOlder && nextCursor == "0") || (!fetchOlder && previousCursor == "0") {
+            print(">>> no more")
+            if let handler = handler {
+                handler()
+            }
+        } else {
+            if let userList = userListRetriever as? UserList {
+                userList.fetchOlder = fetchOlder
+                userList.nextCursor = nextCursor
+                userList.previousCursor = previousCursor
+                userList.headID = self.headID
+                userList.tailID = self.tailID
             }
             
-            Timer.scheduledTimer(
-                withTimeInterval: TimeInterval(0.1),
-                repeats: false) { (timer) in
-                    self?.refreshControl?.endRefreshing()
+            userListRetriever?.fetchData { [weak self] (nextCursor, previousCursor, newUserList) in
+                
+                if (self?.nextCursor == "-1") && (self?.previousCursor == "-1") {
+                    self?.nextCursor = nextCursor
+                    self?.previousCursor = previousCursor
+                } else {
+                    if let fetchOlder = self?.fetchOlder {
+                        if fetchOlder {
+                            self?.nextCursor = nextCursor
+                        } else {
+                            self?.previousCursor = previousCursor
+                        }
+                    }
+                }
+                
+                if newUserList.count > 0 {
+                    self?.insertNewUsers(with: newUserList)
+                }
+                
+                if let handler = handler {
+                    handler()
+                }
             }
         }
     }
     
-    @IBAction func refresh(_ sender: UIRefreshControl) {
-        refreshUserList()
-    }
     
     @IBAction func done(_ sender: Any?) {
         dismiss(animated: true, completion: nil)
     }
 
-    
     
     // MARK: - Table view data source
     
@@ -137,11 +195,6 @@ class UserListTableViewController: UITableViewController {
             } else if let userTimelineTableViewController = segue.destination.content as? UserTimelineTableViewController {
                 userTimelineTableViewController.user = selectedUser
             }
-
-            
-//            if let userTimelineTableViewController = segue.destination as? UserTimelineTableViewController {
-//                userTimelineTableViewController.user = selectedUser
-//            }
         }
     }
 }

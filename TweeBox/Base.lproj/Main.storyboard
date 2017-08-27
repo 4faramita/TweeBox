@@ -3526,12 +3526,12 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mQn-8J-Vdw"/>
-        <segue reference="4il-EK-Pbn"/>
-        <segue reference="tdV-pQ-YAf"/>
-        <segue reference="qqa-7f-aWM"/>
-        <segue reference="GwV-mx-Cse"/>
-        <segue reference="uxh-8f-EHW"/>
+        <segue reference="Xnk-PO-A97"/>
+        <segue reference="sCG-QK-uYb"/>
+        <segue reference="hvw-ft-BYD"/>
+        <segue reference="xU8-Oj-mBQ"/>
+        <segue reference="LD9-fb-Rb0"/>
+        <segue reference="R0C-zo-ejb"/>
         <segue reference="1w8-WL-0CI"/>
     </inferredMetricsTieBreakers>
 </document>

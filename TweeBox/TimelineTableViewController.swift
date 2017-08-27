@@ -38,16 +38,8 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         }
     }
     
-    public var maxID: String? {
-        didSet {
-            print(">>> max set \(maxID)")
-        }
-    }
-    public var sinceID: String? {
-        didSet {
-            print(">>> min set \(sinceID)")
-        }
-    }
+    public var maxID: String?
+    public var sinceID: String?
     public var fetchNewer = true
     /*
      if there is a newer batch, there exists a maxID;
