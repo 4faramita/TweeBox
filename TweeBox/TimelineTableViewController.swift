@@ -12,6 +12,7 @@ import Kingfisher
 //import Whisper
 import SnapKit
 import PopupDialog
+import ESPullToRefresh
 
 class TimelineTableViewController: UITableViewController, TweetClickableContentProtocol
 //, ScrollingNavigationControllerDelegate 
@@ -37,8 +38,16 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         }
     }
     
-    public var maxID: String?
-    public var sinceID: String?
+    public var maxID: String? {
+        didSet {
+            print(">>> max set \(maxID)")
+        }
+    }
+    public var sinceID: String? {
+        didSet {
+            print(">>> min set \(sinceID)")
+        }
+    }
     public var fetchNewer = true
     /*
      if there is a newer batch, there exists a maxID;
@@ -92,6 +101,9 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        addRefresher()
+        pullToLoaderMore()
+        
         //  Warning text when table is empty
         
         if timeline.flatMap({ $0 }).count == 0 {
@@ -118,11 +130,11 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
 //
 //    }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.refreshControl?.endRefreshing()
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        
+//        self.refreshControl?.endRefreshing()
+//    }
     
     // Hide bars on scrolling
 //    override func viewDidDisappear(_ animated: Bool) {
@@ -137,6 +149,35 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
 //        }
 //        
 //    }
+    
+    func addRefresher() {
+        self.tableView.es_addPullToRefresh {
+            [unowned self] in
+            
+            self.fetchNewer = true
+            self.refreshTimeline {
+                //                self.tableView.es_stopPullToRefresh(ignoreDate: true)
+                self.tableView.es_stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
+            }
+            
+            /// 设置ignoreFooter来处理不需要显示footer的情况
+//            self.tableView.es_stopPullToRefresh(completion: true, ignoreFooter: false)
+        }
+    }
+    
+    func pullToLoaderMore() {
+        self.tableView.es_addInfiniteScrolling {
+            [weak self] in
+            self?.fetchNewer = false
+            self?.refreshTimeline {
+                self?.tableView.es_stopLoadingMore()
+            }
+            /// 如果你的加载更多事件成功，调用es_stopLoadingMore()重置footer状态
+//            self.tableView.es_stopLoadingMore()
+            /// 通过es_noticeNoMoreData()设置footer暂无数据状态
+//            self.tableView.es_noticeNoMoreData()
+        }
+    }
     
     func alertForNoSuchUser(viewController: UIViewController) {
         
@@ -170,12 +211,17 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     
     
     func insertNewTweets(with newTweets: [Tweet]) {
-        self.timeline.insert(newTweets, at: 0)
-        self.tableView.insertSections([0], with: .automatic)
+        if fetchNewer {
+            self.timeline.insert(newTweets, at: 0)
+            self.tableView.insertSections([0], with: .automatic)
+        } else {
+            self.timeline.append(newTweets)
+            self.tableView.insertSections([self.timeline.endIndex - 1], with: .automatic)
+        }
     }
     
     
-    func refreshTimeline() {
+    func refreshTimeline(handler: ((Void) -> Void)?) {
         
         let homeTimelineParams = HomeTimelineParams()
         
@@ -188,13 +234,26 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         )
         
         timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
-            if let maxID = maxID {
-                self?.maxID = maxID
+            
+            if (self?.maxID == nil) && (self?.sinceID == nil) {
+                if let sinceID = sinceID {
+                    self?.sinceID = sinceID
+                }
+                if let maxID = maxID {
+                    self?.maxID = maxID
+                }
+            } else {
+                if (self?.fetchNewer)! {
+                    if let sinceID = sinceID {
+                        self?.sinceID = sinceID
+                    }
+                } else {
+                    if let maxID = maxID {
+                        self?.maxID = maxID
+                    }
+                }
+                
             }
-            if let sinceID = sinceID {
-                self?.sinceID = sinceID
-            }
-//                self?.tableView.reloadData()
             
             if tweets.count > 0 {
                 
@@ -212,11 +271,8 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 }
                 
             }
-            
-            Timer.scheduledTimer(
-                withTimeInterval: TimeInterval(0.1),
-                repeats: false) { (timer) in
-                    self?.refreshControl?.endRefreshing()
+            if let handler = handler {
+                handler()
             }
         }
         
@@ -231,9 +287,9 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     }
     
     
-    @IBAction func refresh(_ sender: UIRefreshControl) {
-        refreshTimeline()
-    }
+//    @IBAction func refresh(_ sender: UIRefreshControl) {
+//        refreshTimeline()
+//    }
     
     @objc private func tapToPresentMediaViewer(byReactingTo tapGesture: UITapGestureRecognizer) {
         performSegue(withIdentifier: "To Media", sender: nil)

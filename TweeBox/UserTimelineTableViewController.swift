@@ -29,7 +29,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
             if user == nil {
                 setUser()
             }
-            refreshTimeline()
+            refreshTimeline(handler: nil)
         }
     }
 
@@ -92,12 +92,14 @@ class UserTimelineTableViewController: TimelineTableViewController {
         }
 
     }
+    
+    override func addRefresher() { }
 
     private func pullToRefresh(_ height: CGFloat) {
         if height > (headerHeight + Constants.profilePanelDragOffset), !isRefreshing {
             print("refreshing")
             isRefreshing = true
-            refreshTimeline()
+            refreshTimeline(handler: nil)
         }
     }
 
@@ -149,7 +151,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         }
     }
 
-    override func refreshTimeline() {
+    override func refreshTimeline(handler: ((Void) -> Void)?) {
 
         let userTimelineParams = UserTimelineParams(of: userID!)
 
@@ -162,20 +164,33 @@ class UserTimelineTableViewController: TimelineTableViewController {
         )
 
         timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
-            if maxID != nil {
-                self?.maxID = maxID!
+            
+            if (self?.maxID == nil) && (self?.sinceID == nil) {
+                if let sinceID = sinceID {
+                    self?.sinceID = sinceID
+                }
+                if let maxID = maxID {
+                    self?.maxID = maxID
+                }
+            } else {
+                if (self?.fetchNewer)! {
+                    if let sinceID = sinceID {
+                        self?.sinceID = sinceID
+                    }
+                } else {
+                    if let maxID = maxID {
+                        self?.maxID = maxID
+                    }
+                }
+                
             }
-            if sinceID != nil {
-                self?.sinceID = sinceID!
-            }
+            
             if tweets.count != 0 {
                 self?.insertNewTweets(with: tweets)
             }
 
-            Timer.scheduledTimer(
-                withTimeInterval: TimeInterval(0.1),
-                repeats: false) { (timer) in
-                    self?.refreshControl?.endRefreshing()
+            if let handler = handler {
+                handler()
             }
         }
     }

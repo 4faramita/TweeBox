@@ -11,7 +11,7 @@ class SearchTimelineTableViewController: TimelineTableViewController {
 
     var query: String? {
         didSet {
-            refreshTimeline()
+            refreshTimeline(handler: nil)
         }
     }
 
@@ -37,7 +37,7 @@ class SearchTimelineTableViewController: TimelineTableViewController {
     }
     
 
-    override func refreshTimeline() {
+    override func refreshTimeline(handler: ((Void) -> Void)?) {
 
         let replyTimelineParams = SearchTweetParams(
                 query: self.query ?? "",
@@ -59,11 +59,24 @@ class SearchTimelineTableViewController: TimelineTableViewController {
 
         searchTimeline.fetchData { [weak self] (maxID, sinceID, tweets) in
 
-            if let maxID = maxID {
-                self?.maxID = maxID
-            }
-            if let sinceID = sinceID {
-                self?.sinceID = sinceID
+            if (self?.maxID == nil) && (self?.sinceID == nil) {
+                if let sinceID = sinceID {
+                    self?.sinceID = sinceID
+                }
+                if let maxID = maxID {
+                    self?.maxID = maxID
+                }
+            } else {
+                if (self?.fetchNewer)! {
+                    if let sinceID = sinceID {
+                        self?.sinceID = sinceID
+                    }
+                } else {
+                    if let maxID = maxID {
+                        self?.maxID = maxID
+                    }
+                }
+
             }
             
             print(">>> tweets >> \(tweets.count)")
@@ -83,10 +96,8 @@ class SearchTimelineTableViewController: TimelineTableViewController {
                 }
             }
 
-            Timer.scheduledTimer(
-                    withTimeInterval: TimeInterval(0.1),
-                    repeats: false) { (timer) in
-                self?.refreshControl?.endRefreshing()
+            if let handler = handler {
+                handler()
             }
         }
     }

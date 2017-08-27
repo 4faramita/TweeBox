@@ -63,6 +63,8 @@ class Timeline {
                     self.sinceID = self.timeline.first?.id  // vice versa
                     
                     handler(self.maxID, self.sinceID, self.timeline)
+                } else {
+                    handler(self.maxID, self.sinceID, self.timeline)
                 }
             }
         }

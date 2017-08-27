@@ -63,7 +63,7 @@ class ReplyTableViewController: SearchTimelineTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        refreshTimeline()
+        refreshTimeline(handler: nil)
     }
 
     
@@ -78,7 +78,7 @@ class ReplyTableViewController: SearchTimelineTableViewController {
         super.prepare(for: segue, sender: sender)
     }
     
-    override func refreshTimeline() {
+    override func refreshTimeline(handler: ((Void) -> Void)?) {
 
         let screenName = "%40\(tweet?.user.screenName ?? "")"
         
@@ -103,11 +103,24 @@ class ReplyTableViewController: SearchTimelineTableViewController {
         
         replyTimeline.fetchData { [weak self] (maxID, sinceID, tweets) in
             
-            if let maxID = maxID {
-                self?.maxID = maxID
-            }
-            if let sinceID = sinceID {
-                self?.sinceID = sinceID
+            if (self?.maxID == nil) && (self?.sinceID == nil) {
+                if let sinceID = sinceID {
+                    self?.sinceID = sinceID
+                }
+                if let maxID = maxID {
+                    self?.maxID = maxID
+                }
+            } else {
+                if (self?.fetchNewer)! {
+                    if let sinceID = sinceID {
+                        self?.sinceID = sinceID
+                    }
+                } else {
+                    if let maxID = maxID {
+                        self?.maxID = maxID
+                    }
+                }
+                
             }
             
             if tweets.count > 0 {
@@ -127,12 +140,9 @@ class ReplyTableViewController: SearchTimelineTableViewController {
                 
             }
             
-            Timer.scheduledTimer(
-                withTimeInterval: TimeInterval(0.1),
-                repeats: false) { (timer) in
-                    self?.refreshControl?.endRefreshing()
-            }
-        }
+            if let handler = handler {
+                handler()
+            }}
 
     }
     

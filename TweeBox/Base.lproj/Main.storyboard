@@ -512,21 +512,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="RvG-dG-x51">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle">
-                            <fragment content="Refreshing…">
-                                <attributes>
-                                    <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <connections>
-                            <action selector="refresh:" destination="i8A-W9-rEQ" eventType="valueChanged" id="rSi-ee-bl5"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <segue destination="tY3-Cn-E0S" kind="presentation" identifier="videoTapped" id="mef-VN-nlC"/>
                         <segue destination="YmO-B7-dd1" kind="presentation" identifier="imageTapped" id="TE5-Ah-PTm"/>
@@ -1051,13 +1036,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Phd-mn-2Vp">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="refresh:" destination="EXU-Nt-KBj" eventType="valueChanged" id="RfO-c8-E0s"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <segue destination="siG-Yx-ulA" kind="show" identifier="View User" id="hvw-ft-BYD"/>
                     </connections>
@@ -2520,23 +2498,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Mentions" id="GOx-3P-QAy"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="1DU-u3-c0J">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle">
-                            <fragment content="Refreshing…">
-                                <attributes>
-                                    <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <connections>
-                            <action selector="refresh:" destination="2Vl-q0-3Aw" eventType="valueChanged" id="lcl-nE-4z6"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <segue destination="hhk-sn-pmH" kind="show" identifier="Show Tweets with Hashtag" id="4il-EK-Pbn"/>
+                        <segue destination="YmO-B7-dd1" kind="presentation" identifier="imageTapped" id="YxR-e1-kek"/>
+                        <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="8gZ-cg-Gud"/>
+                        <segue destination="tY3-Cn-E0S" kind="presentation" identifier="videoTapped" id="8o8-9i-eyx"/>
+                        <segue destination="CxX-ex-f2w" kind="show" identifier="View Tweet" id="lwM-mG-gHp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4N3-7r-buq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3036,21 +3003,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tweet" id="y8P-g4-6Db"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="4wO-Vn-WFK">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle">
-                            <fragment content="Refreshing…">
-                                <attributes>
-                                    <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <connections>
-                            <action selector="refresh:" destination="CxX-ex-f2w" eventType="valueChanged" id="b4Z-ge-HGZ"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <outlet property="tweetInfoContainerView" destination="JA5-yx-Mu7" id="Lqe-A9-ie1"/>
                         <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="p1a-fx-Q2D"/>
@@ -3536,13 +3488,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ZzI-Ip-5Cn">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="refresh:" destination="hhk-sn-pmH" eventType="valueChanged" id="9ne-Qd-L99"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <segue destination="YmO-B7-dd1" kind="presentation" identifier="imageTapped" id="KTH-sd-gwr"/>
                         <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="jTH-Om-GAS"/>
@@ -3581,12 +3526,12 @@
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NhC-kn-RBT"/>
-        <segue reference="R0C-zo-ejb"/>
-        <segue reference="jTH-Om-GAS"/>
-        <segue reference="poC-IB-rpN"/>
-        <segue reference="KTH-sd-gwr"/>
-        <segue reference="xU8-Oj-mBQ"/>
+        <segue reference="mQn-8J-Vdw"/>
+        <segue reference="4il-EK-Pbn"/>
+        <segue reference="tdV-pQ-YAf"/>
+        <segue reference="qqa-7f-aWM"/>
+        <segue reference="GwV-mx-Cse"/>
+        <segue reference="uxh-8f-EHW"/>
         <segue reference="1w8-WL-0CI"/>
     </inferredMetricsTieBreakers>
 </document>
