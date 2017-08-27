@@ -40,7 +40,6 @@ class RetweetTableViewCell: TweetWithTextTableViewCell {
         tapOnOriginTweet.numberOfTapsRequired = 1
         tapOnOriginTweet.numberOfTouchesRequired = 1
         originTweetView.addGestureRecognizer(tapOnOriginTweet)
-//        originTweetView.isUserInteractionEnabled = true
     }
 
 }

@@ -13,7 +13,7 @@ import VisualEffectView
 import YYText
 import PopupDialog
 
-class SingleTweetViewController: UIViewController {
+class SingleTweetViewController: UIViewController, TweetClickableContentProtocol {
     
     private var retweet: Tweet?
     
@@ -44,6 +44,7 @@ class SingleTweetViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
+    
     @IBOutlet weak var textContentLabel: YYLabel!
     
     @IBOutlet weak var containerView: UIView!
@@ -56,7 +57,6 @@ class SingleTweetViewController: UIViewController {
     
     var keyword: String? {
         didSet {
-            print(">>> keyword in SingleTweetViewController >> \(keyword)")
             if let newKeyword = keyword, newKeyword.hasPrefix("@") || newKeyword.hasPrefix("#") {
                 let index = newKeyword.index(newKeyword.startIndex, offsetBy: 1)
                 keyword = newKeyword.substring(from: index)
@@ -77,7 +77,9 @@ class SingleTweetViewController: UIViewController {
         
     }
 
-
+    func setAndPerformSegueForHashtag() {
+        performSegue(withIdentifier: "Show Tweets with Hashtag", sender: self)
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,12 +93,6 @@ class SingleTweetViewController: UIViewController {
             refreshReply()
         }
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-//        view.sizeToFit()
-//    }
     
     private func addPlayLabel(to view: UIView, isGif: Bool) {
         
@@ -133,7 +129,9 @@ class SingleTweetViewController: UIViewController {
     }
     
     @IBAction private func tapOnProfileImage(_ sender: UIGestureRecognizer) {
-        performSegue(withIdentifier: "View Profile", sender: sender)
+        
+        fetchedUser = tweet.user
+        performSegue(withIdentifier: "profileImageTapped", sender: sender)
     }
     
     private func setTweetContent() {
@@ -145,6 +143,7 @@ class SingleTweetViewController: UIViewController {
                 addPlayLabel(to: containerView, isGif: (media[0].type == "animated_gif"))
             }
         }
+        containerView.cutToRound(radius: 5)
         
         profileImageView.kf.setImage(with: tweet.user.profileImageURL)
         profileImageView.cutToRound(radius: nil)
@@ -157,6 +156,7 @@ class SingleTweetViewController: UIViewController {
         
         nameLabel.text = tweet.user.name
         screenNameLabel.text = "@\(tweet.user.screenName)"
+        
         textContentLabel.attributedText = TwitterAttributedContent(tweet).attributedString
         textContentLabel.lineBreakMode = .byWordWrapping
         textContentLabel.numberOfLines = 0
@@ -248,14 +248,15 @@ class SingleTweetViewController: UIViewController {
                     imageContainerViewController.tweet = tweet
                 }
                 
-            case "View Profile":
+            case "profileImageTapped":
                 
-                if let profileViewController = segue.destination as? UserTimelineTableViewController {
-                    profileViewController.user = tweet?.user
-                    profileViewController.navigationItem.rightBarButtonItem = nil
-                } else if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
-                    profileViewController.user = tweet?.user
+                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                    if let user = fetchedUser {
+                        profileViewController.user = user
+                        profileViewController.navigationItem.rightBarButtonItem = nil
+                    }
                 }
+
                 
             case "Show Tweets with Hashtag":
                 if let searchTimelineViewController = segue.destination.content as? SearchTimelineTableViewController,
@@ -265,15 +266,6 @@ class SingleTweetViewController: UIViewController {
                     
                     searchTimelineViewController.navigationItem.rightBarButtonItem = nil
                 }
-
-            case "Show User":
-                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
-                    if let user = fetchedUser {
-                        profileViewController.user = user
-                        profileViewController.navigationItem.rightBarButtonItem = nil
-                    }
-                }
-
 
             default:
                 return

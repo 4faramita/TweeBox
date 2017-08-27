@@ -22,10 +22,6 @@ class TwitterAttributedContent {
         return (tweet?.text) ?? (user?.description) ?? ""
     }
     
-    private var NSPlainString: NSString {
-        return plainString as NSString
-    }
-    
     private var attributed: NSMutableAttributedString!
     
     private var tweetEntity: Entity? {
@@ -53,7 +49,7 @@ class TwitterAttributedContent {
             
             let stringToBeRender = plainString.substring(with: start..<end)
             
-            let range = NSPlainString.range(of: stringToBeRender)
+            let range = (attributed.string as NSString).range(of: stringToBeRender)
             
 //            attributed.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
             if let url = entity as? TweetURL {
@@ -78,12 +74,13 @@ class TwitterAttributedContent {
                     color: color ?? Constants.themeColor,
                     backgroundColor: nil,
                     userInfo: nil,
-                    tapAction: { [weak self] (containerView, attributedString, range, rect) in
-                        if let sourceViewController = containerView.yy_viewController as? SingleTweetViewController {
+                    tapAction: { (containerView, attributedString, range, rect) in
+                        if var sourceViewController = containerView.yy_viewController as? TweetClickableContentProtocol {
                             
                             let keyword = (attributedString.string as NSString).substring(with: range)
                             sourceViewController.keyword = keyword
-                            sourceViewController.performSegue(withIdentifier: "Show Tweets with Hashtag", sender: self)
+                            sourceViewController.setAndPerformSegueForHashtag()
+//                            sourceViewController.performSegue(withIdentifier: "Show Tweets with Hashtag", sender: self)
                         }
                     },
                     longPressAction: nil
@@ -96,8 +93,7 @@ class TwitterAttributedContent {
                     backgroundColor: nil,
                     userInfo: nil,
                     tapAction: { [weak self] (containerView, attributedString, range, rect) in
-                        
-                        if let sourceViewController = containerView.yy_viewController as? SingleTweetViewController {
+                        if var sourceViewController = containerView.yy_viewController as? TweetClickableContentProtocol {
                             
                             let keyword = (attributedString.string as NSString).substring(with: range)
                             sourceViewController.keyword = keyword
@@ -106,13 +102,12 @@ class TwitterAttributedContent {
                                 userParams: UserParams(userID: nil, screenName: keyword),
                                 resourceURL: ResourceURL.user_show
                             ).fetchData { (singleUser) in
-                                print(">>> detching user")
-                                    
+                                
                                 if let user = singleUser {
                                     sourceViewController.fetchedUser = user
-                                    sourceViewController.performSegue(withIdentifier: "Show User", sender: self)
+                                    sourceViewController.performSegue(withIdentifier: "profileImageTapped", sender: self)
                                 } else {
-                                    sourceViewController.alertForNoSuchUser(viewController: sourceViewController)
+                                    sourceViewController.alertForNoSuchUser(viewController: sourceViewController as! UIViewController)
                                 }
                             }
                         }
@@ -177,7 +172,11 @@ class TwitterAttributedContent {
         
         if let urls = tweetEntity?.urls {
             for url in urls {
-                let _ = changeColorAttribute(to: url, with: Constants.themeColor)
+                if let range = changeColorAttribute(to: url, with: Constants.themeColor),
+                    let urlString = url.displayURL?.absoluteString {
+                    
+                    attributed.mutableString.replaceCharacters(in: range, with: urlString)
+                }
             }
         }
         
@@ -191,8 +190,7 @@ class TwitterAttributedContent {
             
             let firstMedia = media[0]
             
-            let range = changeColorAttribute(to: firstMedia, with: nil)
-            if let range = range {
+            if let range = changeColorAttribute(to: firstMedia, with: nil) {
                 attributed.mutableString.replaceCharacters(in: range, with: "")
             }
         }

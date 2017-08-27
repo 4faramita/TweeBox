@@ -13,7 +13,7 @@ import Kingfisher
 import SnapKit
 import PopupDialog
 
-class TimelineTableViewController: UITableViewController
+class TimelineTableViewController: UITableViewController, TweetClickableContentProtocol
 //, ScrollingNavigationControllerDelegate 
 {
     var emptyWarningCollapsed = false
@@ -51,8 +51,11 @@ class TimelineTableViewController: UITableViewController
     // tap to segue
     weak var delegate:TweetWithPicTableViewCell?
 
-//    var clickedCellTextLabelHeight: CGFloat?
-    var clickedTweet: Tweet?
+    var clickedTweet: Tweet? {
+        didSet {
+            fetchedUser = clickedTweet?.user
+        }
+    }
     var clickedImageIndex: Int?
     var clickMedia: UIImage? {
         didSet {
@@ -62,6 +65,18 @@ class TimelineTableViewController: UITableViewController
     var imageURLToShare: URL?
 
     var media: [TweetMedia]!
+    
+    var keyword: String? {
+        didSet {
+            if let newKeyword = keyword, newKeyword.hasPrefix("@") || newKeyword.hasPrefix("#") {
+                let index = newKeyword.index(newKeyword.startIndex, offsetBy: 1)
+                keyword = newKeyword.substring(from: index)
+            }
+        }
+    }
+    
+    var fetchedUser: TwitterUser?
+
     
     
     // MARK: - Life cycle
@@ -122,6 +137,17 @@ class TimelineTableViewController: UITableViewController
 //        }
 //        
 //    }
+    
+    func alertForNoSuchUser(viewController: UIViewController) {
+        
+        print(">>> no user")
+        
+        let popup = PopupDialog(title: "Cannot Find User @\(keyword ?? "")", message: "Please check your input.", image: nil)
+        let cancelButton = CancelButton(title: "OK") { }
+        popup.addButton(cancelButton)
+        viewController.present(popup, animated: true, completion: nil)
+        
+    }
     
     
     private func updateTimeLabel() {
@@ -201,21 +227,6 @@ class TimelineTableViewController: UITableViewController
         let searchViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GeneralSearchViewController")
         let popup = PopupDialog.init(viewController: searchViewController)
         
-//        let popup = PopupDialog(title: "Test Dialog", message: "Look!", image: UIImage(named: "twitter_selected"))
-//        let buttonOne = CancelButton(title: "CANCEL") {
-//            print("You canceled the car dialog.")
-//        }
-//        
-//        let buttonTwo = DefaultButton(title: "ADMIRE CAR") {
-//            print("What a beauty!")
-//        }
-//        
-//        let buttonThree = DefaultButton(title: "BUY CAR", height: 60) {
-//            print("Ah, maybe next time :)")
-//        }
-//        
-//        popup.addButtons([buttonOne, buttonTwo, buttonThree])
-
         present(popup, animated: true, completion: nil)
     }
     
@@ -234,19 +245,8 @@ class TimelineTableViewController: UITableViewController
         
         clickedTweet = timeline[indexPath.section][indexPath.row]
         
-//        if let cell = tableView.cellForRow(at: indexPath) as? TweetWithTextTableViewCell {
-//            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
-//        } else if let cell = tableView.cellForRow(at: indexPath) as? TweetWithPicAndTextTableViewCell {
-//            clickedCellTextLabelHeight = cell.tweetTextContent?.frame.height
-//        }
-
-        setAndPerformSegue()
+        setAndPerformSegueForSingleTweet()
     }
-
-    func setAndPerformSegue() {
-        performSegue(withIdentifier: "View Tweet", sender: self)
-    }
-    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return timeline.count
@@ -264,8 +264,9 @@ class TimelineTableViewController: UITableViewController
         let tweet = timeline[indexPath.section][indexPath.row]
         
         if (tweet.quotedStatus != nil) || (tweet.retweetedStatus?.quotedStatus != nil) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Retweet with Comment", for: indexPath)
-            if let retweetCell = cell as? RetweetTableViewCell {
+            cell = tableView.dequeueReusableCell(withIdentifier: "Quote Tweet", for: indexPath)
+            if let retweetCell = cell as? GeneralTweetTableViewCell {
+                
                 retweetCell.tweet = tweet
                 
                 // tap to segue
@@ -273,74 +274,24 @@ class TimelineTableViewController: UITableViewController
                 retweetCell.section = indexPath.section
                 retweetCell.row = indexPath.row
             }
+        } else if let count = tweet.entities?.media?.count, count > 0 {
             
-        } else if let media = tweet.entities?.media {
-            switch media.count {
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Text", for: indexPath)
-                if let tweetCell = cell as? TweetWithTextTableViewCell {
-                    tweetCell.tweet = tweet
-                    
-                    // tap to segue
-                    tweetCell.delegate = self
-                    tweetCell.section = indexPath.section
-                    tweetCell.row = indexPath.row
-                }
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Pic and Text", for: indexPath)
-                if let tweetCell = cell as? TweetWithPicAndTextTableViewCell {
-                    tweetCell.tweet = tweet
-                    
-                    // tap to segue
-                    tweetCell.delegate = self
-                    tweetCell.section = indexPath.section
-                    tweetCell.row = indexPath.row
-                    tweetCell.mediaIndex = 0
-                }
-            case 2:
-                cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Two Pics and Text", for: indexPath)
-                if let tweetCell = cell as? TweetWithPicAndTextTableViewCell {
-                    tweetCell.tweet = tweet
-                    
-                    // tap to segue
-                    tweetCell.delegate = self
-                    tweetCell.section = indexPath.section
-                    tweetCell.row = indexPath.row
-                }
-            case 3:
-                cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Three Pics and Text", for: indexPath)
-                if let tweetCell = cell as? TweetWithPicAndTextTableViewCell {
-                    tweetCell.tweet = tweet
-                    
-                    // tap to segue
-                    tweetCell.delegate = self
-                    tweetCell.section = indexPath.section
-                    tweetCell.row = indexPath.row
-                }
-            case 4:
-                cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Four Pics and Text", for: indexPath)
-                if let tweetCell = cell as? TweetWithPicAndTextTableViewCell {
-                    tweetCell.tweet = tweet
-                    
-                    // tap to segue
-                    tweetCell.delegate = self
-                    tweetCell.section = indexPath.section
-                    tweetCell.row = indexPath.row
-                }
-            default:
-                cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Text", for: indexPath)
-                if let tweetCell = cell as? TweetWithTextTableViewCell {
-                    tweetCell.tweet = tweet
-                    
-                    // tap to segue
-                    tweetCell.delegate = self
-                    tweetCell.section = indexPath.section
-                    tweetCell.row = indexPath.row
-                }
+            cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Media", for: indexPath)
+            
+            if let tweetCell = cell as? GeneralTweetTableViewCell {
+                
+                tweetCell.tweet = tweet
+                
+                // tap to segue
+                tweetCell.delegate = self
+                tweetCell.section = indexPath.section
+                tweetCell.row = indexPath.row
             }
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Text", for: indexPath)
-            if let tweetCell = cell as? TweetWithTextTableViewCell {
+            cell = tableView.dequeueReusableCell(withIdentifier: "Tweet", for: indexPath)
+            
+            if let tweetCell = cell as? GeneralTweetTableViewCell {
+                
                 tweetCell.tweet = tweet
                 
                 // tap to segue
@@ -363,7 +314,7 @@ class TimelineTableViewController: UITableViewController
 }
 
 // tap to segue
-extension TimelineTableViewController: TweetTableViewCellProtocol {
+extension TimelineTableViewController: GeneralTweetTableViewCellProtocol {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -382,23 +333,52 @@ extension TimelineTableViewController: TweetTableViewCellProtocol {
             case "profileImageTapped":
                 if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
                     
-                    if let realViewController = segue.destination as? UserTimelineTableViewController {
-                        realViewController.navigationItem.rightBarButtonItem = nil
-                    }
-
+//                    if let realViewController = segue.destination as? UserTimelineTableViewController {
+                    profileViewController.navigationItem.rightBarButtonItem = nil
+//                    }
                     
-                    profileViewController.user = clickedTweet?.user
+
+                    profileViewController.user = fetchedUser
+//                    profileViewController.user = clickedTweet?.user
                 }
                 
             case "View Tweet":
                 if let singleTweetViewController = segue.destination.content as? ReplyTableViewController {
                     singleTweetViewController.tweet = clickedTweet
                 }
+                
+            case "Show Tweets with Hashtag":
+                if let searchTimelineViewController = segue.destination.content as? SearchTimelineTableViewController,
+                    let keyword = keyword {
+                    searchTimelineViewController.query = "%23\(keyword)"
+                    searchTimelineViewController.navigationItem.title = "#\(keyword)"
+                    
+                    searchTimelineViewController.navigationItem.rightBarButtonItem = nil
+                }
+                
+            case "Show User":
+                if let profileViewController = segue.destination.content as? UserTimelineTableViewController {
+                    if let user = fetchedUser {
+                        profileViewController.user = user
+                        profileViewController.navigationItem.rightBarButtonItem = nil
+                    }
+                }
+
             default:
                 break
             }
         }
     }
+    
+    func setAndPerformSegueForHashtag() {
+        performSegue(withIdentifier: "Show Tweets with Hashtag", sender: self)
+    }
+    
+    func setAndPerformSegueForSingleTweet() {
+        performSegue(withIdentifier: "View Tweet", sender: self)
+    }
+
+
     
     func profileImageTapped(section: Int, row: Int) {
                 

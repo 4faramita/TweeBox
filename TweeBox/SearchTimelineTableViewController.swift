@@ -11,7 +11,6 @@ class SearchTimelineTableViewController: TimelineTableViewController {
 
     var query: String? {
         didSet {
-            print(">>> keyword set at SearchTimelineTableViewController >> \(query)")
             refreshTimeline()
         }
     }
@@ -24,19 +23,19 @@ class SearchTimelineTableViewController: TimelineTableViewController {
         dismiss(animated: true, completion: nil)
     }
 
-
-    override func setAndPerformSegue() {
-
-        let destinationViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReplyTableViewController")
-
-        let segue = UIStoryboardSegue(identifier: "View Tweet", source: self, destination: destinationViewController) {
+    override func setAndPerformSegueForHashtag() {
+        
+        let destinationViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchTimelineViewController")
+        
+        let segue = UIStoryboardSegue(identifier: "Show Tweets with Hashtag", source: self, destination: destinationViewController) {
             self.navigationController?.show(destinationViewController, sender: self)
         }
-
+        
         self.prepare(for: segue, sender: self)
         segue.perform()
-    }
 
+    }
+    
 
     override func refreshTimeline() {
 

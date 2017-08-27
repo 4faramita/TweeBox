@@ -10,6 +10,7 @@ import UIKit
 import Kingfisher
 import DateToolsSwift
 
+
 protocol TweetTableViewCellProtocol: class {
     
     func profileImageTapped(section: Int, row: Int)
