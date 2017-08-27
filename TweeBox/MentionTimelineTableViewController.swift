@@ -39,7 +39,7 @@ class MentionTimelineTableViewController: TimelineTableViewController {
                 if cells != nil {
                     for cell in cells! {
                         let indexPath = self?.tableView.indexPath(for: cell)
-                        if let tweetCell = cell as? TweetTableViewCell {
+                        if let tweetCell = cell as? GeneralTweetTableViewCell {
                             tweetCell.section = indexPath?.section
                         }
                     }

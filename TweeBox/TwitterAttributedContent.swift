@@ -149,13 +149,21 @@ class TwitterAttributedContent {
     
     private func getAttributedContent() -> NSAttributedString {
         
-        attributed = NSMutableAttributedString.init(string: plainString)
+        attributed = NSMutableAttributedString.init(string: plainString.stringByDecodingHTMLEntities)
+        
+        let fullRange = NSRange.init(location: 0, length: attributed.length)
+
+        // Set unified paragraph style
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .natural
+        attributed.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: fullRange)
         
         if user != nil {
-            let range = NSRange.init(location: 0, length: attributed.length)
             let descriptionFont = UIFont.preferredFont(forTextStyle: .caption2)
-            attributed.addAttribute(NSFontAttributeName, value: descriptionFont, range: range)
-            attributed.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: range)
+            attributed.addAttribute(NSFontAttributeName, value: descriptionFont, range: fullRange)
+            attributed.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: fullRange)
         }
         
         if let hashtags = tweetEntity?.hashtags {

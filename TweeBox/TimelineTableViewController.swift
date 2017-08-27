@@ -49,7 +49,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
      */
     
     // tap to segue
-    weak var delegate:TweetWithPicTableViewCell?
+    weak var delegate:GeneralTweetTableViewCell?
 
     var clickedTweet: Tweet? {
         didSet {
@@ -153,7 +153,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     private func updateTimeLabel() {
         let cells = self.tableView.visibleCells
         for cell in cells {
-            if let tweetCell = cell as? TweetTableViewCell {
+            if let tweetCell = cell as? GeneralTweetTableViewCell {
                 tweetCell.tweetCreatedTime.text = tweetCell.tweet?.createdTime?.shortTimeAgoSinceNow
             }
         }
@@ -204,7 +204,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 if cells != nil {
                     for cell in cells! {
                         let indexPath = self?.tableView.indexPath(for: cell)
-                        if let tweetCell = cell as? TweetTableViewCell {
+                        if let tweetCell = cell as? GeneralTweetTableViewCell {
                             tweetCell.section = indexPath?.section
                         }
                     }
