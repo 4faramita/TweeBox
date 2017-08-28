@@ -10,6 +10,8 @@ import Foundation
 
 struct ResourceURL {
     
+    // GET
+    
     static let user_lookup = (url: "https://api.twitter.com/1.1/users/lookup.json", method: "GET")
     /*
      Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.
@@ -39,4 +41,10 @@ struct ResourceURL {
     
     
     static let search_tweets = (url: "https://api.twitter.com/1.1/search/tweets.json", method: "GET")
+    
+    
+    
+    // POST
+    
+    static let statuses_destroy_id = (url: "https://api.twitter.com/1.1/statuses/destroy/:id.json", method: "POST")
 }

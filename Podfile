@@ -22,4 +22,5 @@ target 'TweeBox' do
 	pod 'PopupDialog', '~> 0.5'
 	pod 'YYText'
 	pod "ESPullToRefresh"
+	pod 'SwipeCellKit'
 end

@@ -9,7 +9,7 @@
 ### Timeline:
 - [x] Basic timeline information display
 - [x] Timeline text parsing
-- [ ] **Timeline click action**
+- [x] **Timeline click action**
 - [x] Click and wait indicator
 - [ ] Image viewer:
   - [x] Gestures, alerts
@@ -24,8 +24,8 @@
   - [x] Basic infomation
   - [ ] Text parsing
   - [x] Click action (query)
-- [ ] **Save to database**
-- [ ] **Load upward and downward**
+- [ ] Save to database
+- [x] Load upward and downward
 - [x] View replies
 - [x] View context
 

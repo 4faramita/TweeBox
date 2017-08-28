@@ -8,6 +8,7 @@
 
 import UIKit
 import ESPullToRefresh
+import SwipeCellKit
 
 class UserListTableViewController: UITableViewController {
     
@@ -171,6 +172,7 @@ class UserListTableViewController: UITableViewController {
         
         if let userCell = cell as? TwitterUserTableViewCell {
             userCell.user = user
+            userCell.delegate = self
         }
         
         return cell
@@ -198,6 +200,56 @@ class UserListTableViewController: UITableViewController {
         }
     }
 }
+
+
+extension UserListTableViewController: SwipeTableViewCellDelegate {
+    
+    /**
+     Asks the delegate for the actions to display in response to a swipe in the specified row.
+     
+     - parameter tableView: The table view object which owns the cell requesting this information.
+     
+     - parameter indexPath: The index path of the row.
+     
+     - parameter orientation: The side of the cell requesting this information.
+     
+     - returns: An array of `SwipeAction` objects representing the actions for the row. Each action you provide is used to create a button that the user can tap.  Returning `nil` will prevent swiping for the supplied orientation.
+     */
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        if orientation == .right {
+            
+            let followAction = SwipeAction(style: .default, title: "Folloew") { action, indexPath in
+                print(">>> Folloew")
+            }
+            followAction.backgroundColor = .yellow
+            
+            let DMAction = SwipeAction(style: .default, title: "Message") { action, indexPath in
+                print(">>> Message")
+            }
+            DMAction.backgroundColor = .blue
+            
+            return [followAction, DMAction]
+            
+        } else {
+            
+            let BlockAction = SwipeAction(style: .destructive, title: "Block") { action, indexPath in
+                print(">>> Block")
+            }
+            BlockAction.backgroundColor = .darkGray
+            BlockAction.textColor = .lightGray
+            
+            let reportAction = SwipeAction(style: .destructive, title: "Report Spam") { action, indexPath in
+                print(">>> Report Spam")
+            }
+            
+            return [BlockAction, reportAction]
+        }
+        
+    }
+}
+
+
 
 
 //enum UserListType {

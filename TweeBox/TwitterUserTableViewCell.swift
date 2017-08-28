@@ -9,8 +9,9 @@
 import UIKit
 import Kingfisher
 import DateToolsSwift
+import SwipeCellKit
 
-class TwitterUserTableViewCell: UITableViewCell {
+class TwitterUserTableViewCell: SwipeTableViewCell {
 
     public var user: TwitterUser? {
         didSet {

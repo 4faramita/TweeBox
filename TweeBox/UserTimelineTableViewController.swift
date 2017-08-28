@@ -29,7 +29,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
             if user == nil {
                 setUser()
             }
-            refreshTimeline(handler: nil)
         }
     }
 
@@ -56,7 +55,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
     private var headerHeight: CGFloat = 0
     private var headerHeightCalculated = false
 
-    private var isRefreshing = false
     private var isStretching = false {
         didSet {
             if !isStretching, isRefreshing {
@@ -70,13 +68,16 @@ class UserTimelineTableViewController: TimelineTableViewController {
         
         if let height = tableView.parallaxHeader.view?.bounds.height {
 
-            if height > (headerHeight * 1.1) {
-                isStretching = true
-            } else {
-                isStretching = false
+            if headerHeightCalculated {
+                
+                if height > (headerHeight * 1.1) {
+                    isStretching = true
+                } else {
+                    isStretching = false
+                }
+            
+                pullToRefresh(height)
             }
-
-            pullToRefresh(height)
 
             makeProfileObjectsDisapearByPulling(height)
 
@@ -96,9 +97,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
     override func addRefresher() { }
 
     private func pullToRefresh(_ height: CGFloat) {
-        if height > (headerHeight + Constants.profilePanelDragOffset), !isRefreshing {
-            print("refreshing")
-            isRefreshing = true
+        if height > (headerHeight + Constants.profilePanelDragOffset) {
             refreshTimeline(handler: nil)
         }
     }
@@ -152,45 +151,54 @@ class UserTimelineTableViewController: TimelineTableViewController {
     }
 
     override func refreshTimeline(handler: ((Void) -> Void)?) {
-
-        let userTimelineParams = UserTimelineParams(of: userID!)
-
-        let timeline = Timeline(
-            maxID: maxID,
-            sinceID: sinceID,
-            fetchNewer: fetchNewer,
-            resourceURL: userTimelineParams.resourceURL,
-            timelineParams: userTimelineParams
-        )
-
-        timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
+        
+        if !isRefreshing {
             
-            if (self?.maxID == nil) && (self?.sinceID == nil) {
-                if let sinceID = sinceID {
-                    self?.sinceID = sinceID
-                }
-                if let maxID = maxID {
-                    self?.maxID = maxID
-                }
-            } else {
-                if (self?.fetchNewer)! {
+            isRefreshing = true
+            
+            let userTimelineParams = UserTimelineParams(of: userID!)
+            
+            let timeline = Timeline(
+                maxID: maxID,
+                sinceID: sinceID,
+                fetchNewer: fetchNewer,
+                resourceURL: userTimelineParams.resourceURL,
+                timelineParams: userTimelineParams
+            )
+            
+            timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
+                
+                if (self?.maxID == nil) && (self?.sinceID == nil) {
                     if let sinceID = sinceID {
                         self?.sinceID = sinceID
                     }
-                } else {
                     if let maxID = maxID {
                         self?.maxID = maxID
                     }
+                } else {
+                    if (self?.fetchNewer)! {
+                        if let sinceID = sinceID {
+                            self?.sinceID = sinceID
+                        }
+                    } else {
+                        if let maxID = maxID {
+                            self?.maxID = maxID
+                        }
+                    }
+                    
                 }
                 
-            }
-            
-            if tweets.count != 0 {
-                self?.insertNewTweets(with: tweets)
-            }
-
-            if let handler = handler {
-                handler()
+                if tweets.count != 0 {
+                    self?.insertNewTweets(with: tweets)
+                }
+                
+                if !((self?.isStretching)!) {
+                    self?.isStretching = false
+                }
+                
+                if let handler = handler {
+                    handler()
+                }
             }
         }
     }

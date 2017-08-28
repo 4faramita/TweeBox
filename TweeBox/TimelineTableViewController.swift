@@ -13,6 +13,7 @@ import Kingfisher
 import SnapKit
 import PopupDialog
 import ESPullToRefresh
+import SwipeCellKit
 
 class TimelineTableViewController: UITableViewController, TweetClickableContentProtocol
 //, ScrollingNavigationControllerDelegate 
@@ -50,7 +51,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
      */
     
     // tap to segue
-    weak var delegate:GeneralTweetTableViewCell?
+//    weak var delegate: GeneralTweetTableViewCell?
 
     var clickedTweet: Tweet? {
         didSet {
@@ -77,8 +78,9 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     }
     
     var fetchedUser: TwitterUser?
-
     
+    var isRefreshing = false
+
     
     // MARK: - Life cycle
     
@@ -216,59 +218,66 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     
     func refreshTimeline(handler: ((Void) -> Void)?) {
         
-        let homeTimelineParams = HomeTimelineParams()
-        
-        let timeline = Timeline(
-            maxID: maxID,
-            sinceID: sinceID,
-            fetchNewer: fetchNewer,
-            resourceURL: homeTimelineParams.resourceURL,
-            timelineParams: homeTimelineParams
-        )
-        
-        timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
+        if !isRefreshing {
             
-            if (self?.maxID == nil) && (self?.sinceID == nil) {
-                if let sinceID = sinceID {
-                    self?.sinceID = sinceID
-                }
-                if let maxID = maxID {
-                    self?.maxID = maxID
-                }
-            } else {
-                if (self?.fetchNewer)! {
+            isRefreshing = true
+            
+            let homeTimelineParams = HomeTimelineParams()
+            
+            let timeline = Timeline(
+                maxID: maxID,
+                sinceID: sinceID,
+                fetchNewer: fetchNewer,
+                resourceURL: homeTimelineParams.resourceURL,
+                timelineParams: homeTimelineParams
+            )
+            
+            timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
+                
+                if (self?.maxID == nil) && (self?.sinceID == nil) {
                     if let sinceID = sinceID {
                         self?.sinceID = sinceID
                     }
-                } else {
                     if let maxID = maxID {
                         self?.maxID = maxID
                     }
-                }
-                
-            }
-            
-            if tweets.count > 0 {
-                
-                self?.insertNewTweets(with: tweets)
-                
-                let cells = self?.tableView.visibleCells
-                if cells != nil {
-                    for cell in cells! {
-                        let indexPath = self?.tableView.indexPath(for: cell)
-                        if let tweetCell = cell as? GeneralTweetTableViewCell {
-                            tweetCell.section = indexPath?.section
+                } else {
+                    if (self?.fetchNewer)! {
+                        if let sinceID = sinceID {
+                            self?.sinceID = sinceID
+                        }
+                    } else {
+                        if let maxID = maxID {
+                            self?.maxID = maxID
                         }
                     }
                     
                 }
                 
-            }
-            if let handler = handler {
-                handler()
+                if tweets.count > 0 {
+                    
+                    self?.insertNewTweets(with: tweets)
+                    
+                    let cells = self?.tableView.visibleCells
+                    if cells != nil {
+                        for cell in cells! {
+                            let indexPath = self?.tableView.indexPath(for: cell)
+                            if let tweetCell = cell as? GeneralTweetTableViewCell {
+                                tweetCell.section = indexPath?.section
+                            }
+                        }
+                        
+                    }
+                    
+                }
+                
+                self?.isRefreshing = false
+                
+                if let handler = handler {
+                    handler()
+                }
             }
         }
-        
     }
     
     @IBAction func search(_ sender: UIBarButtonItem) {
@@ -320,6 +329,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 
                 // tap to segue
                 retweetCell.delegate = self
+                retweetCell.tapDelegate = self
                 retweetCell.section = indexPath.section
                 retweetCell.row = indexPath.row
             }
@@ -333,6 +343,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 
                 // tap to segue
                 tweetCell.delegate = self
+                tweetCell.tapDelegate = self
                 tweetCell.section = indexPath.section
                 tweetCell.row = indexPath.row
             }
@@ -345,6 +356,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 
                 // tap to segue
                 tweetCell.delegate = self
+                tweetCell.tapDelegate = self
                 tweetCell.section = indexPath.section
                 tweetCell.row = indexPath.row
             }
@@ -515,3 +527,45 @@ extension TimelineTableViewController: GeneralTweetTableViewCellProtocol {
         }
     }
 }
+
+
+extension TimelineTableViewController: SwipeTableViewCellDelegate {
+    
+    /**
+     Asks the delegate for the actions to display in response to a swipe in the specified row.
+     
+     - parameter tableView: The table view object which owns the cell requesting this information.
+     
+     - parameter indexPath: The index path of the row.
+     
+     - parameter orientation: The side of the cell requesting this information.
+     
+     - returns: An array of `SwipeAction` objects representing the actions for the row. Each action you provide is used to create a button that the user can tap.  Returning `nil` will prevent swiping for the supplied orientation.
+     */
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        if orientation == .right {
+            
+            let replyAction = SwipeAction(style: .default, title: "Reply") { action, indexPath in
+                print(">>> Reply")
+            }
+            
+            let retweetAction = SwipeAction(style: .default, title: "Retweet") { action, indexPath in
+                print(">>> Retweet")
+            }
+            retweetAction.backgroundColor = .green
+            
+            return [replyAction, retweetAction]
+            
+        } else {
+            
+            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+                print(">>> Delete")
+            }
+
+            return [deleteAction]
+        }
+        
+    }
+}
+

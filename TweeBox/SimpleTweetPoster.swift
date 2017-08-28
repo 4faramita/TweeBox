@@ -1,36 +1,36 @@
 //
-//  SingleUser.swift
+//  SimpleTweetPoster.swift
 //  TweeBox
 //
-//  Created by 4faramita on 2017/8/20.
+//  Created by 4faramita on 2017/8/28.
 //  Copyright © 2017年 4faramita. All rights reserved.
 //
 
 import Foundation
 import SwiftyJSON
 
-class SingleUser {
-    
-//    private var user: TwitterUser!
+
+class SimpleTweetPoster {
     
     public var resourceURL: (String, String)
-    public var userParams: UserParams
+    public var tweetParams: SimplePostParams
     
-    init(userParams: UserParams, resourceURL: (String, String)) {
+    init(tweetParams: SimplePostParams, resourceURL: (String, String)) {
         self.resourceURL = resourceURL
-        self.userParams = userParams
+        self.tweetParams = tweetParams
     }
+
     
-    public func fetchData(_ handler: @escaping (TwitterUser?) -> Void) {
+    public func postData(_ handler: @escaping (String?) -> Void) {
         if Constants.selfID != "-1" {
-            let client = RESTfulClient(resource: resourceURL, params: userParams.getParams())
+            let client = RESTfulClient(resource: resourceURL, params: tweetParams.getParams())
             
             client.getData() { data in
                 if let data = data {
                     let json = JSON(data: data)
                     if json.null == nil {
-                        let user = TwitterUser(with: json)
-                        handler(user)
+                        let tweet = Tweet(with: json)
+                        handler(tweet.id)
                     } else {
                         handler(nil)
                     }
@@ -40,4 +40,5 @@ class SingleUser {
             }
         }
     }
+
 }

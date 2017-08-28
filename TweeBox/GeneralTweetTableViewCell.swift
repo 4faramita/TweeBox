@@ -11,6 +11,7 @@ import YYText
 import Kingfisher
 import DateToolsSwift
 import VisualEffectView
+import SwipeCellKit
 
 protocol GeneralTweetTableViewCellProtocol: class {
     
@@ -22,11 +23,11 @@ protocol GeneralTweetTableViewCellProtocol: class {
 }
 
 
-class GeneralTweetTableViewCell: UITableViewCell {
+class GeneralTweetTableViewCell: SwipeTableViewCell {
     
     
     // tap to segue
-    weak var delegate: GeneralTweetTableViewCellProtocol?
+    weak var tapDelegate: GeneralTweetTableViewCellProtocol?
     
     var section: Int?
     var row: Int?
@@ -248,18 +249,18 @@ extension GeneralTweetTableViewCell {
     
     @IBAction func profileImageTapped(byReactingTo: UIGestureRecognizer) {
         guard let section = section, let row = row else { return }
-        delegate?.profileImageTapped(section: section, row: row)
+        tapDelegate?.profileImageTapped(section: section, row: row)
     }
     
     @IBAction func imageTapped() {
         
         guard let section = section, let row = row, let mediaIndex = mediaIndex else { return }
-        delegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.entities?.media)!)
+        tapDelegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.entities?.media)!)
     }
     
     @IBAction func originTweetTapped(byReactingTo: UIGestureRecognizer) {
         guard let section = section, let row = row else { return }
-        delegate?.originTweetTapped(section: section, row: row)
+        tapDelegate?.originTweetTapped(section: section, row: row)
     }
     
 }
