@@ -77,19 +77,21 @@ class UserList: UserListRetrieverProtocol {
                     }
                     
                     if self.fetchOlder, let tailID = self.tailID {
-                        for index in stride(from: self.userList.endIndex - 1, through: 0, by: -1) {
+                        for index in stride(from: self.userList.endIndex - 1, through: self.userList.startIndex, by: -1) {
                             if self.userList[index].id == tailID {
 //                                self.userList = self.userList[(index + 1)..<(self.userList.endIndex)]
                                 self.userList = Array(self.userList.suffix(self.userList.endIndex - index - 1))
+                                break
                             }
                         }
                     }
                     
                     if !(self.fetchOlder), let headID = self.headID {
-                        for index in 0..<self.userList.endIndex {
+                        for index in self.userList.startIndex..<self.userList.endIndex {
                             if self.userList[index].id == headID {
 //                                self.userList = self.userList[0..<index]
                                 self.userList = Array(self.userList.prefix(index))
+                                break
                             }
                         }
                     }

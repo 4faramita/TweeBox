@@ -22,17 +22,17 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     var timeline = [Array<Tweet>]() {
         didSet {
             
-            guard timeline.count > 0, emptyWarningCollapsed else {
-                
-                if timeline.count > 0
-//                    , let navigationController = navigationController
-                {
+//            guard timeline.count > 0, emptyWarningCollapsed else {
+//                
+//                if timeline.count > 0
+////                    , let navigationController = navigationController
+//                {
 //                    Whisper.hide(whisperFrom: navigationController)
-                    tableView.separatorStyle = .singleLine
-                    emptyWarningCollapsed = true
-                }
-                return
-            }
+//                    tableView.separatorStyle = .singleLine
+//                    emptyWarningCollapsed = true
+//                }
+//                return
+//            }
             
             print(">>> Batch >> \(timeline.count)")
         }
@@ -99,7 +99,8 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         //  Warning text when table is empty
         
         if timeline.flatMap({ $0 }).count == 0 {
-            showEmptyWarningMessage()
+//            showEmptyWarningMessage()
+            refreshTimeline(handler: nil)
         }
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in

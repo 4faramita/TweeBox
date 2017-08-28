@@ -212,9 +212,9 @@ class UserTimelineTableViewController: TimelineTableViewController {
         segue.perform()
     }
 
-    override func showEmptyWarningMessage() {
-        emptyWarningCollapsed = true
-    }
+//    override func showEmptyWarningMessage() {
+//        emptyWarningCollapsed = true
+//    }
     
     @IBAction func done(_ sender: Any?) {
         dismiss(animated: true, completion: nil)

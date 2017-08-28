@@ -16,8 +16,8 @@ struct Constants {
         return Twitter.sharedInstance().sessionStore.session()?.userID ?? "-1"
     }
 
-    static let tweetLimitPerRefresh = "10"
-    static let userLimitPerRefresh = "10"
+    static let tweetLimitPerRefresh = "100"
+    static let userLimitPerRefresh = "100"
     
     static let picQuality = MediaSize.large
     
