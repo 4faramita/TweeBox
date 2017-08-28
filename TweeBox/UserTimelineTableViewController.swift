@@ -149,7 +149,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
             headerHeightCalculated = true
         }
     }
-
+    
     override func refreshTimeline(handler: ((Void) -> Void)?) {
         
         if !isRefreshing {

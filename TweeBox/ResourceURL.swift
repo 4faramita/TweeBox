@@ -47,4 +47,11 @@ struct ResourceURL {
     // POST
     
     static let statuses_destroy_id = (url: "https://api.twitter.com/1.1/statuses/destroy/:id.json", method: "POST")
+    
+    static let statuses_unretweet_id = (url: "https://api.twitter.com/1.1/statuses/unretweet/:id.json", method: "POST")
+    
+    static let statuses_retweet_id = (url: "https://api.twitter.com/1.1/statuses/retweet/:id.json", method: "POST")
+
+    
+    static let users_report_spam = (url: "https://api.twitter.com/1.1/users/report_spam.json", method: "POST")
 }

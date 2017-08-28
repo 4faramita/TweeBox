@@ -11,9 +11,9 @@ import TwitterKit
 
 class RESTfulClient {
     
-    private var resource: (url: String, method: String)
+    var resource: (url: String, method: String)
     
-    private var params: [String: Any]?
+    var params: [String: Any]?
     
 //    private var dataJSON: Data?
     

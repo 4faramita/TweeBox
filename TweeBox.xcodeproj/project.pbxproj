@@ -64,6 +64,8 @@
 		B4A2AB901F52EF23008EF7A2 /* TweetClickableContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2AB8F1F52EF23008EF7A2 /* TweetClickableContentProtocol.swift */; };
 		B4A2AB921F54634B008EF7A2 /* SimplePostParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2AB911F54634B008EF7A2 /* SimplePostParams.swift */; };
 		B4A2AB941F54670A008EF7A2 /* SimpleTweetPoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2AB931F54670A008EF7A2 /* SimpleTweetPoster.swift */; };
+		B4A2AB971F547DB4008EF7A2 /* SimpleTweetComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2AB961F547DB4008EF7A2 /* SimpleTweetComposer.swift */; };
+		B4A2AB991F54874D008EF7A2 /* RESTfulClientWithID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2AB981F54874D008EF7A2 /* RESTfulClientWithID.swift */; };
 		B4B406321F40A0A500683124 /* EmbededPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B406311F40A0A500683124 /* EmbededPageViewController.swift */; };
 		B4B406341F40B2EA00683124 /* PageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B406331F40B2EA00683124 /* PageManagerViewController.swift */; };
 		B4B406361F4163E600683124 /* HomeTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B406351F4163E600683124 /* HomeTimelineTableViewController.swift */; };
@@ -172,6 +174,8 @@
 		B4A2AB8F1F52EF23008EF7A2 /* TweetClickableContentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetClickableContentProtocol.swift; sourceTree = "<group>"; };
 		B4A2AB911F54634B008EF7A2 /* SimplePostParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePostParams.swift; sourceTree = "<group>"; };
 		B4A2AB931F54670A008EF7A2 /* SimpleTweetPoster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTweetPoster.swift; sourceTree = "<group>"; };
+		B4A2AB961F547DB4008EF7A2 /* SimpleTweetComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTweetComposer.swift; sourceTree = "<group>"; };
+		B4A2AB981F54874D008EF7A2 /* RESTfulClientWithID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTfulClientWithID.swift; sourceTree = "<group>"; };
 		B4B406311F40A0A500683124 /* EmbededPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbededPageViewController.swift; sourceTree = "<group>"; };
 		B4B406331F40B2EA00683124 /* PageManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageManagerViewController.swift; sourceTree = "<group>"; };
 		B4B406351F4163E600683124 /* HomeTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimelineTableViewController.swift; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 				B443A0F51F2B43EB0021BB65 /* ResourceURL.swift */,
 				B488E6661F49E2C80033CFAD /* Params */,
 				B443A0F71F2B44FD0021BB65 /* RESTfulClient.swift */,
+				B4A2AB981F54874D008EF7A2 /* RESTfulClientWithID.swift */,
 				B4047B811F4EC575004E2AE3 /* SearchResultType.swift */,
 			);
 			name = "RESTful Client";
@@ -425,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				B4A2AB931F54670A008EF7A2 /* SimpleTweetPoster.swift */,
+				B4A2AB961F547DB4008EF7A2 /* SimpleTweetComposer.swift */,
 			);
 			name = "Data Poster";
 			sourceTree = "<group>";
@@ -723,6 +729,7 @@
 				B43BB8BD1F35A4A40011A301 /* Place.swift in Sources */,
 				B488E6751F4B0E890033CFAD /* ImageContainerViewController.swift in Sources */,
 				B443A0F21F2B38050021BB65 /* TwitterUser.swift in Sources */,
+				B4A2AB971F547DB4008EF7A2 /* SimpleTweetComposer.swift in Sources */,
 				B4A2AB8C1F52A621008EF7A2 /* GeneralTweetTableViewCell.swift in Sources */,
 				B4C5E7841F515B0200975242 /* UserListRetriever.swift in Sources */,
 				B469BAC41F481A8500ADA3F6 /* UIViewExtension.swift in Sources */,
@@ -756,6 +763,7 @@
 				B443A0FC1F2B70D40021BB65 /* Error.swift in Sources */,
 				B43BB8B91F359F9A0011A301 /* Coordinates.swift in Sources */,
 				B4EDAAE41F4C85CE00C6660B /* RetweetersIDParams.swift in Sources */,
+				B4A2AB991F54874D008EF7A2 /* RESTfulClientWithID.swift in Sources */,
 				B4B406321F40A0A500683124 /* EmbededPageViewController.swift in Sources */,
 				B4047B8A1F4ED080004E2AE3 /* ParamsWithCursor.swift in Sources */,
 				B46242921F4419CF0074158A /* TwitterDate.swift in Sources */,

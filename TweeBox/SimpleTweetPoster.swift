@@ -21,16 +21,18 @@ class SimpleTweetPoster {
     }
 
     
-    public func postData(_ handler: @escaping (String?) -> Void) {
+    public func postData(_ handler: @escaping (Tweet?) -> Void) {
         if Constants.selfID != "-1" {
-            let client = RESTfulClient(resource: resourceURL, params: tweetParams.getParams())
+            let client = RESTfulClientWithID(resource: resourceURL, params: tweetParams.getParams())
+            
+            print(">>> composer >> \(tweetParams.getParams())")
             
             client.getData() { data in
                 if let data = data {
                     let json = JSON(data: data)
                     if json.null == nil {
                         let tweet = Tweet(with: json)
-                        handler(tweet.id)
+                        handler(tweet)
                     } else {
                         handler(nil)
                     }

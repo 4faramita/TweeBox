@@ -546,26 +546,84 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
         
         if orientation == .right {
             
-            let replyAction = SwipeAction(style: .default, title: "Reply") { action, indexPath in
-                print(">>> Reply")
+            if let rightActions = addRightActions(at: indexPath) {
+                return rightActions
             }
-            
-            let retweetAction = SwipeAction(style: .default, title: "Retweet") { action, indexPath in
-                print(">>> Retweet")
-            }
-            retweetAction.backgroundColor = .green
-            
-            return [replyAction, retweetAction]
             
         } else {
             
-            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-                print(">>> Delete")
+            if let leftActions = addLefttActions(at: indexPath) {
+                return leftActions
             }
-
-            return [deleteAction]
+        }
+        return nil
+    }
+    
+    func addRightActions(at indexPath: IndexPath) -> [SwipeAction]? {
+        
+        let tweet = timeline[indexPath.section][indexPath.row]
+        
+        let replyAction = SwipeAction(style: .default, title: "Reply") { action, indexPath in
+            print(">>> Reply")
         }
         
+        let retweetAction: SwipeAction
+        if tweet.retweeted {
+            retweetAction = SwipeAction(style: .default, title: "Undo Retweet") { action, indexPath in
+                print(">>> Undo Retweet")
+                
+                let composer = SimpleTweetComposer(id: tweet.id)
+                composer.unRetweet() { [weak self] (succeeded, retweet) in
+                    if succeeded {
+                        print(">>> Undo Retweet succeed")
+                        
+                        if let retweet = retweet {
+                            retweet.retweeted = false
+                            if let originTweet = retweet.retweetedStatus {
+                                originTweet.retweeted = false
+                                self?.timeline[indexPath.section][indexPath.row] = originTweet
+                                self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            }
+                        }
+                        
+                    } else {
+                        print(">>> Undo Retweet failed")
+                    }
+                }
+            }
+        } else {
+            retweetAction = SwipeAction(style: .default, title: "Retweet") { action, indexPath in
+                print(">>> Retweet")
+                
+                let composer = SimpleTweetComposer(id: tweet.id)
+                composer.retweet() { [weak self] (succeeded, retweet) in
+                    if succeeded {
+                        print(">>> Retweet succeed")
+                        
+                        if let retweet = retweet {
+                            retweet.retweeted = true
+                            if let originTweet = retweet.retweetedStatus {
+                                originTweet.retweeted = true
+                            }
+                            self?.timeline[indexPath.section][indexPath.row] = retweet
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+
+                    } else {
+                        print(">>> Retweet failed")
+                    }
+                }
+
+            }
+        }
+        retweetAction.backgroundColor = .orange
+        
+        return [replyAction, retweetAction]
+
     }
+    
+    func addLefttActions(at indexPath: IndexPath) -> [SwipeAction]? {
+        return nil
+    }    
 }
 
