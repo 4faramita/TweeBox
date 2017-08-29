@@ -51,12 +51,12 @@ struct SimpleTweetComposer {
         
         let dataRetriever = SimpleTweetPoster(tweetParams: params, resourceURL: ResourceURL.statuses_destroy_id)
         
-        dataRetriever.postData { (retweet) in
-            if self.id == retweet?.retweetedStatus?.id {
-                handler(true, retweet)
-            } else {
-                handler(false, retweet)
-            }
+        dataRetriever.postData { (tweet) in
+//            if self.id == tweet?.id {
+//                handler(true, tweet)
+//            } else {
+//                handler(false, tweet)
+//            }
         }
         handler(true, nil)
         // FIX THIS!
@@ -94,6 +94,4 @@ struct SimpleTweetComposer {
             }
         }
     }
-
-
 }

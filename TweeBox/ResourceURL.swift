@@ -56,7 +56,18 @@ struct ResourceURL {
     static let favorites_create = (url: "https://api.twitter.com/1.1/favorites/create.json", method: "POST")
     
     static let favorites_destroy = (url: "https://api.twitter.com/1.1/favorites/destroy.json", method: "POST")
+    
+    
+    static let friendships_create = (url: "https://api.twitter.com/1.1/friendships/create.json", method: "POST")
+    
+    static let friendships_destroy = (url: "https://api.twitter.com/1.1/friendships/destroy.json", method: "POST")
+    
+    static let friendships_update = (url: "https://api.twitter.com/1.1/friendships/update.json", method: "POST")
 
+        
+    static let blocks_create = (url: "https://api.twitter.com/1.1/blocks/create.json", method: "POST")
+    
+    static let blocks_destroy = (url: "https://api.twitter.com/1.1/blocks/destroy.json", method: "POST")
     
     static let users_report_spam = (url: "https://api.twitter.com/1.1/users/report_spam.json", method: "POST")
 }

@@ -32,6 +32,5 @@ class FavoritePoster: SimpleTweetPoster {
                 }
             }
         }
-
     }
 }

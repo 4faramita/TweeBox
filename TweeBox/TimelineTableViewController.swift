@@ -571,11 +571,11 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
         
         options.transitionStyle = .border
         
-        if orientation == .right {
-            options.expansionStyle = .selection
-        } else {
-            options.expansionStyle = .destructive
-        }
+//        if orientation == .right {
+        options.expansionStyle = .selection
+//        } else {
+//            options.expansionStyle = .destructive
+//        }
         
         return options
     }
@@ -588,6 +588,8 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
         let replyAction = SwipeAction(style: .default, title: "Reply") { action, indexPath in
             print(">>> Reply")
         }
+        replyAction.image = UIImage(named: "reply_true")
+        replyAction.textColor = .darkGray
         
         let retweetAction: SwipeAction
         if tweet.retweeted {
@@ -611,6 +613,8 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
                     
                 }
             }
+            retweetAction.image = UIImage(named: "retweet_false")
+            
         } else {
             retweetAction = SwipeAction(style: .default, title: "Retweet") { action, indexPath in
                 print(">>> Retweet")
@@ -632,10 +636,11 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
                         print(">>> Retweet failed")
                     }
                 }
-
             }
+            retweetAction.image = UIImage(named: "retweet_true")
         }
         retweetAction.backgroundColor = .orange
+        retweetAction.textColor = .darkGray
         
         let likeAction: SwipeAction
         if tweet.favorited {
@@ -658,7 +663,8 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
                 }
                 
             }
-
+            likeAction.image = UIImage(named: "like_false")
+            
         } else {
             likeAction = SwipeAction(style: .default, title: "Like") { action, indexPath in
                 print(">>> Like")
@@ -677,11 +683,12 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
                         print(">>> Like failed")
                     }
                 }
-                
             }
+            likeAction.image = UIImage(named: "like_true")
         }
+        
         likeAction.backgroundColor = .yellow
-        likeAction.textColor = .black
+        likeAction.textColor = .darkGray
 
         
         return [likeAction, retweetAction, replyAction]

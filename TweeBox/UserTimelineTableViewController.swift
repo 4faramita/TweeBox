@@ -481,23 +481,38 @@ extension UserTimelineTableViewController {
         if userID == Constants.selfID {
             let tweet = timeline[indexPath.section][indexPath.row]
             
-            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { [weak self] action, indexPath in
                 print(">>> Delete")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
-                composer.deleteTweet() { [weak self] (succeeded, _) in
-                    
-                    self?.timeline[indexPath.section].remove(at: indexPath.row)
-//                    self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-                    // SwipeCellKit already did the tableview update for .destructive
-                    
-                    if succeeded {
-                        print(">>> Delete succeed")
-                    } else {
-                        print(">>> Delete failed")
-                    }
-                }
+                let alert = UIAlertController(title: "About To Delete", message: "This tweet will be destoryed forever. Proceed?", preferredStyle: .alert)
+                alert.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: .destructive,
+                        handler: { (action) in
+                            
+                            let composer = SimpleTweetComposer(id: tweet.id)
+                            composer.deleteTweet() { [weak self] (succeeded, _) in
+                                
+                                self?.timeline[indexPath.section].remove(at: indexPath.row)
+                                self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                                // SwipeCellKit already did the tableview update for .destructive
+                                
+//                                if succeeded {
+//                                    print(">>> Delete succeed")
+//                                } else {
+//                                    print(">>> Delete failed")
+//                                }
+                            }
+                        }
+                    )
+                )
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
             }
+            deleteAction.image = UIImage(named: "delete")
+            deleteAction.textColor = .black
+            
             return [deleteAction]
         } else {
             return nil
@@ -512,6 +527,8 @@ extension UserTimelineTableViewController {
         let replyAction = SwipeAction(style: .default, title: "Reply") { action, indexPath in
             print(">>> Reply")
         }
+        replyAction.image = UIImage(named: "reply_true")
+        replyAction.textColor = .darkGray
         
         let retweetAction: SwipeAction
         if tweet.retweeted {
@@ -525,14 +542,14 @@ extension UserTimelineTableViewController {
                         let returnTweet = returnTweet,
                         originTweet.id == returnTweet.id {
                         
-                        if originTweet.user.id == Constants.selfID {
-                            returnTweet.retweeted = false
-                            self?.timeline[indexPath.section][indexPath.row] = returnTweet
-                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
-                        } else {
-                            self?.timeline[indexPath.section].remove(at: indexPath.row)
-                            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-                        }
+//                        if originTweet.user.id == Constants.selfID {
+                        returnTweet.retweeted = false
+                        self?.timeline[indexPath.section][indexPath.row] = returnTweet
+                        self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+//                        } else {
+//                            self?.timeline[indexPath.section].remove(at: indexPath.row)
+//                            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+//                        }
                         
                     } else {
                         print(">>> Undo Retweet failed")
@@ -540,6 +557,7 @@ extension UserTimelineTableViewController {
                     
                 }
             }
+            retweetAction.image = UIImage(named: "retweet_false")
         } else {
             retweetAction = SwipeAction(style: .default, title: "Retweet") { action, indexPath in
                 print(">>> Retweet")
@@ -563,8 +581,10 @@ extension UserTimelineTableViewController {
                 }
                 
             }
+            retweetAction.image = UIImage(named: "retweet_true")
         }
         retweetAction.backgroundColor = .orange
+        retweetAction.textColor = .darkGray
         
         let likeAction: SwipeAction
         if tweet.favorited {
@@ -587,6 +607,7 @@ extension UserTimelineTableViewController {
                 }
                 
             }
+            likeAction.image = UIImage(named: "like_false")
             
         } else {
             likeAction = SwipeAction(style: .default, title: "Like") { action, indexPath in
@@ -606,12 +627,12 @@ extension UserTimelineTableViewController {
                         print(">>> Like failed")
                     }
                 }
-                
             }
+            likeAction.image = UIImage(named: "like_true")
         }
+        
         likeAction.backgroundColor = .yellow
-        likeAction.textColor = .black
-
+        likeAction.textColor = .darkGray
         
         return [likeAction, retweetAction, replyAction]
     }

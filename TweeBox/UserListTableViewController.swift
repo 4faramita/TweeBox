@@ -217,12 +217,47 @@ extension UserListTableViewController: SwipeTableViewCellDelegate {
      */
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         
+        let user = userList[indexPath.section][indexPath.row]
+        
         if orientation == .right {
             
-            let followAction = SwipeAction(style: .default, title: "Folloew") { action, indexPath in
-                print(">>> Folloew")
+            let followAction: SwipeAction
+            if let following = user.following, following {
+                followAction = SwipeAction(style: .default, title: "Unfollow") { action, indexPath in
+                    print(">>> Unfollow")
+                    
+                    let manager = FriendshipManager(userID: user.id)
+                    
+                    manager.unfollow(handler: { [weak self] (succeeded, returnedUser) in
+                        if succeeded, var returnedUser = returnedUser {
+                            returnedUser.following = false
+                            
+                            self?.userList[indexPath.section][indexPath.row] = returnedUser
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+                    })
+                }
+                
+            } else {
+                followAction = SwipeAction(style: .default, title: "Follow") { action, indexPath in
+                    print(">>> Follow")
+                    
+                    let manager = FriendshipManager(userID: user.id)
+                    
+                    manager.follow(handler: { [weak self] (succeeded, returnedUser) in
+                        if succeeded, var returnedUser = returnedUser {
+                            returnedUser.following = true
+                            
+                            self?.userList[indexPath.section][indexPath.row] = returnedUser
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+                    })
+
+                }
             }
+            
             followAction.backgroundColor = .yellow
+            followAction.textColor = .black
             
             let DMAction = SwipeAction(style: .default, title: "Message") { action, indexPath in
                 print(">>> Message")
@@ -233,19 +268,98 @@ extension UserListTableViewController: SwipeTableViewCellDelegate {
             
         } else {
             
-            let BlockAction = SwipeAction(style: .destructive, title: "Block") { action, indexPath in
+            let BlockAction: SwipeAction = SwipeAction(style: .default, title: "Block") { [weak self] action, indexPath in
                 print(">>> Block")
+                
+                let alert = UIAlertController(title: "About To Block", message: "You will not see any tweet or mention from this account directly. Proceed?", preferredStyle: .alert)
+                alert.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: .destructive,
+                        handler: { (action) in
+                            let manager = FriendshipManager(userID: user.id)
+                            
+                            manager.block(handler: { (succeeded, user) in
+                                self?.userList[indexPath.section].remove(at: indexPath.row)
+                                self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                            })
+                        }
+                    )
+                )
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+                
             }
             BlockAction.backgroundColor = .darkGray
-            BlockAction.textColor = .lightGray
+            BlockAction.textColor = .red
             
-            let reportAction = SwipeAction(style: .destructive, title: "Report Spam") { action, indexPath in
+            
+            
+            let reportAction = SwipeAction(style: .default, title: "Report Spam") { [weak self] action, indexPath in
                 print(">>> Report Spam")
+                
+                let alert = UIAlertController(title: "About To Report Spam", message: "You will report this account as a spam account. Proceed?", preferredStyle: .alert)
+                alert.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: .destructive,
+                        handler: { (action) in
+                            
+                            var alsoBlock: Bool? {
+                                didSet {
+                                    let manager = FriendshipManager(userID: user.id)
+
+                                    manager.reportSpam(block: alsoBlock) { (succeeded, user) in
+                                        self?.userList[indexPath.section].remove(at: indexPath.row)
+                                        self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                                    }
+                                    
+                                    guard let alsoBlock = alsoBlock, !alsoBlock else {
+                                        self?.userList[indexPath.section].remove(at: indexPath.row)
+                                        self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                                        return
+                                    }
+                                }
+                            }
+                            
+                            let alert = UIAlertController(title: "Also Block This Account?", message: "You may also want to block this account. Proceed?", preferredStyle: .alert)
+
+                            
+                            alert.addAction(UIAlertAction(title: "Block", style: .destructive, handler: { (action) in
+                                alsoBlock = true
+                            }))
+                                
+                            alert.addAction(UIAlertAction(title: "Not Now", style: .default, handler: { (action) in
+                                alsoBlock = false
+                            }))
+                        }
+                    )
+                )
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+
             }
+            reportAction.backgroundColor = .red
             
             return [BlockAction, reportAction]
         }
         
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+        
+        var options = SwipeTableOptions()
+        
+        options.transitionStyle = .border
+        
+        //        if orientation == .right {
+        options.expansionStyle = .selection
+        //        } else {
+        //            options.expansionStyle = .destructive
+        //        }
+        
+        return options
     }
 }
 
