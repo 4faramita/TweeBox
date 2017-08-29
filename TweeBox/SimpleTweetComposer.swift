@@ -26,8 +26,8 @@ struct SimpleTweetComposer {
                 handler(false, retweet)
             }
         }
-        handler(false, nil)
     }
+    
     
     func unRetweet(handler: @escaping (Bool, Tweet?) -> Void) {
         
@@ -42,8 +42,8 @@ struct SimpleTweetComposer {
                 handler(false, retweet)
             }
         }
-        handler(false, nil)
     }
+    
     
     func deleteTweet(handler: @escaping (Bool, Tweet?) -> Void) {
         
@@ -58,6 +58,42 @@ struct SimpleTweetComposer {
                 handler(false, retweet)
             }
         }
-        handler(false, nil)
+        handler(true, nil)
+        // FIX THIS!
+
     }
+    
+    
+    func like(handler: @escaping (Bool, Tweet?) -> Void) {
+        
+        let params = SimplePostParams(id: id)
+        
+        let dataRetriever = FavoritePoster(tweetParams: params, resourceURL: ResourceURL.favorites_create)
+        
+        dataRetriever.postData { (tweet) in
+            if self.id == tweet?.id {
+                handler(true, tweet)
+            } else {
+                handler(false, tweet)
+            }
+        }
+    }
+    
+    
+    func dislike(handler: @escaping (Bool, Tweet?) -> Void) {
+        
+        let params = SimplePostParams(id: id)
+        
+        let dataRetriever = FavoritePoster(tweetParams: params, resourceURL: ResourceURL.favorites_destroy)
+        
+        dataRetriever.postData { (tweet) in
+            if self.id == tweet?.id {
+                handler(true, tweet)
+            } else {
+                handler(false, tweet)
+            }
+        }
+    }
+
+
 }

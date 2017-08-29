@@ -35,7 +35,18 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
 //                return
 //            }
             
+            let cells = self.tableView.visibleCells
+            for cell in cells {
+                let indexPath = self.tableView.indexPath(for: cell)
+                if let tweetCell = cell as? GeneralTweetTableViewCell {
+                    tweetCell.section = indexPath?.section
+                }
+            }
+            
+            tableView.es_stopPullToRefresh()
+            
             print(">>> Batch >> \(timeline.count)")
+            print(">>> count >> \(timeline.flatMap({ $0 }).count)")
         }
     }
     
@@ -91,6 +102,15 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    func initRefreshIfNeeded() {
+        
+        if timeline.flatMap({ $0 }).count == 0 {
+//            showEmptyWarningMessage()
+            tableView.es_startPullToRefresh()
+//            refreshTimeline(handler: nil)
+        }
+
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,12 +118,10 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         addRefresher()
         pullToLoaderMore()
         
+        
         //  Warning text when table is empty
         
-        if timeline.flatMap({ $0 }).count == 0 {
-//            showEmptyWarningMessage()
-            refreshTimeline(handler: nil)
-        }
+        initRefreshIfNeeded()
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
             self?.updateTimeLabel()
@@ -257,18 +275,6 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 if tweets.count > 0 {
                     
                     self?.insertNewTweets(with: tweets)
-                    
-                    let cells = self?.tableView.visibleCells
-                    if cells != nil {
-                        for cell in cells! {
-                            let indexPath = self?.tableView.indexPath(for: cell)
-                            if let tweetCell = cell as? GeneralTweetTableViewCell {
-                                tweetCell.section = indexPath?.section
-                            }
-                        }
-                        
-                    }
-                    
                 }
                 
                 self?.isRefreshing = false
@@ -559,6 +565,22 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
         return nil
     }
     
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+        
+        var options = SwipeTableOptions()
+        
+        options.transitionStyle = .border
+        
+        if orientation == .right {
+            options.expansionStyle = .selection
+        } else {
+            options.expansionStyle = .destructive
+        }
+        
+        return options
+    }
+
+    
     func addRightActions(at indexPath: IndexPath) -> [SwipeAction]? {
         
         let tweet = timeline[indexPath.section][indexPath.row]
@@ -573,22 +595,20 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
                 print(">>> Undo Retweet")
                 
                 let composer = SimpleTweetComposer(id: tweet.id)
-                composer.unRetweet() { [weak self] (succeeded, retweet) in
-                    if succeeded {
-                        print(">>> Undo Retweet succeed")
+                composer.unRetweet() { [weak self] (succeeded, returnTweet) in
+                    
+                    if let originTweet = tweet.retweetedStatus,
+                        let returnTweet = returnTweet,
+                        originTweet.id == returnTweet.id {
                         
-                        if let retweet = retweet {
-                            retweet.retweeted = false
-                            if let originTweet = retweet.retweetedStatus {
-                                originTweet.retweeted = false
-                                self?.timeline[indexPath.section][indexPath.row] = originTweet
-                                self?.tableView.reloadRows(at: [indexPath], with: .automatic)
-                            }
-                        }
+                        returnTweet.retweeted = false
+                        self?.timeline[indexPath.section][indexPath.row] = returnTweet
+                        self?.tableView.reloadRows(at: [indexPath], with: .automatic)
                         
                     } else {
                         print(">>> Undo Retweet failed")
                     }
+                    
                 }
             }
         } else {
@@ -597,9 +617,7 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
                 
                 let composer = SimpleTweetComposer(id: tweet.id)
                 composer.retweet() { [weak self] (succeeded, retweet) in
-                    if succeeded {
-                        print(">>> Retweet succeed")
-                        
+                    
                         if let retweet = retweet {
                             retweet.retweeted = true
                             if let originTweet = retweet.retweetedStatus {
@@ -608,7 +626,8 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
                             self?.timeline[indexPath.section][indexPath.row] = retweet
                             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
                         }
-
+                    if succeeded {
+                        print(">>> Retweet succeed")
                     } else {
                         print(">>> Retweet failed")
                     }
@@ -618,7 +637,54 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
         }
         retweetAction.backgroundColor = .orange
         
-        return [replyAction, retweetAction]
+        let likeAction: SwipeAction
+        if tweet.favorited {
+            likeAction = SwipeAction(style: .default, title: "Me No Likey") { action, indexPath in
+                print(">>> Dislike")
+                
+                let composer = SimpleTweetComposer(id: tweet.id)
+                composer.dislike() { [weak self] (succeeded, tweet) in
+                    
+                    if succeeded {
+                        print(">>> Dislike succeed")
+                        if let tweet = tweet {
+                            tweet.favorited = false
+                            self?.timeline[indexPath.section][indexPath.row] = tweet
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+                    } else {
+                        print(">>> Dislike failed")
+                    }
+                }
+                
+            }
+
+        } else {
+            likeAction = SwipeAction(style: .default, title: "Like") { action, indexPath in
+                print(">>> Like")
+                
+                let composer = SimpleTweetComposer(id: tweet.id)
+                composer.like() { [weak self] (succeeded, tweet) in
+                    
+                    if succeeded {
+                        print(">>> Like succeed")
+                        if let tweet = tweet {
+                            tweet.favorited = true
+                            self?.timeline[indexPath.section][indexPath.row] = tweet
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+                    } else {
+                        print(">>> Like failed")
+                    }
+                }
+                
+            }
+        }
+        likeAction.backgroundColor = .yellow
+        likeAction.textColor = .black
+
+        
+        return [likeAction, retweetAction, replyAction]
 
     }
     
