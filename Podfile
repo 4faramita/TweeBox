@@ -23,4 +23,10 @@ target 'TweeBox' do
 	pod 'YYText'
 	pod "ESPullToRefresh"
 	pod 'SwipeCellKit'
+	# pod 'STPopup'
+	pod 'JDStatusBarNotification'
+
+	pod 'Gallery'
+	# pod 'ImagePicker'
+	pod 'Lightbox'
 end

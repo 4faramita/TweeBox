@@ -34,8 +34,7 @@ class GeneralSearchViewController: UIViewController {
         }
 
     }
-    
-    
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,8 +9,13 @@ PODS:
     - SnapKit (~> 3.2)
   - DateToolsSwift (2.0.3)
   - ESPullToRefresh (2.6)
+  - Gallery (1.3.0)
+  - Hue (2.0.1)
+  - JDStatusBarNotification (1.5.5)
   - Kanna (2.1.1)
-  - Kingfisher (3.11.0)
+  - Kingfisher (3.12.1)
+  - Lightbox (1.0.0):
+    - Hue
   - MXParallaxHeader (0.6.1)
   - NVActivityIndicatorView (3.7.0):
     - NVActivityIndicatorView/Presenter (= 3.7.0)
@@ -32,8 +37,11 @@ DEPENDENCIES:
   - BMPlayer
   - DateToolsSwift
   - ESPullToRefresh
+  - Gallery
+  - JDStatusBarNotification
   - Kanna (~> 2.1.0)
   - Kingfisher (~> 3.0)
+  - Lightbox
   - MXParallaxHeader
   - PopupDialog (~> 0.5)
   - Reveal-SDK
@@ -50,8 +58,12 @@ SPEC CHECKSUMS:
   BMPlayer: 5ba9e3f3d61ccc5a24ebd9cdc24901dcf28c98bc
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
   ESPullToRefresh: 85f4990acf87f78c6a1466bbbee7a75d7de24db9
+  Gallery: 40220b942a34dfc9815ad06bffcd2025827b5e02
+  Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
+  JDStatusBarNotification: 2b4f29bd68a60d7aa2f190b5265f1ce59c18aaf8
   Kanna: 9b4b086c218703f2b94f5b21a466217dd2f9332e
-  Kingfisher: c8911a7672c6217dec8c0520fb6e76ec4b7e0780
+  Kingfisher: 7e87498c3b795c2b8f6430fd5853ae5b5548ff9c
+  Lightbox: 13f55a0a840f7945dc5ac87931564e7fe569fca9
   MXParallaxHeader: 858c403532ed933b381556a81ce333d7065ad182
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
@@ -65,6 +77,6 @@ SPEC CHECKSUMS:
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: e458518ed91f57f53edcb99f9344e4d32995dda0
+PODFILE CHECKSUM: 4b744e839aa815b7acde098523a9b491acb99851
 
 COCOAPODS: 1.3.1

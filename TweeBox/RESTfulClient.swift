@@ -30,6 +30,8 @@ class RESTfulClient {
             let client = TWTRAPIClient(userID: userID)
             var clientError : NSError?
             
+            
+            
             let request = client.urlRequest(withMethod: resource.method, url: resource.url, parameters: params, error: &clientError)
             
             client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in

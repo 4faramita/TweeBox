@@ -15,6 +15,7 @@ import PopupDialog
 import ESPullToRefresh
 import SwipeCellKit
 
+
 class TimelineTableViewController: UITableViewController, TweetClickableContentProtocol
 //, ScrollingNavigationControllerDelegate 
 {
@@ -289,7 +290,15 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     @IBAction func search(_ sender: UIBarButtonItem) {
         
         let searchViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GeneralSearchViewController")
+        
         let popup = PopupDialog.init(viewController: searchViewController)
+//        popup.addButton(PopupDialogButton(title: "Tweet!", action: { 
+//            print("Tweet")
+//        }))
+//        popup.addButton(PopupDialogButton(title: "Cancel", action: {
+//            print("Cancel")
+//        }))
+//        popup.buttonAlignment = .horizontal
         
         present(popup, animated: true, completion: nil)
     }
