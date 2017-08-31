@@ -102,7 +102,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525853485.193224"
+                  timestampString = "525856422.354681"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -117,7 +117,7 @@
                   moduleName = "TweeBox"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525853485.196862"
+                  timestampString = "525856422.357383"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -125,6 +125,22 @@
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TweeBox/TimelineTableViewController.swift"
+            timestampString = "525854118.984806"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "518"
+            endingLineNumber = "518"
+            landmarkName = "imageTapped(section:row:mediaIndex:media:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
