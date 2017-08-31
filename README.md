@@ -2,31 +2,24 @@
 
 ![banner](https://user-images.githubusercontent.com/14917258/29926139-1f0fb956-8e95-11e7-9180-f581482b91b1.png)
 
-> WARNING: TweeBox is still in a quite early phase of processing (after all, it's only one-month old now). So the bad news is, it still has many bugs and unfinished features; on the bright side, you will be there to witness its growth :)
+> WARNING: TweeBox is still in a quite early phase of developing (after all, it's only one-month old now). So the bad news is, it still has many bugs and unfinished features; on the bright side, you will be there to witness its growth :)
 
 There are a lot of Twitter "clients", but this is not one of them -- TweeBox is a Twitter "reader", designed for those who would like to browse on twitter rather than speak loadly to the Twitter street.
 
 As a result, TweeBox is friendly to many tweet reading features, including but not limited to "favorite", "block" and "report spam". What's more, you can also easily delete your tweets by just a swipe.
 
-![like](https://user-images.githubusercontent.com/14917258/29924287-1462f60e-8e8f-11e7-9049-494b96df9190.PNG)
+![like](https://user-images.githubusercontent.com/14917258/29928805-65dfed2c-8e9c-11e7-838e-4ed73b6d70e9.png)
 
-![delete](https://user-images.githubusercontent.com/14917258/29924285-14552f56-8e8f-11e7-984b-b3bd692cde59.PNG)
-
-![block](https://user-images.githubusercontent.com/14917258/29924282-1433d36a-8e8f-11e7-9ae6-70ad329a2ab3.PNG)
+![delete](https://user-images.githubusercontent.com/14917258/29928804-65de5fde-8e9c-11e7-83cb-459827a3de08.png)
 
 Also, I'm currently living in a country where I have to use Twitter via proxy, which can be slow. So TweeBox also contains features like "do not show the image until it's fully loaded", so you can continue browsing your timeline while loading.
 
-![loading](https://user-images.githubusercontent.com/14917258/29924286-146140f2-8e8f-11e7-8ecd-8fcfc2ba6e8f.PNG)
+![loading](https://user-images.githubusercontent.com/14917258/29928806-65e3a7aa-8e9c-11e7-98aa-5eccf0fa7275.png)
 
 TweeBox also comes with a ton of other features and a decent UI design. More pictures:
 
-![search](https://user-images.githubusercontent.com/14917258/29924280-143061c6-8e8f-11e7-9718-b3b48a5c7faa.PNG)
+![timeline](https://user-images.githubusercontent.com/14917258/29928816-6c180db4-8e9c-11e7-9147-de9fa9933f7a.png)
 
-![video](https://user-images.githubusercontent.com/14917258/29924281-14322b50-8e8f-11e7-8bd6-7e6f1e518445.PNG)
-
-![timeline](https://user-images.githubusercontent.com/14917258/29924279-1422746c-8e8f-11e7-9836-03148d293a65.PNG)
-
-![image viewer](https://user-images.githubusercontent.com/14917258/29924284-1438add6-8e8f-11e7-8c22-d2c744422d57.PNG)
 
 ## Getting Started
 TweeBox is currently absent from Apple App Store （just for now). So if you want to try it,please do as follow:
