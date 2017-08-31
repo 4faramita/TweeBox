@@ -93,7 +93,6 @@ class UserTimelineTableViewController: TimelineTableViewController {
         if !headerHeightCalculated {
             calculateHeaderHeight()
         }
-
     }
     
     override func initRefreshIfNeeded() {
@@ -239,6 +238,19 @@ class UserTimelineTableViewController: TimelineTableViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        
+        let alert = UIAlertController(title: "Logout", message: "You are logging out the current account. Proceed?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] (action) in
+            Twitter.sharedInstance().sessionStore.logOutUserID(Constants.selfID)
+            self?.performSegue(withIdentifier: "Login", sender: self)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 
     // Header
     private func addHeader() {

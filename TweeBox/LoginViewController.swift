@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
         addLoginButton()
         
         if Twitter.sharedInstance().sessionStore.session()?.userID != nil {
-            performSegue(withIdentifier: "login", sender: nil)
+            performSegue(withIdentifier: "login", sender: self)
         }
     }
     

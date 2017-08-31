@@ -104,6 +104,11 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         
         addRefresher()
         pullToLoaderMore()
+        
+        guard Constants.selfID != "-1" else {
+            performSegue(withIdentifier: "Login", sender: self)
+            return
+        }
 
     }
     

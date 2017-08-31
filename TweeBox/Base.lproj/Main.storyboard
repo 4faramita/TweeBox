@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fLz-PT-jrb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,22 +22,15 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDN-GZ-tHS">
-                                <rect key="frame" x="172" y="535" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="GO!"/>
-                                <connections>
-                                    <segue destination="fLz-PT-jrb" kind="showDetail" identifier="login" id="lbx-3W-IeN"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="fLz-PT-jrb" kind="show" identifier="login" id="UF2-SD-kcC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="124"/>
+            <point key="canvasLocation" x="-846" y="36"/>
         </scene>
         <!--Timeline-->
         <scene sceneID="I0z-cp-Zvb">
@@ -523,6 +516,7 @@
                         <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="AAx-pq-S6O"/>
                         <segue destination="CxX-ex-f2w" kind="show" identifier="View Tweet" id="wHR-Kd-1fr"/>
                         <segue destination="hhk-sn-pmH" kind="show" identifier="Show Tweets with Hashtag" id="C3g-AD-gPn"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="Login" id="8be-A1-ekp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQt-Fg-ncE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -835,7 +829,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BgN-NQ-Mp2">
-                                <rect key="frame" x="16" y="72" width="343" height="298.5"/>
+                                <rect key="frame" x="16" y="72" width="343" height="293.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJh-9Y-2LX" customClass="YYTextView">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
@@ -845,30 +839,30 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="lastBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="kzD-b4-Saj">
-                                        <rect key="frame" x="0.0" y="220" width="343" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="220" width="343" height="22.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrv-ia-3MQ">
-                                                <rect key="frame" x="0.0" y="11.5" width="34.5" height="16"/>
+                                                <rect key="frame" x="0.0" y="6.5" width="34.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zye-1N-XwO">
-                                                <rect key="frame" x="239" y="0.0" width="104" height="32"/>
+                                                <rect key="frame" x="255" y="0.0" width="88" height="22"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPh-hq-vJK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="16" height="22"/>
                                                         <state key="normal" image="picture"/>
                                                         <connections>
                                                             <action selector="addMedia:" destination="VOf-R7-vWP" eventType="touchUpInside" id="9sG-fr-slZ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJD-Db-WVz">
-                                                        <rect key="frame" x="52" y="0.0" width="16" height="32"/>
+                                                        <rect key="frame" x="36" y="0.0" width="16" height="22"/>
                                                         <state key="normal" image="mention_thin"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3Z-gn-9b1">
-                                                        <rect key="frame" x="88" y="0.0" width="16" height="32"/>
+                                                        <rect key="frame" x="72" y="0.0" width="16" height="22"/>
                                                         <state key="normal" image="hashtag"/>
                                                     </button>
                                                 </subviews>
@@ -876,7 +870,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dZg-Ta-jJs">
-                                        <rect key="frame" x="0.0" y="267.5" width="343" height="31"/>
+                                        <rect key="frame" x="0.0" y="262.5" width="343" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This tweet contains sensitive content." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xu8-zi-57A">
                                                 <rect key="frame" x="0.0" y="0.0" width="289" height="31"/>
@@ -2111,7 +2105,13 @@
                             <outlet property="delegate" destination="j9R-GV-7ol" id="hW3-Ah-Lak"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NjE-bg-xoU"/>
+                    <navigationItem key="navigationItem" id="NjE-bg-xoU">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="gbH-j2-S2T">
+                            <connections>
+                                <action selector="logout:" destination="j9R-GV-7ol" id="DaG-bQ-6bg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="tY3-Cn-E0S" kind="presentation" identifier="videoTapped" id="tdV-pQ-YAf"/>
                         <segue destination="EXU-Nt-KBj" kind="show" identifier="User List" id="GwV-mx-Cse"/>
@@ -2119,6 +2119,7 @@
                         <segue destination="YmO-B7-dd1" kind="presentation" identifier="imageTapped" id="mQn-8J-Vdw"/>
                         <segue destination="CxX-ex-f2w" kind="show" identifier="View Tweet" id="qqa-7f-aWM"/>
                         <segue destination="hhk-sn-pmH" kind="show" identifier="Show Tweets with Hashtag" id="l05-0q-9YC"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="Login" id="O14-j2-fBA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hr3-x7-vrY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3656,19 +3657,20 @@
         <image name="hashtag" width="16" height="16"/>
         <image name="mention" width="16" height="16"/>
         <image name="mention_thin" width="16" height="16"/>
-        <image name="picture" width="32" height="32"/>
+        <image name="picture" width="16" height="16"/>
         <image name="profile" width="16" height="16"/>
         <image name="profile_selected" width="16" height="16"/>
         <image name="twitter" width="16" height="16"/>
         <image name="twitter_selected" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TE5-Ah-PTm"/>
+        <segue reference="O14-j2-fBA"/>
         <segue reference="GwV-mx-Cse"/>
-        <segue reference="mef-VN-nlC"/>
-        <segue reference="AAx-pq-S6O"/>
-        <segue reference="C3g-AD-gPn"/>
-        <segue reference="wHR-Kd-1fr"/>
+        <segue reference="l05-0q-9YC"/>
+        <segue reference="uxh-8f-EHW"/>
+        <segue reference="qqa-7f-aWM"/>
+        <segue reference="tdV-pQ-YAf"/>
+        <segue reference="mQn-8J-Vdw"/>
         <segue reference="1w8-WL-0CI"/>
     </inferredMetricsTieBreakers>
 </document>
