@@ -26,7 +26,9 @@ TweeBox is currently absent from Apple App Store （just for now). So if you wan
 
 check out the source in a way you feel suits, for example:
 
-`git clone "https://github.com/4faramita/TweeBox.git"`
+```
+git clone "https://github.com/4faramita/TweeBox.git"
+```
 
 Then
 ```
