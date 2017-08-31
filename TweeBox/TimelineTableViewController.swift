@@ -9,11 +9,11 @@
 import UIKit
 //import AMScrollingNavbar
 import Kingfisher
-//import Whisper
 import SnapKit
 import PopupDialog
 import ESPullToRefresh
 import SwipeCellKit
+import JDStatusBarNotification
 
 
 class TimelineTableViewController: UITableViewController, TweetClickableContentProtocol
@@ -101,6 +101,10 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        addRefresher()
+        pullToLoaderMore()
+
     }
     
     func initRefreshIfNeeded() {
@@ -115,10 +119,6 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        addRefresher()
-        pullToLoaderMore()
-        
         
         //  Warning text when table is empty
         
@@ -171,6 +171,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
             self.fetchNewer = true
             self.refreshTimeline {
                 //                self.tableView.es_stopPullToRefresh(ignoreDate: true)
+                
                 self.tableView.es_stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
             }
             
@@ -487,32 +488,35 @@ extension TimelineTableViewController: GeneralTweetTableViewCellProtocol {
         } else {
             if let clickedMediaURL = clickedTweet?.entities?.realMedia?[clickedImageIndex ?? 0].mediaURL {
                 
-                let progressView = UIProgressView(progressViewStyle: .bar)
-                progressView.alpha = 0
-                progressView.backgroundColor = .gray
-                progressView.progressTintColor = .orange
-                
-                if let navigationView = navigationController?.view {
-                    navigationView.addSubview(progressView)
-                    if progressView.alpha == 0 {
-                        UIView.animate(
-                            withDuration: 0.5,
-                            delay: 0,
-                            options: [.curveLinear],
-                            animations: { progressView.alpha = 0.5 },
-                            completion: nil
-                        )
-                    }
-                    progressView.snp.makeConstraints({ (make) in
-                        make.size.equalTo(UIApplication.shared.statusBarFrame.size)
-                    })
-                }
+//                let progressView = UIProgressView(progressViewStyle: .bar)
+//                progressView.alpha = 0
+//                progressView.backgroundColor = .gray
+//                progressView.progressTintColor = .orange
+//                
+//                if let navigationView = navigationController?.view {
+//                    navigationView.addSubview(progressView)
+//                    if progressView.alpha == 0 {
+//                        UIView.animate(
+//                            withDuration: 0.5,
+//                            delay: 0,
+//                            options: [.curveLinear],
+//                            animations: { progressView.alpha = 0.5 },
+//                            completion: nil
+//                        )
+//                    }
+//                    progressView.snp.makeConstraints({ (make) in
+//                        make.size.equalTo(UIApplication.shared.statusBarFrame.size)
+//                    })
+//                }
                 
                 KingfisherManager.shared.retrieveImage(with: clickedMediaURL, options: nil, progressBlock: {
                     receivedSize, totalSize in
-                    let percentage = (Float(receivedSize) / Float(totalSize))  // * 100.0
+                    let percentage = (CGFloat(receivedSize) / CGFloat(totalSize))  // * 100.0
                     
-                    progressView.setProgress(percentage, animated: true)
+                    JDStatusBarNotification.show(withStatus: "Loading image…", styleName: "JDStatusBarStyleWarning")
+                    
+                    JDStatusBarNotification.showProgress(percentage)
+//                    progressView.setProgress(percentage, animated: true)
                     
 //                    let tapToStopLoading = UITapGestureRecognizer(target: self, action: #selector("stopLoading(_:)"))
 //                    tapToStopLoading.numberOfTapsRequired = 1
@@ -522,15 +526,17 @@ extension TimelineTableViewController: GeneralTweetTableViewCellProtocol {
 //                    func stopLoading(_ sender: UIGestureRecognizer) { }
                     
                 }) { [weak self] (image, error, cacheType, url) in
-                    if progressView.alpha > 0 {
-                        UIView.animate(
-                            withDuration: 0.5,
-                            delay: 0,
-                            options: [.curveLinear],
-                            animations: { progressView.alpha = 0 },
-                            completion: { if $0 { progressView.removeFromSuperview() } }
-                        )
-                    }
+//                    if progressView.alpha > 0 {
+//                        UIView.animate(
+//                            withDuration: 0.5,
+//                            delay: 0,
+//                            options: [.curveLinear],
+//                            animations: { progressView.alpha = 0 },
+//                            completion: { if $0 { progressView.removeFromSuperview() } }
+//                        )
+//                    }
+                    
+                    JDStatusBarNotification.dismiss(animated: true)
                     
                     if let image = image {
                         self?.clickMedia = image

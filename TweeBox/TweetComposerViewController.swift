@@ -72,7 +72,7 @@ class TweetComposerViewController: UIViewController {
         )
 
         
-        if let imageList = imageList, !(imageList.isEmpty) {
+        if let imageList = imageList, imageList.count > 0 {
             
             let thumbnails = imageList.map {
                 getAssetImage(asset: $0.asset, fullSize: false)
@@ -105,6 +105,8 @@ class TweetComposerViewController: UIViewController {
                     mediaIDs.append(mediaID)
                 }
             }
+        } else if let video = video {
+            
         }
         
         func proceedPosting() {
@@ -184,6 +186,22 @@ extension TweetComposerViewController: GalleryControllerDelegate {
         })
     }
     
+    func upload(video: Video, handler: @escaping (String) -> Void) {
+        
+        print(">>> uploading >> \(video)")
+        
+        let videoData = getVideoAssetData(asset: video.asset)
+        
+        let dataPoster = RESTfulClientWithMedia(imageData: videoData)
+        dataPoster.getData({ (mediaID) in
+            if let mediaID = mediaID {
+                print(">>> media id >> \(mediaID)")
+                handler(mediaID)
+            }
+        })
+    }
+
+    
     
     func getAssetImage(asset: PHAsset, fullSize: Bool) -> UIImage {
         
@@ -225,6 +243,30 @@ extension TweetComposerViewController: GalleryControllerDelegate {
         }
         return imageData
     }
+    
+    
+    func getVideoAssetData(asset: PHAsset) -> Data {
+        
+        let manager = PHImageManager.default()
+//        let option = PHVideoRequestOptions()
+        var imageData = Data()
+//        option.isSynchronous = true
+        
+        //        options.synchronous = false
+        //        options.deliveryMode = .HighQualityFormat
+        //        options.networkAccessAllowed = true
+        
+//        manager.requestImageData(for: asset, options: option) { (data, string, orientation, hashables) in
+//            imageData = data!
+//        }
+        manager.requestAVAsset(forVideo: asset, options: nil, resultHandler: { (avAsset, avAudioMix, info) in
+            if let avAsset = avAsset as? AVURLAsset {
+                imageData = try! Data(contentsOf: avAsset.url)
+            }
+        })
+        return imageData
+    }
+
 
 
 

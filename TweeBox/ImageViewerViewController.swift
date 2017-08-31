@@ -8,9 +8,8 @@
 
 import UIKit
 import Photos
-import Whisper
 import Kingfisher
-//import BMPlayer
+import JDStatusBarNotification
 
 class ImageViewerViewController: PannableViewController {
         
@@ -134,12 +133,13 @@ class ImageViewerViewController: PannableViewController {
                 
                 UIPasteboard.general.string = self?.imageURL.absoluteString
             
-                var successMessage = Murmur(title: "Image Link Copied to Clipboard.")
-                successMessage.backgroundColor = .green
-                successMessage.titleColor = .black
+//                var successMessage = Murmur(title: "Image Link Copied to Clipboard.")
+//                successMessage.backgroundColor = .green
+//                successMessage.titleColor = .black
                 
                 DispatchQueue.main.async {
-                    Whisper.show(whistle: successMessage, action: .show(1.5))
+//                    Whisper.show(whistle: successMessage, action: .show(1.5))
+                    JDStatusBarNotification.show(withStatus: "Image Link Copied to Clipboard.", dismissAfter: 1.5)
                 }
             }
 
@@ -222,11 +222,14 @@ extension ImageViewerViewController {
     func saveToCameraRoll() {
         if let image = image {
             
-            var savingMessage = Murmur(title: "Saving to Camera Roll…")
-            savingMessage.backgroundColor = .orange
-            savingMessage.titleColor = .white
-            
-            Whisper.show(whistle: savingMessage, action: .present)
+//            var savingMessage = Murmur(title: "Saving to Camera Roll…")
+//            savingMessage.backgroundColor = .orange
+//            savingMessage.titleColor = .white
+//            
+//            Whisper.show(whistle: savingMessage, action: .present)
+
+            JDStatusBarNotification.show(withStatus: "Saving to Camera Roll…", styleName: "JDStatusBarStyleWarning")
+            JDStatusBarNotification.showActivityIndicator(true, indicatorStyle: .gray)
             
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (timer) in
                 
@@ -240,32 +243,39 @@ extension ImageViewerViewController {
                         
                         if success {
                                                         
-                            Whisper.hide()
-                            
-                            var successMessage = Murmur(title: "Saved To Camera Roll Successfully.")
-                            successMessage.backgroundColor = .green
-                            successMessage.titleColor = .black
+//                            Whisper.hide()
+//                            
+//                            var successMessage = Murmur(title: "Saved To Camera Roll Successfully.")
+//                            successMessage.backgroundColor = .green
+//                            successMessage.titleColor = .black
                             
                             DispatchQueue.main.async {
-                                Whisper.show(whistle: successMessage, action: .show(1.5))
+//                                Whisper.show(whistle: successMessage, action: .show(1.5))
+                                JDStatusBarNotification.show(withStatus: "Saved To Camera Roll Successfully.", dismissAfter: 1.5, styleName: "JDStatusBarStyleSuccess")
+                                JDStatusBarNotification.showActivityIndicator(false, indicatorStyle: .gray)
                             }
                         } else if let error = error {
                             
-                            var errorMessage = Murmur(title: "Failed to Saved: \(error.localizedDescription)")
-                            errorMessage.backgroundColor = .red
-                            errorMessage.titleColor = .black
+//                            var errorMessage = Murmur(title: "Failed to Save: \(error.localizedDescription)")
+//                            errorMessage.backgroundColor = .red
+//                            errorMessage.titleColor = .black
                             
                             DispatchQueue.main.async {
-                                Whisper.show(whistle: errorMessage, action: .show(1.0))
+//                                Whisper.show(whistle: errorMessage, action: .show(1.0))
+                                JDStatusBarNotification.show(withStatus: "Failed to Save: \(error.localizedDescription)", dismissAfter: 1.5, styleName: "JDStatusBarStyleError")
+                                JDStatusBarNotification.showActivityIndicator(false, indicatorStyle: .gray)
                             }
                         } else {
                             
-                            var errorMessage = Murmur(title: "Failed to Saved.")
-                            errorMessage.backgroundColor = .red
-                            errorMessage.titleColor = .black
+//                            var errorMessage = Murmur(title: "Failed to Save.")
+//                            errorMessage.backgroundColor = .red
+//                            errorMessage.titleColor = .black
                             
                             DispatchQueue.main.async {
-                                Whisper.show(whistle: errorMessage, action: .show(1.0))
+//                                Whisper.show(whistle: errorMessage, action: .show(1.0))
+                                JDStatusBarNotification.show(withStatus: "Failed to Save", dismissAfter: 1.5, styleName: "JDStatusBarStyleError")
+                                JDStatusBarNotification.showActivityIndicator(false, indicatorStyle: .gray)
+
                             }
                         }
                     })

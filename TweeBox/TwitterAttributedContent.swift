@@ -164,6 +164,9 @@ class TwitterAttributedContent {
             let descriptionFont = UIFont.preferredFont(forTextStyle: .caption2)
             attributed.addAttribute(NSFontAttributeName, value: descriptionFont, range: fullRange)
             attributed.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: fullRange)
+        } else {
+            let fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+            attributed.addAttribute(NSForegroundColorAttributeName, value: fontColor, range: fullRange)
         }
         
         if let hashtags = tweetEntity?.hashtags {

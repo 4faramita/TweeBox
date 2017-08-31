@@ -834,8 +834,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BgN-NQ-Mp2">
-                                <rect key="frame" x="16" y="72" width="343" height="273"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BgN-NQ-Mp2">
+                                <rect key="frame" x="16" y="72" width="343" height="298.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJh-9Y-2LX" customClass="YYTextView">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
@@ -845,49 +845,49 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="lastBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="kzD-b4-Saj">
-                                        <rect key="frame" x="0.0" y="210" width="343" height="22"/>
+                                        <rect key="frame" x="0.0" y="220" width="343" height="27.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zye-1N-XwO">
-                                                <rect key="frame" x="0.0" y="0.0" width="68" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrv-ia-3MQ">
+                                                <rect key="frame" x="0.0" y="11.5" width="34.5" height="16"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zye-1N-XwO">
+                                                <rect key="frame" x="239" y="0.0" width="104" height="32"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPh-hq-vJK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="16" height="22"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                                         <state key="normal" image="picture"/>
                                                         <connections>
                                                             <action selector="addMedia:" destination="VOf-R7-vWP" eventType="touchUpInside" id="9sG-fr-slZ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJD-Db-WVz">
-                                                        <rect key="frame" x="26" y="0.0" width="16" height="22"/>
+                                                        <rect key="frame" x="52" y="0.0" width="16" height="32"/>
                                                         <state key="normal" image="mention_thin"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3Z-gn-9b1">
-                                                        <rect key="frame" x="52" y="0.0" width="16" height="22"/>
+                                                        <rect key="frame" x="88" y="0.0" width="16" height="32"/>
                                                         <state key="normal" image="hashtag"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrv-ia-3MQ">
-                                                <rect key="frame" x="308.5" y="6.5" width="34.5" height="16"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dZg-Ta-jJs">
-                                        <rect key="frame" x="0.0" y="242" width="283" height="31"/>
+                                        <rect key="frame" x="0.0" y="267.5" width="343" height="31"/>
                                         <subviews>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5a4-Y6-ccl">
-                                                <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                                                <color key="onTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This tweet contains sensitive content." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xu8-zi-57A">
-                                                <rect key="frame" x="54" y="0.0" width="229" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="289" height="31"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5a4-Y6-ccl">
+                                                <rect key="frame" x="294" y="0.0" width="51" height="31"/>
+                                                <color key="onTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </switch>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -896,6 +896,8 @@
                                     <constraint firstAttribute="trailing" secondItem="kzD-b4-Saj" secondAttribute="trailing" id="BQa-ka-Y8b"/>
                                     <constraint firstItem="tJh-9Y-2LX" firstAttribute="leading" secondItem="BgN-NQ-Mp2" secondAttribute="leading" id="HrA-Xb-UOn"/>
                                     <constraint firstItem="kzD-b4-Saj" firstAttribute="leading" secondItem="BgN-NQ-Mp2" secondAttribute="leading" id="OPe-hS-kKM"/>
+                                    <constraint firstItem="dZg-Ta-jJs" firstAttribute="leading" secondItem="BgN-NQ-Mp2" secondAttribute="leading" id="Tbq-4y-AnP"/>
+                                    <constraint firstAttribute="trailing" secondItem="dZg-Ta-jJs" secondAttribute="trailing" id="YEE-0X-Hza"/>
                                     <constraint firstAttribute="trailing" secondItem="tJh-9Y-2LX" secondAttribute="trailing" id="b6T-hh-tu3"/>
                                 </constraints>
                             </stackView>
@@ -3654,7 +3656,7 @@
         <image name="hashtag" width="16" height="16"/>
         <image name="mention" width="16" height="16"/>
         <image name="mention_thin" width="16" height="16"/>
-        <image name="picture" width="16" height="16"/>
+        <image name="picture" width="32" height="32"/>
         <image name="profile" width="16" height="16"/>
         <image name="profile_selected" width="16" height="16"/>
         <image name="twitter" width="16" height="16"/>
