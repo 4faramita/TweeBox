@@ -1,4 +1,4 @@
-# TweeBox - A Twitter client for iOS made by GeeBox with ❤️ (and my dear dear MacBook Air 💻
+# TweeBox - A iOS Twitter client for Twitter readers.
 
 ## Roadmap
 ### Basic
@@ -30,23 +30,18 @@
 - [x] View context
 
 #### Special:
-- [ ] Tweet gesture
+- [x] Tweet gesture
 - [ ] Waiting bubble
 
 ### Composer:
-- [ ] Retweet
-- [ ] Reply
-- [ ] Compose new tweet
+- [x] Retweet
+- [x] Reply
+- [x] Compose new tweet
 
 ### Settings:
+
+### Search:
 - [x] General search
 - [ ] Database search
 
-### Search:
-
 ### DM:
-
-## Bug:
-- [ ] retweet/reply/like indicator set cannot be initialized properly
-- [ ] GIF/video indicator set cannot be initialized properly
-- [ ] Single tweet page: retweeter list
