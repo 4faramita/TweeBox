@@ -20,6 +20,9 @@ class TweetComposerViewController: UIViewController {
     @IBOutlet weak var lengthCountLabel: UILabel!
     @IBOutlet weak var sensitivitySwitch: UISwitch!
     
+    public var replyTo: Tweet?
+
+    
     fileprivate var imageList: [Image]?
     fileprivate var video: Video?
     
@@ -51,7 +54,11 @@ class TweetComposerViewController: UIViewController {
         
         contentTextView.delegate = self
         contentTextView.font = UIFont.preferredFont(forTextStyle: .body)
-        contentTextView.placeholderText = "Anything you wanna say?"
+        if let tweet = replyTo {
+            contentTextView.text = "@\(tweet.user.screenName) "
+        } else {
+            contentTextView.placeholderText = "Anything you wanna say?"
+        }
         contentTextView.isScrollEnabled = false
     }
     
@@ -62,14 +69,25 @@ class TweetComposerViewController: UIViewController {
             return
         }
         
-        let inReplyToStatusID: String? = nil
-        
         let tweetParams = TweetPostParams(
             text: contentTextView.text,
-            inReplyToStatusID: inReplyToStatusID,
+            inReplyToStatusID: replyTo?.id,
             possiblySensitive: sensitivitySwitch.isOn,
             mediaIDs: nil
         )
+
+        func proceedPosting() {
+            
+            let poster = TweetPoster(tweetParams: tweetParams)
+            
+            poster.postData { [weak self] (tweet) in
+                if let tweet = tweet {
+                    print(">>> tweet >> \(tweet.text)")
+                    
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
 
         
         if let imageList = imageList, imageList.count > 0 {
@@ -107,23 +125,14 @@ class TweetComposerViewController: UIViewController {
             }
         } else if let video = video {
             
+        } else {
+            proceedPosting()
         }
         
-        func proceedPosting() {
-            
-            let poster = TweetPoster(tweetParams: tweetParams)
-            
-            poster.postData { [weak self] (tweet) in
-                if let tweet = tweet {
-                    print(">>> tweet >> \(tweet.text)")
-                    
-                    self?.dismiss(animated: true, completion: nil)
-                }
-            }
-        }
+
     }
     
-    
+
     
     @IBAction private func cancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)

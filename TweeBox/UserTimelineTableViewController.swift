@@ -536,8 +536,10 @@ extension UserTimelineTableViewController {
         
         let tweet = timeline[indexPath.section][indexPath.row]
         
-        let replyAction = SwipeAction(style: .default, title: "Reply") { action, indexPath in
+        let replyAction = SwipeAction(style: .default, title: "Reply") { [weak self] action, indexPath in
             print(">>> Reply")
+            
+            self?.performSegue(withIdentifier: "Compose", sender: tweet)
         }
         replyAction.image = UIImage(named: "reply_true")
         replyAction.textColor = .darkGray

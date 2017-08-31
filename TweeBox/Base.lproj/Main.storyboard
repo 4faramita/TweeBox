@@ -925,7 +925,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ON7-Zq-uig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2775.1999999999998" y="-1300.2998500749627"/>
+            <point key="canvasLocation" x="676" y="-751"/>
         </scene>
         <!--General Search View Controller-->
         <scene sceneID="l8A-MH-j2F">
@@ -1633,6 +1633,7 @@
                         <segue destination="EXU-Nt-KBj" kind="show" identifier="User List" id="xU8-Oj-mBQ"/>
                         <segue destination="CxX-ex-f2w" kind="show" identifier="View Tweet" id="sCG-QK-uYb"/>
                         <segue destination="hhk-sn-pmH" kind="show" identifier="Show Tweets with Hashtag" id="Uli-qk-0yA"/>
+                        <segue destination="aaQ-7U-zLQ" kind="presentation" identifier="Compose" id="Uf3-GV-odM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gf4-vT-v3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2106,9 +2107,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="NjE-bg-xoU">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="gbH-j2-S2T">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="gbH-j2-S2T">
                             <connections>
                                 <action selector="logout:" destination="j9R-GV-7ol" id="DaG-bQ-6bg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="25X-Vc-Het">
+                            <connections>
+                                <segue destination="aaQ-7U-zLQ" kind="presentation" identifier="Compose" id="N6U-Wi-nBl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2614,7 +2620,13 @@
                             <outlet property="delegate" destination="2Vl-q0-3Aw" id="NXO-ta-4Y0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Mentions" id="GOx-3P-QAy"/>
+                    <navigationItem key="navigationItem" title="Mentions" id="GOx-3P-QAy">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Wj3-Ia-w9Q">
+                            <connections>
+                                <segue destination="aaQ-7U-zLQ" kind="presentation" identifier="Compose" id="sOc-AU-t1H"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="hhk-sn-pmH" kind="show" identifier="Show Tweets with Hashtag" id="4il-EK-Pbn"/>
                         <segue destination="YmO-B7-dd1" kind="presentation" identifier="imageTapped" id="YxR-e1-kek"/>
@@ -3119,7 +3131,13 @@
                             <outlet property="delegate" destination="CxX-ex-f2w" id="B11-OB-NLJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tweet" id="y8P-g4-6Db"/>
+                    <navigationItem key="navigationItem" title="Tweet" id="y8P-g4-6Db">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="occ-VY-J4N">
+                            <connections>
+                                <segue destination="aaQ-7U-zLQ" kind="presentation" identifier="Compose" id="ufh-ku-ztc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tweetInfoContainerView" destination="JA5-yx-Mu7" id="Lqe-A9-ie1"/>
                         <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="p1a-fx-Q2D"/>
@@ -3610,6 +3628,7 @@
                         <segue destination="siG-Yx-ulA" kind="show" identifier="profileImageTapped" id="jTH-Om-GAS"/>
                         <segue destination="CxX-ex-f2w" kind="show" identifier="View Tweet" id="NhC-kn-RBT"/>
                         <segue destination="tY3-Cn-E0S" kind="presentation" identifier="videoTapped" id="poC-IB-rpN"/>
+                        <segue destination="aaQ-7U-zLQ" kind="presentation" identifier="Compose" id="5YA-fc-rOJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GYl-AV-qkQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3650,7 +3669,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOV-Bp-doa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1836" y="-1300.2998500749627"/>
+            <point key="canvasLocation" x="1836" y="-1096"/>
         </scene>
     </scenes>
     <resources>
@@ -3665,12 +3684,13 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="O14-j2-fBA"/>
+        <segue reference="4il-EK-Pbn"/>
+        <segue reference="sOc-AU-t1H"/>
+        <segue reference="YxR-e1-kek"/>
+        <segue reference="8o8-9i-eyx"/>
+        <segue reference="lwM-mG-gHp"/>
+        <segue reference="8gZ-cg-Gud"/>
         <segue reference="GwV-mx-Cse"/>
-        <segue reference="l05-0q-9YC"/>
-        <segue reference="uxh-8f-EHW"/>
-        <segue reference="qqa-7f-aWM"/>
-        <segue reference="tdV-pQ-YAf"/>
-        <segue reference="mQn-8J-Vdw"/>
         <segue reference="1w8-WL-0CI"/>
     </inferredMetricsTieBreakers>
 </document>
