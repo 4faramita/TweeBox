@@ -4,7 +4,7 @@
 
 > WARNING: TweeBox is still in a quite early phase of developing (after all, it's only one-month old now). So the bad news is, it still has many bugs and unfinished features; on the bright side, you will be there to witness its growth :)
 
-There are a lot of Twitter "clients", but this is not one of them -- TweeBox is a Twitter "reader", designed for those who would like to browse on twitter rather than speak loadly to the Twitter street.
+There are a lot of Twitter "clients", but this is not one of those -- TweeBox is a Twitter "reader", designed for those who would like to browse on twitter rather than speak loadly to the Twitter street.
 
 As a result, TweeBox is friendly to many tweet reading features, including but not limited to "favorite", "block" and "report spam". What's more, you can also easily delete your tweets by just a swipe.
 
