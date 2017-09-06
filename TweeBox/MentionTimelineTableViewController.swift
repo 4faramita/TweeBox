@@ -19,7 +19,7 @@ class MentionTimelineTableViewController: TimelineTableViewController {
             sinceID: sinceID,
             fetchNewer: fetchNewer,
             resourceURL: mentionTimelineParams.resourceURL,
-            timelineParams: mentionTimelineParams
+            params: mentionTimelineParams
         )
         
         timeline.fetchData { [weak self] (maxID, sinceID, tweets) in

@@ -54,7 +54,7 @@ class SearchTimelineTableViewController: TimelineTableViewController {
                 sinceID: sinceID,
                 fetchNewer: fetchNewer,
                 resourceURL: replyTimelineParams.resourceURL,
-                timelineParams: replyTimelineParams
+                params: replyTimelineParams
         )
 
         searchTimeline.fetchData { [weak self] (maxID, sinceID, tweets) in

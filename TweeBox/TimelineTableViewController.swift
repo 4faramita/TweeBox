@@ -254,7 +254,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 sinceID: sinceID,
                 fetchNewer: fetchNewer,
                 resourceURL: homeTimelineParams.resourceURL,
-                timelineParams: homeTimelineParams
+                params: homeTimelineParams
             )
             
             timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
@@ -585,7 +585,7 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
             
         } else {
             
-            if let leftActions = addLefttActions(at: indexPath) {
+            if let leftActions = addLeftActions(at: indexPath) {
                 return leftActions
             }
         }
@@ -724,7 +724,7 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
 
     }
     
-    func addLefttActions(at indexPath: IndexPath) -> [SwipeAction]? {
+    func addLeftActions(at indexPath: IndexPath) -> [SwipeAction]? {
         return nil
     }    
 }

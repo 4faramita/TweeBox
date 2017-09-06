@@ -17,7 +17,7 @@ class ReplyTimeline: SearchTimeline {
         
         self.mainTweetID = mainTweetID
         
-        super.init(maxID: maxID, sinceID: sinceID, resourceURL: resourceURL, timelineParams: timelineParams)
+        super.init(maxID: maxID, sinceID: sinceID, resourceURL: resourceURL, params: timelineParams)
     }
 
     

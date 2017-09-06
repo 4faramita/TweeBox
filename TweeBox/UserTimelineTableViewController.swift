@@ -173,7 +173,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
                 sinceID: sinceID,
                 fetchNewer: fetchNewer,
                 resourceURL: userTimelineParams.resourceURL,
-                timelineParams: userTimelineParams
+                params: userTimelineParams
             )
             
             timeline.fetchData { [weak self] (maxID, sinceID, tweets) in
@@ -489,7 +489,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
 
 
 extension UserTimelineTableViewController {
-    override func addLefttActions(at indexPath: IndexPath) -> [SwipeAction]? {
+    override func addLeftActions(at indexPath: IndexPath) -> [SwipeAction]? {
         if userID == Constants.selfID {
             let tweet = timeline[indexPath.section][indexPath.row]
             

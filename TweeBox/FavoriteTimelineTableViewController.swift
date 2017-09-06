@@ -29,7 +29,7 @@ class FavoriteTimelineTableViewController: TimelineTableViewController {
             sinceID: sinceID,
             fetchNewer: fetchNewer,
             resourceURL: params.resourceURL,
-            timelineParams: params
+            params: params
         )
         
         timeline.fetchData { [weak self] (maxID, sinceID, tweets) in

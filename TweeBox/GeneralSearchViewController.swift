@@ -93,7 +93,7 @@ extension GeneralSearchViewController {
                     if let userListTableViewController = segue.destination.content as? UserListTableViewController {
                         
                         let simpleUserListRetriever = SearchUsers(
-                            usersParams: UsersSearchParams(query: keyword),
+                            params: UsersSearchParams(query: keyword),
                             resourceURL: ResourceURL.users_search
                         )
                         
