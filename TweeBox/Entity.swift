@@ -11,6 +11,8 @@ import SwiftyJSON
 
 struct Entity {
     
+    typealias TweetSymbol = Hashtag
+    
     public var hashtags: [Hashtag]
     public var urls: [TweetURL]
     public var userMentions: [Mention]
@@ -20,11 +22,7 @@ struct Entity {
     public var realMedia: [TweetMedia]?
     public var mediaToShare: [TweetMedia]?
     public var thumbMedia: [TweetMedia]?
-    
-    
-    
-    
-    
+
     
     init(with json: JSON, and extendedJson: JSON) {
         

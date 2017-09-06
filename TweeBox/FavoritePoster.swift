@@ -14,9 +14,9 @@ class FavoritePoster: SimpleTweetPoster {
     override func postData(_ handler: @escaping (Tweet?) -> Void) {
         
         if Constants.selfID != "-1" {
-            let client = RESTfulClient(resource: resourceURL, params: tweetParams.getParams())
+            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             
-            print(">>> FavoritePoster >> \(tweetParams.getParams())")
+            print(">>> FavoritePoster >> \(params.getParams())")
             
             client.getData() { data in
                 if let data = data {

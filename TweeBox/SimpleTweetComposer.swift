@@ -17,7 +17,7 @@ struct SimpleTweetComposer {
         
         let params = SimplePostParams(id: id)
         
-        let dataRetriever = SimpleTweetPoster(tweetParams: params, resourceURL: ResourceURL.statuses_retweet_id)
+        let dataRetriever = SimpleTweetPoster(params: params, resourceURL: ResourceURL.statuses_retweet_id)
         
         dataRetriever.postData { (retweet) in
             if self.id == retweet?.retweetedStatus?.id {
@@ -33,7 +33,7 @@ struct SimpleTweetComposer {
         
         let params = SimplePostParams(id: id)
         
-        let dataRetriever = SimpleTweetPoster(tweetParams: params, resourceURL: ResourceURL.statuses_unretweet_id)
+        let dataRetriever = SimpleTweetPoster(params: params, resourceURL: ResourceURL.statuses_unretweet_id)
         
         dataRetriever.postData { (retweet) in
             if self.id == retweet?.retweetedStatus?.id {
@@ -49,7 +49,7 @@ struct SimpleTweetComposer {
         
         let params = SimplePostParams(id: id)
         
-        let dataRetriever = SimpleTweetPoster(tweetParams: params, resourceURL: ResourceURL.statuses_destroy_id)
+        let dataRetriever = SimpleTweetPoster(params: params, resourceURL: ResourceURL.statuses_destroy_id)
         
         dataRetriever.postData { (tweet) in
 //            if self.id == tweet?.id {
@@ -68,7 +68,7 @@ struct SimpleTweetComposer {
         
         let params = SimplePostParams(id: id)
         
-        let dataRetriever = FavoritePoster(tweetParams: params, resourceURL: ResourceURL.favorites_create)
+        let dataRetriever = FavoritePoster(params: params, resourceURL: ResourceURL.favorites_create)
         
         dataRetriever.postData { (tweet) in
             if self.id == tweet?.id {
@@ -84,7 +84,7 @@ struct SimpleTweetComposer {
         
         let params = SimplePostParams(id: id)
         
-        let dataRetriever = FavoritePoster(tweetParams: params, resourceURL: ResourceURL.favorites_destroy)
+        let dataRetriever = FavoritePoster(params: params, resourceURL: ResourceURL.favorites_destroy)
         
         dataRetriever.postData { (tweet) in
             if self.id == tweet?.id {

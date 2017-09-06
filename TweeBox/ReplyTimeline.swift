@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class ReplyTimeline: Timeline {
+class ReplyTimeline: SearchTimeline {
     
     public var mainTweetID: String
     
@@ -21,15 +21,10 @@ class ReplyTimeline: Timeline {
     }
 
     
-    override func appendTweet(from json: JSON) {
-        
-        for (_, tweetJSON) in json["statuses"] {
-            if tweetJSON.null == nil {
-                let tweet = Tweet(with: tweetJSON)
-                if let repliedID = tweet.inReplyToStatusID, repliedID == mainTweetID {
-                    self.timeline.append(tweet)  // mem cycle?
-                }
-            }
+    override func addToTimeline(_ tweet: Tweet) {
+
+        if let repliedID = tweet.inReplyToStatusID, repliedID == mainTweetID {
+            self.timeline.append(tweet)
         }
     }
 }

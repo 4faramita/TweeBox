@@ -20,13 +20,13 @@ class UserList: UserListRetrieverProtocol {
     
     public var fetchOlder = true
     public var resourceURL: (String, String)
-    public var userListParams: ParamsWithCursorProtocol
+    public var params: ParamsWithCursorProtocol
     
-    init(resourceURL: (String, String), userListParams: ParamsWithCursorProtocol, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?, headID: String?, tailID: String?) {
+    init(resourceURL: (String, String), params: ParamsWithCursorProtocol, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?, headID: String?, tailID: String?) {
         
         self.resourceURL = resourceURL
         
-        self.userListParams = userListParams
+        self.params = params
         
         if let fetchOlder = fetchOlder {
             self.fetchOlder = fetchOlder
@@ -50,17 +50,17 @@ class UserList: UserListRetrieverProtocol {
         if Constants.selfID != "-1" {
             
             if fetchOlder, nextCursor != "0" {
-                userListParams.cursor = nextCursor
+                params.cursor = nextCursor
             }
             
             if !fetchOlder, previousCursor != "0" {
-                userListParams.cursor = previousCursor
+                params.cursor = previousCursor
             }
             
             
-            let client = RESTfulClient(resource: resourceURL, params: userListParams.getParams())            
+            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             
-            print(">>> params >> \(userListParams.getParams())")
+            print(">>> params >> \(params.getParams())")
             
             client.getData() { data in
                 if let data = data {

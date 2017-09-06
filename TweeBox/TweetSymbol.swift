@@ -8,4 +8,4 @@
 
 import Foundation
 
-class TweetSymbol: Hashtag { }
+//class TweetSymbol: Hashtag { }

@@ -15,16 +15,16 @@ class SingleTweet {
     //    private var user: TwitterUser!
     
     public var resourceURL: (String, String)
-    public var tweetParams: TweetParams
+    public var params: TweetParams
     
-    init(tweetParams: TweetParams, resourceURL: (String, String)) {
+    init(params: TweetParams, resourceURL: (String, String)) {
         self.resourceURL = resourceURL
-        self.tweetParams = tweetParams
+        self.params = params
     }
     
     public func fetchData(_ handler: @escaping (Tweet?) -> Void) {
         if Constants.selfID != "-1" {
-            let client = RESTfulClient(resource: resourceURL, params: tweetParams.getParams())
+            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             
             client.getData() { data in
                 if let data = data {

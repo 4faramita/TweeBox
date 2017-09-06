@@ -79,53 +79,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TweeBox/SingleTweet.swift"
-            timestampString = "525164991.599713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "init(tweetParams:resourceURL:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TweeBox.SingleTweet.init (tweetParams : TweeBox.TweetParams, resourceURL : (Swift.String, Swift.String)) -&gt; TweeBox.SingleTweet"
-                  moduleName = "TweeBox"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525887751.453799"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TweeBox.SingleTweet.__allocating_init (tweetParams : TweeBox.TweetParams, resourceURL : (Swift.String, Swift.String)) -&gt; TweeBox.SingleTweet"
-                  moduleName = "TweeBox"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/4faramita/Developer/TweeBox/TweeBox/SingleTweet.swift"
-                  timestampString = "525887751.45759"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

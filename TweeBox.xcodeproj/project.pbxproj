@@ -42,7 +42,6 @@
 		B443A0FC1F2B70D40021BB65 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A0FB1F2B70D40021BB65 /* Error.swift */; };
 		B45F1D561F40645B00AF201C /* VideoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F1D551F40645B00AF201C /* VideoViewerViewController.swift */; };
 		B4600B021F51E51500D0403E /* HashTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B011F51E51500D0403E /* HashTag.swift */; };
-		B4600B041F51E54F00D0403E /* TweetSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B031F51E54F00D0403E /* TweetSymbol.swift */; };
 		B4600B061F51E56500D0403E /* TweetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B051F51E56500D0403E /* TweetURL.swift */; };
 		B4600B081F51E57B00D0403E /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4600B071F51E57B00D0403E /* Mention.swift */; };
 		B46242921F4419CF0074158A /* TwitterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46242911F4419CF0074158A /* TwitterDate.swift */; };
@@ -165,7 +164,6 @@
 		B443A0FB1F2B70D40021BB65 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B45F1D551F40645B00AF201C /* VideoViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewerViewController.swift; sourceTree = "<group>"; };
 		B4600B011F51E51500D0403E /* HashTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTag.swift; sourceTree = "<group>"; };
-		B4600B031F51E54F00D0403E /* TweetSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetSymbol.swift; sourceTree = "<group>"; };
 		B4600B051F51E56500D0403E /* TweetURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetURL.swift; sourceTree = "<group>"; };
 		B4600B071F51E57B00D0403E /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		B46242911F4419CF0074158A /* TwitterDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterDate.swift; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 				B43BB8BA1F35A2300011A301 /* Entity.swift */,
 				B4600B071F51E57B00D0403E /* Mention.swift */,
 				B4600B051F51E56500D0403E /* TweetURL.swift */,
-				B4600B031F51E54F00D0403E /* TweetSymbol.swift */,
 				B4600B011F51E51500D0403E /* HashTag.swift */,
 				B4092FF61F38BD6D00CAB109 /* TweetEntity.swift */,
 				B4092FF81F38BECF00CAB109 /* TweetPhotoSize.swift */,
@@ -767,7 +764,6 @@
 				B488E66D1F49F1990033CFAD /* TweetParams.swift in Sources */,
 				B469BAC11F480C0B00ADA3F6 /* OriginTweetView.swift in Sources */,
 				B4A2AB9B1F554BC7008EF7A2 /* FavoritePoster.swift in Sources */,
-				B4600B041F51E54F00D0403E /* TweetSymbol.swift in Sources */,
 				B4047B881F4ED00F004E2AE3 /* ParamsWithBounds.swift in Sources */,
 				B40930081F39710000CAB109 /* URLExtension.swift in Sources */,
 				B409300A1F39763E00CAB109 /* MediaSize.swift in Sources */,

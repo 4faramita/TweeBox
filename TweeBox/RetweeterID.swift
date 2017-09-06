@@ -20,14 +20,14 @@ class RetweeterID {
     
     public var fetchOlder = true
     
-    public var retweetersIDParams: RetweetersIDParams
+    public var params: RetweetersIDParams
     public var resourceURL: (String, String)
 
-    init(resourceURL: (String, String), retweetersIDParams: RetweetersIDParams, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?) {
+    init(resourceURL: (String, String), params: RetweetersIDParams, fetchOlder: Bool?, nextCursor: String?, previousCursor: String?) {
         
         self.resourceURL = resourceURL
         
-        self.retweetersIDParams = retweetersIDParams
+        self.params = params
         
         if let fetchOlder = fetchOlder {
             self.fetchOlder = fetchOlder
@@ -48,16 +48,16 @@ class RetweeterID {
         if Constants.selfID != "-1" {
             
             if fetchOlder, previousCursor != "-1" {
-                retweetersIDParams.cursor = previousCursor
+                params.cursor = previousCursor
             }
             
             if !fetchOlder, nextCursor != "-1" {
-                retweetersIDParams.cursor = nextCursor
+                params.cursor = nextCursor
             }
             
-            let client = RESTfulClient(resource: resourceURL, params: retweetersIDParams.getParams())
+            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             print(resourceURL)
-            print(retweetersIDParams.getParams())
+            print(params.getParams())
             client.getData() { data in
                 if let data = data {
                     let json = JSON(data: data)

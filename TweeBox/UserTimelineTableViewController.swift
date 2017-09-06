@@ -114,7 +114,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
 
     private func setUser() {
         SingleUser(
-            userParams: UserParams(userID: userID, screenName: nil),
+            params: UserParams(userID: userID, screenName: nil),
             resourceURL: ResourceURL.user_show
         ).fetchData { [weak self] (singleUser) in
             if singleUser != nil {
@@ -463,7 +463,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
                     
                     userListRetriever = UserList(
                         resourceURL: ResourceURL.followers_list,
-                        userListParams: UserListParams(userID: userID!),
+                        params: UserListParams(userID: userID!),
                         fetchOlder: nil, nextCursor: nil, previousCursor: nil,
                         headID: nil,
                         tailID: nil
@@ -472,7 +472,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
                     
                     userListRetriever = UserList(
                         resourceURL: ResourceURL.followings_list,
-                        userListParams: UserListParams(userID: userID!),
+                        params: UserListParams(userID: userID!),
                         fetchOlder: nil, nextCursor: nil, previousCursor: nil,
                         headID: nil,
                         tailID: nil

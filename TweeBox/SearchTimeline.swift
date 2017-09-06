@@ -16,8 +16,12 @@ class SearchTimeline: Timeline {
         for (_, tweetJSON) in json["statuses"] {
             if tweetJSON.null == nil {
                 let tweet = Tweet(with: tweetJSON)
-                self.timeline.append(tweet)  // mem cycle?
+                addToTimeline(tweet)
             }
         }
+    }
+
+    func addToTimeline(_ tweet: Tweet) {
+        self.timeline.append(tweet)
     }
 }

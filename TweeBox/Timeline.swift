@@ -15,9 +15,9 @@ class Timeline {
     public var sinceID: String?
     public var fetchNewer: Bool
     public var resourceURL: (String, String)
-    public var timelineParams: ParamsWithBoundsProtocol
+    public var params: ParamsWithBoundsProtocol
     
-    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), timelineParams: ParamsWithBoundsProtocol) {
+    init(maxID: String?, sinceID: String?, fetchNewer: Bool = true, resourceURL: (String, String), params: ParamsWithBoundsProtocol) {
         
         self.maxID = maxID
         self.sinceID = sinceID
@@ -25,7 +25,7 @@ class Timeline {
         self.fetchNewer = fetchNewer
         
         self.resourceURL = resourceURL
-        self.timelineParams = timelineParams
+        self.params = params
     }
     
     func appendTweet(from json: JSON) {
@@ -44,15 +44,15 @@ class Timeline {
         if Constants.selfID != "-1" {
             
             if fetchNewer, sinceID != nil {
-                timelineParams.sinceID = String(Int(sinceID!)! + 1)
+                params.sinceID = String(Int(sinceID!)! + 1)
             }
             
             if !fetchNewer, maxID != nil {
-                timelineParams.maxID = String(Int(maxID!)! - 1)
+                params.maxID = String(Int(maxID!)! - 1)
             }
             
-            let client = RESTfulClient(resource: resourceURL, params: timelineParams.getParams())
-            print(">>> params \(timelineParams.getParams())")
+            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
+            print(">>> params \(params.getParams())")
             client.getData() { data in
                 if let data = data {
                     let json = JSON(data: data)

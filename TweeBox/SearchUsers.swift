@@ -14,16 +14,16 @@ class SearchUsers: UserListRetrieverProtocol {
     private var userList = [TwitterUser]()
     
     public var resourceURL: (String, String)
-    public var usersParams: UsersSearchParams
+    public var params: UsersSearchParams
     
-    init(usersParams: UsersSearchParams, resourceURL: (String, String)) {
+    init(params: UsersSearchParams, resourceURL: (String, String)) {
         self.resourceURL = resourceURL
-        self.usersParams = usersParams
+        self.params = params
     }
     
     public func fetchData(_ handler: @escaping (String, String, [TwitterUser]) -> Void) {
         if Constants.selfID != "-1" {
-            let client = RESTfulClient(resource: resourceURL, params: usersParams.getParams())
+            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             
             client.getData() { data in
                 if let data = data {

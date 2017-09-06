@@ -99,7 +99,7 @@ class TwitterAttributedContent {
                             sourceViewController.keyword = keyword
                             
                             SingleUser(
-                                userParams: UserParams(userID: nil, screenName: keyword),
+                                params: UserParams(userID: nil, screenName: keyword),
                                 resourceURL: ResourceURL.user_show
                             ).fetchData { (singleUser) in
                                 

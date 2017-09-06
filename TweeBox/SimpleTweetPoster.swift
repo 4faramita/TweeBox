@@ -13,19 +13,19 @@ import SwiftyJSON
 class SimpleTweetPoster {
     
     public var resourceURL: (String, String)
-    public var tweetParams: SimplePostParams
+    public var params: SimplePostParams
     
-    init(tweetParams: SimplePostParams, resourceURL: (String, String)) {
+    init(params: SimplePostParams, resourceURL: (String, String)) {
         self.resourceURL = resourceURL
-        self.tweetParams = tweetParams
+        self.params = params
     }
 
     
     public func postData(_ handler: @escaping (Tweet?) -> Void) {
         if Constants.selfID != "-1" {
-            let client = RESTfulClientWithID(resource: resourceURL, params: tweetParams.getParams())
+            let client = RESTfulClientWithID(resource: resourceURL, params: params.getParams())
             
-            print(">>> composer >> \(tweetParams.getParams())")
+            print(">>> composer >> \(params.getParams())")
             
             client.getData() { data in
                 if let data = data {

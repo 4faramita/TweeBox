@@ -124,7 +124,7 @@ extension GeneralSearchViewController {
     fileprivate func fetchUser(_ handler: @escaping (TwitterUser?) -> Void) {
         
         SingleUser(
-            userParams: UserParams(userID: nil, screenName: keyword),
+            params: UserParams(userID: nil, screenName: keyword),
             resourceURL: ResourceURL.user_show
         ).fetchData { (singleUser) in
             handler(singleUser)

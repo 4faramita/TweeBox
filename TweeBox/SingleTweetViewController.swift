@@ -211,7 +211,7 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
     
     private func setTweet() {
         SingleTweet(
-            tweetParams: TweetParams(of: tweetID!),
+            params: TweetParams(of: tweetID!),
             resourceURL: ResourceURL.statuses_show_id
         ).fetchData { [weak self] (tweet) in
             if tweet != nil {
