@@ -11,26 +11,30 @@ import SwiftyJSON
 
 class FavoritePoster: SimpleTweetPoster {
     
-    override func postData(_ handler: @escaping (Tweet?) -> Void) {
-        
-        if Constants.selfID != "-1" {
-            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
-            
-            print(">>> FavoritePoster >> \(params.getParams())")
-            
-            client.getData() { data in
-                if let data = data {
-                    let json = JSON(data: data)
-                    if json.null == nil {
-                        let tweet = Tweet(with: json)
-                        handler(tweet)
-                    } else {
-                        handler(nil)
-                    }
-                } else {
-                    handler(nil)
-                }
-            }
-        }
+    override var client: RESTfulClient {
+        return RESTfulClient(resource: resourceURL, params: params.getParams())
     }
+    
+//    override func postData(_ handler: @escaping (Tweet?) -> Void) {
+//        
+//        if Constants.selfID != "-1" {
+//            let client = RESTfulClient(resource: resourceURL, params: params.getParams())
+//            
+//            print(">>> FavoritePoster >> \(params.getParams())")
+//            
+//            client.getData() { data in
+//                if let data = data {
+//                    let json = JSON(data: data)
+//                    if json.null == nil {
+//                        let tweet = Tweet(with: json)
+//                        handler(tweet)
+//                    } else {
+//                        handler(nil)
+//                    }
+//                } else {
+//                    handler(nil)
+//                }
+//            }
+//        }
+//    }
 }

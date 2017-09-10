@@ -14,11 +14,12 @@ import PopupDialog
 import ESPullToRefresh
 import SwipeCellKit
 import JDStatusBarNotification
+import CoreData
 
 
 class TimelineTableViewController: UITableViewController, TweetClickableContentProtocol
 //, ScrollingNavigationControllerDelegate 
-{
+{    
     var emptyWarningCollapsed = false
 
     var timeline = [Array<Tweet>]() {
@@ -214,7 +215,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         let cells = self.tableView.visibleCells
         for cell in cells {
             if let tweetCell = cell as? GeneralTweetTableViewCell {
-                tweetCell.tweetCreatedTime.text = ((tweetCell.tweet?.createdTime)! as Data).shortTimeAgoSinceNow
+                tweetCell.tweetCreatedTime.text = ((tweetCell.tweet?.createdTime)! as Date).shortTimeAgoSinceNow
             }
         }
     }
@@ -237,6 +238,8 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
             self.timeline.append(newTweets)
             self.tableView.insertSections([self.timeline.endIndex - 1], with: .automatic)
         }
+        
+//        updateDatabase(with newTweets: [Tweet])
     }
     
     
@@ -353,7 +356,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 retweetCell.section = indexPath.section
                 retweetCell.row = indexPath.row
             }
-        } else if let count = tweet.entities?.media?.count, count > 0 {
+        } else if let count = tweet.tweetEntities?.media?.count, count > 0 {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "Tweet with Media", for: indexPath)
             
@@ -492,12 +495,12 @@ extension TimelineTableViewController: GeneralTweetTableViewCellProtocol {
         self.clickedTweet = timeline[section][row]
         self.clickedImageIndex = mediaIndex
         self.media = media
-        self.imageURLToShare = clickedTweet?.entities?.mediaToShare?[clickedImageIndex ?? 0].mediaURL
+        self.imageURLToShare = clickedTweet?.tweetEntities?.mediaToShare?[clickedImageIndex ?? 0].mediaURL
         
         if media.count == 1, media[0].type != "photo" {
             performSegue(withIdentifier: "videoTapped", sender: nil)
         } else {
-            if let clickedMediaURL = clickedTweet?.entities?.realMedia?[clickedImageIndex ?? 0].mediaURL {
+            if let clickedMediaURL = clickedTweet?.tweetEntities?.realMedia?[clickedImageIndex ?? 0].mediaURL {
                 
 //                let progressView = UIProgressView(progressViewStyle: .bar)
 //                progressView.alpha = 0

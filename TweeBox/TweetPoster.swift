@@ -8,9 +8,12 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 
 class TweetPoster {
+    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
     private let resourceURL = ResourceURL.statuses_update
     public var tweetParams: TweetPostParams
@@ -28,12 +31,17 @@ class TweetPoster {
             
             print(">>> TweetPoster >> \(tweetParams.getParams())")
             
-            client.getData() { data in
+            client.getData() { [weak self] data in
                 if let data = data {
                     let json = JSON(data: data)
                     if json.null == nil {
-                        let tweet = Tweet(with: json)
-                        handler(tweet)
+                        self?.container?.performBackgroundTask({ (context) in
+                            if let tweet = try? Tweet.matchOrCreateTweet(with: json, in: context) {
+                                context.perform {
+                                    handler(tweet)
+                                }
+                            }
+                        })
                     } else {
                         handler(nil)
                     }

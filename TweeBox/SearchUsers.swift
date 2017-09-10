@@ -8,8 +8,11 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class SearchUsers: UserListRetrieverProtocol {
+    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
     private var userList = [TwitterUser]()
     
@@ -25,19 +28,27 @@ class SearchUsers: UserListRetrieverProtocol {
         if Constants.selfID != "-1" {
             let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             
-            client.getData() { data in
+            client.getData() { [weak self] data in
+                
+                guard var userList = self?.userList else { return }
+                
                 if let data = data {
                     
                     let json = JSON(data: data)
                     
                     for (_, userJSON) in json {
                         if userJSON.null == nil {
-                            let user = TwitterUser(with: userJSON)
-                            self.userList.append(user)  // mem cycle?
+                            self?.container?.performBackgroundTask({ (context) in
+                                if let user = try? TwitterUser.matchOrCreateTwitterUser(with: userJSON, in: context) {
+                                    context.perform {
+                                        userList.append(user)
+                                    }
+                                }
+                            })
                         }
                     }
                     
-                    handler("0", "0", self.userList)
+                    handler("0", "0", userList)
                 }
             }
         }

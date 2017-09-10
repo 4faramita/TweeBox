@@ -43,6 +43,6 @@ class TwitterUserTableViewCell: SwipeTableViewCell {
         
         followersCountLabel.text = "Followers: \(user?.followersCount ?? 0)"
         
-        createdTimeLabel.text = "Created At: \((user?.createdAt as! Date).timeAgoSinceNow ?? "")"
+        createdTimeLabel.text = "Created At: \(((user?.createdAt ?? NSDate()) as Date).timeAgoSinceNow)"
     }
 }

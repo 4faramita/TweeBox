@@ -89,40 +89,78 @@ class TwitterUser: NSManagedObject {
 //    public var withheld_in_countries: String?
 //    public var withheld_scope: String?
     
-    init(with userJSON: JSON) {
-        id                            = userJSON["id_str"].stringValue
-        location                      = userJSON["location"].string
-        name                          = userJSON["name"].stringValue
-        screenName                    = userJSON["screen_name"].stringValue
-        url                           = userJSON["url"].stringValue
-        createdAt                     = TwitterDate(string: userJSON["created_at"].stringValue).date! as NSDate
-        defaultProfile                = userJSON["default_profile"].bool ?? true
-        defaultProfileImage           = userJSON["default_profile_image"].bool ?? true
-        bio                           = userJSON["description"].string
-        entities                      = Entity(with: userJSON["entities"], and: JSON.null)  // ((userJSON["entities"].null == nil) ? (Entity(with: userJSON["entities"])) : nil)
-        verified                      = userJSON["verified"].bool ?? false
-        favouritesCount               = Int64(userJSON["favourites_count"].intValue)
-        followRequestSent             = userJSON["follow_request_sent"].boolValue
-        following                     = userJSON["following"].boolValue
-        followersCount                = Int64(userJSON["followers_count"].intValue)
-        followingCount                = Int64(userJSON["friends_count"].intValue)
-        geoEnabled                    = userJSON["geo_enabled"].bool ?? false
-        isTranslator                  = userJSON["is_translator"].bool ?? false
-        lang                          = userJSON["lang"].stringValue
-        listedCount                   = Int64(userJSON["listed_count"].intValue)
-        notifications                 = userJSON["notifications"].boolValue
-        profileBackgroundColor        = userJSON["profile_background_color"].stringValue
-        profileBackgroundImageURLHTTP = userJSON["profile_background_image_url"].stringValue
-        profileBackgroundImageURL     = userJSON["profile_background_image_url_https"].stringValue
-        profileBackgroundTile         = userJSON["profile_background_tile"].bool ?? false
-        profileBannerURL              = userJSON["profile_banner_url"].stringValue
-        profileImageURLHTTP           = userJSON["profile_image_url"].stringValue
-        profileImageURL               = URL(string: userJSON["profile_image_url_https"].stringValue, quality: .max)?.absoluteString
-        profileUseBackgroundImage     = userJSON["profile_use_background_image"].bool ?? true
-        protected                     = userJSON["protected"].bool ?? false
-        status                        = ((userJSON["status"].null == nil) ? (Tweet(with: userJSON["status"])) : nil)
-        statusesCount                 = Int64(userJSON["statuses_count"].intValue)
-        timeZone                      = userJSON["time_zone"].string
-        utcOffset                     = Int32(userJSON["utc_offset"].intValue)
+    var userEntities: Entity? {
+        if let entitiesData = self.entities {
+            let entitiesJSON = JSON(data: entitiesData as Data)
+            
+            let entities = Entity(with: entitiesJSON, and: JSON.null)
+            
+            return entities
+        }
+        return nil
     }
+
+    
+    class func createTwitterUser(with userJSON: JSON, in context: NSManagedObjectContext) -> TwitterUser {
+        
+        let user = TwitterUser(context: context)
+        
+        user.id                            = userJSON["id_str"].stringValue
+        user.location                      = userJSON["location"].string
+        user.name                          = userJSON["name"].stringValue
+        user.screenName                    = userJSON["screen_name"].stringValue
+        user.url                           = userJSON["url"].stringValue
+        user.createdAt                     = TwitterDate(string: userJSON["created_at"].stringValue).date! as NSDate
+        user.defaultProfile                = userJSON["default_profile"].bool ?? true
+        user.defaultProfileImage           = userJSON["default_profile_image"].bool ?? true
+        user.bio                           = userJSON["description"].string
+        user.entities                      = (try? userJSON["entities"].rawData()) as NSData?
+        user.verified                      = userJSON["verified"].bool ?? false
+        user.favouritesCount               = Int64(userJSON["favourites_count"].intValue)
+        user.followRequestSent             = userJSON["follow_request_sent"].boolValue
+        user.following                     = userJSON["following"].boolValue
+        user.followersCount                = Int64(userJSON["followers_count"].intValue)
+        user.followingCount                = Int64(userJSON["friends_count"].intValue)
+        user.geoEnabled                    = userJSON["geo_enabled"].bool ?? false
+        user.isTranslator                  = userJSON["is_translator"].bool ?? false
+        user.lang                          = userJSON["lang"].stringValue
+        user.listedCount                   = Int64(userJSON["listed_count"].intValue)
+        user.notifications                 = userJSON["notifications"].boolValue
+        user.profileBackgroundColor        = userJSON["profile_background_color"].stringValue
+        user.profileBackgroundImageURLHTTP = userJSON["profile_background_image_url"].stringValue
+        user.profileBackgroundImageURL     = userJSON["profile_background_image_url_https"].stringValue
+        user.profileBackgroundTile         = userJSON["profile_background_tile"].bool ?? false
+        user.profileBannerURL              = userJSON["profile_banner_url"].stringValue
+        user.profileImageURLHTTP           = userJSON["profile_image_url"].stringValue
+        user.profileImageURL               = URL(string: userJSON["profile_image_url_https"].stringValue, quality: .max)?.absoluteString
+        user.profileUseBackgroundImage     = userJSON["profile_use_background_image"].bool ?? true
+        user.protected                     = userJSON["protected"].bool ?? false
+//        user.status                        = try? Tweet.matchOrCreateTweet(with: userJSON["status"], in: context)  // ((userJSON["status"].null == nil) ? (try? Tweet.matchOrCreateTweet(with: userJSON["status"], in: context)) : nil)
+        user.statusesCount                 = Int64(userJSON["statuses_count"].intValue)
+        user.timeZone                      = userJSON["time_zone"].string
+        user.utcOffset                     = Int32(userJSON["utc_offset"].intValue)
+        
+        return user
+    }
+    
+    class func matchOrCreateTwitterUser(with json: JSON, in context: NSManagedObjectContext) throws -> TwitterUser {
+        
+        let request: NSFetchRequest<TwitterUser> = TwitterUser.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", json["id_str"].stringValue)
+        
+        do {
+            let matches = try context.fetch(request)
+            if matches.count > 0 {
+                assert(matches.count == 1, "TwitterUser.matchOrCreateTwitterUser == db inconsistency")
+                return matches[0]
+            }
+        } catch {
+            throw error
+            // may need more effort
+        }
+        
+        return TwitterUser.createTwitterUser(with: json, in: context)
+        // WHY
+    }
+
 }

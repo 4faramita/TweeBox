@@ -8,9 +8,12 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 
 class SingleTweet {
+    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
     //    private var user: TwitterUser!
     
@@ -26,13 +29,22 @@ class SingleTweet {
         if Constants.selfID != "-1" {
             let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             
-            client.getData() { data in
+            client.getData() { [weak self] data in
                 if let data = data {
                     let json = JSON(data: data)
                     if json.null == nil {
-                        let tweet = Tweet(with: json)
-                        handler(tweet)
+                        self?.container?.performBackgroundTask({ (context) in
+                            if let tweet = try? Tweet.matchOrCreateTweet(with: json, in: context) {
+                                context.perform {
+                                    handler(tweet)
+                                }
+                            }
+                        })
+                    } else {
+                        handler(nil)
                     }
+                } else {
+                    handler(nil)
                 }
             }
         }

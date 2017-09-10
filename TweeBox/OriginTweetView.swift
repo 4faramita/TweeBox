@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SwiftyJSON
 
 class OriginTweetView: UIView {
 
@@ -18,7 +19,7 @@ class OriginTweetView: UIView {
     }
     
     private var thumbImages: [TweetMedia]? {
-        return originTweet?.entities?.thumbMedia?.allObjects as? [TweetMedia]
+        return originTweet.tweetEntities?.thumbMedia
     }
     
     private var hasMedia: Bool {
@@ -75,7 +76,7 @@ class OriginTweetView: UIView {
                 make.height.equalTo(150)
                 make.width.equalTo(150)
             }
-            thumbImageView!.kf.setImage(with: thumbImages?[0].mediaURL?.url)
+            thumbImageView!.kf.setImage(with: thumbImages?[0].mediaURL)
         }
         
         let profileImageView = UIImageView()

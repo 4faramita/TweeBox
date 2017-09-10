@@ -8,8 +8,11 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class UserList: UserListRetrieverProtocol {
+    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
     public var userList = [TwitterUser]()
     public var nextCursor = "-1"
@@ -62,43 +65,51 @@ class UserList: UserListRetrieverProtocol {
             
             print(">>> params >> \(params.getParams())")
             
-            client.getData() { data in
+            client.getData() { [weak self] data in
+                
+                guard let userList = self?.userList, let nextCursor = self?.nextCursor, let previousCursor = self?.previousCursor else { return }
+                
                 if let data = data {
                     let json = JSON(data: data)
                     
-                    self.nextCursor = json["next_cursor_str"].stringValue
-                    self.previousCursor = json["previous_cursor_str"].stringValue
+                    self?.nextCursor = json["next_cursor_str"].stringValue
+                    self?.previousCursor = json["previous_cursor_str"].stringValue
                     
                     for (_, userJSON) in json["users"] {
                         if userJSON.null == nil {
-                            let user = TwitterUser(with: userJSON)
-                            self.userList.append(user)  // mem cycle?
+                            self?.container?.performBackgroundTask({ (context) in
+                                if let user = try? TwitterUser.matchOrCreateTwitterUser(with: userJSON, in: context) {
+                                    context.perform {
+                                        self?.userList.append(user)
+                                    }
+                                }
+                            })
                         }
                     }
                     
-                    if self.fetchOlder, let tailID = self.tailID {
-                        for index in stride(from: self.userList.endIndex - 1, through: self.userList.startIndex, by: -1) {
-                            if self.userList[index].id == tailID {
+                    if let fetchOlder = self?.fetchOlder, fetchOlder, let tailID = self?.tailID, let end = self?.userList.endIndex, let start = self?.userList.startIndex {
+                        for index in stride(from: end - 1, through: start, by: -1) {
+                            if self?.userList[index].id == tailID {
 //                                self.userList = self.userList[(index + 1)..<(self.userList.endIndex)]
-                                self.userList = Array(self.userList.suffix(self.userList.endIndex - index - 1))
+                                self?.userList = Array((self?.userList.suffix(end - index - 1))!)
                                 break
                             }
                         }
                     }
                     
-                    if !(self.fetchOlder), let headID = self.headID {
-                        for index in self.userList.startIndex..<self.userList.endIndex {
-                            if self.userList[index].id == headID {
+                    if let fetchOlder = self?.fetchOlder, !fetchOlder, let headID = self?.headID, let start = self?.userList.startIndex, let end = self?.userList.endIndex {
+                        for index in start..<end {
+                            if self?.userList[index].id == headID {
 //                                self.userList = self.userList[0..<index]
-                                self.userList = Array(self.userList.prefix(index))
+                                self?.userList = Array((self?.userList.prefix(index))!)
                                 break
                             }
                         }
                     }
                     
-                    handler(self.nextCursor, self.previousCursor, self.userList)
+                    handler(nextCursor, previousCursor, userList)
                 } else {
-                    handler(self.nextCursor, self.previousCursor, self.userList)
+                    handler(nextCursor, previousCursor, userList)
                 }
             }
             

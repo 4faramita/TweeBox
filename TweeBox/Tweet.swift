@@ -89,35 +89,75 @@ class Tweet: NSManagedObject {
 //    public var withheldScope: String?
     // When present, indicates whether the content being withheld is the “status” or a “user.”
     
-    init(with tweetJSON: JSON
-        ) {
-        coordinates         = ((tweetJSON["coordinates"].null == nil) ? (Coordinates(with: tweetJSON["coordinates"])) : nil)
-        createdTime         = TwitterDate(string: tweetJSON["created_at"].stringValue).date! as NSDate  // tweetJSON["created_at"].stringValue
-        currenUserRetweet   = tweetJSON["current_user_retweet"].string
-        entities            = Entity(with: tweetJSON["entities"], and: tweetJSON["extended_entities"])  // ((tweetJSON["entities"].null == nil) ? (Entity(with: tweetJSON["entities"])) : nil)
-        favoriteCount       = Int64(tweetJSON["favorite_count"].intValue)
-        favorited           = tweetJSON["favorited"].bool ?? false
-        filterLevel         = tweetJSON["filter_level"].string
-        id                  = tweetJSON["id_str"].stringValue
-        inReplyToScreenName = tweetJSON["in_reply_to_screen_name"].string
-        inReplyToStatusID   = tweetJSON["in_reply_to_status_id_str"].string
-        inReplyToUserID     = tweetJSON["in_reply_to_user_id_str"].string
-        lang                = tweetJSON["lang"].string
-        place               = ((tweetJSON["place"].null == nil) ? (Place(with: tweetJSON["place"])) : nil)
-        possiblySensitive   = tweetJSON["possibly_sensitive"].boolValue
-        quotedStatusID      = tweetJSON["quoted_status_id_str"].string
-        quotedStatus        = ((tweetJSON["quoted_status"].null == nil) ? (Tweet(with: tweetJSON["quoted_status"])) : nil)
-        retweetCount        = Int64(tweetJSON["retweet_count"].int ?? 0)
-        retweeted           = tweetJSON["retweeted"].bool ?? false
-        retweetedStatus     = ((tweetJSON["retweeted_status"].null == nil) ? (Tweet(with: tweetJSON["retweeted_status"])) : nil)
-        source              = tweetJSON["source"].stringValue
-        text                = tweetJSON["text"].stringValue
-        truncated           = tweetJSON["truncated"].bool ?? false
-        user                = TwitterUser(with: tweetJSON["user"])  // ((tweetJSON["user"].null == nil) ? (TwitterUser(with: tweetJSON["user"])) : nil)
+    var tweetEntities: Entity? {
+        if let entitiesData = self.entities {
+            let entitiesJSON = JSON(data: entitiesData as Data)
+            
+            var extendedEntitiesJSON = JSON.null
+            if let extendedEntitiesData = self.extendedEntities {
+                extendedEntitiesJSON = JSON(data: extendedEntitiesData as Data)
+            }
+            
+            let entities = Entity(with: entitiesJSON, and: extendedEntitiesJSON)
+            
+            return entities
+        }
+        return nil
+    }
+
+    
+    class func createTweet(with tweetJSON: JSON, in context: NSManagedObjectContext) -> Tweet {
+        
+        let tweet = Tweet(context: context)
+        
+        tweet.coordinates         = ((tweetJSON["coordinates"].null == nil) ? ((try? tweetJSON["coordinates"].rawData()) as NSData?) : nil)
+        tweet.createdTime         = TwitterDate(string: tweetJSON["created_at"].stringValue).date! as NSDate
+        tweet.currenUserRetweet   = tweetJSON["current_user_retweet"].string
+        tweet.entities            = (try? tweetJSON["entities"].rawData()) as NSData?
+        tweet.extendedEntities    = (try? tweetJSON["extended_entities"].rawData()) as NSData?
+        tweet.favoriteCount       = Int64(tweetJSON["favorite_count"].intValue)
+        tweet.favorited           = tweetJSON["favorited"].bool ?? false
+        tweet.filterLevel         = tweetJSON["filter_level"].string
+        tweet.id                  = tweetJSON["id_str"].stringValue
+        tweet.inReplyToScreenName = tweetJSON["in_reply_to_screen_name"].string
+        tweet.inReplyToStatusID   = tweetJSON["in_reply_to_status_id_str"].string
+        tweet.inReplyToUserID     = tweetJSON["in_reply_to_user_id_str"].string
+        tweet.lang                = tweetJSON["lang"].string
+        tweet.place               = ((tweetJSON["place"].null == nil) ? ((try? tweetJSON["place"].rawData()) as NSData?) : nil)
+        tweet.possiblySensitive   = tweetJSON["possibly_sensitive"].boolValue
+        tweet.quotedStatusID      = tweetJSON["quoted_status_id_str"].string
+        tweet.quotedStatus        = ((tweetJSON["quoted_status"].null == nil) ? (try? Tweet.matchOrCreateTweet(with: tweetJSON["quoted_status"], in: context)) : nil)
+        tweet.retweetCount        = Int64(tweetJSON["retweet_count"].int ?? 0)
+        tweet.retweeted           = tweetJSON["retweeted"].bool ?? false
+        tweet.retweetedStatus     = ((tweetJSON["retweeted_status"].null == nil) ? (try? Tweet.matchOrCreateTweet(with: tweetJSON["retweeted_status"], in: context)) : nil)
+        tweet.source              = tweetJSON["source"].stringValue
+        tweet.text                = tweetJSON["text"].stringValue
+        tweet.truncated           = tweetJSON["truncated"].bool ?? false
+        tweet.user                = try? TwitterUser.matchOrCreateTwitterUser(with: tweetJSON["user"], in: context)
         //        withheldCopyright: tweetJSON["withheld_copyright"].bool
         //        withheldInCountries: nil
         //        withheldScope: tweetJSON["withheld_scope"].string
+        
+        return tweet
     }
     
     
+    class func matchOrCreateTweet(with json: JSON, in context: NSManagedObjectContext) throws -> Tweet {
+        let request: NSFetchRequest<Tweet> = Tweet.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", json["id_str"].stringValue)
+        
+        do {
+            let matches = try context.fetch(request)
+            if matches.count > 0 {
+                assert(matches.count == 1, "Tweet.matchTweet == db inconsistency")
+                return matches[0]
+            }
+        } catch {
+            throw error
+            // may need more effort
+        }
+        
+        return Tweet.createTweet(with: json, in: context)
+        // WHY
+    }
 }

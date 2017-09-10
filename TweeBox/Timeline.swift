@@ -8,10 +8,13 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 
 class Timeline {
-    public var timeline = [Tweet]()    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+
+    public var timeline = [Tweet]()
     public var maxID: String?
     public var sinceID: String?
     public var fetchNewer: Bool
@@ -29,19 +32,28 @@ class Timeline {
         self.params = params
     }
     
-    func appendTweet(from json: JSON) {
-        
-        for (_, tweetJSON) in json {
-            if tweetJSON.null == nil {
-                let tweet = Tweet(with: tweetJSON)
-                self.timeline.append(tweet)  // mem cycle?
+    func appendTweet(with json: JSON) {
                 
-                // Realm
-                
+        container?.performBackgroundTask({ [weak self] (context) in
+            for (_, tweetJSON) in json {
+                if tweetJSON.null == nil {
+                    //                let tweet = Tweet(with: tweetJSON)
+                    if let tweet = try? Tweet.matchOrCreateTweet(with: tweetJSON, in: context) {
+                        context.perform {
+                            self?.addToTimeline(tweet)
+                            // may not need local timeline
+                        }
+                    }
+                }
             }
-        }
-
+            try? context.save()
+        })
     }
+    
+    func addToTimeline(_ tweet: Tweet) {
+        self.timeline.append(tweet)
+    }
+
     
     public func fetchData(_ handler: @escaping (String?, String?, [Tweet]) -> Void) {
         
@@ -61,7 +73,7 @@ class Timeline {
                 if let data = data {
                     let json = JSON(data: data)
                     
-                    self.appendTweet(from: json)
+                    self.appendTweet(with: json)
                     
                     self.maxID = self.timeline.last?.id  // if fetch tweets below this batch, the earliest one in this batch would be the max one for the next batch
                     self.sinceID = self.timeline.first?.id  // vice versa

@@ -31,16 +31,16 @@ class PlaceAttributes: NSManagedObject {
     //        public var appID: String?
     // An ID or comma separated list of IDs representing the place in the applications place database.
     
-    init(with json: JSON) {
-        
-        streetAddress = json["street_address"].string
-        locality = json["locality"].string
-        region = json["region"].string
-        iso3 = json["iso3"].string
-        postalCode = json["postal_code"].string
-        phone = json["phone"].string
-        twitter = json["twitter"].string
-        url = json["url"].stringValue
-        //            appID = json["app:id"].string
-    }
+//    init(with json: JSON) {
+//        
+//        streetAddress = json["street_address"].string
+//        locality = json["locality"].string
+//        region = json["region"].string
+//        iso3 = json["iso3"].string
+//        postalCode = json["postal_code"].string
+//        phone = json["phone"].string
+//        twitter = json["twitter"].string
+//        url = json["url"].stringValue
+//        //            appID = json["app:id"].string
+//    }
 }

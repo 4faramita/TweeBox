@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import SwiftyJSON
 
 class TweetMediaContainerView: UIView {
 
@@ -21,6 +22,7 @@ class TweetMediaContainerView: UIView {
             }
         }
     }
+
     
     var isQuote: Bool {
         return (tweet?.quotedStatus != nil)
@@ -35,7 +37,7 @@ class TweetMediaContainerView: UIView {
     }
     
     private var media: [TweetMedia]? {
-        return tweet?.entities?.media?.allObjects as? [TweetMedia]
+        return tweet?.tweetEntities?.media
     }
     
 //    private var clickedIndex = 0
@@ -169,7 +171,7 @@ class TweetMediaContainerView: UIView {
 //        }
         
         imageView.kf.setImage(
-            with: media![index].mediaURL?.url,
+            with: media![index].mediaURL,
             placeholder: placeholder,
             options: [
                 .transition(.fade(Constants.picFadeInDuration)),

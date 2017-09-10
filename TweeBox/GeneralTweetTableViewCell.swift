@@ -12,6 +12,7 @@ import Kingfisher
 import DateToolsSwift
 import VisualEffectView
 import SwipeCellKit
+import SwiftyJSON
 
 protocol GeneralTweetTableViewCellProtocol: class {
     
@@ -60,7 +61,6 @@ class GeneralTweetTableViewCell: SwipeTableViewCell {
             updateUI()
         }
     }
-
     
 
     @IBOutlet weak var tweetUserProfileImage: UIImageView!
@@ -98,13 +98,12 @@ class GeneralTweetTableViewCell: SwipeTableViewCell {
             quoteTweetContainerView.addGestureRecognizer(tapOnOriginTweet)
 
             
-        } else if let tweet = tweet, let tweetMediaContentView = tweetMediaContentView, let media = tweet.entities?.media {
+        } else if let tweet = tweet, let tweetMediaContentView = tweetMediaContentView, let media = tweet.tweetEntities?.media {
             
             tweetMediaContentView.tweet = tweet
             
             if media.count == 1 {
                 
-                let media = media.allObjects as! [TweetMedia]
                 if media[0].type != "photo" {
                     addPlayLabel(to: tweetMediaContentView, isGif: (media[0].type == "animated_gif"))
                 }
@@ -188,7 +187,7 @@ class GeneralTweetTableViewCell: SwipeTableViewCell {
             if isRetweet, let retweet = retweet {
                 
                 retweetLabel.text = retweet.user?.name
-                retweeterProfileImage?.kf.setImage(with: retweet.user?.profileImageURL)
+                retweeterProfileImage?.kf.setImage(with: retweet.user?.profileImageURL?.url)
                 retweeterProfileImage?.cutToRound(radius: 8)
                 
             } else {
@@ -257,7 +256,7 @@ extension GeneralTweetTableViewCell {
     @IBAction func imageTapped() {
         
         guard let section = section, let row = row, let mediaIndex = mediaIndex else { return }
-        tapDelegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.entities?.media as! [TweetMedia]))
+        tapDelegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.tweetEntities?.media!)!)
     }
     
     @IBAction func originTweetTapped(byReactingTo: UIGestureRecognizer) {

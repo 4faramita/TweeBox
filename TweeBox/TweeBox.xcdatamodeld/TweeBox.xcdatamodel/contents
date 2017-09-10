@@ -1,51 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Coordinates" representedClassName=".Coordinates" syncable="YES" codeGenerationType="category">
-        <attribute name="coordinates" attributeType="Transformable" syncable="YES"/>
-        <attribute name="type" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Entity" representedClassName=".Entity" syncable="YES" codeGenerationType="category">
-        <relationship name="hashtags" toMany="YES" deletionRule="Nullify" destinationEntity="Hashtag" syncable="YES"/>
-        <relationship name="media" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TweetMedia" syncable="YES"/>
-        <relationship name="mediaToShare" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TweetMedia" syncable="YES"/>
-        <relationship name="realMedia" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TweetMedia" syncable="YES"/>
-        <relationship name="symbols" toMany="YES" deletionRule="Nullify" destinationEntity="TweetSymbol" syncable="YES"/>
-        <relationship name="thumbMedia" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TweetMedia" syncable="YES"/>
-        <relationship name="urls" toMany="YES" deletionRule="Nullify" destinationEntity="TweetURL" syncable="YES"/>
-        <relationship name="userMentions" toMany="YES" deletionRule="Nullify" destinationEntity="Mention" syncable="YES"/>
-    </entity>
-    <entity name="Hashtag" representedClassName=".Hashtag" parentEntity="TweetEntity" syncable="YES" codeGenerationType="category">
-        <attribute name="text" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Mention" representedClassName=".Mention" parentEntity="TweetEntity" syncable="YES" codeGenerationType="category">
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="screenName" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Place" representedClassName=".Place" syncable="YES" codeGenerationType="category">
-        <attribute name="country" attributeType="String" syncable="YES"/>
-        <attribute name="countryCode" attributeType="String" syncable="YES"/>
-        <attribute name="fullName" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="placeType" attributeType="String" syncable="YES"/>
-        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="attributes" maxCount="1" deletionRule="Nullify" destinationEntity="PlaceAttributes" syncable="YES"/>
-        <relationship name="boundingBox" maxCount="1" deletionRule="Nullify" destinationEntity="Coordinates" syncable="YES"/>
-    </entity>
-    <entity name="PlaceAttributes" representedClassName="PlaceAttributes" syncable="YES" codeGenerationType="class">
-        <attribute name="iso3" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="locality" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="postalCode" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="streetAddress" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="Tweet" representedClassName=".Tweet" syncable="YES" codeGenerationType="category">
+        <attribute name="coordinates" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="currenUserRetweet" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="entities" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="extendedEntities" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="favoriteCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="favorited" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="filterLevel" optional="YES" attributeType="String" syncable="YES"/>
@@ -54,6 +14,7 @@
         <attribute name="inReplyToStatusID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inReplyToUserID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="possiblySensitive" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quotedStatusID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="retweetCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -61,38 +22,16 @@
         <attribute name="source" attributeType="String" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
         <attribute name="truncated" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="coordinates" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coordinates" syncable="YES"/>
-        <relationship name="entities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entity" syncable="YES"/>
-        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" syncable="YES"/>
         <relationship name="quotedStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tweet" syncable="YES"/>
         <relationship name="retweetedStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tweet" syncable="YES"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="TwitterUser" inverseName="status" inverseEntity="TwitterUser" syncable="YES"/>
-    </entity>
-    <entity name="TweetEntity" representedClassName=".TweetEntity" syncable="YES" codeGenerationType="category">
-        <attribute name="indices" attributeType="Transformable" syncable="YES"/>
-    </entity>
-    <entity name="TweetMedia" representedClassName=".TweetMedia" parentEntity="TweetEntity" syncable="YES" codeGenerationType="category">
-        <attribute name="displayURL" attributeType="String" syncable="YES"/>
-        <attribute name="expandedURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="extAltText" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="mediaURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mediaURLHTTP" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sourceStatusID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" attributeType="String" syncable="YES"/>
-        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="TweetSymbol" representedClassName=".TweetSymbol" parentEntity="Hashtag" syncable="YES" codeGenerationType="category"/>
-    <entity name="TweetURL" representedClassName=".TweetURL" parentEntity="TweetEntity" syncable="YES" codeGenerationType="category">
-        <attribute name="displayURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="expandedURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="TwitterUser" representedClassName=".TwitterUser" syncable="YES" codeGenerationType="category">
         <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="defaultProfile" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="defaultProfileImage" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="entities" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="favouritesCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="followersCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="following" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -121,21 +60,10 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="utcOffset" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="verified" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="entities" maxCount="1" deletionRule="Nullify" destinationEntity="Entity" syncable="YES"/>
         <relationship name="status" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="user" inverseEntity="Tweet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Coordinates" positionX="-36" positionY="9" width="128" height="75"/>
-        <element name="Entity" positionX="0" positionY="171" width="128" height="165"/>
-        <element name="Hashtag" positionX="18" positionY="180" width="128" height="60"/>
-        <element name="Mention" positionX="0" positionY="144" width="128" height="90"/>
-        <element name="Place" positionX="-54" positionY="-9" width="128" height="180"/>
-        <element name="Tweet" positionX="-63" positionY="-18" width="128" height="30"/>
-        <element name="TweetEntity" positionX="36" positionY="189" width="128" height="60"/>
-        <element name="TweetMedia" positionX="18" positionY="162" width="128" height="180"/>
-        <element name="TweetSymbol" positionX="9" positionY="153" width="128" height="45"/>
-        <element name="TweetURL" positionX="-9" positionY="135" width="128" height="90"/>
-        <element name="TwitterUser" positionX="-18" positionY="27" width="128" height="555"/>
-        <element name="PlaceAttributes" positionX="-9" positionY="135" width="128" height="165"/>
+        <element name="Tweet" positionX="-299" positionY="159" width="128" height="403"/>
+        <element name="TwitterUser" positionX="-290" positionY="300" width="128" height="553"/>
     </elements>
 </model>

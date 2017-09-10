@@ -10,9 +10,9 @@ import Foundation
 import SwiftyJSON
 import CoreData
 
-class TweetEntity: NSManagedObject {
+class TweetEntity {
     
-//    var indices: [Int]
+    var indices: [Int]
     
     init(with json: JSON) {
         indices = json["indices"].arrayValue.map({ $0.intValue })

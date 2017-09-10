@@ -10,19 +10,18 @@
 
 import Foundation
 import SwiftyJSON
-import CoreData
 
-class Coordinates: NSManagedObject {
+struct Coordinates {
     
-//    public var type: String
+    var type: String
     
-    @NSManaged var coordinates: [Float]
+    var coordinates: [Any]
     
     init(with json: JSON) {
         
         type = json["type"].string ?? "Point"
         
-        switch type! {
+        switch type {
         case "Point":
             coordinates = json["coordinates"].arrayValue.map({ $0.floatValue })
         case "Polygon":

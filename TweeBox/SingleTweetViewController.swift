@@ -136,17 +136,16 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
     
     private func setTweetContent() {
         
-        if (tweet.entities?.realMedia == nil) || (tweet.entities?.realMedia!.count == 0) {
+        if (tweet.tweetEntities?.realMedia == nil) || (tweet.tweetEntities?.realMedia!.count == 0) {
             containerView.removeFromSuperview()
-        } else if let media = tweet.entities?.realMedia, media.count == 1 {
-            mediaArray = media.allObjects as [TweetMedia]
-            if mediaArray[0].type != "photo" {
-                addPlayLabel(to: containerView, isGif: (mediaArray[0].type == "animated_gif"))
+        } else if let media = tweet.tweetEntities?.realMedia, media.count == 1 {
+            if media[0].type != "photo" {
+                addPlayLabel(to: containerView, isGif: (media[0].type == "animated_gif"))
             }
         }
         containerView.cutToRound(radius: 5)
         
-        profileImageView.kf.setImage(with: tweet.user?.profileImageURL.url)
+        profileImageView.kf.setImage(with: tweet.user?.profileImageURL?.url)
         profileImageView.cutToRound(radius: nil)
         profileImageView.isUserInteractionEnabled = true
         
@@ -196,7 +195,7 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
             createdTimeLabel.text = dateString
         }
         
-        likeCountLabel.text = "\((tweet.favoriteCount ?? 0).shortExpression) like"
+        likeCountLabel.text = "\(tweet.favoriteCount.shortExpression) like"
         
         retweetCountButton.setTitle("\(tweet.retweetCount.shortExpression) retweet", for: .normal)
     }
@@ -276,7 +275,7 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "Media Container" {
-            return (tweet.entities?.realMedia != nil)
+            return (tweet.tweetEntities?.realMedia != nil)
         }
             
         // FIX THIS

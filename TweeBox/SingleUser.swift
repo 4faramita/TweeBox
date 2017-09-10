@@ -8,8 +8,11 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class SingleUser {
+    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
 //    private var user: TwitterUser!
     
@@ -25,12 +28,17 @@ class SingleUser {
         if Constants.selfID != "-1" {
             let client = RESTfulClient(resource: resourceURL, params: params.getParams())
             
-            client.getData() { data in
+            client.getData() { [weak self] data in
                 if let data = data {
                     let json = JSON(data: data)
                     if json.null == nil {
-                        let user = TwitterUser(with: json)
-                        handler(user)
+                        self?.container?.performBackgroundTask({ (context) in
+                            if let user = try? TwitterUser.matchOrCreateTwitterUser(with: json, in: context) {
+                                context.perform {
+                                    handler(user)
+                                }
+                            }
+                        })
                     } else {
                         handler(nil)
                     }

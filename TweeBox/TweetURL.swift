@@ -11,17 +11,17 @@ import SwiftyJSON
 
 class TweetURL: TweetEntity {
     
-//    var url: URL?
+    var url: URL?
     // The t.co URL that was extracted from the Tweet text
-//    var displayURL: URL?
-//    var expandedURL: URL?
+    var displayURL: URL?
+    var expandedURL: URL?
     // The resolved URL
     
     override init(with json: JSON) {
         
-        url = json["url"].stringValue
-        displayURL = json["display_url"].stringValue
-        expandedURL = json["expanded_url"].stringValue
+        url = json["url"].stringValue.url
+        displayURL = json["display_url"].stringValue.url
+        expandedURL = json["expanded_url"].stringValue.url
         
         super.init(with: json)
     }

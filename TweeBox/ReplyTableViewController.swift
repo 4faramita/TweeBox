@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ReplyTableViewController: SearchTimelineTableViewController {
 
@@ -42,7 +43,7 @@ class ReplyTableViewController: SearchTimelineTableViewController {
     // MARK - Header height
     public var cellTextLabelHeight: CGFloat?
     private var hasMedia: Bool {
-        if let media = tweet?.entities?.realMedia, media.count > 0 {
+        if let media = tweet?.tweetEntities?.realMedia, media.count > 0 {
             return true
         } else {
             return false

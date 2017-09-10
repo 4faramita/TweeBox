@@ -8,20 +8,14 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class SearchTimeline: Timeline {
-    
-    override func appendTweet(from json: JSON) {
         
-        for (_, tweetJSON) in json["statuses"] {
-            if tweetJSON.null == nil {
-                let tweet = Tweet(with: tweetJSON)
-                addToTimeline(tweet)
-            }
-        }
-    }
-
-    func addToTimeline(_ tweet: Tweet) {
-        self.timeline.append(tweet)
+    override func appendTweet(with json: JSON) {
+        
+        let innerJSON = json["statuses"]
+        
+        super.appendTweet(with: innerJSON)
     }
 }

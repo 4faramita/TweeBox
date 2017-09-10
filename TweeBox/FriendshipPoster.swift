@@ -8,8 +8,11 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class FriendshipPoster {
+    
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
     public var resourceURL: (String, String)
     public var userParams: SimpleUserParams
@@ -28,12 +31,17 @@ class FriendshipPoster {
             
             print(">>> FavoritePoster >> \(userParams.getParams())")
             
-            client.getData() { data in
+            client.getData() { [weak self] data in
                 if let data = data {
                     let json = JSON(data: data)
                     if json.null == nil {
-                        let user = TwitterUser(with: json)
-                        handler(user)
+                        self?.container?.performBackgroundTask({ (context) in
+                            if let user = try? TwitterUser.matchOrCreateTwitterUser(with: json, in: context) {
+                                context.perform {
+                                    handler(user)
+                                }
+                            }
+                        })
                     } else {
                         handler(nil)
                     }

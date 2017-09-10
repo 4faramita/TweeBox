@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import SwiftyJSON
 
 
 class ImageContainerViewController: UIViewController {
@@ -20,8 +21,14 @@ class ImageContainerViewController: UIViewController {
     }
     
     private var media: [TweetMedia]? {
-        return tweet?.entities?.realMedia?.allObjects as? [TweetMedia]
+//        return tweet?.entities?.realMedia?.allObjects as? [TweetMedia]
+        return tweet?.tweetEntities?.realMedia
     }
+    
+    private var mediaToShare: [TweetMedia]? {
+        return tweet?.tweetEntities?.mediaToShare
+    }
+
     
     private var clickedIndex = 0
     private var images = [UIImage]()
@@ -150,7 +157,7 @@ class ImageContainerViewController: UIViewController {
         let cutSize = media![index].getCutSize(with: ratio, at: Constants.picQuality)
 //        let processor = CroppingImageProcessor(size: cutSize, anchor: cutPoint)
         
-        KingfisherManager.shared.retrieveImage(with: (media![index].mediaURL!).url!, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
+        KingfisherManager.shared.retrieveImage(with: media![index].mediaURL!, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
             
             if let image = image, let cutPoint = self?.cutPoint {
                 self?.images.append(image)
@@ -225,7 +232,7 @@ class ImageContainerViewController: UIViewController {
             case "Image Tapped":
                 if let imageViewer = segue.destination as? ImageViewerViewController {
                     imageViewer.image = images[clickedIndex]
-                    imageViewer.imageURL = ((tweet?.entities?.mediaToShare)?.allObjects as! [TweetMedia])[clickedIndex].mediaURL?.url
+                    imageViewer.imageURL = mediaToShare?[clickedIndex].mediaURL
                 }
 
             default:

@@ -6,8 +6,10 @@
 //  Copyright © 2017年 4faramita. All rights reserved.
 //
 
-import Foundation
-import SwiftyJSON
-import CoreData
+//import Foundation
+//import SwiftyJSON
+//import CoreData
+//
+//class TweetSymbol: Hashtag { }
 
-class TweetSymbol: Hashtag { }
+// already been replaced by typealias in Entity

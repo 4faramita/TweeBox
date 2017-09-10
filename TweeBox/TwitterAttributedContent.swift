@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import YYText
 import SafariServices
+import SwiftyJSON
 
 
 class TwitterAttributedContent {
@@ -25,7 +26,7 @@ class TwitterAttributedContent {
     private var attributed: NSMutableAttributedString!
     
     private var tweetEntity: Entity? {
-        return (tweet?.entities) ?? (user?.entities)
+        return tweet?.tweetEntities ?? user?.userEntities
     }
     
     
