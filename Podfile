@@ -28,4 +28,6 @@ target 'TweeBox' do
 
 	pod 'Gallery'
 	pod 'Lightbox'
+
+	# pod 'RealmSwift'
 end

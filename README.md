@@ -1,6 +1,6 @@
-# TweeBox - A iOS Twitter Reader.
+![banner](https://user-images.githubusercontent.com/14917258/30247255-9fe2553e-9642-11e7-974a-d17ef132ef4f.png)
 
-![banner](https://user-images.githubusercontent.com/14917258/29926139-1f0fb956-8e95-11e7-9180-f581482b91b1.png)
+## TweeBox - A iOS Twitter Reader.
 
 > WARNING: TweeBox is still in a quite early phase of developing (after all, it's only one-month old now). So the bad news is, it still has many bugs and unfinished features; on the bright side, you will be there to witness its growth :)
 
