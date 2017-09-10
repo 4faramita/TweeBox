@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+
 class Timeline {
     public var timeline = [Tweet]()    
     public var maxID: String?
@@ -34,6 +35,9 @@ class Timeline {
             if tweetJSON.null == nil {
                 let tweet = Tweet(with: tweetJSON)
                 self.timeline.append(tweet)  // mem cycle?
+                
+                // Realm
+                
             }
         }
 

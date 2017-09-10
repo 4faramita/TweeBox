@@ -23,3 +23,19 @@ extension Int {
         return shortenExpression
     }
 }
+
+extension Int64 {
+    
+    var shortExpression: String {
+        
+        let shortenExpression: String
+        
+        if self > 10000 {
+            shortenExpression = "\(Int(Float(self) / 1000))k"
+        } else {
+            shortenExpression = "\(self)"
+        }
+        
+        return shortenExpression
+    }
+}

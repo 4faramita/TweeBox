@@ -8,10 +8,11 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
 class Hashtag: TweetEntity {
     
-    var text: String
+//    var text: String
     
     override init(with json: JSON) {
         

@@ -35,7 +35,7 @@ class TweetMediaContainerView: UIView {
     }
     
     private var media: [TweetMedia]? {
-        return tweet?.entities?.media
+        return tweet?.entities?.media?.allObjects as? [TweetMedia]
     }
     
 //    private var clickedIndex = 0
@@ -169,7 +169,7 @@ class TweetMediaContainerView: UIView {
 //        }
         
         imageView.kf.setImage(
-            with: media![index].mediaURL,
+            with: media![index].mediaURL?.url,
             placeholder: placeholder,
             options: [
                 .transition(.fade(Constants.picFadeInDuration)),

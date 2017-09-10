@@ -8,20 +8,21 @@
 
 import Foundation
 import SwiftyJSON
+import CoreData
 
-struct Entity {
+class Entity: NSManagedObject {
     
-    typealias TweetSymbol = Hashtag
+//    typealias TweetSymbol = Hashtaga
     
-    public var hashtags: [Hashtag]
-    public var urls: [TweetURL]
-    public var userMentions: [Mention]
-    public var symbols: [TweetSymbol]
+//    public var hashtags: [Hashtag]
+//    public var urls: [TweetURL]
+//    public var userMentions: [Mention]
+//    public var symbols: [TweetSymbol]
     
-    public var media: [TweetMedia]?
-    public var realMedia: [TweetMedia]?
-    public var mediaToShare: [TweetMedia]?
-    public var thumbMedia: [TweetMedia]?
+//    public var media: [TweetMedia]?
+//    public var realMedia: [TweetMedia]?
+//    public var mediaToShare: [TweetMedia]?
+//    public var thumbMedia: [TweetMedia]?
 
     
     init(with json: JSON, and extendedJson: JSON) {

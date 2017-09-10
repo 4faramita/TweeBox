@@ -22,6 +22,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     var emptyWarningCollapsed = false
 
     var timeline = [Array<Tweet>]() {
+//    var timeline = List<Array<Tweet>>() {
         didSet {
             
 //            guard timeline.count > 0, emptyWarningCollapsed else {
@@ -92,13 +93,12 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     var fetchedUser: TwitterUser?
     
     var isRefreshing = false
-
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -112,22 +112,11 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
 
     }
     
-    func initRefreshIfNeeded() {
-        
-        if timeline.flatMap({ $0 }).count == 0 {
-//            showEmptyWarningMessage()
-            tableView.es_startPullToRefresh()
-//            refreshTimeline(handler: nil)
-        }
-
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //  Warning text when table is empty
-        
-        initRefreshIfNeeded()
+        // refresh timeline if empty
+//        initRefreshIfNeeded()
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
             self?.updateTimeLabel()
@@ -168,6 +157,16 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
 //        }
 //        
 //    }
+    
+    func initRefreshIfNeeded() {
+        
+        if timeline.flatMap({ $0 }).count == 0 {
+            //            showEmptyWarningMessage()
+            tableView.es_startPullToRefresh()
+            //            refreshTimeline(handler: nil)
+        }
+        
+    }
     
     func addRefresher() {
         self.tableView.es_addPullToRefresh {
@@ -215,7 +214,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         let cells = self.tableView.visibleCells
         for cell in cells {
             if let tweetCell = cell as? GeneralTweetTableViewCell {
-                tweetCell.tweetCreatedTime.text = tweetCell.tweet?.createdTime?.shortTimeAgoSinceNow
+                tweetCell.tweetCreatedTime.text = ((tweetCell.tweet?.createdTime)! as Data).shortTimeAgoSinceNow
             }
         }
     }
@@ -625,7 +624,9 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
             retweetAction = SwipeAction(style: .default, title: "Undo Retweet") { action, indexPath in
                 print(">>> Undo Retweet")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.unRetweet() { [weak self] (succeeded, returnTweet) in
                     
                     if let originTweet = tweet.retweetedStatus,
@@ -648,7 +649,9 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
             retweetAction = SwipeAction(style: .default, title: "Retweet") { action, indexPath in
                 print(">>> Retweet")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.retweet() { [weak self] (succeeded, retweet) in
                     
                         if let retweet = retweet {
@@ -676,7 +679,9 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
             likeAction = SwipeAction(style: .default, title: "Me No Likey") { action, indexPath in
                 print(">>> Dislike")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.dislike() { [weak self] (succeeded, tweet) in
                     
                     if succeeded {
@@ -698,7 +703,9 @@ extension TimelineTableViewController: SwipeTableViewCellDelegate {
             likeAction = SwipeAction(style: .default, title: "Like") { action, indexPath in
                 print(">>> Like")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.like() { [weak self] (succeeded, tweet) in
                     
                     if succeeded {

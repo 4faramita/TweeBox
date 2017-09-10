@@ -103,6 +103,8 @@ class GeneralTweetTableViewCell: SwipeTableViewCell {
             tweetMediaContentView.tweet = tweet
             
             if media.count == 1 {
+                
+                let media = media.allObjects as! [TweetMedia]
                 if media[0].type != "photo" {
                     addPlayLabel(to: tweetMediaContentView, isGif: (media[0].type == "animated_gif"))
                 }
@@ -113,10 +115,10 @@ class GeneralTweetTableViewCell: SwipeTableViewCell {
         tweetMediaContentView?.cutToRound(radius: 5)
 
         
-        if let userProfileImageURL = tweet?.user.profileImageURL, let userProfileImageView = self.tweetUserProfileImage {
+        if let userProfileImageURL = tweet?.user?.profileImageURL, let userProfileImageView = self.tweetUserProfileImage {
             
             userProfileImageView.kf.setImage(
-                with: userProfileImageURL,
+                with: userProfileImageURL.url,
 //                placeholder: placeholder,
                 options: [
                     .transition(.fade(Constants.picFadeInDuration)),
@@ -142,14 +144,14 @@ class GeneralTweetTableViewCell: SwipeTableViewCell {
         
         
         if let created = tweet?.createdTime {
-            self.tweetCreatedTime?.text = created.shortTimeAgoSinceNow
+            self.tweetCreatedTime?.text = (created as Date).shortTimeAgoSinceNow
         } else {
             tweetCreatedTime?.text = nil
         }
         
-        tweetUserName.text = tweet?.user.name
+        tweetUserName.text = tweet?.user?.name
         
-        if let screenName = tweet?.user.screenName {
+        if let screenName = tweet?.user?.screenName {
             tweetUserScreenName.text = "@\(screenName)"
         }
         
@@ -185,8 +187,8 @@ class GeneralTweetTableViewCell: SwipeTableViewCell {
             
             if isRetweet, let retweet = retweet {
                 
-                retweetLabel.text = retweet.user.name
-                retweeterProfileImage?.kf.setImage(with: retweet.user.profileImageURL)
+                retweetLabel.text = retweet.user?.name
+                retweeterProfileImage?.kf.setImage(with: retweet.user?.profileImageURL)
                 retweeterProfileImage?.cutToRound(radius: 8)
                 
             } else {
@@ -255,7 +257,7 @@ extension GeneralTweetTableViewCell {
     @IBAction func imageTapped() {
         
         guard let section = section, let row = row, let mediaIndex = mediaIndex else { return }
-        tapDelegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.entities?.media)!)
+        tapDelegate?.imageTapped(section: section, row: row, mediaIndex: mediaIndex, media: (tweet?.entities?.media as! [TweetMedia]))
     }
     
     @IBAction func originTweetTapped(byReactingTo: UIGestureRecognizer) {

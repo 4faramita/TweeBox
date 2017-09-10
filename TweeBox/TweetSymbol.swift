@@ -2,10 +2,12 @@
 //  TweetSymbol.swift
 //  TweeBox
 //
-//  Created by 4faramita on 2017/8/27.
+//  Created by 4faramita on 2017/9/10.
 //  Copyright © 2017年 4faramita. All rights reserved.
 //
 
 import Foundation
+import SwiftyJSON
+import CoreData
 
-//class TweetSymbol: Hashtag { }
+class TweetSymbol: Hashtag { }

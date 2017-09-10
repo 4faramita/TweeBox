@@ -8,9 +8,9 @@ There are a lot of Twitter "clients", but this is not one of those -- TweeBox is
 
 As a result, TweeBox is friendly to many tweet reading features, including but not limited to "favorite", "block" and "report spam". What's more, you can also easily delete your tweets by just a swipe.
 
-![like](https://user-images.githubusercontent.com/14917258/29928805-65dfed2c-8e9c-11e7-838e-4ed73b6d70e9.png)
+![like](https://user-images.githubusercontent.com/14917258/30247373-c4ce0e30-9645-11e7-9c9b-26476e0017c4.png)
 
-![delete](https://user-images.githubusercontent.com/14917258/29928804-65de5fde-8e9c-11e7-83cb-459827a3de08.png)
+![delete](https://user-images.githubusercontent.com/14917258/30247374-c4ce7d8e-9645-11e7-93e3-901be140efd0.png)
 
 Also, I'm currently living in a country where I have to use Twitter via proxy, which can be slow. So TweeBox also contains features like "do not show the image until it's fully loaded", so you can continue browsing your timeline while loading.
 
@@ -18,7 +18,7 @@ Also, I'm currently living in a country where I have to use Twitter via proxy, w
 
 TweeBox also comes with a ton of other features and a decent UI design. More pictures:
 
-![timeline](https://user-images.githubusercontent.com/14917258/29928816-6c180db4-8e9c-11e7-9147-de9fa9933f7a.png)
+![timeline](https://user-images.githubusercontent.com/14917258/30247372-c4cd8b4a-9645-11e7-845e-831b9c368b59.png)
 
 
 ## Getting Started

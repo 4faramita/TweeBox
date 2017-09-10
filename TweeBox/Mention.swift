@@ -11,9 +11,9 @@ import SwiftyJSON
 
 
 class Mention: TweetEntity {
-    var id: String
-    var screenName: String
-    var name: String
+//    var id: String
+//    var screenName: String
+//    var name: String
     
     override init(with json: JSON) {
         

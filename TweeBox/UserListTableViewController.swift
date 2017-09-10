@@ -222,11 +222,13 @@ extension UserListTableViewController: SwipeTableViewCellDelegate {
         if orientation == .right {
             
             let followAction: SwipeAction
-            if let following = user.following, following {
+            if user.following {
                 followAction = SwipeAction(style: .default, title: "Unfollow") { action, indexPath in
                     print(">>> Unfollow")
                     
-                    let manager = FriendshipManager(userID: user.id)
+                    guard let id = user.id else { return }
+                    
+                    let manager = FriendshipManager(userID: id)
                     
                     manager.unfollow(handler: { [weak self] (succeeded, returnedUser) in
                         if succeeded, var returnedUser = returnedUser {
@@ -242,7 +244,9 @@ extension UserListTableViewController: SwipeTableViewCellDelegate {
                 followAction = SwipeAction(style: .default, title: "Follow") { action, indexPath in
                     print(">>> Follow")
                     
-                    let manager = FriendshipManager(userID: user.id)
+                    guard let id = user.id else { return }
+                    
+                    let manager = FriendshipManager(userID: id)
                     
                     manager.follow(handler: { [weak self] (succeeded, returnedUser) in
                         if succeeded, var returnedUser = returnedUser {
@@ -277,7 +281,10 @@ extension UserListTableViewController: SwipeTableViewCellDelegate {
                         title: "OK",
                         style: .destructive,
                         handler: { (action) in
-                            let manager = FriendshipManager(userID: user.id)
+                            
+                            guard let id = user.id else { return }
+                            
+                            let manager = FriendshipManager(userID: id)
                             
                             manager.block(handler: { (succeeded, user) in
                                 self?.userList[indexPath.section].remove(at: indexPath.row)
@@ -307,7 +314,10 @@ extension UserListTableViewController: SwipeTableViewCellDelegate {
                             
                             var alsoBlock: Bool? {
                                 didSet {
-                                    let manager = FriendshipManager(userID: user.id)
+                                    
+                                    guard let id = user.id else { return }
+                                    
+                                    let manager = FriendshipManager(userID: id)
 
                                     manager.reportSpam(block: alsoBlock) { (succeeded, user) in
                                         self?.userList[indexPath.section].remove(at: indexPath.row)

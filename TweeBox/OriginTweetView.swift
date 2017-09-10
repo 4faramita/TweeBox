@@ -18,7 +18,7 @@ class OriginTweetView: UIView {
     }
     
     private var thumbImages: [TweetMedia]? {
-        return originTweet?.entities?.thumbMedia
+        return originTweet?.entities?.thumbMedia?.allObjects as? [TweetMedia]
     }
     
     private var hasMedia: Bool {
@@ -75,7 +75,7 @@ class OriginTweetView: UIView {
                 make.height.equalTo(150)
                 make.width.equalTo(150)
             }
-            thumbImageView!.kf.setImage(with: thumbImages?[0].mediaURL)
+            thumbImageView!.kf.setImage(with: thumbImages?[0].mediaURL?.url)
         }
         
         let profileImageView = UIImageView()
@@ -87,7 +87,7 @@ class OriginTweetView: UIView {
             make.width.equalTo(32)
         }
         profileImageView.cutToRound(radius: 16)
-        profileImageView.kf.setImage(with: originTweet?.user.profileImageURL)
+        profileImageView.kf.setImage(with: originTweet?.user?.profileImageURL?.url)
         
         let originNameLabel = UILabel()
         addSubview(originNameLabel)
@@ -100,7 +100,7 @@ class OriginTweetView: UIView {
                 make.trailing.greaterThanOrEqualTo(self)
             }
         }
-        originNameLabel.text = originTweet.user.name
+        originNameLabel.text = originTweet.user?.name
         originNameLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         originNameLabel.lineBreakMode = .byTruncatingTail
         
@@ -115,7 +115,7 @@ class OriginTweetView: UIView {
                 make.trailing.greaterThanOrEqualTo(self)
             }
         }
-        originScreenNameLabel.text = "@\(originTweet.user.screenName)"
+        originScreenNameLabel.text = "@\(originTweet.user?.screenName)"
         originScreenNameLabel.textColor = .darkGray
         originScreenNameLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         originScreenNameLabel.lineBreakMode = .byTruncatingTail

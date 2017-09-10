@@ -21,7 +21,7 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
     
     public var tweet: Tweet! {
         didSet {
-            if let originTweet = tweet.retweetedStatus, tweet.text.hasPrefix("RT @") {
+            if let originTweet = tweet.retweetedStatus, let text = tweet.text, text.hasPrefix("RT @") {
                 retweet = tweet
                 tweet = originTweet
             }
@@ -139,13 +139,14 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
         if (tweet.entities?.realMedia == nil) || (tweet.entities?.realMedia!.count == 0) {
             containerView.removeFromSuperview()
         } else if let media = tweet.entities?.realMedia, media.count == 1 {
-            if media[0].type != "photo" {
-                addPlayLabel(to: containerView, isGif: (media[0].type == "animated_gif"))
+            mediaArray = media.allObjects as [TweetMedia]
+            if mediaArray[0].type != "photo" {
+                addPlayLabel(to: containerView, isGif: (mediaArray[0].type == "animated_gif"))
             }
         }
         containerView.cutToRound(radius: 5)
         
-        profileImageView.kf.setImage(with: tweet.user.profileImageURL)
+        profileImageView.kf.setImage(with: tweet.user?.profileImageURL.url)
         profileImageView.cutToRound(radius: nil)
         profileImageView.isUserInteractionEnabled = true
         
@@ -154,8 +155,8 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
         tapProfile.numberOfTouchesRequired = 1
         profileImageView.addGestureRecognizer(tapProfile)
         
-        nameLabel.text = tweet.user.name
-        screenNameLabel.text = "@\(tweet.user.screenName)"
+        nameLabel.text = tweet.user?.name
+        screenNameLabel.text = "@\(tweet.user?.screenName)"
         
         textContentLabel.attributedText = TwitterAttributedContent(tweet).attributedString
         textContentLabel.lineBreakMode = .byWordWrapping
@@ -167,7 +168,7 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
         print(">>> label >> \(textContentLabel.subviews)")
         
         let clientHTMLString = tweet.source
-        if let doc = HTML(html: clientHTMLString, encoding: .utf8) {
+        if let clientHTMLString = clientHTMLString, let doc = HTML(html: clientHTMLString, encoding: .utf8) {
             for link in doc.css("a, link") {
                 let attributedString = NSMutableAttributedString(string: (link.text ?? ""))
                 
@@ -190,7 +191,7 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             dateFormatter.timeZone = TimeZone.current
-            let dateString = dateFormatter.string(from: date)
+            let dateString = dateFormatter.string(from: date as Date)
             
             createdTimeLabel.text = dateString
         }

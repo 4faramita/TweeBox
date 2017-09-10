@@ -32,7 +32,7 @@ class TwitterUserTableViewCell: SwipeTableViewCell {
     
     private func updateUI() {
         
-        profileImage.kf.setImage(with: user?.profileImageURL)
+        profileImage.kf.setImage(with: user?.profileImageURL?.url)
         profileImage.cutToRound(radius: nil)
 
         nameLabel.text = user?.name
@@ -43,6 +43,6 @@ class TwitterUserTableViewCell: SwipeTableViewCell {
         
         followersCountLabel.text = "Followers: \(user?.followersCount ?? 0)"
         
-        createdTimeLabel.text = "Created At: \(TwitterDate(string: user?.createdAt).date?.timeAgoSinceNow ?? "")"
+        createdTimeLabel.text = "Created At: \((user?.createdAt as! Date).timeAgoSinceNow ?? "")"
     }
 }

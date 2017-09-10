@@ -256,7 +256,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
     private func addHeader() {
 
         headerView.isUserInteractionEnabled = true
-        headerView.kf.setImage(with: user?.profileBannerURL, placeholder: nil, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
+        headerView.kf.setImage(with: user?.profileBannerURL?.url, placeholder: nil, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
             self?.profileBannerImage = image
             self?.profileBannerImageURL = url
         }
@@ -280,7 +280,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
             make.width.equalTo(Constants.profileImageRadius * 2)
             make.height.equalTo(Constants.profileImageRadius * 2)
         }
-        profileImageView.kf.setImage(with: user?.profileImageURL, placeholder: nil, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
+        profileImageView.kf.setImage(with: user?.profileImageURL?.url, placeholder: nil, options: nil, progressBlock: nil) { [weak self] (image, error, cacheType, url) in
             self?.profileImage = image
             self?.profileImageURL = url
         }
@@ -360,7 +360,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
                     make.top.equalTo(bioLabel.snp.bottom).offset(5)
                 }
             }
-            userURLButton?.setTitle(userURL.absoluteString, for: .normal)
+            userURLButton?.setTitle(userURL, for: .normal)
             userURLButton?.setTitleColor(.lightGray, for: .normal)
             //            userURLButton.titleLabel?.textAlignment = .center
 //            userURLButton?.titleLabel?.font = UIFont(descriptor: .preferredFontDescriptor(withTextStyle: .caption2), size: 12)
@@ -503,7 +503,9 @@ extension UserTimelineTableViewController {
                         style: .destructive,
                         handler: { (action) in
                             
-                            let composer = SimpleTweetComposer(id: tweet.id)
+                            guard let id = tweet.id else { return }
+                            
+                            let composer = SimpleTweetComposer(id: id)
                             composer.deleteTweet() { [weak self] (succeeded, _) in
                                 
                                 self?.timeline[indexPath.section].remove(at: indexPath.row)
@@ -549,7 +551,9 @@ extension UserTimelineTableViewController {
             retweetAction = SwipeAction(style: .default, title: "Undo Retweet") { action, indexPath in
                 print(">>> Undo Retweet")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.unRetweet() { [weak self] (succeeded, returnTweet) in
                     
                     if let originTweet = tweet.retweetedStatus,
@@ -576,7 +580,9 @@ extension UserTimelineTableViewController {
             retweetAction = SwipeAction(style: .default, title: "Retweet") { action, indexPath in
                 print(">>> Retweet")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.retweet() { [weak self] (succeeded, retweet) in
                     
                     if let retweet = retweet {
@@ -605,7 +611,9 @@ extension UserTimelineTableViewController {
             likeAction = SwipeAction(style: .default, title: "Me No Likey") { action, indexPath in
                 print(">>> Dislike")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.dislike() { [weak self] (succeeded, tweet) in
                     
                     if succeeded {
@@ -627,7 +635,9 @@ extension UserTimelineTableViewController {
             likeAction = SwipeAction(style: .default, title: "Like") { action, indexPath in
                 print(">>> Like")
                 
-                let composer = SimpleTweetComposer(id: tweet.id)
+                guard let id = tweet.id else { return }
+                
+                let composer = SimpleTweetComposer(id: id)
                 composer.like() { [weak self] (succeeded, tweet) in
                     
                     if succeeded {

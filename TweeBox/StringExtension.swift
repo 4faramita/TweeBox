@@ -92,6 +92,12 @@ extension String {
         result.append(self[position ..< endIndex])
         return result
     }
+    
+
+    
+    var url: URL? {
+        return URL(string: self)
+    }
 
     
     var isAlpha: Bool {
@@ -171,5 +177,4 @@ extension String {
         return encodedString
         
     }
-
 }

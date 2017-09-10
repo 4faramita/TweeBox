@@ -55,7 +55,7 @@ class TweetComposerViewController: UIViewController {
         contentTextView.delegate = self
         contentTextView.font = UIFont.preferredFont(forTextStyle: .body)
         if let tweet = replyTo {
-            contentTextView.text = "@\(tweet.user.screenName) "
+            contentTextView.text = "@\(tweet.user?.screenName) "
         } else {
             contentTextView.placeholderText = "Anything you wanna say?"
         }
@@ -82,8 +82,6 @@ class TweetComposerViewController: UIViewController {
             
             poster.postData { [weak self] (tweet) in
                 if let tweet = tweet {
-                    print(">>> tweet >> \(tweet.text)")
-                    
                     self?.dismiss(animated: true, completion: nil)
                 }
             }

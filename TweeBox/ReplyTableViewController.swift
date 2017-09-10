@@ -16,7 +16,7 @@ class ReplyTableViewController: SearchTimelineTableViewController {
     
     public var tweet: Tweet! {
         didSet {
-            if let originTweet = tweet.retweetedStatus, tweet.text.hasPrefix("RT @") {
+            if let originTweet = tweet.retweetedStatus, let text = tweet.text, text.hasPrefix("RT @") {
                 retweet = tweet
                 tweet = originTweet
             }
@@ -80,7 +80,7 @@ class ReplyTableViewController: SearchTimelineTableViewController {
     
     override func refreshTimeline(handler: ((Void) -> Void)?) {
 
-        let screenName = "%40\(tweet?.user.screenName ?? "")"
+        let screenName = "%40\(tweet?.user?.screenName ?? "")"
         
         let replyTimelineParams = SearchTweetParams(
             query: screenName,

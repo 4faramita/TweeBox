@@ -11,15 +11,15 @@ import SwiftyJSON
 
 class TweetMedia: TweetEntity {
     
-    public var id: String  // id_str
+//    public var id: String  // id_str
     
-    public var mediaURLHTTP: URL?  // media_url
-    public var mediaURL: URL?  // media_url_https
-    public var url: URL?
+//    public var mediaURLHTTP: URL?  // media_url
+//    public var mediaURL: URL?  // media_url_https
+//    public var url: URL?
     // The media URL that was extracted
-    public var displayURL: String
+//    public var displayURL: String
     // Not a URL but a string to display instead of the media URL
-    public var expandedURL: URL?
+//    public var expandedURL: URL?
     // The fully resolved media URL
     
     public var sizes: TweetPhotoSize
@@ -33,11 +33,11 @@ class TweetMedia: TweetEntity {
      and resize : how we resized the media to this particular size (can be crop or fit )
      */
     
-    public var type: String
+//    public var type: String
     
-    public var extAltText: String?
+//    public var extAltText: String?
     
-    public var sourceStatusID: String?
+//    public var sourceStatusID: String?
     // For Tweets containing media that was originally associated with a different tweet,
     // this string-based ID points to the original Tweet.
     
@@ -48,11 +48,11 @@ class TweetMedia: TweetEntity {
     init(with json: JSON, quality: MediaSize) {
         
         id = json["id_str"].stringValue
-        mediaURLHTTP = URL(string: json["media_url"].stringValue, quality: quality)
-        mediaURL = URL(string: json["media_url_https"].stringValue, quality: quality)
-        url = URL(string: json["url"].stringValue)
+        mediaURLHTTP = URL(string: json["media_url"].stringValue, quality: quality)?.absoluteString
+        mediaURL = URL(string: json["media_url_https"].stringValue, quality: quality)?.absoluteString
+        url = URL(string: json["url"].stringValue)?.absoluteString
         displayURL = json["display_url"].stringValue
-        expandedURL = URL(string: json["expanded_url"].stringValue)
+        expandedURL = URL(string: json["expanded_url"].stringValue)?.absoluteString
         sizes = TweetPhotoSize(with: json["sizes"])
         type = json["type"].stringValue
         extAltText = json["ext_alt_text"].string
