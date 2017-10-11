@@ -24,7 +24,7 @@
         <attribute name="truncated" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="quotedStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tweet" syncable="YES"/>
         <relationship name="retweetedStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tweet" syncable="YES"/>
-        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="TwitterUser" inverseName="status" inverseEntity="TwitterUser" syncable="YES"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="TwitterUser" syncable="YES"/>
     </entity>
     <entity name="TwitterUser" representedClassName=".TwitterUser" syncable="YES" codeGenerationType="category">
         <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
@@ -60,10 +60,9 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="utcOffset" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="verified" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="status" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="user" inverseEntity="Tweet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Tweet" positionX="-299" positionY="159" width="128" height="403"/>
-        <element name="TwitterUser" positionX="-290" positionY="300" width="128" height="553"/>
+        <element name="Tweet" positionX="-299" positionY="159" width="128" height="405"/>
+        <element name="TwitterUser" positionX="-290" positionY="300" width="128" height="540"/>
     </elements>
 </model>

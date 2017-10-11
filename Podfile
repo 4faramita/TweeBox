@@ -14,7 +14,6 @@ target 'TweeBox' do
 	pod 'DateToolsSwift'
 	pod 'AMScrollingNavbar'
 	# pod 'Eureka'
-	# pod 'Whisper'
 	pod 'BMPlayer'
 	pod "MXParallaxHeader"
 	pod "VisualEffectView"
@@ -30,4 +29,6 @@ target 'TweeBox' do
 	pod 'Lightbox'
 
 	# pod 'RealmSwift'
+	# pod 'Quick'
+    # pod 'Nimble'
 end
