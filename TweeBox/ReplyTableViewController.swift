@@ -78,7 +78,7 @@ class ReplyTableViewController: SearchTimelineTableViewController {
         super.prepare(for: segue, sender: sender)
     }
     
-    override func refreshTimeline(handler: ((Void) -> Void)?) {
+    override func refreshTimeline(handler: (() -> Void)?) {
 
         let screenName = "%40\(tweet?.user.screenName ?? "")"
         

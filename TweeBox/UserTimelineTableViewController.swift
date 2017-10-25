@@ -160,7 +160,7 @@ class UserTimelineTableViewController: TimelineTableViewController {
         }
     }
     
-    override func refreshTimeline(handler: ((Void) -> Void)?) {
+    override func refreshTimeline(handler: (() -> Void)?) {
         
         if !isRefreshing {
             

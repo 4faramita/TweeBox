@@ -20,7 +20,7 @@ class FavoriteTimelineTableViewController: TimelineTableViewController {
         self.navigationItem.leftBarButtonItem = nil
     }
 
-    override func refreshTimeline(handler: ((Void) -> Void)?) {
+    override func refreshTimeline(handler: (() -> Void)?) {
         
         let params = FavoriteTimelineParams(of: userID)
         

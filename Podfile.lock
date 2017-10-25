@@ -1,34 +1,43 @@
 PODS:
-  - AMScrollingNavbar (3.4.1)
-  - BMPlayer (0.8.7):
-    - BMPlayer/Full (= 0.8.7)
-  - BMPlayer/Core (0.8.7)
-  - BMPlayer/Full (0.8.7):
+  - AMScrollingNavbar (4.0.4)
+  - BMPlayer (1.0.0):
+    - BMPlayer/Full (= 1.0.0)
+  - BMPlayer/Core (1.0.0)
+  - BMPlayer/Full (1.0.0):
     - BMPlayer/Core
-    - NVActivityIndicatorView (~> 3.5)
-    - SnapKit (~> 3.2)
+    - NVActivityIndicatorView (~> 4.0.0)
+    - SnapKit (~> 4.0.0)
+  - Cache (4.0.4):
+    - SwiftHash (~> 2.0.0)
   - DateToolsSwift (2.0.3)
-  - ESPullToRefresh (2.6)
-  - Gallery (1.3.0)
-  - Hue (2.0.1)
-  - JDStatusBarNotification (1.5.5)
-  - Kanna (2.1.1)
-  - Kingfisher (3.12.2)
-  - Lightbox (1.0.0):
-    - Hue
+  - ESPullToRefresh (2.7)
+  - Gallery (2.0.2)
+  - Hue (3.0.0)
+  - Imaginary (3.0.0):
+    - Cache (~> 4.0)
+  - JDStatusBarNotification (1.5.6)
+  - Kingfisher (4.2.0)
+  - Lightbox (2.0.0):
+    - Hue (~> 3.0)
+    - Imaginary (~> 3.0)
   - MXParallaxHeader (0.6.1)
-  - NVActivityIndicatorView (3.7.0):
-    - NVActivityIndicatorView/Presenter (= 3.7.0)
-  - NVActivityIndicatorView/Presenter (3.7.0)
-  - PopupDialog (0.5.4)
-  - Reveal-SDK (10)
-  - SnapKit (3.2.0)
+  - NVActivityIndicatorView (4.0.0):
+    - NVActivityIndicatorView/Presenter (= 4.0.0)
+  - NVActivityIndicatorView/Presenter (4.0.0)
+  - PopupDialog (0.6.0)
+  - R.swift (4.0.0):
+    - R.swift.Library (~> 4.0.0)
+  - R.swift.Library (4.0.0)
+  - Reveal-SDK (11)
+  - SnapKit (4.0.0)
+  - SwiftHash (2.0.0)
+  - SwiftyAttributes (4.1.0)
   - SwiftyJSON (3.1.4)
-  - SwipeCellKit (1.9.1)
-  - TwitterCore (3.0.1)
-  - TwitterKit (3.1.1):
-    - TwitterCore (>= 3.0.1)
-  - VisualEffectView (2.0.7)
+  - SwipeCellKit (2.0.0)
+  - TwitterCore (3.0.2)
+  - TwitterKit (3.2.1):
+    - TwitterCore (>= 3.0.2)
+  - VisualEffectView (3.0.0)
   - YYText (1.0.7)
 
 DEPENDENCIES:
@@ -38,13 +47,14 @@ DEPENDENCIES:
   - ESPullToRefresh
   - Gallery
   - JDStatusBarNotification
-  - Kanna (~> 2.1.0)
-  - Kingfisher (~> 3.0)
+  - Kingfisher (~> 4.0)
   - Lightbox
   - MXParallaxHeader
-  - PopupDialog (~> 0.5)
+  - PopupDialog (~> 0.6)
+  - R.swift
   - Reveal-SDK
-  - SnapKit (~> 3.2.0)
+  - SnapKit (~> 4.0.0)
+  - SwiftyAttributes
   - SwiftyJSON
   - SwipeCellKit
   - TwitterKit
@@ -52,28 +62,33 @@ DEPENDENCIES:
   - YYText
 
 SPEC CHECKSUMS:
-  AMScrollingNavbar: ce8d3cdd733ffb7f2c56dfc16e350d571f6f80a2
-  BMPlayer: 5ba9e3f3d61ccc5a24ebd9cdc24901dcf28c98bc
+  AMScrollingNavbar: 3f35e65f5c97918c31be2179bda9ecb25dc5a3df
+  BMPlayer: 06717ac5daf25d403329df24667abe2354dd9b17
+  Cache: 1b3907ee2f5a457e7cfe9ac0be22dc9207f55a09
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
-  ESPullToRefresh: 85f4990acf87f78c6a1466bbbee7a75d7de24db9
-  Gallery: 40220b942a34dfc9815ad06bffcd2025827b5e02
-  Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
-  JDStatusBarNotification: 2b4f29bd68a60d7aa2f190b5265f1ce59c18aaf8
-  Kanna: 9b4b086c218703f2b94f5b21a466217dd2f9332e
-  Kingfisher: 320626678acadfcf47008b3c6841cd882050737b
-  Lightbox: 13f55a0a840f7945dc5ac87931564e7fe569fca9
+  ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
+  Gallery: a5cdf94495b789c622e8286dea6bf6f29a0b3429
+  Hue: b8fe1e43eef13631331eebecb2198b68e2622f95
+  Imaginary: 2765d293d425cbed3b07fa11642554cbaebe913d
+  JDStatusBarNotification: d5829a8f2f291b23b8a54b87fac8bf2549945a2f
+  Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
+  Lightbox: 83ec9f4aba4c79fc7bb9bcd263386df9969f09bb
   MXParallaxHeader: 858c403532ed933b381556a81ce333d7065ad182
-  NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
-  PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
-  Reveal-SDK: 7869ddf1f902cabbb07a1f0dd06bd25861a126f7
-  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
+  PopupDialog: 687af43af0f7b89948cd411ac701865f931bd6dc
+  R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
+  R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
+  Reveal-SDK: 7fa13d04bb55db61ff2342a990cf731d5159361d
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftHash: d2e09b13495447178cdfb8e46e54a5c46f15f5a9
+  SwiftyAttributes: cef9463f6e7da1ab393896ca036c9ac37d8a406b
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  SwipeCellKit: e9ff953c820394a4e641cfb0118b6c959506aec2
-  TwitterCore: 6856288a1c25e5281363250681f33b42fce1da42
-  TwitterKit: 313bf02baee8427f7649b3640169178e5a8b5a99
-  VisualEffectView: c6e2b281616b46262d1371aaee3735a58b7b2c7f
+  SwipeCellKit: 349c61ffde96ac3ae51c2691a03e421b5b29ee98
+  TwitterCore: e0420b01e02e7d20e94690e37f43e75de219ab8d
+  TwitterKit: 205ac89824bbfe9e85a16c420d30bb7bcbedac45
+  VisualEffectView: d47d295c68bf1b8648aa8e7d6eb4acf6dc18ea12
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 3f3adc529bcae356392dfe6c470e1c5e4f109aee
+PODFILE CHECKSUM: d1c2d244ffe96253e4531923d1be380a59ae323b
 
 COCOAPODS: 1.3.1

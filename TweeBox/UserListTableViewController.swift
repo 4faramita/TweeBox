@@ -75,13 +75,13 @@ class UserListTableViewController: UITableViewController {
     
     
     func addRefresher() {
-        self.tableView.es_addPullToRefresh {
+        self.tableView.es.addPullToRefresh {
             [unowned self] in
             
             self.fetchOlder = false
             self.refreshUserList {
 //                self.tableView.es_stopPullToRefresh(ignoreDate: true)
-                self.tableView.es_stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
+                self.tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
             }
             
             /// 设置ignoreFooter来处理不需要显示footer的情况
@@ -90,11 +90,11 @@ class UserListTableViewController: UITableViewController {
     }
     
     func pullToLoaderMore() {
-        self.tableView.es_addInfiniteScrolling {
+        self.tableView.es.addInfiniteScrolling {
             [weak self] in
             self?.fetchOlder = true
             self?.refreshUserList {
-                self?.tableView.es_stopLoadingMore()
+                self?.tableView.es.stopLoadingMore()
             }
             /// 如果你的加载更多事件成功，调用es_stopLoadingMore()重置footer状态
             //            self.tableView.es_stopLoadingMore()
@@ -105,7 +105,7 @@ class UserListTableViewController: UITableViewController {
 
 
     
-    func refreshUserList(handler: ((Void) -> Void)?) {
+    func refreshUserList(handler: (() -> Void)?) {
         
         if (fetchOlder && nextCursor == "0") || (!fetchOlder && previousCursor == "0") {
             print(">>> no more")
