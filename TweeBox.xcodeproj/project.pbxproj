@@ -99,6 +99,7 @@
 		B4EDAAE41F4C85CE00C6660B /* RetweetersIDParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE31F4C85CE00C6660B /* RetweetersIDParams.swift */; };
 		B4EDAAE61F4C89F400C6660B /* RetweeterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */; };
 		B4EDAAE81F4C8DE500C6660B /* MultiUserParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EDAAE71F4C8DE500C6660B /* MultiUserParams.swift */; };
+		B4EFAD441FA0AA8E009F0891 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EFAD431FA0AA8E009F0891 /* R.generated.swift */; };
 		B4F6414B1F50843E0039FA1C /* SearchTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F6414A1F50843E0039FA1C /* SearchTimeline.swift */; };
 		B4F6414D1F50AF830039FA1C /* UsersSearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F6414C1F50AF830039FA1C /* UsersSearchParams.swift */; };
 		B4F641511F50B1580039FA1C /* SearchUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F641501F50B1580039FA1C /* SearchUsers.swift */; };
@@ -221,6 +222,7 @@
 		B4EDAAE31F4C85CE00C6660B /* RetweetersIDParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetersIDParams.swift; sourceTree = "<group>"; };
 		B4EDAAE51F4C89F400C6660B /* RetweeterID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweeterID.swift; sourceTree = "<group>"; };
 		B4EDAAE71F4C8DE500C6660B /* MultiUserParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiUserParams.swift; sourceTree = "<group>"; };
+		B4EFAD431FA0AA8E009F0891 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		B4F6414A1F50843E0039FA1C /* SearchTimeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTimeline.swift; sourceTree = "<group>"; };
 		B4F6414C1F50AF830039FA1C /* UsersSearchParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersSearchParams.swift; sourceTree = "<group>"; };
 		B4F641501F50B1580039FA1C /* SearchUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsers.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				B429859F1F29E8E700AFFB97 /* AppDelegate.swift */,
 				B469BAC21F480C1300ADA3F6 /* View */,
 				B42985A91F29E8E700AFFB97 /* Assets.xcassets */,
+				B4EFAD431FA0AA8E009F0891 /* R.generated.swift */,
 				B42985AB1F29E8E700AFFB97 /* LaunchScreen.storyboard */,
 				B42985AE1F29E8E700AFFB97 /* Info.plist */,
 				B42985A61F29E8E700AFFB97 /* TweeBox.xcdatamodeld */,
@@ -522,6 +525,7 @@
 			buildConfigurationList = B42985C71F29E8E700AFFB97 /* Build configuration list for PBXNativeTarget "TweeBox" */;
 			buildPhases = (
 				AC43473CB3CF46957A0A52C2 /* [CP] Check Pods Manifest.lock */,
+				B4EFAD421FA0A9C3009F0891 /* ShellScript */,
 				B42985981F29E8E600AFFB97 /* Sources */,
 				B42985991F29E8E600AFFB97 /* Frameworks */,
 				B429859A1F29E8E600AFFB97 /* Resources */,
@@ -733,6 +737,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B4EFAD421FA0A9C3009F0891 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"";
+		};
 		E26B7E4E4464EBC7B9EE44BC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -806,6 +823,7 @@
 				B4047B861F4ECF32004E2AE3 /* Params.swift in Sources */,
 				B4E917161F433CE600FD3A5F /* UserList.swift in Sources */,
 				B4B541D81F4D84170008C2EE /* ReplyTableViewController.swift in Sources */,
+				B4EFAD441FA0AA8E009F0891 /* R.generated.swift in Sources */,
 				B4A2AB901F52EF23008EF7A2 /* TweetClickableContentProtocol.swift in Sources */,
 				B4967D631F572FEB006F2CED /* RESTfulClientWithMedia.swift in Sources */,
 				B4047B801F4EC0B5004E2AE3 /* SearchTweetParams.swift in Sources */,
