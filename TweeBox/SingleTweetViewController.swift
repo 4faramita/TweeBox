@@ -166,24 +166,26 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
 
         print(">>> label >> \(textContentLabel.subviews)")
         
-        let clientHTMLString = tweet.source
-        if let clientHTMLString = clientHTMLString, let doc = HTML(html: clientHTMLString, encoding: .utf8) {
-            for link in doc.css("a, link") {
-                let attributedString = NSMutableAttributedString(string: (link.text ?? ""))
-                
-                let range = NSRange.init(location: 0, length: attributedString.length)
-                
-                attributedString.addAttribute(NSLinkAttributeName, value: (link["href"] ?? ""), range: range)
-                clientLink = link["href"]
-                
-                let font = UIFont.preferredFont(forTextStyle: .caption2)
-                attributedString.addAttribute(NSFontAttributeName, value: font, range: range)
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGray, range: range)
-                clientButton.setAttributedTitle(attributedString, for: .normal)
-                
-                clientButton.addTarget(self, action: #selector(clickOnClient(_:)), for: .touchUpInside)
-            }
-        }
+        // FIXME: HTML parsing
+//        let clientHTMLString = tweet.source
+        
+//        if let doc = HTML(html: clientHTMLString, encoding: .utf8) {
+//            for link in doc.css("a, link") {
+//                let attributedString = NSMutableAttributedString(string: (link.text ?? ""))
+//
+//                let range = NSRange.init(location: 0, length: attributedString.length)
+//
+//                attributedString.addAttribute(NSAttributedStringKey.link, value: (link["href"] ?? ""), range: range)
+//                clientLink = link["href"]
+//
+//                let font = UIFont.preferredFont(forTextStyle: .caption2)
+//                attributedString.addAttribute(NSAttributedStringKey.font, value: font, range: range)
+//                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.darkGray, range: range)
+//                clientButton.setAttributedTitle(attributedString, for: .normal)
+//
+//                clientButton.addTarget(self, action: #selector(clickOnClient(_:)), for: .touchUpInside)
+//            }
+//        }
         
         
         if let date = tweet.createdTime {

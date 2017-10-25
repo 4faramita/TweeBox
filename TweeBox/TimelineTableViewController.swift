@@ -163,7 +163,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         
         if timeline.flatMap({ $0 }).count == 0 {
             //            showEmptyWarningMessage()
-            tableView.es_startPullToRefresh()
+            tableView.es.startPullToRefresh()
             //            refreshTimeline(handler: nil)
         }
         
