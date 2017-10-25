@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kanna
+//import Kanna
 import SafariServices
 import VisualEffectView
 import YYText
@@ -59,7 +59,7 @@ class SingleTweetViewController: UIViewController, TweetClickableContentProtocol
         didSet {
             if let newKeyword = keyword, newKeyword.hasPrefix("@") || newKeyword.hasPrefix("#") {
                 let index = newKeyword.index(newKeyword.startIndex, offsetBy: 1)
-                keyword = newKeyword.substring(from: index)
+                keyword = String(newKeyword[index...])
             }
         }
     }

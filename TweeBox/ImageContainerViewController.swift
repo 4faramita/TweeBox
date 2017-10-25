@@ -11,7 +11,6 @@ import SnapKit
 import Kingfisher
 import SwiftyJSON
 
-
 class ImageContainerViewController: UIViewController {
 
     public var tweet: Tweet? {
@@ -34,7 +33,7 @@ class ImageContainerViewController: UIViewController {
     private var images = [UIImage]()
     private var imageViews = [UIImageView]()
     
-    private let placeholder = UIImage(named: "picPlaceholder")!
+    private let placeholder = R.image.picPlaceholder()  // UIImage(named: "picPlaceholder")!
     private let cutPoint = CGPoint(x: 0.5, y: 0.5)
     
     

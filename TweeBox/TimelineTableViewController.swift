@@ -46,7 +46,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
                 }
             }
             
-            tableView.es_stopPullToRefresh()
+            tableView.es.stopPullToRefresh()
             
             print(">>> Batch >> \(timeline.count)")
             print(">>> count >> \(timeline.flatMap({ $0 }).count)")
@@ -86,7 +86,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
         didSet {
             if let newKeyword = keyword, newKeyword.hasPrefix("@") || newKeyword.hasPrefix("#") {
                 let index = newKeyword.index(newKeyword.startIndex, offsetBy: 1)
-                keyword = newKeyword.substring(from: index)
+                keyword = String(newKeyword[index...])
             }
         }
     }
@@ -170,14 +170,14 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     }
     
     func addRefresher() {
-        self.tableView.es_addPullToRefresh {
-            [unowned self] in
+        self.tableView.es.addPullToRefresh {
+            [weak self] in
             
-            self.fetchNewer = true
-            self.refreshTimeline {
-                //                self.tableView.es_stopPullToRefresh(ignoreDate: true)
+            self?.fetchNewer = true
+            self?.refreshTimeline {
+//                self.tableView.es_stopPullToRefresh(ignoreDate: true)
                 
-                self.tableView.es_stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
+                self?.tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
             }
             
             /// 设置ignoreFooter来处理不需要显示footer的情况
@@ -186,11 +186,11 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     }
     
     func pullToLoaderMore() {
-        self.tableView.es_addInfiniteScrolling {
+        self.tableView.es.addInfiniteScrolling {
             [weak self] in
             self?.fetchNewer = false
             self?.refreshTimeline {
-                self?.tableView.es_stopLoadingMore()
+                self?.tableView.es.stopLoadingMore()
             }
             /// 如果你的加载更多事件成功，调用es_stopLoadingMore()重置footer状态
 //            self.tableView.es_stopLoadingMore()
@@ -243,7 +243,7 @@ class TimelineTableViewController: UITableViewController, TweetClickableContentP
     }
     
     
-    func refreshTimeline(handler: ((Void) -> Void)?) {
+    func refreshTimeline(handler: (() -> Void)?) {
         
         if !isRefreshing {
             
@@ -461,7 +461,7 @@ extension TimelineTableViewController: GeneralTweetTableViewCellProtocol {
         }
     }
     
-    func setAndPerformSegueForHashtag() {
+    @objc func setAndPerformSegueForHashtag() {
         performSegue(withIdentifier: "Show Tweets with Hashtag", sender: self)
     }
     
@@ -471,7 +471,7 @@ extension TimelineTableViewController: GeneralTweetTableViewCellProtocol {
 
 
     
-    func profileImageTapped(section: Int, row: Int) {
+    @objc func profileImageTapped(section: Int, row: Int) {
                 
         clickedTweet = timeline[section][row]
         if let originTweet = clickedTweet?.retweetedStatus, let retweetText = clickedTweet?.text, retweetText.hasPrefix("RT @") {

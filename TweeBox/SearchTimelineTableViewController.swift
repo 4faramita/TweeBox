@@ -37,7 +37,7 @@ class SearchTimelineTableViewController: TimelineTableViewController {
     }
     
 
-    override func refreshTimeline(handler: ((Void) -> Void)?) {
+    override func refreshTimeline(handler: (() -> Void)?) {
 
         let replyTimelineParams = SearchTweetParams(
                 query: self.query ?? "",

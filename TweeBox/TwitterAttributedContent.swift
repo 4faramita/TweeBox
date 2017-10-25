@@ -48,7 +48,7 @@ class TwitterAttributedContent {
         let end = plainString.index(plainString.startIndex, offsetBy: entity.indices[1], limitedBy: plainString.endIndex)
         if let start = start, let end = end {
             
-            let stringToBeRender = plainString.substring(with: start..<end)
+            let stringToBeRender = String(plainString[start..<end])
             
             let range = (attributed.string as NSString).range(of: stringToBeRender)
             
@@ -159,15 +159,15 @@ class TwitterAttributedContent {
         paragraphStyle.lineSpacing = 5
         paragraphStyle.lineBreakMode = .byWordWrapping
         paragraphStyle.alignment = .natural
-        attributed.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: fullRange)
+        attributed.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: fullRange)
         
         if user != nil {
             let descriptionFont = UIFont.preferredFont(forTextStyle: .caption2)
-            attributed.addAttribute(NSFontAttributeName, value: descriptionFont, range: fullRange)
-            attributed.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: fullRange)
+            attributed.addAttribute(NSAttributedStringKey.font, value: descriptionFont, range: fullRange)
+            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.white, range: fullRange)
         } else {
             let fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
-            attributed.addAttribute(NSForegroundColorAttributeName, value: fontColor, range: fullRange)
+            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: fontColor, range: fullRange)
         }
         
         if let hashtags = tweetEntity?.hashtags {

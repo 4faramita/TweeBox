@@ -10,7 +10,7 @@ import UIKit
 
 class MentionTimelineTableViewController: TimelineTableViewController {
 
-    override func refreshTimeline(handler: ((Void) -> Void)?) {
+    override func refreshTimeline(handler: (() -> Void)?) {
         
         let mentionTimelineParams = MentionTimelineParams()
         
