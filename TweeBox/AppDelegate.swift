@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Twitter Kit
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Twitter.sharedInstance().start(withConsumerKey:"yuo33GhvlWXA465CE1wrIhvss", consumerSecret:"ji2rPh5sMDjR4vj4HC24ZGDpZ0miGVJagCCiIkJsoZsMmTKYcF")
+        Twitter.sharedInstance().start(withConsumerKey:"KEY", consumerSecret:"SECRET")
         
         return true
     }
